@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>TestNG:  Default test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Default test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Sun Sep 17 18:17:43 EDT 2017</td>
+</tr>
+<tr><td>Total time:</td><td>0 seconds (568 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='stepDefinitions.runnerTest.run_cukes()'><b>run_cukes</b><br>Test class: stepDefinitions.runnerTest<br>Test method: Runs Cucumber Features<br/>
+<a href="#Output-1158258131" onClick='toggleBox("Output-1158258131", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1158258131" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1158258131">
+<div "featureFile">Feature File: Login.feature</div><br/>
+<div "feature">Feature: LoginFeature</div><br/>
+<div "scenario">Scenario: Login with correct username and password</div><br/>
+<div "result">Given  User navigates to the login page (undefined)</div><br/>
+<div "result">And  User enters valid username and password (undefined)</div><br/>
+<div "result">And  User click slogin button (undefined)</div><br/>
+<div "result">Then  login should be successfull (undefined)</div><br/>
+<div "featureFile">Feature File: overviewTest.feature</div><br/>
+<div "feature">Feature: To test Overview page</div><br/>
+<div "scenario">Scenario: Overview page loads and shows correct title</div><br/>
+<div "result">When  User clicks on Overview page link in navigation menu (undefined)</div><br/>
+<div "result">Then  Overview page loads successfully and verify title (undefined)</div><br/>
+<div "scenario">Scenario: Verify ONC-ACB and ONC-ATL information loads from database</div><br/>
+<div "result">When  User looks at ONC-ACB and ONC-ATL information table (undefined)</div><br/>
+<div "result">Then  the table shows data from databse (undefined)</div><br/>
+<div "featureFile">Feature File: sampletest.feature</div><br/>
+<div "feature">Feature: To test my cucumber test is running</div><br/>
+<div "scenario">Scenario: cucumber setup</div><br/>
+<div "result">Given  sample feature file is ready (undefined)</div><br/>
+<div "result">When  I run the feature file (undefined)</div><br/>
+<div "result">Then  run should be successful (undefined)</div><br/>
+</div>
+</td>
+<td></td>
+<td>0</td>
+<td>stepDefinitions.runnerTest@35d176f7</td></tr>
+</table><p>
+</body>
+</html>
