@@ -45,8 +45,8 @@ public class loginSteps {
 	public void User_enters_valid_username_and_password() throws Throwable {
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		
-		***REMOVED***
-	   ***REMOVED***
+		driver.findElement(By.id("username")).sendKeys("amore");
+	   driver.findElement(By.id("password")).sendKeys("Chpl!234");
 	  
 	}
 
