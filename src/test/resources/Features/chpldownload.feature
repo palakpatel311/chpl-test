@@ -12,11 +12,8 @@ Given user is not logged in
 When user clicks on download file box
 Then user sees 7 download files
 
-<<<<<<< HEAD
+
 Scenario: Each download file has associated definition file  
-=======
-Scenario: For each download file respective definition file is displayed 
->>>>>>> dcf5c39dbbdf1f150438590c352a08580d7453e4
 When user selects a file in download file box
 Then definition file shows based on download file selection 		
 		
