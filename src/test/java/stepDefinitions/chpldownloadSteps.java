@@ -47,6 +47,10 @@ public class chpldownloadSteps {
 
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> dcf5c39dbbdf1f150438590c352a08580d7453e4
 	@Given("^user is not logged in$")
 	public void user_is_not_logged_in() throws Throwable {
 	System.out.println("user is not logged in");
