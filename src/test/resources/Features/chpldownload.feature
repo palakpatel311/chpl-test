@@ -12,7 +12,7 @@ Given user is not logged in
 When user clicks on download file box
 Then user sees 7 download files
 
-Scenario: For each download file respective definition file is displayed 
+Scenario: Each download file has associated definition file  
 When user selects a file in download file box
 Then definition file shows based on download file selection 		
 		
