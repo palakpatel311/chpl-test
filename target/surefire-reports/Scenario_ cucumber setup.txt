@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: Scenario: cucumber setup
--------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 11, Time elapsed: 0.235 sec - in Scenario: cucumber setup

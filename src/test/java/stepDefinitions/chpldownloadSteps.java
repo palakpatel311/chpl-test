@@ -107,8 +107,8 @@ public class chpldownloadSteps {
 		
 	}
 	
-	@Given("^user is logged in$")
-	public void user_is_logged_in() throws Throwable {
+	@Given("^user is logged in with \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void user_is_logged_in_with_and(String arg1, String arg2) throws Throwable {
 	    
 		driver.get("https://chpl.ahrqdev.org/#/resources/download");
 		driver.manage().window().maximize();
@@ -116,18 +116,19 @@ public class chpldownloadSteps {
 		driver.findElement(By.xpath("//*[@id='login-toggle']")).click();
 		Thread.sleep(100);
 		// This part is currently not logging in user; login button click() is not working
-		driver.findElement(By.id("username")).sendKeys("****");
-		driver.findElement(By.id("password")).sendKeys("****");
+		driver.findElement(By.id("username")).sendKeys("username");
+		driver.findElement(By.id("password")).sendKeys("password");
 		driver.findElement(By.xpath("//*[@id='admin']/li/div/form/button[1]")).click();
-			
-	  
+		  
 	}
 
+	@When("^User checks download file box$")
+	public void user_checks_download_file_box() throws Throwable {
+		
+}
 	
-	@Then("^user sees 8 download files$")
-	public void user_sees_download_files(int arg1) throws Throwable {
-		driver.get("https://chpl.ahrqdev.org/#/resources/download");
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+	@Then("^user sees 8 download files")
+	public void user_sees_8_download_files() throws Throwable {
 		
 		WebElement element=driver.findElement(By.name("downloadSelect"));
 		Select select=new Select(element);
@@ -137,7 +138,7 @@ public class chpldownloadSteps {
 		    {
 		        System.out.println(list.get(i).getText());
 		    }
-
+	
 	}
 
 	

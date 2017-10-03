@@ -17,7 +17,11 @@ Scenario: Each download file has associated definition file
 When user selects a file in download file box
 Then definition file shows based on download file selection 		
 		
-Scenario: User logs in, 8 download files available 
-Given user is logged in
-When user clicks on download file box
+Scenario Outline: User logs in, 8 download files available 
+Given user is logged in with "<username>" and "<password>"
+And User checks download file box
 Then user sees 8 download files		
+
+Examples:
+|username  |password|
+|**|*** |

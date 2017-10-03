@@ -1,4 +1,6 @@
 stepDefinitions\overviewTest.class
+stepDefinitions\IWebELement.class
+stepDefinitions\chpldownloadSteps.class
 stepDefinitions\hooks.class
 stepDefinitions\runnerTest.class
 stepDefinitions\StepDefinitions.class
