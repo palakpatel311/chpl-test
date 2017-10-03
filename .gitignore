@@ -15,12 +15,8 @@ local.properties
 .classpath
 .settings/
 .loadpath
-/target/
-.settings/org.eclipse.core.resources.prefs 
-test-output/old/Default suite/methods-alphabetical.html
-/test-output/ 
+target/
 test-output/
-test-output
 
 # External tool builders
 .externalToolBuilders/
