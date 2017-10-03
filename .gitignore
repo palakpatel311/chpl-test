@@ -1,1 +1,28 @@
+#################
+## Eclipse
+#################
+
+*.pydevproject
+.project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
 /target/
+.settings/org.eclipse.core.resources.prefs 
+test-output/old/Default suite/methods-alphabetical.html
+/test-ouput/ 
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
