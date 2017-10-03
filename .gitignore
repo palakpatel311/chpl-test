@@ -19,6 +19,8 @@ local.properties
 .settings/org.eclipse.core.resources.prefs 
 test-output/old/Default suite/methods-alphabetical.html
 /test-output/ 
+test-output/
+test-output
 
 # External tool builders
 .externalToolBuilders/
