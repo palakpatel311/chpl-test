@@ -15,10 +15,11 @@ Then the header name should read as 'Date SED Testing was Completed'
 Scenario: Verify SED download option and button title
 Then the download button title should read as 'Download SED Details'
 
+Scenario: Verify usability report title update
+Then usability report text should read as 'Full Usability Report'
+
 Scenario: Verify SED description shows associated criteria title with criteria number
 Then the criteria number should also include the criteria title
 
 Scenario: Verify appropriate message shows when selected product does not have SED data to display
 Then there should be text 'No Certification Criteria were tested for SED'
-
- 

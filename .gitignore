@@ -17,6 +17,8 @@ local.properties
 .loadpath
 target/
 test-output/
+APICalls.*
+Rest.*
 
 # External tool builders
 .externalToolBuilders/
