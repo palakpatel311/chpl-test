@@ -21,8 +21,6 @@ public class listingDetails_page {
 	
 	public static void load_listings_details_page(WebDriver driver) {
 			driver = hooks.driver;
-			driver.get("https://chpl.ahrqstg.org/#/product/8481");
-			WebDriverWait wait = new WebDriverWait(driver, 20);
 			driver.manage().window().maximize();
 			String actualTitle = driver.getTitle();
 			System.out.println("page title is : "+actualTitle);
@@ -31,7 +29,6 @@ public class listingDetails_page {
 	
 	public static void sed_details_accordion_open(WebDriver driver){
 	
-		driver.get("https://chpl.ahrqdev.org/#/product/8511");	
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.panel:nth-child(4) > div:nth-child(1) > a:nth-child(1)")));
 		
@@ -43,19 +40,6 @@ public class listingDetails_page {
 		expanded1.click();
 	}
 	
-	public static void sed_details_no_sed_data(WebDriver driver){
-		
-		driver.get("https://chpl.ahrqdev.org/#/product/8511");	
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.panel:nth-child(4) > div:nth-child(1) > a:nth-child(1)")));
-		
-		// to close certification criteria accordion that's open by default
-		WebElement expanded = driver.findElement(By.cssSelector("div.panel:nth-child(2) > div:nth-child(1) > a:nth-child(1)"));
-		expanded.click();
-		//to open SED accordion			
-		WebElement expanded1 = driver.findElement(By.cssSelector("div.panel:nth-child(4) > div:nth-child(1) > a:nth-child(1)"));
-		expanded1.click();
-	}
 	
 	public static WebElement SED_criteria_table(WebDriver driver){
 
