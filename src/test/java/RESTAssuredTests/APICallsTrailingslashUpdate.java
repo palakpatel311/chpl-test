@@ -23,7 +23,7 @@ public class APICallsTrailingslashUpdate {
 	
 	
 	@Test
-	public void testAPIcallswithoutlashes()
+	public void testAPIcallswithoutslashes()
 	{
 		given()            
         .header("API-KEY", "***")
@@ -35,7 +35,7 @@ public class APICallsTrailingslashUpdate {
         .log()
         .all();
         //Assert.assertEquals(statusCode, 200, "Correct status code returned");		
-		given().get("https://chpl.ahrqstg.org/rest/announcements/").then().statusCode(200).log().all();
+		given().get("https://chpl.ahrqstg.org/rest/announcements").then().statusCode(200).log().all();
 				given().get("https://chpl.ahrqstg.org/rest/certified_products").then().statusCode(200);
 				given().get("https://chpl.ahrqstg.org/rest/certified_products/").then().statusCode(200);
 				given().get("https://chpl.ahrqstg.org/rest/corrective_action_plan").then().statusCode(200);
