@@ -18,21 +18,17 @@ public class search_page {
 		return element;
 	}
 	public static WebElement search_results_chpl_id(WebDriver driver){
-		String actualString = driver.findElement(By.xpath("//*[@id='resultsSection']/div[2]/div/table/tbody/tr/td[6]")).getText();
-		assertTrue(actualString.contains("14.07.07.1221.FIA1.16.01.1.170608"));
+		element = driver.findElement(By.xpath("//*[@id='resultsSection']/div[2]/div/table/tbody/tr/td[6]"));
 		return element;
 	}
 	
 	public static WebElement details_link(WebDriver driver){
 		element = driver.findElement(By.xpath("//*[@id=\'resultsSection\']/div[2]/div/table/tbody/tr/td[8]/div/div[1]/a"));
-		element.click();
 		return element;
 	}
 	
 	public static WebElement disclosure_url(WebDriver driver){
-		String actualString = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[2]/div[1]/span/div[2]/a")).getText();
-		assertTrue(actualString.contains("cehrt-disclosure-information"));
-		System.out.println(actualString);
+		element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[2]/div[1]/span/div[2]/a"));
 		return element;
 	}
 	

@@ -1,7 +1,6 @@
 package stepDefinitions;
 
-import static org.junit.Assert.assertTrue;
-
+import static org.testng.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +24,7 @@ public class tptdSteps {
 public void i_am_on_a_listing_details_page(String arg1) throws Throwable {
 	driver.get("https://chpl.ahrqdev.org/#/product/" + arg1);
 	WebDriverWait wait = new WebDriverWait(driver, 20);
-	listingDetails_page.load_listings_details_page(driver); 	    
+	assertTrue(driver.getTitle().contains("CHPL Product details")); 	    
 }
 
 @When("^I look at criteria details for criteria c2$")

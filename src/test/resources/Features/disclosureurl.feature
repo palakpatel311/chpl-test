@@ -2,7 +2,6 @@ Feature: This is to test updated mandatory disclosure urls for cerner listings
 
 Scenario Outline: Verify mandatory disclosure link update for Cerner listings
 Given I am on listing details page of listing with CHPL ID "<CHPL_ID>"
-When I look at Mandatory Disclosure URL 
 Then it should show updated url
 Examples:
 |CHPL_ID|
