@@ -4,7 +4,7 @@ package RESTAssuredTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.oracle.webservices.internal.api.message.ContentType;
+
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
