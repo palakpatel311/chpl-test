@@ -10,11 +10,11 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 features = "src/test/resources/Features",
 format = { "json:target/cucumber.json", "html:target/site/cucumber-pretty"},
 plugin = {"pretty", "html:target/cucumber-html-report"},
-glue = "src/test/java/stepDefinitions/",
+glue = "stepDefinitions",
 tags = {},
 monochrome = false
-
 )
+
 public class runnerTest extends AbstractTestNGCucumberTests {
 
 }
