@@ -1,5 +1,8 @@
-package RestHeaderDefinitions;
+package gov.healthit.chpl.aqa.RestHeaderDefinitions;
 
-public class headerDefinitions {
+/**
+ * Class HeaderDefinitions definition.
+ */
+public class HeaderDefinitions {
 
 }

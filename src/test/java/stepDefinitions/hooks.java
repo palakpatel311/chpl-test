@@ -1,4 +1,4 @@
-package stepDefinitions;
+package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -7,23 +7,26 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
-public class hooks {
+/**
+ * Class Hooks definition.
+ */
+public class Hooks {
 
-    public static WebDriver driver;
+    private static WebDriver driver;
+    private static final int DELAY = 30;
 
     @Before
-    public void openbrowser() {
-
-        //		 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\chromedriver_win32\\chromedriver.exe");
+    public void openBrowser() {
         driver = new ChromeDriver();
-        //	      driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
     }
-
 
     @After
     public void afterMethod() {
-        // Close the driver
         driver.quit();
+    }
+
+    public static WebDriver getDriver() {
+        return driver;
     }
 }

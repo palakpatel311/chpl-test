@@ -1,7 +1,6 @@
-package stepDefinitions;
+package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,63 +11,68 @@ import org.testng.Assert;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageObjects.chpldownload_page;
-import pageObjects.listingDetails_page;
-public class chpldownloadSteps {
 
-    public WebDriver driver;
+import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
 
-    public chpldownloadSteps()
-    {
-        driver = hooks.driver;
+/**
+ * Class ChplDownloadSteps definition.
+ */
+public class ChplDownloadSteps {
+
+    private WebDriver driver;
+    private static final int DELAY = 20;
+
+    public ChplDownloadSteps() {
+        driver = Hooks.getDriver();
     }
 
     @Given("^user is on CHPL download page$")
-    public void user_is_on_CHPL_home() throws Throwable {
+    public void userIsOnCHPLHome() throws Throwable {
         driver.get("https://chpl.ahrqdev.org/#/resources/download");
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, DELAY);
         assertTrue(driver.getTitle().contains("Download the CHPL"));
     }
 
     @When("^user is not logged in$")
-    public void user_is_not_logged_in() throws Throwable {
+    public void userIsNotLoggedIn() throws Throwable {
         driver.get("https://chpl.ahrqdev.org/#/resources/download");
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        chpldownload_page.login_menu_dropdown(driver).click();
-        String actualString = chpldownload_page.login_button(driver).getText();
+        WebDriverWait wait = new WebDriverWait(driver, DELAY);
+        ChplDownloadPage.loginMenuDropdown(driver).click();
+        String actualString = ChplDownloadPage.loginButton(driver).getText();
         assertTrue(actualString.contains("Log In"));
     }
 
     @Then("^user sees 7 download files")
-    public void user_sees_7_download_files() throws Throwable {
+    public void userSees7DownloadFiles() throws Throwable {
 
-	WebElement selectElement = chpldownload_page.downloadselect_list(driver);
-	Select listBox = new Select(selectElement);
-	int filecount = listBox.getOptions().size();
-	Assert.assertEquals(filecount, 7);
+        int expectedLength = 7;
+        WebElement selectElement = ChplDownloadPage.downloadSelectList(driver);
+        Select listBox = new Select(selectElement);
+        int filecount = listBox.getOptions().size();
+        Assert.assertEquals(filecount, expectedLength);
     }
 
     @When("^user selects a file in download file box")
-    public void user_selects_a_file_in_download_file_box() throws Throwable{
+    public void userSelectsAFileInDownloadFileBox() throws Throwable {
 
-        WebElement selectBox = chpldownload_page.downloadselect_list(driver);
+        WebElement selectBox = ChplDownloadPage.downloadSelectList(driver);
         Select dropdown = new Select(selectBox);
         dropdown.selectByVisibleText("2015 edition products (xml)");
     }
 
     @Then("^definition file shows based on download file selection$")
-    public void definitio_file_shows_based_on_selection () throws Throwable{
+    public void definitionFileShowsBasedOnSelection() throws Throwable {
 
-        String definition = new Select(chpldownload_page.definitionselect_list(driver)).getFirstSelectedOption().getText();
+        String definition = new Select(ChplDownloadPage.definitionSelectList(driver)).getFirstSelectedOption().getText();
         Assert.assertTrue(definition.contains("2015 edition products (xml) Definition File"));
     }
 
     @Given("^user is logged in with \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void user_is_logged_in_with_and(String arg1, String arg2) throws Throwable {
+    public void userIsLoggedInWithAnd(final String arg1, final String arg2) throws Throwable {
 
         driver.get("https://chpl.ahrqdev.org/#/resources/download");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        //driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id='login-toggle']")).click();
 
         // This part is currently not logging in user; login button click() is not working
@@ -77,12 +81,13 @@ public class chpldownloadSteps {
         driver.findElement(By.xpath("//*[@id='admin']/li/div/form/button[1]")).click();
     }
 
-
     @Then("^user sees 8 download files")
-    public void user_sees_8_download_files() throws Throwable {
-        WebElement selectElement = chpldownload_page.downloadselect_list(driver);
+    public void userSees8DownloadFiles() throws Throwable {
+        int expectedLength = 8;
+
+        WebElement selectElement = ChplDownloadPage.downloadSelectList(driver);
         Select listBox = new Select(selectElement);
         int filecount1 = listBox.getOptions().size();
-        Assert.assertEquals(filecount1, 8);
+        Assert.assertEquals(filecount1, expectedLength);
     }
 }
