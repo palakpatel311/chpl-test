@@ -47,6 +47,10 @@ If your console does not support color, enable monochrome with:
 
 `mvn test -Dcucumber.options="-m"`
 
+By default, for those test that support it, the target url is `http://localhost:3000`. A different url can be targetted with the command:
+
+`mvn test -Durl="https://chpl.ahrqdev.org"`
+
 ## View Reports Reports generated after test run are saved at:
 
-target/cucumber-html-report
+target/cucumber-html-report/index.html
