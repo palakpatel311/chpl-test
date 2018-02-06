@@ -136,53 +136,15 @@ public class ListingDetailsPage {
         return element;
     }
 
-    public static WebElement sedCertificationCriteria(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[1]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria2(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[2]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria3(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[3]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria4(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[4]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria5(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[5]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria6(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[6]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria7(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[7]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria8(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[8]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria9(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[9]"));
-        return element;
-    }
-
-    public static WebElement sedCertificationCriteria10(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[10]"));
+    /**
+     * Returns certification criteria from the SED accordion.
+     *
+     * @param driver webdriver
+     * @param index the "nth" criteria (1-based)
+     * @return the criteria at the "nth" position
+     */
+    public static WebElement sedCertificationCriteria(final WebDriver driver, final String index) {
+        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[" + index + "]"));
         return element;
     }
 
@@ -198,6 +160,17 @@ public class ListingDetailsPage {
 
     public static WebElement additionalInfoAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-additional-information"));
+        return element;
+    }
+
+    /**
+     * Returns the Transparecy Disclosure URL.
+     *
+     * @param driver webdriver
+     * @return the transparency disclosure URL
+     */
+    public static WebElement disclosureUrl(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[2]/div[1]/span/div[2]/a"));
         return element;
     }
 }

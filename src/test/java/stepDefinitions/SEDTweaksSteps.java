@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
@@ -117,16 +118,16 @@ public class SEDTweaksSteps {
      */
     @Then("^the criteria number should also include the criteria title$")
     public void theCriteriaNumberShouldAlsoIncludeTheCriteriaTitle() {
-        assertTrue(ListingDetailsPage.sedCertificationCriteria(driver).getText().contains("170.315 (a)(1): Computerized Provider Order Entry (CPOE) - Medications"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria2(driver).getText().contains("170.315 (a)(2): CPOE - Laboratory"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria3(driver).getText().contains("170.315 (a)(3): CPOE - Diagnostic Imaging"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria4(driver).getText().contains("170.315 (a)(4): Drug-Drug, Drug-Allergy Interaction Checks for CPOE"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria5(driver).getText().contains("170.315 (a)(5): Demographics"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria6(driver).getText().contains("170.315 (a)(6): Problem List"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria7(driver).getText().contains("170.315 (a)(7): Medication List"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria8(driver).getText().contains("170.315 (a)(8): Medication Allergy List"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria9(driver).getText().contains("170.315 (a)(14): Implantable Device List"));
-        assertTrue(ListingDetailsPage.sedCertificationCriteria10(driver).getText().contains("170.315 (b)(3): Electronic Prescribing"));
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "1").getText(), "170.315 (a)(1): Computerized Provider Order Entry (CPOE) - Medications");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "2").getText(), "170.315 (a)(2): CPOE - Laboratory");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "3").getText(), "170.315 (a)(3): CPOE - Diagnostic Imaging");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "4").getText(), "170.315 (a)(4): Drug-Drug, Drug-Allergy Interaction Checks for CPOE");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "5").getText(), "170.315 (a)(5): Demographics");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "6").getText(), "170.315 (a)(6): Problem List");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "7").getText(), "170.315 (a)(7): Medication List");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "8").getText(), "170.315 (a)(8): Medication Allergy List");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "9").getText(), "170.315 (a)(14): Implantable Device List");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "10").getText(), "170.315 (b)(3): Electronic Prescribing");
     }
 
     /**

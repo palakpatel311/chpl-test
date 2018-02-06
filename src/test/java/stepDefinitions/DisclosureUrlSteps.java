@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
@@ -32,25 +32,28 @@ public class DisclosureUrlSteps {
 
     /**
      * Loads a listing. First searches for listing, then loads that listing.
-     * Waits until the Listing name exists.
+     * Waits to open Listing page until there's only one result, then waits on listing page until the Listing name exists.
+     *
      * @param chplId the CHPL Product Number to load
      */
     @Given("^I am on listing details page of listing with CHPL ID \"(.*)\"$")
     public void iAmOnListingDetailsPageOfListingWithCHPLID(final String chplId) {
         driver.get(url + "#/search");
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.elementToBeClickable(SearchPage.searchField(driver)));
         SearchPage.searchField(driver).sendKeys(chplId);
-        wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
+        wait.until(ExpectedConditions.textToBePresentInElement(SearchPage.resultCount(driver), "1 - 1 of 1 Result"));
         SearchPage.detailsLink(driver).click();
         wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
     }
 
     /**
-     * Assert that updated URL exists.
+     * Assert that Mandatory Disclosures URL is correct.
+     *
+     * @param targetUrl the URL to look for
      */
-    @Then("^it should show updated url$")
-    public void itShouldShowUpdatedUrl() {
-        String actualString = SearchPage.disclosureUrl(driver).getText();
-        assertTrue(actualString.contains("cehrt-disclosure-information"));
+    @Then("^the Mandatory Disclosures URL should be: \"(.*)\"$")
+    public void theMandatoryDisclosuresUrlShouldBe(final String targetUrl) {
+        assertEquals(ListingDetailsPage.disclosureUrl(driver).getText(), targetUrl + "\nWeb Site Disclaimers");
     }
 }
