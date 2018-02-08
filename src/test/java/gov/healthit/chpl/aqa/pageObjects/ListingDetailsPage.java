@@ -27,6 +27,11 @@ public class ListingDetailsPage {
         sedAccordion(driver).click();
     }
 
+    public static WebElement listingName(final WebDriver driver) {
+        element = driver.findElement(By.id("listingName"));
+        return element;
+    }
+
     public static WebElement editCertifiedProductLink(final WebDriver driver) {
         element = driver.findElement(By.linkText("Edit Certified Product"));
         element.click();
@@ -173,6 +178,11 @@ public class ListingDetailsPage {
 
     public static WebElement sedCertificationCriteria9(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[9]"));
+        return element;
+    }
+
+    public static WebElement sedCertificationCriteria10(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[10]"));
         return element;
     }
 

@@ -16,10 +16,11 @@ Feature: SED Display in product details
     When I open SED details accordion
     Then intended user description header should show as 'Description of Intended Users'
 
-  Scenario: Verify SED Testing Completion Date header and value
-    Given I am on the Details page of Listing "8338"
-    When I open SED details accordion
-    Then the header name should read as 'Date SED Testing was Completed'
+#  Scenario: Verify SED Testing Completion Date header and value
+#    Given I am on the Details page of Listing "8338"
+#    When I open SED details accordion
+#    Then the header name should read as 'Date SED Testing was Completed'
+# I think this scenario is no longer valid
 
   Scenario: Verify SED download option and button title
     Given I am on the Details page of Listing "8338"
