@@ -25,7 +25,7 @@ public class FuzzyMatchTextSteps {
 
     @Given("^I am on listing details page \"([^\"]*)\"$")
     public void iAmOnListingDetailsPage(final String arg1) throws Throwable {
-        driver.get("https://chpl.ahrqstg.org/#/product/" + arg1);
+        driver.get("https://chpl.ahrqdev.org/#/product/" + arg1);
         WebDriverWait wait = new WebDriverWait(driver, DELAY);
         Assert.assertTrue(driver.getTitle().contains("CHPL Product Details"));
     }
@@ -35,10 +35,10 @@ public class FuzzyMatchTextSteps {
         ListingDetailsPage.certificationCriteriaG4ViewDetails(driver).click();
     }
 
-    @Then("^QMS Standard should display updated 'Standard: 21 CFR 820' text$")
+    @Then("^QMS Standard should display updated '21 CFR 820' text$")
     public void qmsStandardDisplaysCorrectText() throws Throwable {
         String actualString = ListingDetailsPage.qmsStandardText(driver).getText();
-        assertTrue(actualString.contains("Standard: 21 CFR 820"));
+        assertTrue(actualString.contains("21 CFR Part 820"));
     }
 
     @When("^I look at criteria details for criteria g5$")
@@ -47,10 +47,10 @@ public class FuzzyMatchTextSteps {
         action.moveToElement(ListingDetailsPage.certificationCriteriaG5ViewDetails(driver)).click().perform();
     }
 
-    @Then("^Accessibility Standard should display updated 'Other - WCAG Level' text$")
+    @Then("^Accessibility Standard should display updated 'WCAG Level' text$")
     public void accessibilityStandardShouldDisplayUpdatedOtherWCAG() throws Throwable {
         String actualString = ListingDetailsPage.acceessibilityStandardText(driver).getText();
-        assertTrue(actualString.contains("Other - WCAG Level"));
+        assertTrue(actualString.contains("WCAG Level"));
     }
 
     @When("^I look at SED details$")
@@ -58,9 +58,15 @@ public class FuzzyMatchTextSteps {
         ListingDetailsPage.sedDetailsAccordionOpen(driver);
     }
 
-    @Then("^UCD process should display updated 'ISO 9241-210' text$")
+    @Then("^UCD process should display updated 'IS0 9001' text$")
     public void ucdProcessShouldDisplayUpdatedNISTIRText() throws Throwable {
         String actualString = ListingDetailsPage.ucdProcessText(driver).getText();
-        assertTrue(actualString.contains("ISO 9241-210"));
+        assertTrue(actualString.contains("IS0 9001"));
+    }
+        
+    @Then("^UCD process should display updated 'NISTIR 7741' text$")
+    public void ucdProcessShouldDisplaycleantext() throws Throwable {
+    String actualString = ListingDetailsPage.ucdProcessText(driver).getText();
+    assertTrue(actualString.contains("NISTIR 7741"));
     }
 }
