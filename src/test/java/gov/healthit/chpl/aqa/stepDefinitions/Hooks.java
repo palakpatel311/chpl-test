@@ -17,8 +17,6 @@ public class Hooks {
 
     @Before
     public void openBrowser() {
-        String exePath = "C:\\Users\\amore\\eclipse-workspace\\chpl-testautomation\\chromedriver_win32\\chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", exePath);
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
     }

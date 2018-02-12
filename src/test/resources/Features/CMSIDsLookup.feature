@@ -9,7 +9,11 @@ Feature: This feature is to test newly generated/unverifiable CMS IDs are insert
       |0015H8GK6K0ZZB2|14.07.07.2452.VEI1.01.01.0.161111|
       |0015H8GK6K0ZZB2|15.04.04.2891.Sunr.07.01.1.171201|
       			
-Scenario: If a user loads their cms widget with any of these sets of listings, and generates a CMS ID then it should return the newer CMS ID
+Scenario Outline: If a user loads their cms widget with any of these sets of listings, and generates a CMS ID then it should return the newer CMS ID
 	Given I am an end user on CHPL home page
-	When I Generate CMS ID using CMS ID widget for same listings as in result of reverse lookup of 0015H8GK6K0ZZB2
-	Then the generated CMS ID should be 0015H8GK6K0ZZB2
+	When I Generate CMS ID using CMS ID widget for same listings as in result of reverse lookup
+	Then the generated CMS ID should be "<CMS_ID>"
+	Examples:
+      |CMS_ID|	
+      |0015H8GK6K0ZZB2|
+            

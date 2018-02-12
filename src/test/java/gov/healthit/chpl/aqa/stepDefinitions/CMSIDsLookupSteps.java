@@ -1,5 +1,6 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 import static org.testng.Assert.assertTrue;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,10 +16,18 @@ import gov.healthit.chpl.aqa.pageObjects.SearchPage;
 public class CMSIDsLookupSteps {
 
     private WebDriver driver;
-    private static final int DELAY = 40;
-        
+    private static final int TIMEOUT = 30;
+    private String url = System.getProperty("url");
+    
+    /**
+     * Constructor creates new driver.
+     */
+    
     public CMSIDsLookupSteps() {
     driver = Hooks.getDriver();
+    if (StringUtils.isEmpty(url)) {
+       url = "http://localhost:3000/";
+      }
     }
     
     /**
@@ -27,8 +36,7 @@ public class CMSIDsLookupSteps {
     
     @Given("^I am an end-user on CMS ID Reverse Lookup page$")
     public void i_am_an_end_user_on_CMS_ID_Reverse_Lookup_page() {
-        driver.get("https://chpl.ahrqstg.org/#/resources/cms_lookup");
-        driver.manage().window().maximize();
+        driver.get(url + "#/resources/cms_lookup");
     }
 
     /**
@@ -56,9 +64,8 @@ public class CMSIDsLookupSteps {
     
     @Given("^I am an end user on CHPL home page$")
     public void i_am_an_end_user() throws Throwable {
-        driver.get("https://chpl.ahrqstg.org/#/search");
-        WebDriverWait wait = new WebDriverWait(driver, DELAY);
-        driver.manage().window().maximize();
+        driver.get(url + "#/search");
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
     }
 
     /**
@@ -66,23 +73,20 @@ public class CMSIDsLookupSteps {
      * Waits after adding each of the Cert Ids, then generates EHR certification Id.
      */
     
-    @When("^I Generate CMS ID using CMS ID widget for same listings as in result of reverse lookup of 0015H8GK6K0ZZB2$")
-    public void i_Generate_CMS_ID_using_CMS_ID_widget_for_same_listings_as_in_result_of_reverse_lookup_() throws Throwable{
+    @When("^I Generate CMS ID using CMS ID widget for same listings as in result of reverse lookup$")
+    public void i_Generate_CMS_ID_using_CMS_ID_widget_for_same_listings_as_in_result_of_reverse_lookup() {
         SearchPage.searchField(driver).sendKeys("14.07.07.2452.VEI1.01.01.0.161111");
-        
-        WebDriverWait wait = new WebDriverWait(driver, DELAY);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         SearchPage.certId_Link1(driver).click();
         
         SearchPage.searchField(driver).clear();
-        SearchPage.searchField(driver).sendKeys("15.04.04.2891.Sunr.07.01.1.171201");
         
+        SearchPage.searchField(driver).sendKeys("15.04.04.2891.Sunr.07.01.1.171201");
         wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
         SearchPage.certId_Link2(driver).click();
-       
         wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
-        
+      
         SearchPage.getEHR_certId(driver).click();
-        
         wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
      }
 
@@ -90,9 +94,9 @@ public class CMSIDsLookupSteps {
      * Assert Certification Id generated for listings with unverifiable CMS Id  matches newly generated CMS Id (reverse generation of Id)
      */    
     
-    @Then("^the generated CMS ID should be 0015H8GK6K0ZZB2$")
-    public void the_generated_CMS_ID_should_be_0015H8GK6K0ZZB2() {
-        assertTrue(CMSidReverseLookupPage.CMSidCreatorWidget(driver).getText().contains("0015H8GK6K0ZZB2"));
+    @Then("^the generated CMS ID should be \"(.*)\"$")
+    public void the_generated_CMS_ID_should_be_given_cmsId(final String cmsId) {
+        assertTrue(CMSidReverseLookupPage.CMSidCreatorWidget(driver).getText().contains(cmsId));
     }
 
 }
