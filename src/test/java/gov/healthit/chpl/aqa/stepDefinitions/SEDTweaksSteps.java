@@ -97,14 +97,6 @@ public class SEDTweaksSteps {
     }
 
     /**
-     * Asserts correct text for Date SED Testing.
-     */
-    @Then("^the header name should read as 'Date SED Testing was Completed'$")
-    public void theHeaderShouldBeNamedAsDateSEDTestingWasCompleted() {
-        assertTrue(ListingDetailsPage.sedTestingCompleteDateTitle(driver).getText().contains("Date SED Testing was Completed"));
-    }
-
-    /**
      * Asserts correct text for download button.
      */
     @Then("^the download button title should read as 'Download SED Details'$")

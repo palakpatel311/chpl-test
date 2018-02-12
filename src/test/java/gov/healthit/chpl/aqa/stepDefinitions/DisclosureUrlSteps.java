@@ -7,9 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.testng.Assert.assertTrue;
-
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
+
 
 /**
  * Class DisclosureUrlSteps definition.
@@ -50,7 +50,7 @@ public class DisclosureUrlSteps {
      */
     @Then("^it should show updated url$")
     public void itShouldShowUpdatedUrl() {
-        String actualString = SearchPage.disclosureUrl(driver).getText();
+        String actualString = ListingDetailsPage.disclosureUrl(driver).getText();
         assertTrue(actualString.contains("cehrt-disclosure-information"));
     }
 }
