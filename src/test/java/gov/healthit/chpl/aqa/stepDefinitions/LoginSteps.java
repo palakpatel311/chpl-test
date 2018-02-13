@@ -1,6 +1,8 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,24 +20,26 @@ public class LoginSteps {
     private WebDriver driver;
     private static final int DELAY = 60;
     private static final int SLEEP_TIME = 100;
+    private String url = System.getProperty("url");
 
     public LoginSteps() {
         driver = Hooks.getDriver();
+        if (StringUtils.isEmpty(url)) {
+            url = "http://localhost:3000/";
+        }
     }
 
     @Given("^User is on CHPL home page$")
     public void userIsOnCHPLHomePage() throws Throwable {
-        driver.get("https://chpl.ahrqdev.org/#/search");
+        driver.get(url + "#/search");
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
     }
 
     @When("^User clicks on Administrator Login button$")
     public void userClicksOnAdministratorLoginButton() throws Throwable {
-        driver.get("https://chpl.ahrqdev.org/#/resources/download");
-        //driver.manage().window().maximize();
+        driver.get(url + "#/resources/download");
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id='login-toggle']")).click();
-        Thread.sleep(SLEEP_TIME);
     }
 
     @Then("^login form shows in dropdown$")
@@ -46,7 +50,7 @@ public class LoginSteps {
 
     @Given("^User enters valid \"(.*)\" and \"(.*)\"$")
     public void userEntersValidUsernameAndPassword(final String username, final String password) throws Throwable {
-        driver.get("https://chpl.ahrqdev.org/#/resources/download");
+        driver.get(url + "#/resources/download");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id='login-toggle']")).click();

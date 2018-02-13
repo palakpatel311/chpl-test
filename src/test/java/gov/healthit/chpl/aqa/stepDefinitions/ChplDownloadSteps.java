@@ -2,6 +2,8 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,21 +23,28 @@ public class ChplDownloadSteps {
 
     private WebDriver driver;
     private static final int DELAY = 20;
+    private String url = System.getProperty("url");
 
+    /**
+     * Constructor creates new driver.
+     */
     public ChplDownloadSteps() {
         driver = Hooks.getDriver();
+        if (StringUtils.isEmpty(url)) {
+            url = "http://localhost:3000/";
+        }
     }
 
     @Given("^user is on CHPL download page$")
     public void userIsOnCHPLHome() throws Throwable {
-        driver.get("https://chpl.ahrqdev.org/#/resources/download");
+        driver.get(url + "#/resources/download");
         WebDriverWait wait = new WebDriverWait(driver, DELAY);
         assertTrue(driver.getTitle().contains("Download the CHPL"));
     }
 
     @When("^user is not logged in$")
     public void userIsNotLoggedIn() throws Throwable {
-        driver.get("https://chpl.ahrqdev.org/#/resources/download");
+        driver.get(url + "#/resources/download");
         WebDriverWait wait = new WebDriverWait(driver, DELAY);
         ChplDownloadPage.loginMenuDropdown(driver).click();
         String actualString = ChplDownloadPage.loginButton(driver).getText();
@@ -70,7 +79,7 @@ public class ChplDownloadSteps {
     @Given("^user is logged in with \"([^\"]*)\" and \"([^\"]*)\"$")
     public void userIsLoggedInWithAnd(final String arg1, final String arg2) throws Throwable {
 
-        driver.get("https://chpl.ahrqdev.org/#/resources/download");
+        driver.get(url + "#/resources/download");
         //driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id='login-toggle']")).click();

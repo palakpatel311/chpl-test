@@ -65,29 +65,30 @@ public class CMSIDsLookupSteps {
     @Given("^I am an end user on CHPL home page$")
     public void i_am_an_end_user() throws Throwable {
         driver.get(url + "#/search");
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-    }
+     }
 
     /**
      * Loads a listing. First searches for listing, then adds Cert Id to CMS creator.
      * Waits after adding each of the Cert Ids, then generates EHR certification Id.
      */
     
-    @When("^I Generate CMS ID using CMS ID widget for same listings as in result of reverse lookup$")
-    public void i_Generate_CMS_ID_using_CMS_ID_widget_for_same_listings_as_in_result_of_reverse_lookup() {
-        SearchPage.searchField(driver).sendKeys("14.07.07.2452.VEI1.01.01.0.161111");
+    @When("^I Generate CMS ID using CMS ID widget for same listings \"([^\"]*)\" and \"([^\"]*)\" as in result of reverse lookup$")
+    public void i_Generate_CMS_ID_using_CMS_ID_widget_for_same_listings_and_as_in_result_of_reverse_lookup(String chplId1, String chplId2) {
+             
+        SearchPage.searchField(driver).sendKeys(chplId1);
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         SearchPage.certId_Link1(driver).click();
-        
+              
         SearchPage.searchField(driver).clear();
         
-        SearchPage.searchField(driver).sendKeys("15.04.04.2891.Sunr.07.01.1.171201");
+        SearchPage.searchField(driver).sendKeys(chplId2);
         wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
         SearchPage.certId_Link2(driver).click();
         wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
       
         SearchPage.getEHR_certId(driver).click();
         wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
+      
      }
 
     /**

@@ -1,6 +1,7 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.Given;
@@ -16,16 +17,23 @@ public class TptdSteps {
 
     private WebDriver driver;
     private static final int DELAY = 20;
+private String url = System.getProperty("url");
+    
+    /**
+     * Constructor creates new driver.
+     */
 
     public TptdSteps() {
         driver = Hooks.getDriver();
+        if (StringUtils.isEmpty(url)) {
+            url = "http://localhost:3000/";
+           }
     }
 
     @Given("^I am on Details page of Listing \"([^\"]*)\"$")
     public void iAmOnAListingDetailsPage(final String arg1) throws Throwable {
-        driver.get("https://chpl.ahrqdev.org/#/product/" + arg1);
+        driver.get(url + "#/product/" + arg1);
         WebDriverWait wait = new WebDriverWait(driver, DELAY);
-        assertTrue(driver.getTitle().contains("CHPL Product details"));
     }
 
     @When("^I look at criteria details for criteria c2$")

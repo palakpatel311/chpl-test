@@ -1,6 +1,8 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
+
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,14 +20,21 @@ public class FuzzyMatchTextSteps {
 
     private WebDriver driver;
     private static final int DELAY = 20;
+    private String url = System.getProperty("url");
 
+    /**
+     * Constructor creates new driver.
+     */
     public FuzzyMatchTextSteps() {
         driver = Hooks.getDriver();
+        if (StringUtils.isEmpty(url)) {
+            url = "http://localhost:3000/";
+        }
     }
 
     @Given("^I am on listing details page \"([^\"]*)\"$")
     public void iAmOnListingDetailsPage(final String arg1) throws Throwable {
-        driver.get("https://chpl.ahrqdev.org/#/product/" + arg1);
+        driver.get(url + "#/product/" + arg1);
         WebDriverWait wait = new WebDriverWait(driver, DELAY);
         Assert.assertTrue(driver.getTitle().contains("CHPL Product Details"));
     }
