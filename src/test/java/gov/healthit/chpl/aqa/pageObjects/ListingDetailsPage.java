@@ -27,32 +27,26 @@ public class ListingDetailsPage {
     
     public static WebElement certificationCriteriaAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-certification-criteria"));
-        element.click();
         return element;
     }
     
     public static WebElement certificationCriteriaA1ViewDetails(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[1]/div/div/span[2]/a"));
-        element.click();
-
         return element;
     }
 
     public static WebElement certificationCriteriaC2ViewDetails(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[26]/div/div/span[2]/a"));
-        element.click();
         return element;
     }
 
     public static WebElement certificationCriteriaC3ViewDetails(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[27]/div/div/span[2]/a"));
-        element.click();
         return element;
     }
 
     public static WebElement certificationCriteriaC4ViewDetails(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[28]/div/div/span[2]/a"));
-        element.click();
         return element;
     }
 
@@ -68,8 +62,6 @@ public class ListingDetailsPage {
     
     public static WebElement certificationCriteriaF1ViewDetails(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[53]/div/div/span[2]/a"));
-        Actions action = new Actions(driver);
-        action.moveToElement(element).click().perform();
         return element;
     }
     
@@ -85,7 +77,6 @@ public class ListingDetailsPage {
     
     public static WebElement editCertifiedProductLink(final WebDriver driver) {
         element = driver.findElement(By.linkText("Edit Certified Product"));
-        element.click();
         return element;
     }
     
@@ -117,22 +108,6 @@ public class ListingDetailsPage {
     public static WebElement downloadSEDDetailsButton(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-tasks-table\"]/tfoot/tr/td/button"));
         return element;
-    }
-
-    
-    /**
-     * This will be (re)moved from here eventually
-     */
-    public static void sedDetailsAccordionOpen(final WebDriver driver) {
-        int delay = 20;
-        WebDriverWait wait = new WebDriverWait(driver, delay);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("details-sed")));
-
-        // to close certification criteria accordion that's open by default
-        certificationCriteriaAccordion(driver);
-
-        //to open SED accordion
-        sedAccordion(driver).click();
     }
 
     public static WebElement sEDCriteriaTable(final WebDriver driver) {

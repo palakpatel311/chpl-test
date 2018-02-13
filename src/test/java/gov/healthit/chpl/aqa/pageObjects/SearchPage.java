@@ -39,6 +39,5 @@ public class SearchPage {
         element = driver.findElement(By.xpath("//*[@id='resultsSection']/div[2]/div/table/tbody/tr/td[6]"));
         return element;
     }
-
-    
+   
 }

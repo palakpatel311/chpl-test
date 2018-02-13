@@ -4,10 +4,10 @@ Feature: Overview page tests
 
   Scenario: Overview page loads and shows correct title
 
-    When User clicks on Overview page link in navigation menu
-    Then Overview page loads successfully and verify title
+    When User is on Overview page
+    Then Overview page loads successfully and shows correct title
 
   Scenario: Verify ONC-ACB and ONC-ATL information loads from database
 
-    When User looks at ONC-ACB and ONC-ATL information table
-    Then the table shows data from databse
+    When User is on Overview page 
+    Then ONC-ACB and ONC-ATL information table shows data from databse
