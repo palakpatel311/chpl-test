@@ -1,9 +1,7 @@
 package gov.healthit.chpl.aqa.RESTAssuredTests;
 
 import org.testng.annotations.Test;
-
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.given;
 
 /**
  * APICallsTrailingslashUpdate Class.

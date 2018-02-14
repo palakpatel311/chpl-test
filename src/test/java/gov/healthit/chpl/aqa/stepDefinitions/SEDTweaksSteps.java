@@ -38,8 +38,6 @@ public class SEDTweaksSteps {
     @Given("^I am on the Details page of Listing \"([^\"]*)\"$")
     public void iAmOnAListingsDetailsPages(final String chplId) {
         driver.get(url + "#/product/" + chplId);
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
     }
 
     /**
@@ -47,7 +45,11 @@ public class SEDTweaksSteps {
      */
     @When("^I open SED details accordion$")
     public void iOpenSEDAccordion() {
-        ListingDetailsPage.sedDetailsAccordionOpen(driver);
+        // to close certification criteria accordion that's open by default
+        ListingDetailsPage.certificationCriteriaAccordion(driver).click();
+
+        //to open SED accordion
+        ListingDetailsPage.sedAccordion(driver).click();
     }
 
     /**
@@ -94,14 +96,6 @@ public class SEDTweaksSteps {
     @Then("^intended user description header should show as 'Description of Intended Users'$")
     public void theHeaderShouldBeNamedDescriptionOfIntendedUsers() {
         assertTrue(ListingDetailsPage.intendedUserDescriptionTitle(driver).getText().contains("Description of Intended Users"));
-    }
-
-    /**
-     * Asserts correct text for Date SED Testing.
-     */
-    @Then("^the header name should read as 'Date SED Testing was Completed'$")
-    public void theHeaderShouldBeNamedAsDateSEDTestingWasCompleted() {
-        assertTrue(ListingDetailsPage.sedTestingCompleteDateTitle(driver).getText().contains("Date SED Testing was Completed"));
     }
 
     /**
