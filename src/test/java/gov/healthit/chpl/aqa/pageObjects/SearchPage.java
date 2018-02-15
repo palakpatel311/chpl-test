@@ -11,6 +11,32 @@ public class SearchPage {
     private WebDriver driver;
     private static WebElement element = null;
 
+    public static WebElement certId_Link1(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"toggle-cms-8169\"]"));
+        return element;
+    }
+
+    public static WebElement certId_Link2(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"toggle-cms-8969\"]"));
+        return element;
+    }
+
+    public static WebElement getEHR_certId(final WebDriver driver) {
+        element = driver.findElement(By.id("get-ehr-cert-id"));
+        return element;
+    }
+
+    /**
+     * Returns the first search details button.
+     *
+     * @param driver webdriver
+     * @return the first search result's details button
+     */
+    public static WebElement detailsLink(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\'resultsSection\']/div[2]/div/table/tbody/tr/td[8]/div/div[1]/a"));
+        return element;
+    }
+
     /**
      * Returns main search field element.
      *
@@ -41,17 +67,6 @@ public class SearchPage {
      */
     public static WebElement searchResultsChplId(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id='resultsSection']/div[2]/div/table/tbody/tr/td[6]"));
-        return element;
-    }
-
-    /**
-     * Returns the first search details button.
-     *
-     * @param driver webdriver
-     * @return the first search result's details button
-     */
-    public static WebElement detailsLink(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\'resultsSection\']/div[2]/div/table/tbody/tr/td[8]/div/div[1]/a"));
         return element;
     }
 }

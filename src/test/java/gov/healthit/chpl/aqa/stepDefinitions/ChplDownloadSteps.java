@@ -3,13 +3,14 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.By;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
 
@@ -36,24 +37,10 @@ public class ChplDownloadSteps {
      * Loads the CHPL Download page.
      */
     @Given("^user is on CHPL download page$")
-    public void userIsOnChplDownloadPage() {
+    public void userIsOnCHPLdownloadPage() {
         driver.get(url + "#/resources/download");
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(ChplDownloadPage.pageTitle(driver)));
-    }
-
-    /**
-     * Logs in the user.
-     *
-     * @param username the active username
-     * @param password the password to use
-     */
-    @Given("^user is logged in with \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void userIsLoggedIn(final String username, final String password) {
-        // This part is currently not logging in user; login button click() is not working
-        driver.findElement(By.id("username")).sendKeys(username);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.xpath("//*[@id='admin']/li/div/form/button[1]")).click();
+        wait.until(ExpectedConditions.visibilityOf(ChplDownloadPage.mainContent(driver)));
     }
 
     /**
@@ -72,7 +59,7 @@ public class ChplDownloadSteps {
     @Then("^definition file shows based on download file selection$")
     public void definitionFileShowsBasedOnSelection() {
         String definition = new Select(ChplDownloadPage.definitionSelectList(driver)).getFirstSelectedOption().getText();
-        assertTrue(definition.contains("2015 edition products (xml) Definition File"));
+        Assert.assertTrue(definition.contains("2015 edition products (xml) Definition File"));
     }
 
     /**

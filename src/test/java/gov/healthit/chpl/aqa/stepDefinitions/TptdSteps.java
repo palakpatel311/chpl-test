@@ -1,7 +1,10 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -16,21 +19,27 @@ public class TptdSteps {
 
     private WebDriver driver;
     private static final int DELAY = 20;
+private String url = System.getProperty("url");
+    
+    /**
+     * Constructor creates new driver.
+     */
 
     public TptdSteps() {
         driver = Hooks.getDriver();
+        if (StringUtils.isEmpty(url)) {
+            url = "http://localhost:3000/";
+           }
     }
 
     @Given("^I am on Details page of Listing \"([^\"]*)\"$")
     public void iAmOnAListingDetailsPage(final String arg1) throws Throwable {
-        driver.get("https://chpl.ahrqdev.org/#/product/" + arg1);
-        WebDriverWait wait = new WebDriverWait(driver, DELAY);
-        assertTrue(driver.getTitle().contains("CHPL Product details"));
+        driver.get(url + "#/product/" + arg1);
     }
 
     @When("^I look at criteria details for criteria c2$")
     public void iLookAtCriteriaDetailsC2() throws Throwable {
-        ListingDetailsPage.certificationCriteriaC2ViewDetails(driver);
+        ListingDetailsPage.certificationCriteriaC2ViewDetails(driver).click();
     }
 
     @Then("^Test Procedure field should display 'Name: ONC Test Method' text$")
@@ -40,11 +49,13 @@ public class TptdSteps {
 
     @When("^I look at criteria details for criteria c3$")
     public void iLookAtCriteriaDetailsC3() throws Throwable {
-        ListingDetailsPage.certificationCriteriaC3ViewDetails(driver);
+        ListingDetailsPage.certificationCriteriaC3ViewDetails(driver).click();
     }
 
     @When("^I look at criteria details for criteria f1$")
     public void iLookAtCriteriaDetailsF1() throws Throwable {
-        ListingDetailsPage.certificationCriteriaF1ViewDetails(driver);
+       WebElement f1 = ListingDetailsPage.certificationCriteriaF1ViewDetails(driver);
+        Actions action = new Actions(driver);
+        action.moveToElement(f1).click().perform();
     }
 }
