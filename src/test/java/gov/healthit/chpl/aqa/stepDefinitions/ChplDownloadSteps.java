@@ -9,8 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
 
@@ -59,7 +59,7 @@ public class ChplDownloadSteps {
     @Then("^definition file shows based on download file selection$")
     public void definitionFileShowsBasedOnSelection() {
         String definition = new Select(ChplDownloadPage.definitionSelectList(driver)).getFirstSelectedOption().getText();
-        Assert.assertTrue(definition.contains("2015 edition products (xml) Definition File"));
+        assertTrue(definition.contains("2015 edition products (xml) Definition File"));
     }
 
     /**
