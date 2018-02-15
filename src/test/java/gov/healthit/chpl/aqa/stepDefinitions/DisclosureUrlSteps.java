@@ -40,7 +40,7 @@ public class DisclosureUrlSteps {
     public void iAmOnListingDetailsPageOfListingWithCHPLID(final String chplId) {
         driver.get(url + "#/search");
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.elementToBeClickable(SearchPage.searchField(driver)));
+        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(driver))));
         SearchPage.searchField(driver).sendKeys(chplId);
         wait.until(ExpectedConditions.textToBePresentInElement(SearchPage.resultCount(driver), "1 - 1 of 1 Result"));
         SearchPage.detailsLink(driver).click();

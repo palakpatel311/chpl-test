@@ -11,6 +11,17 @@ public class SearchPage {
     private WebDriver driver;
     private static WebElement element = null;
 
+    /**
+     * Returns the pending mask "black screen".
+     *
+     * @param driver WebDriver
+     * @return the pending mask
+     */
+    public static WebElement pendingMask(final WebDriver driver) {
+        element = driver.findElement(By.id("pendingMask"));
+        return element;
+    }
+
     public static WebElement certId_Link1(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"toggle-cms-8169\"]"));
         return element;
