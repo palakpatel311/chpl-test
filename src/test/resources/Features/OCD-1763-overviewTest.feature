@@ -17,4 +17,4 @@ Feature: Overview page tests
       | ONC-ATL | Drummond Group |
       | ONC-ATL | ICSA Labs      |
       | ONC-ATL | InfoGard       |
-      | ONC-ATL | SLI Global     |
+      | ONC-ATL | SLI Compliance |

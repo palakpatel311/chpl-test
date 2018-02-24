@@ -1,17 +1,19 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.OverviewPage;
 
 /**
@@ -29,7 +31,7 @@ public class OverviewSteps {
     public OverviewSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
-            url = "http://localhost:3000/";
+            url = "http://localhost:3000/";           
        }
     }
 
