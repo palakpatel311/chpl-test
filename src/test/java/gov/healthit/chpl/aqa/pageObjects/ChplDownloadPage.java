@@ -31,6 +31,47 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id='downloadSelect']"));
         return element;
     }
+   
+    public static WebElement downloadFileButton(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadChplLink\"]"));
+        return element;
+    }
+    
+    public static WebElement downloadDefinitionButton(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadChplDefinitionLink\"]"));
+        return element;
+    }
+    
+    public static WebElement downloadFile_2015products(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[1]"));
+        return element;
+    }
+    public static WebElement downloadFile_2014products(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[2]"));
+        return element;
+    }
+    
+    public static WebElement downloadFile_2011products(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[3]"));
+        return element;
+    }
+    
+    public static WebElement downloadFile_2015summary(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[4]"));
+        return element;
+    }
+    public static WebElement downloadFile_2014summary(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[5]"));
+        return element;
+    }
+    public static WebElement downloadFile_surveillanceall(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[6]"));
+        return element;
+    }
+    public static WebElement downloadFile_nonconformity(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[7]"));
+        return element;
+    }
 
     public static WebElement loginButton(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"admin\"]/li/div/form/button[1]"));
@@ -41,5 +82,5 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"login-toggle\"]/span[1]"));
         return element;
     }
-
+    
 }

@@ -1,15 +1,17 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
+import static org.testng.Assert.assertTrue;
+
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.CMSidReverseLookupPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import static org.testng.Assert.assertTrue;
 
 /**
  * Class CMSIDsLookupSteps definition.
