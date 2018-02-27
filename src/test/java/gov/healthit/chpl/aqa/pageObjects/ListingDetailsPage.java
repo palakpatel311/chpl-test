@@ -80,6 +80,11 @@ public class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[2]/div[1]/span/div[2]/a"));
         return element;
     }
+    
+    public static WebElement downloadSEDDetailsButton(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"sed-tasks-table\"]/tfoot/tr/td/button"));
+        return element;
+    }
 
     public static WebElement editCertifiedProductLink(final WebDriver driver) {
         element = driver.findElement(By.linkText("Edit Certified Product"));
@@ -100,6 +105,11 @@ public class ListingDetailsPage {
         element = driver.findElement(By.id("listingName"));
         return element;
     }
+    
+    public static WebElement mainContent(final WebDriver driver) {
+        element = driver.findElement(By.id("mainContent"));
+        return element;
+    }
 
     public static WebElement qmsStandardText(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[53]/div/div/div/table/tbody/tr[3]/td[2]/ul/li"));
@@ -109,12 +119,7 @@ public class ListingDetailsPage {
     public static WebElement sedAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-sed"));
         return element;
-    }
-
-    public static WebElement downloadSEDDetailsButton(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-tasks-table\"]/tfoot/tr/td/button"));
-        return element;
-    }
+    }   
 
     public static WebElement sEDCriteriaTable(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]"));
@@ -132,6 +137,11 @@ public class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[" + index + "]"));
         return element;
     }
+    
+    public static WebElement surveillanceActivitiesAccordion(final WebDriver driver) {
+        element = driver.findElement(By.id("details-surveillance-activities"));
+        return element;
+    }
 
     public static WebElement ucdProcessText(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr/td[2]"));
@@ -142,9 +152,5 @@ public class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/h4"));
         return element;
     }
-
-    public static WebElement surveillanceActivitiesAccordion(final WebDriver driver) {
-        element = driver.findElement(By.id("details-surveillance-activities"));
-        return element;
-    }
+    
 }

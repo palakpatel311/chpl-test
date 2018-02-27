@@ -9,18 +9,7 @@ import org.openqa.selenium.WebElement;
  */
 public class SearchPage {
     private WebDriver driver;
-    private static WebElement element = null;
-
-    /**
-     * Returns the pending mask "black screen".
-     *
-     * @param driver WebDriver
-     * @return the pending mask
-     */
-    public static WebElement pendingMask(final WebDriver driver) {
-        element = driver.findElement(By.id("pendingMask"));
-        return element;
-    }
+    private static WebElement element = null;    
 
     public static WebElement certId_Link1(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"toggle-cms-8169\"]"));
@@ -31,12 +20,7 @@ public class SearchPage {
         element = driver.findElement(By.xpath("//*[@id=\"toggle-cms-8969\"]"));
         return element;
     }
-
-    public static WebElement getEHR_certId(final WebDriver driver) {
-        element = driver.findElement(By.id("get-ehr-cert-id"));
-        return element;
-    }
-
+    
     /**
      * Returns the first search details button.
      *
@@ -48,6 +32,55 @@ public class SearchPage {
         return element;
     }
 
+    public static WebElement getEHR_certId(final WebDriver driver) {
+        element = driver.findElement(By.id("get-ehr-cert-id"));
+        return element;
+    }    
+    
+    /**
+     * Returns the pending mask "black screen".
+     *
+     * @param driver WebDriver
+     * @return the pending mask
+     */
+    public static WebElement pendingMask(final WebDriver driver) {
+        element = driver.findElement(By.id("pendingMask"));
+        return element;
+    }
+    
+    public static WebElement noResultsFound(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"resultsSection\"]/div[2]/div/table/thead/tr/td/div/div/p"));
+        return element;
+    }
+
+
+    /**
+     * Returns the result count element.
+     *
+     * @param driver webdriver
+     * @return the the result count element
+     */
+    public static WebElement resultCount(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\'resultsSection\']/div[2]/div/table/thead/tr/td/div/div/div/div"));
+        return element;
+    }
+     
+    public static WebElement resultsSection(final WebDriver driver) {
+        element = driver.findElement(By.id("resultsSection"));
+        return element;
+    }
+    
+    /**
+     * Returns the first search result's CHPL ID.
+     *
+     * @param driver webdriver
+     * @return the first search result's CHPL ID
+     */
+    public static WebElement searchResultsChplId(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id='resultsSection']/div[2]/div/table/tbody/tr/td[6]"));
+        return element;
+    }
+    
     /**
      * Returns main search field element.
      *
@@ -59,25 +92,4 @@ public class SearchPage {
         return element;
     }
 
-    /**
-     * Returns the result count element.
-     *
-     * @param driver webdriver
-     * @return the the result count elemetn
-     */
-    public static WebElement resultCount(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\'resultsSection\']/div[2]/div/table/thead/tr/td/div/div/div/div"));
-        return element;
-    }
-
-    /**
-     * Returns the first search result's CHPL ID.
-     *
-     * @param driver webdriver
-     * @return the first search result's CHPL ID
-     */
-    public static WebElement searchResultsChplId(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id='resultsSection']/div[2]/div/table/tbody/tr/td[6]"));
-        return element;
-    }
 }
