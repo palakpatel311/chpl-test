@@ -10,12 +10,12 @@ tmp/
 *.tmp
 *.bak
 *.swp
+*.log
 *~.nib
 local.properties
 .classpath
 .settings/
 .loadpath
-debug.log
 target/
 test-output/
 APICalls.*
