@@ -15,6 +15,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+.debug.log
 target/
 test-output/
 APICalls.*
