@@ -3,9 +3,6 @@ package gov.healthit.chpl.aqa.pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Class ListingDetailsPage definition.
@@ -119,7 +116,7 @@ public class ListingDetailsPage {
     public static WebElement sedAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-sed"));
         return element;
-    }   
+    }
 
     public static WebElement sEDCriteriaTable(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]"));
