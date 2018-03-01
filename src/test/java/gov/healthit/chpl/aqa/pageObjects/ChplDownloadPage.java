@@ -13,7 +13,7 @@ public class ChplDownloadPage {
     private static WebElement element = null;
 
     /**
-     * Returns element holding main content
+     * Returns element holding main content.
      * @driver webdriver
      * @return element holding main content
      */
