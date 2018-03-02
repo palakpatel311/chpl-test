@@ -9,18 +9,18 @@ import org.openqa.selenium.WebElement;
  */
 public class SearchPage {
     private WebDriver driver;
-    private static WebElement element = null;    
+    private static WebElement element = null; 
 
-    public static WebElement certId_Link1(final WebDriver driver) {
+    public static WebElement certIdLink1(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"toggle-cms-8169\"]"));
         return element;
     }
 
-    public static WebElement certId_Link2(final WebDriver driver) {
+    public static WebElement certIdLink2(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"toggle-cms-8969\"]"));
         return element;
     }
-    
+
     /**
      * Returns the first search details button.
      *
@@ -32,11 +32,11 @@ public class SearchPage {
         return element;
     }
 
-    public static WebElement getEHR_certId(final WebDriver driver) {
+    public static WebElement getEHRCertId(final WebDriver driver) {
         element = driver.findElement(By.id("get-ehr-cert-id"));
         return element;
-    }    
-    
+    }
+
     /**
      * Returns the pending mask "black screen".
      *
@@ -47,7 +47,7 @@ public class SearchPage {
         element = driver.findElement(By.id("pendingMask"));
         return element;
     }
-    
+
     public static WebElement noResultsFound(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"resultsSection\"]/div[2]/div/table/thead/tr/td/div/div/p"));
         return element;
@@ -64,12 +64,12 @@ public class SearchPage {
         element = driver.findElement(By.xpath("//*[@id=\'resultsSection\']/div[2]/div/table/thead/tr/td/div/div/div/div"));
         return element;
     }
-     
+
     public static WebElement resultsSection(final WebDriver driver) {
         element = driver.findElement(By.id("resultsSection"));
         return element;
     }
-    
+
     /**
      * Returns the first search result's CHPL ID.
      *
@@ -80,7 +80,6 @@ public class SearchPage {
         element = driver.findElement(By.xpath("//*[@id='resultsSection']/div[2]/div/table/tbody/tr/td[6]"));
         return element;
     }
-    
     /**
      * Returns main search field element.
      *

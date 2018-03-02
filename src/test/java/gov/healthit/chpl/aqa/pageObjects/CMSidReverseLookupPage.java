@@ -27,7 +27,7 @@ public final class CMSidReverseLookupPage {
         return element;
     }
 
-    public static WebElement CertIdResultsTable_CHPLIdcolumn(final WebDriver driver) {
+    public static WebElement chplIdColumnInCertIdResultsTable(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"lookupCertIdResults\"]/tbody"));
         return element;
     }
@@ -52,7 +52,7 @@ public final class CMSidReverseLookupPage {
         return element;
     }
 
-    public static WebElement SearchLookupResults(final WebDriver driver) {
+    public static WebElement searchLookupResults(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div/div/div/span/button/i"));
         return element;
     }

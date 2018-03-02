@@ -5,6 +5,9 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
+/**
+ * Set Cucumber Options.
+ */
 @RunWith(Cucumber.class)
 @CucumberOptions(
 features = "src/test/resources/Features",
