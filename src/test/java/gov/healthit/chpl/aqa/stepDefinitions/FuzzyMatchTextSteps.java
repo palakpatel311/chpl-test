@@ -1,11 +1,12 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-import cucumber.api.java.en.Given;
+import org.openqa.selenium.WebElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -29,49 +30,51 @@ public class FuzzyMatchTextSteps {
         }
     }
 
-    @Given("^I am on listing details page \"([^\"]*)\"$")
-    public void iAmOnListingDetailsPage(final String arg1) throws Throwable {
-        driver.get(url + "#/product/" + arg1);
+    /**
+     * Open the details for designated certification criteria.
+     * @param number criteria to open
+     */
+    @When("^I open details for criteria \"([^\"]*)\"$")
+    public void iOpenDetailsForACriteria(final String number) {
+        WebElement link = ListingDetailsPage.certificationCriteriaDetailsLink(driver, number);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
     }
 
-    @When("^I look at criteria details for criteria g4$")
-    public void iLookAtCriteriaDetailsG4() throws Throwable {
-        ListingDetailsPage.certificationCriteriaG4ViewDetails(driver).click();
-    }
-
-    @Then("^QMS Standard should display updated '21 CFR 820' text$")
-    public void qmsStandardDisplaysCorrectText() throws Throwable {
-        String actualString = ListingDetailsPage.qmsStandardText(driver).getText();
-        assertTrue(actualString.contains("21 CFR Part 820"));
-    }
-
-    @When("^I look at criteria details for criteria g5$")
-    public void iLookAtCriteriaDetailsForCriteriaG5() throws Throwable {
-        Actions action = new Actions(driver);
-        action.moveToElement(ListingDetailsPage.certificationCriteriaG5ViewDetails(driver)).click().perform();
-    }
-
-    @Then("^Accessibility Standard should display updated 'WCAG Level' text$")
-    public void accessibilityStandardShouldDisplayUpdatedOtherWCAG() throws Throwable {
-        String actualString = ListingDetailsPage.acceessibilityStandardText(driver).getText();
-        assertTrue(actualString.contains("WCAG Level"));
-    }
-
+    /**
+     * Open the SED panel.
+     */
     @When("^I look at SED details$")
-    public void iLookAtSEDDetails() throws Throwable {
-        ListingDetailsPage.certificationCriteriaAccordion(driver).click();
-        ListingDetailsPage.sedAccordion(driver).click();
+    public void iLookAtSEDDetails() {
+        WebElement link = ListingDetailsPage.sedAccordion(driver);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
     }
 
-    @Then("^UCD process should display updated 'IS0 9001' text$")
-    public void ucdProcessShouldDisplayUpdatedNISTIRText() throws Throwable {
-        String actualString = ListingDetailsPage.ucdProcessText(driver).getText();
-        assertTrue(actualString.contains("IS0 9001"));
+    /**
+     * Assert that the QMS Standard section has the passed in value.
+     * @param qmsText expected text
+     */
+    @Then("^QMS Standard should display \"([^\"]*)\"$")
+    public void qmsStandardDisplaysCorrectText(final String qmsText) {
+        String actualString = ListingDetailsPage.qmsStandardText(driver).getText();
+        assertTrue(actualString.contains(qmsText), "Expect " + qmsText + " to be found in " + actualString);
     }
-        
-    @Then("^UCD process should display updated 'NISTIR 7741' text$")
-    public void ucdProcessShouldDisplaycleantext() throws Throwable {
-    String actualString = ListingDetailsPage.ucdProcessText(driver).getText();
-    assertTrue(actualString.contains("NISTIR 7741"));
+
+    /**
+     * Assert that the Accessibility Standard equals the passed in value.
+     * @param accessibilityText expected text
+     */
+    @Then("^Accessibility Standard should display \"([^\"]*)\"$")
+    public void accessibilityStandardShouldDisplayUpdatedOtherWCAG(final String accessibilityText) {
+        String actualString = ListingDetailsPage.accessibilityStandardText(driver).getText();
+        assertEquals(actualString, accessibilityText);
+    }
+    /**
+     * Assert that the UCD Process equals the passed in value.
+     * @param ucdText expected text
+     */
+    @Then("^UCD process should display \"([^\"]*)\"$")
+    public void ucdProcessShouldDisplayUpdatedUcdText(final String ucdText) {
+        String actualString = ListingDetailsPage.ucdProcessText(driver).getText();
+        assertEquals(actualString, ucdText);
     }
 }

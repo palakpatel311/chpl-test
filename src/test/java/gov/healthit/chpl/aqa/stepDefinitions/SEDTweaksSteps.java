@@ -37,8 +37,10 @@ public class SEDTweaksSteps {
      * @param chplId the database id of the requested listing
      */
     @Given("^I am on the Details page of Listing \"([^\"]*)\"$")
-    public void iAmOnAListingsDetailsPages(final String chplId) {
+    public void iAmOnAListingsDetailsPage(final String chplId) {
         driver.get(url + "#/product/" + chplId);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
     }
 
     /**

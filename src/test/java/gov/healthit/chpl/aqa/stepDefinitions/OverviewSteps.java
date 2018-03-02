@@ -31,7 +31,7 @@ public class OverviewSteps {
     public OverviewSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
-            url = "http://localhost:3000/";           
+            url = "http://localhost:3000/";
        }
     }
 

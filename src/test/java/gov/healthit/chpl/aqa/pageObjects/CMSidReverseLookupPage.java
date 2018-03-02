@@ -7,38 +7,63 @@ import org.openqa.selenium.WebElement;
 /**
  * Class CMSidReverseLookupPage definition.
  */
-public class CMSidReverseLookupPage {
-    
-    private WebDriver driver;
+public final class CMSidReverseLookupPage {
+
+    private CMSidReverseLookupPage() {}
     private static WebElement element = null;
-    
+
+    /**
+     * Returns paragraph that contains CMS ID.
+     * @param driver WebDriver
+     * @return the results paragraph
+     */
+    public static WebElement cmsIdResults(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"widget-dropdown\"]/ai-cms-widget-display/div/p/strong"));
+        return element;
+    }
+
     public static WebElement inputCertificationId(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"certIdsField\"]"));
         return element;
     }
-    
+
     public static WebElement CertIdResultsTable_CHPLIdcolumn(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"lookupCertIdResults\"]/tbody"));
         return element;
     }
-    
-    public static WebElement CertIdResultsTable_CHPLIdcolumnrow1(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"lookupCertIdResults\"]/tbody/tr[1]/td[6]"));
+
+    /**
+     * Get the button that generates a CMS Cert ID.
+     * @param driver WebDriver
+     * @return the button
+     */
+    public static WebElement generateCmsIdButton(final WebDriver driver) {
+        element = driver.findElement(By.id("get-ehr-cert-id"));
         return element;
     }
-    public static WebElement CertIdResultsTable_CHPLIdcolumnrow2(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"lookupCertIdResults\"]/tbody/tr[2]/td[6]"));
+
+    /**
+     * Returns element holding main content.
+     * @param driver WebDriver
+     * @return element holding main content
+     */
+    public static WebElement mainContent(final WebDriver driver) {
+        element = driver.findElement(By.id("mainContent"));
         return element;
     }
-    
-    public static WebElement CMSidCreatorWidget(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"widget-dropdown\"]/ai-cms-widget-display/div"));
-        return element;
-    }
+
     public static WebElement SearchLookupResults(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div/div/div/span/button/i"));
         return element;
     }
-  
-    
+
+    /**
+     * Toggle for widget display.
+     * @param driver WebDriver
+     * @return the toggle
+     */
+    public static WebElement widgetToggle(final WebDriver driver) {
+        element = driver.findElement(By.id("widget-toggle"));
+        return element;
+    }
 }

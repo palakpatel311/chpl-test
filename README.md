@@ -10,7 +10,6 @@ Based on Selenium-cucumber: Automation Testing Using Java Automation test framew
 * Cucumber - Gherkin
 * TestNG
 
-
 ## Prerequisites
 * Java
 * Maven
@@ -18,7 +17,6 @@ Based on Selenium-cucumber: Automation Testing Using Java Automation test framew
 * Eclipse Plugins
 * Cucumber
 * Chromedriver
-
 
 ## Getting started
 
@@ -47,7 +45,7 @@ If your console does not support color, enable monochrome with:
 
 `mvn test -Dcucumber.options="-m"`
 
-By default, for those test that support it, the target url is `http://localhost:3000`. A different url can be targetted with the command:
+By default, for those test that support it, the target url is `http://localhost:3000`. A different url can be targeted with the command:
 
 `mvn test -Durl="https://chpl.ahrqdev.org"`
 
