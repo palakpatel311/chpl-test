@@ -10,8 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import gov.healthit.chpl.aqa.pageObjects.CMSidReverseLookupPage;
-import gov.healthit.chpl.aqa.pageObjects.SearchPage;
+import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
 /**
  * Class CMSIDsLookupSteps definition.
@@ -21,86 +22,83 @@ public class CMSIDsLookupSteps {
     private WebDriver driver;
     private static final int TIMEOUT = 30;
     private String url = System.getProperty("url");
-    
+
     /**
      * Constructor creates new driver.
      */
-    
     public CMSIDsLookupSteps() {
-    driver = Hooks.getDriver();
-    if (StringUtils.isEmpty(url)) {
-       url = "http://localhost:3000/";
-      }
-    }
-    
-    /**
-     * To load CMS ID Reverse Lookup page 
-     */
-    
-    @Given("^I am an end-user on CMS ID Reverse Lookup page$")
-    public void i_am_an_end_user_on_CMS_ID_Reverse_Lookup_page() {
-        driver.get(url + "#/resources/cms_lookup");
+        driver = Hooks.getDriver();
+        if (StringUtils.isEmpty(url)) {
+            url = "http://localhost:3000/";
+        }
     }
 
     /**
-     * Lookup one of the 3 unverifiable CMS IDs on reverse lookup page 
+     * Load the reverse lookup page.
      */
-    
-   @When("^I look up CMS ID \"(.*)\" in the reverse look-up tool$")
-    public void I_look_up_CMS_ID_in_the_reverse_lookup_tool(final String cmsId){
+    @Given("^I am on the CMS ID Reverse Lookup page$")
+    public void iAmOnTheCmsIdReverseLookupPage() {
+        driver.get(url + "#/resources/cms_lookup");
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(CMSidReverseLookupPage.mainContent(driver)));
+    }
+
+    /**
+     * Look up a CMS ID in the reverse lookup tool.
+     * @param cmsId ID to look up
+     */
+    @When("^I look up CMS ID \"(.*)\" in the reverse look-up tool$")
+    public void lookUpCmsId(final String cmsId) {
         CMSidReverseLookupPage.inputCertificationId(driver).sendKeys(cmsId);
         CMSidReverseLookupPage.SearchLookupResults(driver).click();
     }
-    
-    /**
-     * Asserts that listings returned in result are as expected  
-     */
 
-    @Then("^I should see the listings \"(.*)\" that make up the CMS ID$")
-    public void i_should_see_the_listings_that_make_up_the_CMS_ID(final String chplId) throws Throwable {
-        assertTrue(CMSidReverseLookupPage.CertIdResultsTable_CHPLIdcolumn(driver).getText().contains(chplId));
+    /**
+     * Add Listings to the CMS Widget.
+     * @param chplIds semicolon separated list of DB IDs
+     */
+    @When("^I add \"([^\"]*)\" Listings to the CMS Widget$")
+    public void addListingsToWidget(final String chplIds) {
+        String[] ids = chplIds.split(";");
+        for (String id : ids) {
+            driver.get(url + "#/product/" + id);
+            WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+            wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
+            ListingDetailsPage.cmsWidgetButton(driver, id).click();
+        }
     }
-    
-    /**
-     * Loads CHPL home/search page  
-     */
-    
-    @Given("^I am an end user on CHPL home page$")
-    public void i_am_an_end_user() throws Throwable {
-        driver.get(url + "#/search");
-     }
 
     /**
-     * Loads a listing. First searches for listing, then adds Cert Id to CMS creator.
-     * Waits after adding each of the Cert Ids, then generates EHR certification Id.
+     * Generate a CMS ID.
      */
-    
-    @When("^I Generate CMS ID using CMS ID widget for same listings \"([^\"]*)\" and \"([^\"]*)\" as in result of reverse lookup$")
-    public void i_Generate_CMS_ID_using_CMS_ID_widget_for_same_listings_and_as_in_result_of_reverse_lookup(String chplId1, String chplId2) {
-             
-        SearchPage.searchField(driver).sendKeys(chplId1);
+    @When("^I generate a CMS ID$")
+    public void generateCmsId() {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        SearchPage.certId_Link1(driver).click();
-              
-        SearchPage.searchField(driver).clear();
-        
-        SearchPage.searchField(driver).sendKeys(chplId2);
-        wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
-        SearchPage.certId_Link2(driver).click();
-        wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
-      
-        SearchPage.getEHR_certId(driver).click();
-        wait.until(ExpectedConditions.elementToBeClickable(SearchPage.detailsLink(driver)));
-      
-     }
-
-    /**
-     * Assert Certification Id generated for listings with unverifiable CMS Id  matches newly generated CMS Id (reverse generation of Id)
-     */    
-    
-    @Then("^the generated CMS ID should be \"(.*)\"$")
-    public void the_generated_CMS_ID_should_be_given_cmsId(final String cmsId) {
-        assertTrue(CMSidReverseLookupPage.CMSidCreatorWidget(driver).getText().contains(cmsId));
+        if (CMSidReverseLookupPage.widgetToggle(driver).getAttribute("aria-expanded").equals("false")) {
+            CMSidReverseLookupPage.widgetToggle(driver).click();
+        }
+        wait.until(ExpectedConditions.visibilityOf(CMSidReverseLookupPage.generateCmsIdButton(driver)));
+        CMSidReverseLookupPage.generateCmsIdButton(driver).click();
+        wait.until(ExpectedConditions.visibilityOf(CMSidReverseLookupPage.cmsIdResults(driver)));
     }
 
+    /**
+     * Asserts that listings returned in result are as expected.
+     * @param chplId id to expect
+     */
+    @Then("^I should see the listings \"(.*)\" that make up the CMS ID$")
+    public void checkForListings(final String chplId) {
+        String actualText = CMSidReverseLookupPage.CertIdResultsTable_CHPLIdcolumn(driver).getText();
+        assertTrue(actualText.contains(chplId), "Expect " + chplId + " to be found in " + actualText);
+    }
+
+    /**
+     * Assert that the generated CMS ID matches parameter.
+     * @param cmsId expected CMS ID
+     */
+    @Then("^the generated CMS ID should be \"(.*)\"$")
+    public void readCmsId(final String cmsId) {
+        String actualText = CMSidReverseLookupPage.cmsIdResults(driver).getText();
+        assertTrue(actualText.contains(cmsId), "Expect " + cmsId + " to be found in " + actualText);
+    }
 }

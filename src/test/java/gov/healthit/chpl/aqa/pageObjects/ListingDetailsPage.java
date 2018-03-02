@@ -1,5 +1,7 @@
 package gov.healthit.chpl.aqa.pageObjects;
 
+import java.util.ArrayList;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,12 +9,11 @@ import org.openqa.selenium.WebElement;
 /**
  * Class ListingDetailsPage definition.
  */
-public class ListingDetailsPage {
+public final class ListingDetailsPage {
 
-    private WebDriver driver;
+    private ListingDetailsPage() {}
     private static WebElement element = null;
-
-    public static WebElement acceessibilityStandardText(final WebDriver driver) {
+    public static WebElement accessibilityStandardText(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[54]/div/div/div/table/tbody/tr[3]/td[2]/ul/li[1]"));
         return element;
     }
@@ -27,38 +28,25 @@ public class ListingDetailsPage {
         return element;
     }
 
-    public static WebElement certificationCriteriaA1ViewDetails(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[1]/div/div/span[2]/a"));
+    /**
+     * Get the link to a criteria details section.
+     * @param driver WebDriver
+     * @param number criteria number
+     * @return the link element
+     */
+    public static WebElement certificationCriteriaDetailsLink(final WebDriver driver, final String number) {
+        element = driver.findElement(By.id("criteria_" + number + "_details_link"));
         return element;
     }
 
-    public static WebElement certificationCriteriaC2ViewDetails(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[26]/div/div/span[2]/a"));
-        return element;
-    }
-
-    public static WebElement certificationCriteriaC3ViewDetails(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[27]/div/div/span[2]/a"));
-        return element;
-    }
-
-    public static WebElement certificationCriteriaC4ViewDetails(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[28]/div/div/span[2]/a"));
-        return element;
-    }
-
-    public static WebElement certificationCriteriaG4ViewDetails(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[53]/div/div/span[2]/a"));
-        return element;
-    }
-
-    public static WebElement certificationCriteriaG5ViewDetails(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[54]/div/div/span[2]/a"));
-        return element;
-    }
-
-    public static WebElement certificationCriteriaF1ViewDetails(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[53]/div/div/span[2]/a"));
+    /**
+     * Return CMS Widget button for listing.
+     * @param driver WebDriver
+     * @param id database id of listing
+     * @return the button
+     */
+    public static WebElement cmsWidgetButton(final WebDriver driver, final String id) {
+        element = driver.findElement(By.id("toggle-cms-" + id));
         return element;
     }
 
@@ -68,16 +56,16 @@ public class ListingDetailsPage {
     }
 
     /**
-     * Returns the Transparecy Disclosure URL.
+     * Returns the Transparency Disclosure URL.
      *
-     * @param driver webdriver
+     * @param driver WebDriver
      * @return the transparency disclosure URL
      */
     public static WebElement disclosureUrl(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[2]/div[1]/span/div[2]/a"));
         return element;
     }
-    
+
     public static WebElement downloadSEDDetailsButton(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-tasks-table\"]/tfoot/tr/td/button"));
         return element;
@@ -102,7 +90,7 @@ public class ListingDetailsPage {
         element = driver.findElement(By.id("listingName"));
         return element;
     }
-    
+
     public static WebElement mainContent(final WebDriver driver) {
         element = driver.findElement(By.id("mainContent"));
         return element;
@@ -118,7 +106,7 @@ public class ListingDetailsPage {
         return element;
     }
 
-    public static WebElement sEDCriteriaTable(final WebDriver driver) {
+    public static WebElement sedCriteriaTable(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]"));
         return element;
     }
@@ -126,7 +114,7 @@ public class ListingDetailsPage {
     /**
      * Returns certification criteria from the SED accordion.
      *
-     * @param driver webdriver
+     * @param driver WebDriver
      * @param index the "nth" criteria (1-based)
      * @return the criteria at the "nth" position
      */
@@ -134,10 +122,28 @@ public class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[" + index + "]"));
         return element;
     }
-    
+
     public static WebElement surveillanceActivitiesAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-surveillance-activities"));
         return element;
+    }
+
+    /**
+     * Get the Test Procedure value for a given criteria.
+     * @param driver WebDriver
+     * @param number certification criteria
+     * @return the test procedure element
+     */
+    public static WebElement testProcedure(final WebDriver driver, final String number) {
+        WebElement table = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody"));
+        ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
+            ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
+            if (cols.get(0).getText().equalsIgnoreCase("Test procedure")) {
+                return cols.get(1);
+            }
+        }
+        return null;
     }
 
     public static WebElement ucdProcessText(final WebDriver driver) {
@@ -149,5 +155,4 @@ public class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/h4"));
         return element;
     }
-    
 }

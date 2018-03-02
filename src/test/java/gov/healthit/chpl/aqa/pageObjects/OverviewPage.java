@@ -7,9 +7,10 @@ import org.openqa.selenium.WebElement;
 /**
  * Class OverviewPage definition.
  */
-public class OverviewPage {
+public final class OverviewPage {
 
-    private WebDriver driver;
+    private OverviewPage() {}
+
     private static WebElement element = null;
 
     /**

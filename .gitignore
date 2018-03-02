@@ -27,3 +27,7 @@ Rest.*
 # Locally stored "Eclipse launch configurations"
 *.launch
 
+#################
+## Custom
+#################
+.checkstyle
