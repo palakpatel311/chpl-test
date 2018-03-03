@@ -50,7 +50,7 @@ public class CMSIDsLookupSteps {
     @When("^I look up CMS ID \"(.*)\" in the reverse look-up tool$")
     public void lookUpCmsId(final String cmsId) {
         CMSidReverseLookupPage.inputCertificationId(driver).sendKeys(cmsId);
-        CMSidReverseLookupPage.SearchLookupResults(driver).click();
+        CMSidReverseLookupPage.searchLookupResults(driver).click();
     }
 
     /**
@@ -88,7 +88,7 @@ public class CMSIDsLookupSteps {
      */
     @Then("^I should see the listings \"(.*)\" that make up the CMS ID$")
     public void checkForListings(final String chplId) {
-        String actualText = CMSidReverseLookupPage.CertIdResultsTable_CHPLIdcolumn(driver).getText();
+        String actualText = CMSidReverseLookupPage.chplIdColumnInCertIdResultsTable(driver).getText();
         assertTrue(actualText.contains(chplId), "Expect " + chplId + " to be found in " + actualText);
     }
 

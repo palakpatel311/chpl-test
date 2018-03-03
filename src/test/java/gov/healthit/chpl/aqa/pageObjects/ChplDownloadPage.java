@@ -14,7 +14,7 @@ public class ChplDownloadPage {
 
     /**
      * Returns element holding main content.
-     * @driver webdriver
+     * @param driver WebDriver
      * @return element holding main content
      */
     public static WebElement mainContent(final WebDriver driver) {
@@ -31,44 +31,44 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id='downloadSelect']"));
         return element;
     }
-   
+
     public static WebElement downloadFileButton(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadChplLink\"]"));
         return element;
     }
-    
+
     public static WebElement downloadDefinitionButton(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadChplDefinitionLink\"]"));
         return element;
     }
-    
-    public static WebElement downloadFile_2015products(final WebDriver driver) {
+
+    public static WebElement downloadoption2015editionProductsFile(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[1]"));
         return element;
     }
-    public static WebElement downloadFile_2014products(final WebDriver driver) {
+    public static WebElement downloadoption2014editionProductsFile(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[2]"));
         return element;
     }
-    
-    public static WebElement downloadFile_2011products(final WebDriver driver) {
+
+    public static WebElement downloadoption2011editionProductsFile(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[3]"));
         return element;
     }
-    
-    public static WebElement downloadFile_2015summary(final WebDriver driver) {
+
+    public static WebElement downloadoption2015summaryFile(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[4]"));
         return element;
     }
-    public static WebElement downloadFile_2014summary(final WebDriver driver) {
+    public static WebElement downloadoption2014summaryFile(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[5]"));
         return element;
     }
-    public static WebElement downloadFile_surveillanceall(final WebDriver driver) {
+    public static WebElement downloadoptionSurveillanceFile(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[6]"));
         return element;
     }
-    public static WebElement downloadFile_nonconformity(final WebDriver driver) {
+    public static WebElement downloadoptionNonconformitiesFile(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[7]"));
         return element;
     }
@@ -82,5 +82,5 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"login-toggle\"]/span[1]"));
         return element;
     }
-    
+
 }

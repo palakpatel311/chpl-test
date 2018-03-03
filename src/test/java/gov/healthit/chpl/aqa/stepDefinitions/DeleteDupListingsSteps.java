@@ -29,27 +29,27 @@ public class DeleteDupListingsSteps {
     }
 
     @Given("^I am on CHPL search page$")
-    public void i_am_on_CHPL_search_page() throws Throwable {
+    public void iAamOnCHPLSearchPage() throws Throwable {
         driver.get(url);
     }
 
     @When("^I search for a listing with CHPL ID \"(.*)\"$")
-    public void i_search_for_a_listing_with_CHPL_ID_MEDI_IR(final String chplId) throws Throwable {
+    public void searchForCHPLID(final String chplId) throws Throwable {
         SearchPage.searchField(driver).sendKeys(chplId);
     }
 
     @Then("^the search page shows 'No results found' message$")
-    public void the_search_page_shows_No_results_found_message() throws Throwable {
+    public void verifyMessage() throws Throwable {
         assertTrue(SearchPage.noResultsFound(driver).getText().contains("No results found"));
     }
 
     @Given("^I am on listing details page of listing with database ID \"(.*)\"$")
-    public void i_am_on_listing_details_page_of_listing_with_CHPL_ID_MEDI_IR(final String dbId) throws Throwable {
+    public void loadListingWithDbId(final String dbId) throws Throwable {
         driver.get(url + "#/product/" + dbId);
     }
 
     @Then("^the page shows 'This listing does not exist' message$")
-    public void the_page_shows_This_listing_does_not_exist_message() throws Throwable {
+    public void verifyMessageonPage() throws Throwable {
         assertTrue(ListingDetailsPage.mainContent(driver).getText().contains("This listing does not exist"));
     }
 }

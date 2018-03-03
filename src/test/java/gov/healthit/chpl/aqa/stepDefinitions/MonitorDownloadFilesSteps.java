@@ -42,14 +42,15 @@ public class MonitorDownloadFilesSteps {
     /**
      * Get user to the Download CHPL page. Chrome options are necessary to get past
      * keep/discard pop ups for successful download of a file to directory.
+     * @throws Exception if there is an issue with Chrome options.
      */
     @Given("^I am on download the CHPL resources page$")
-    public void i_am_on_download_the_CHPL_resources_page() throws Throwable {
+    public void iAmOnDownloadTheCHPLResourcesPage() throws Throwable {
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("profile.default_content_settings.popups", 0);
         chromePrefs.put("download.default_directory", downloadPath);
         /**
-         * Save Chrome Opions
+         * Save Chrome Options
          */
         ChromeOptions options = new ChromeOptions();
         HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
@@ -69,13 +70,13 @@ public class MonitorDownloadFilesSteps {
     }
 
     @When("^I download the 2015 edition products file$")
-    public void i_download_the_2015ed_products_file() {
-        ChplDownloadPage.downloadFile_2015products(driver).click();
+    public void download2015editionProductsFile() {
+        ChplDownloadPage.downloadoption2015editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
 
     @Then("^the downloaded file shows chpl-2015-currentdate.xml filename$")
-    public void the_downloaded_file_shows_chpl_2015_currentdate_xml_filename() {
+    public void verify2015editionProductsFilename() {
         /**
          * Get a list of all files in the directory and sort it by last modified date to
          * get latest download file in the directory. This can be improved by deleting
@@ -100,13 +101,13 @@ public class MonitorDownloadFilesSteps {
     }
 
     @When("^I download the 2014 edition products file$")
-    public void i_download_the_2014ed_xml_file() {
-        ChplDownloadPage.downloadFile_2014products(driver).click();
+    public void download2014editionProductsFile() {
+        ChplDownloadPage.downloadoption2014editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
 
     @Then("^the downloaded file shows chpl-2014-currentdate.xml filename$")
-    public void the_downloaded_file_shows_chpl_2014_currentdate_xml_filename() {
+    public void verify2014editionProductsFilename() {
 
         File[] files = dir.listFiles();
         Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
@@ -124,13 +125,13 @@ public class MonitorDownloadFilesSteps {
     }
 
     @When("^I download the 2011 edition products file$")
-    public void i_download_the_2011ed_products_file() {
-        ChplDownloadPage.downloadFile_2011products(driver).click();
+    public void download2011editionProductsFile() {
+        ChplDownloadPage.downloadoption2011editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
 
     @Then("^the downloaded file shows 2011-chpl-lastrun.xml filename$")
-    public void the_downloaded_file_shows_chpl_2011_lastrun_xml_filename() {
+    public void verify2011editionProductsFilename() {
 
         File[] files = dir.listFiles();
         Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
@@ -160,9 +161,7 @@ public class MonitorDownloadFilesSteps {
             } else if (sysMonth.equalsIgnoreCase("04") || sysMonth.equalsIgnoreCase("05")
                     || sysMonth.equalsIgnoreCase("06") && downloadfileName.equals(sysfilenameQ2)) {
                 assertEquals(downloadfileName, sysfilenameQ2, "File is not current");
-            }
-
-            else if (sysMonth.equalsIgnoreCase("07") || sysMonth.equalsIgnoreCase("08")
+            } else if (sysMonth.equalsIgnoreCase("07") || sysMonth.equalsIgnoreCase("08")
                     || sysMonth.equalsIgnoreCase("09") && downloadfileName.equals(sysfilenameQ3)) {
                 assertEquals(downloadfileName, sysfilenameQ3, "File is not current");
             } else if (sysMonth.equalsIgnoreCase("10") || sysMonth.equalsIgnoreCase("11")
@@ -173,13 +172,13 @@ public class MonitorDownloadFilesSteps {
     }
 
     @When("^I download the 2015 edition summary file$")
-    public void i_download_the_2015ed_summary_file() {
-        ChplDownloadPage.downloadFile_2015summary(driver).click();
+    public void download2015editionSummaryFile() {
+        ChplDownloadPage.downloadoption2015summaryFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
 
     @Then("^the downloaded file shows chpl-2015-currentdate.csv filename$")
-    public void the_downloaded_file_shows_chpl_2015_currentdate_csv_filename() {
+    public void verify2015editionSummaryFilename() {
         File[] files = dir.listFiles();
         Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
 
@@ -196,13 +195,13 @@ public class MonitorDownloadFilesSteps {
     }
 
     @When("^I download the 2014 edition summary file$")
-    public void i_download_the_2014ed_summary_file() {
-        ChplDownloadPage.downloadFile_2014summary(driver).click();
+    public void download2014editionSummaryFile() {
+        ChplDownloadPage.downloadoption2015summaryFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
 
     @Then("^the downloaded file shows chpl-2014-currentdate.csv filename$")
-    public void the_downloaded_file_shows_chpl_2014_currentdate_csv_filename() {
+    public void verify2014editionSummaryFilename() {
         File[] files = dir.listFiles();
         Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
 
@@ -220,13 +219,13 @@ public class MonitorDownloadFilesSteps {
     }
 
     @When("^I download the Surveillance Activity file$")
-    public void i_download_the_Surveillance_Activity_file() {
-        ChplDownloadPage.downloadFile_surveillanceall(driver).click();
+    public void downloadSurveillanceActivityFile() {
+        ChplDownloadPage.downloadoptionSurveillanceFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
 
     @Then("^the downloaded file shows surveillance-all.csv filename$")
-    public void the_downloaded_file_shows_surveillance_all_csv_filename() {
+    public void verifySurveillanceActivityFilename() {
         File[] files = dir.listFiles();
         Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
 
@@ -240,13 +239,13 @@ public class MonitorDownloadFilesSteps {
     }
 
     @When("^I download the Non-Conformities file$")
-    public void i_download_the_Non_Conformities_file() {
-        ChplDownloadPage.downloadFile_nonconformity(driver).click();
+    public void downloadNonConformitiesFile() {
+        ChplDownloadPage.downloadoptionNonconformitiesFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
 
     @Then("^the downloaded file shows surveillance-with-nonconformities.csv filename$")
-    public void the_downloaded_file_shows_surveillance_with_nonconformities_csv_filename() {
+    public void verifyNonConformitiesFilename() {
         File[] files = dir.listFiles();
         Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
 
