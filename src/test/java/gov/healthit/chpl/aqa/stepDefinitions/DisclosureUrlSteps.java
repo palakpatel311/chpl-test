@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
@@ -28,12 +29,27 @@ public class DisclosureUrlSteps {
         if (StringUtils.isEmpty(url)) {
             url = "http://localhost:3000/";
         }
-    }
-
+   }
+    /**
+     * Loads a listing for given Database ID.
+     * @param dbId the Database Id of a listing to load
+     */
+    @Given("^I am on listing details page with database ID \"([^\"]*)\"$")
+    public void loadListingDetails(final String dbId) {
+        driver.get(url + "#/product/" + dbId);
+   }
+    /**
+     * Assert that Mandatory Disclosures URL exists and is correct.
+     * @param urlValue the URL value to assert
+     */
+    @Then("^the Mandatory Disclosures URL field should show Disclosures URL \"(.*)\"$")
+    public void verifyMandatoryDisclosureurlValue(final String urlValue) {
+        String actualText = ListingDetailsPage.disclosureUrl(driver).getText();
+        assertTrue(actualText.contains(urlValue), "Expect " + urlValue + " to be found in " + actualText);
+   }
     /**
      * Loads a listing. First searches for listing, then loads that listing.
      * Waits to open Listing page until there's only one result, then waits on listing page until the Listing name exists.
-     *
      * @param chplId the CHPL Product Number to load
      */
     @Given("^I am on listing details page of listing with CHPL ID \"(.*)\"$")

@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
  */
 public class SearchPage {
     private WebDriver driver;
-    private static WebElement element = null; 
+    private static WebElement element = null;
 
     public static WebElement certIdLink1(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"toggle-cms-8169\"]"));

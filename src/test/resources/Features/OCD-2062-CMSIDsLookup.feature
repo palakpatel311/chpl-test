@@ -1,3 +1,4 @@
+@Regression
 Feature: OCD-2062 - Verify that newly generated & incorrectly removed CMS IDs still work
   Background: Some CMS IDs were lost during an outage. They need to be re-inserted, and able to be validated against. In addition, if a new CMS ID is generated with the same CHPL Listings, the CMS ID should be the new version.
 

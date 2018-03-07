@@ -42,7 +42,7 @@ public class MonitorDownloadFilesSteps {
     /**
      * Get user to the Download CHPL page. Chrome options are necessary to get past
      * keep/discard pop ups for successful download of a file to directory.
-     * @throws Exception if there is an issue with Chrome options.
+     * @throws Throwable throws exception if there is an issue with Chrome options.
      */
     @Given("^I am on download the CHPL resources page$")
     public void iAmOnDownloadTheCHPLResourcesPage() throws Throwable {

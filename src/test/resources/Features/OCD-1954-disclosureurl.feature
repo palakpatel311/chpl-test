@@ -1,5 +1,16 @@
-Feature: This is to test updated mandatory disclosure urls for cerner listings
+Feature: Regression test to test Mandatory Disclosures URL for listings and 
+		 Acceptance test to test updated mandatory disclosure urls for cerner listings
 
+@Regression
+Scenario Outline: Verify Mandatory Disclosures URL exists and shows correct URL for that listing
+	Given I am on listing details page with database ID "<DB_ID>"
+	Then the Mandatory Disclosures URL field should show Disclosures URL "<URL>"
+	Examples:
+		|DB_ID|URL|
+		|8624|https://www.cerner.com/cehrt-disclosure-information|
+		|9240|http://www.allscripts.com/solutions/government-initiatives/costs-and-limitations-per-onc|
+
+ @Acceptance
   Scenario Outline: Verify mandatory disclosure link update for Cerner listings
     Given I am on listing details page of listing with CHPL ID "<CHPL_ID>"
     Then the Mandatory Disclosures URL should be: "<URL>"

@@ -1,3 +1,4 @@
+@Regression
 Feature: To verify duplicate listings are deleted
  		Tests to verify 3 duplicate drummond listings are deleted
 

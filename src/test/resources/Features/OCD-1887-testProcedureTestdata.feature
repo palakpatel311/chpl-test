@@ -1,3 +1,4 @@
+@Regression
 Feature: OCD-1887 - Test Procedure and Test Data field update in 2015 template V12
   New columns 'Test Procedure' and 'Test Data'
   Allowable values are:

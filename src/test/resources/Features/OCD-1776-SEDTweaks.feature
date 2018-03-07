@@ -1,3 +1,4 @@
+@Regression
 Feature: SED Display in product details
   This test is to verify text changes and other display updates to SED section
 

@@ -1,3 +1,4 @@
+@Regression
 Feature: Download chpl data files
   To test download files functionality of CHPL application
 

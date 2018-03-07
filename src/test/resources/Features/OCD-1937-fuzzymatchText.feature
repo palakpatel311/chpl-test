@@ -1,3 +1,4 @@
+@Regression
 Feature: OCD-1937 - Update Listings to have "cleaned" data fields
   Tests in this feature will be used to verify updated text for these fields based on fuzzy matching technique using provided mapping of values.
 

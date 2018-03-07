@@ -1,3 +1,4 @@
+@Regression
 Feature: Monitor that download files on CHPL download resources page are correct and current
   	Tests to verify download files show correct date on filenames to check file generation didn't fail at any point.
   	
