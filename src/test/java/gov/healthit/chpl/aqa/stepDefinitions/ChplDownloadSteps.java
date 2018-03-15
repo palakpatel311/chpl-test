@@ -17,18 +17,22 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
+import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 /**
  * Class ChplDownloadSteps definition.
  */
 public class ChplDownloadSteps {
 
     private WebDriver driver;
+    private static final int TIMEOUT = 30;
     private String url = System.getProperty("url");
     private static String downloadPath = "\\filepath\\tempdnld";
     private static File dir = new File(downloadPath);
@@ -88,6 +92,8 @@ public class ChplDownloadSteps {
 
         driver = new ChromeDriver(cap);
         driver.get(url + "#/resources/download");
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(driver)));
     }
 
     /**

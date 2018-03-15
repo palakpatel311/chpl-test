@@ -14,7 +14,7 @@ Examples:
 
 Scenario Outline: Verify listing details do not load for deleted listings
 Given I am on listing details page of listing with database ID "<DB_ID>"
-Then the page shows 'This listing does not exist' message
+Then the page shows "This listing does not exist" message
 Examples:
 	|DB_ID|
 	|9102|
