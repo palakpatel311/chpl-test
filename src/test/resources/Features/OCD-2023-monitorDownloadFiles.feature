@@ -1,5 +1,5 @@
 @Regression
-Feature: Monitor that download files on CHPL download resources page are correct and current
+Feature: OCD-2023 - Monitor that download files on CHPL download resources page are correct and current
   	Tests to verify download files show correct date on filenames to check file generation didn't fail at any point.
   	
   	Scenario: At any given time, when downloaded, 2015 edition products (xml) file is up-to-date 

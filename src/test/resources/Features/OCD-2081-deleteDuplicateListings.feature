@@ -1,5 +1,5 @@
 @Regression
-Feature: To verify duplicate listings are deleted
+Feature: OCD-2081 - To verify duplicate listings are deleted
  		Tests to verify 3 duplicate drummond listings are deleted
 
 Scenario Outline: Verify deleted listings do not show in search results

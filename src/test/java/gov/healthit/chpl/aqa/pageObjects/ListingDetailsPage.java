@@ -13,21 +13,33 @@ public final class ListingDetailsPage {
 
     private ListingDetailsPage() {}
     private static WebElement element = null;
+    /**
+     * Returns element that holds Accessibility Standard Process Text.
+     * @param driver WebDriver
+     * @return Text element
+     */
     public static WebElement accessibilityStandardText(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[54]/div/div/div/table/tbody/tr[3]/td[2]/ul/li[1]"));
         return element;
     }
-
+    /**
+     * Returns Additional Information Accordion element.
+     * @param driver WebDriver
+     * @return Additional Information Accordion element
+     */
     public static WebElement additionalInfoAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-additional-information"));
         return element;
     }
-
+    /**
+     * Return Certification Criteria Accordion on listing page.
+     * @param driver WebDriver
+     * @return Certification Criteria Accordion element
+     */
     public static WebElement certificationCriteriaAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-certification-criteria"));
         return element;
     }
-
     /**
      * Get the link to a criteria details section.
      * @param driver WebDriver
@@ -49,7 +61,11 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.id("toggle-cms-" + id));
         return element;
     }
-
+    /**
+     * Return CQM Accordion on listing page.
+     * @param driver WebDriver
+     * @return CQM Accordion element
+     */
     public static WebElement cqmAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-cqm"));
         return element;
@@ -57,7 +73,6 @@ public final class ListingDetailsPage {
 
     /**
      * Returns the Transparency Disclosure URL.
-     *
      * @param driver WebDriver
      * @return the transparency disclosure URL
      */
@@ -65,47 +80,83 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[2]/div[1]/span/div[2]/a"));
         return element;
     }
-
+    /**
+     * Returns download SED details button element to download SED data.
+     * @param driver WebDriver
+     * @return download SED details button element
+     */
     public static WebElement downloadSEDDetailsButton(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-tasks-table\"]/tfoot/tr/td/button"));
         return element;
     }
-
+    /**
+     * Get the link to edit certified product page.
+     * @param driver WebDriver
+     * @return edit certified product link element
+     */
     public static WebElement editCertifiedProductLink(final WebDriver driver) {
         element = driver.findElement(By.linkText("Edit Certified Product"));
         return element;
     }
-
-    public static WebElement g1G2Accordion(final WebDriver driver) {
+    /**
+     * Return G1/G2 Accordion on listing page.
+     * @param driver WebDriver
+     * @return G1/G2 Accordion element
+     */
+    public static WebElement g1g2Accordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-g1g2"));
         return element;
     }
-
+    /**
+     * Returns the element that holds Intended User Description Title.
+     * @param driver WebDriver
+     * @return Title element
+     */
     public static WebElement intendedUserDescriptionTitle(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[2]/h4"));
         return element;
     }
-
+    /**
+     * Returns listing name of a listing.
+     * @param driver WebDriver
+     * @return listing name element
+     */
     public static WebElement listingName(final WebDriver driver) {
         element = driver.findElement(By.id("listingName"));
         return element;
     }
-
+    /**
+     * Returns element holding main content.
+     * @param driver WebDriver
+     * @return element holding main content
+     */
     public static WebElement mainContent(final WebDriver driver) {
         element = driver.findElement(By.id("mainContent"));
         return element;
     }
-
+    /**
+     * Returns element that holds QMS Standard text.
+     * @param driver WebDriver
+     * @return text element
+     */
     public static WebElement qmsStandardText(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[53]/div/div/div/table/tbody/tr[3]/td[2]/ul/li"));
         return element;
     }
-
+    /**
+     * Return SED Accordion on listing page.
+     * @param driver WebDriver
+     * @return SED Accordion element
+     */
     public static WebElement sedAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-sed"));
         return element;
     }
-
+    /**
+     * Returns SED Criteria Table element.
+     * @param driver WebDriver
+     * @return Table element
+     */
     public static WebElement sedCriteriaTable(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]"));
         return element;
@@ -113,7 +164,6 @@ public final class ListingDetailsPage {
 
     /**
      * Returns certification criteria from the SED accordion.
-     *
      * @param driver WebDriver
      * @param index the "nth" criteria (1-based)
      * @return the criteria at the "nth" position
@@ -122,7 +172,11 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[" + index + "]"));
         return element;
     }
-
+    /**
+     * Returns Surveillance Activities Accordion on listing details page.
+     * @param driver WebDriver
+     * @return Surveillance Activities Accordion element
+     */
     public static WebElement surveillanceActivitiesAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-surveillance-activities"));
         return element;
@@ -145,12 +199,20 @@ public final class ListingDetailsPage {
         }
         return null;
     }
-
+    /**
+     * Returns element that holds UCD Process Text.
+     * @param driver WebDriver
+     * @return Text element
+     */
     public static WebElement ucdProcessText(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr/td[2]"));
         return element;
     }
-
+    /**
+     * Returns the element that holds Usability Report Title.
+     * @param driver WebDriver
+     * @return Title element
+     */
     public static WebElement usabilityReportTitle(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/h4"));
         return element;

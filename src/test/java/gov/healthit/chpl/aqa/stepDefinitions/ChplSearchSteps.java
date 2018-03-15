@@ -1,22 +1,20 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
+import static org.testng.Assert.assertTrue;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
-
 /**
- * Class DisclosureUrlSteps definition.
+ * Class DeleteDupListingsSteps definition.
  */
-public class DisclosureUrlSteps {
 
+public class ChplSearchSteps {
     private WebDriver driver;
     private static final int TIMEOUT = 30;
     private String url = System.getProperty("url");
@@ -24,29 +22,33 @@ public class DisclosureUrlSteps {
     /**
      * Constructor creates new driver.
      */
-    public DisclosureUrlSteps() {
+    public ChplSearchSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
             url = "http://localhost:3000/";
-        }
-   }
+           }
+    }
     /**
-     * Loads a listing for given Database ID.
-     * @param dbId the Database Id of a listing to load
+     * Get user to CHPL search page.
      */
-    @Given("^I am on listing details page with database ID \"([^\"]*)\"$")
-    public void loadListingDetails(final String dbId) {
-        driver.get(url + "#/product/" + dbId);
-   }
+    @Given("^I am on CHPL search page$")
+    public void iAamOnCHPLSearchPage() {
+        driver.get(url);
+    }
     /**
-     * Assert that Mandatory Disclosures URL exists and is correct.
-     * @param urlValue the URL value to assert
+     * @param chplId Search for a listing with given chplId.
      */
-    @Then("^the Mandatory Disclosures URL field should show Disclosures URL \"(.*)\"$")
-    public void verifyMandatoryDisclosureurlValue(final String urlValue) {
-        String actualText = ListingDetailsPage.disclosureUrl(driver).getText();
-        assertTrue(actualText.contains(urlValue), "Expect " + urlValue + " to be found in " + actualText);
-   }
+    @When("^I search for a listing with CHPL ID \"(.*)\"$")
+    public void searchForCHPLID(final String chplId) {
+        SearchPage.searchField(driver).sendKeys(chplId);
+    }
+    /**
+     * Assert message when no results found.
+     */
+    @Then("^the search page shows 'No results found' message$")
+    public void verifyMessage() {
+        assertTrue(SearchPage.noResultsFound(driver).getText().contains("No results found"));
+    }
     /**
      * Loads a listing. First searches for listing, then loads that listing.
      * Waits to open Listing page until there's only one result, then waits on listing page until the Listing name exists.
@@ -63,13 +65,4 @@ public class DisclosureUrlSteps {
         wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
     }
 
-    /**
-     * Assert that Mandatory Disclosures URL is correct.
-     *
-     * @param targetUrl the URL to look for
-     */
-    @Then("^the Mandatory Disclosures URL should be: \"(.*)\"$")
-    public void theMandatoryDisclosuresUrlShouldBe(final String targetUrl) {
-        assertEquals(ListingDetailsPage.disclosureUrl(driver).getText(), targetUrl + "\nWeb Site Disclaimers");
-    }
 }

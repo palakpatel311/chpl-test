@@ -1,23 +1,24 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
 /**
- * Class SEDTweaksSteps definition.
+ * Class DeleteDupListingsSteps definition.
  */
-public class SEDTweaksSteps {
 
+public class ListingDetailsSteps {
     private WebDriver driver;
     private static final int TIMEOUT = 30;
     private String url = System.getProperty("url");
@@ -25,36 +26,46 @@ public class SEDTweaksSteps {
     /**
      * Constructor creates new driver.
      */
-    public SEDTweaksSteps() {
+    public ListingDetailsSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
             url = "http://localhost:3000/";
-        }
+           }
     }
-
     /**
-     * Loads a listing. Waits until the Listing name exists.
-     * @param chplId the database id of the requested listing
+     * Assert that the Accessibility Standard equals the passed in value.
+     * @param accessibilityText expected text
      */
-    @Given("^I am on the Details page of Listing \"([^\"]*)\"$")
-    public void iAmOnAListingsDetailsPage(final String chplId) {
-        driver.get(url + "#/product/" + chplId);
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
+    @Then("^Accessibility Standard should display \"([^\"]*)\"$")
+    public void accessibilityStandardShouldDisplayUpdatedOtherWCAG(final String accessibilityText) {
+        String actualString = ListingDetailsPage.accessibilityStandardText(driver).getText();
+        assertEquals(actualString, accessibilityText);
     }
-
     /**
-     * Opens the SED section of the accordion.
+     * Loads a listing for given Database ID.
+     * @param dbId the Database Id of a listing to load
      */
-    @When("^I open SED details accordion$")
-    public void iOpenSEDAccordion() {
-        // to close certification criteria accordion that's open by default
-        ListingDetailsPage.certificationCriteriaAccordion(driver).click();
-
-        //to open SED accordion
-        ListingDetailsPage.sedAccordion(driver).click();
+    @Given("^I am on listing details page of listing with database ID \"(.*)\"$")
+    public void loadListingWithDbId(final String dbId) {
+        driver.get(url + "#/product/" + dbId);
     }
-
+    /**
+     * Open the details for designated certification criteria.
+     * @param number criteria to open
+     */
+    @When("^I open details for criteria \"([^\"]*)\"$")
+    public void iOpenDetailsForACriteria(final String number) {
+        WebElement link = ListingDetailsPage.certificationCriteriaDetailsLink(driver, number);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+    }
+    /**
+     * Open the SED panel.
+     */
+    @When("^I look at SED details$")
+    public void iLookAtSEDDetails() {
+        WebElement link = ListingDetailsPage.sedAccordion(driver);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+    }
     /**
      * Asserts that elements exist on the accordion.
      */
@@ -84,31 +95,15 @@ public class SEDTweaksSteps {
         assertTrue(driver.findElement(By.cssSelector("div.panel:nth-child(6) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Surveillance Activities"));
         assertTrue(driver.findElement(By.cssSelector("div.panel:nth-child(7) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Additional Information"));
     }
-
     /**
-     * Asserts correct text in SED section.
+     * Assert that the QMS Standard section has the passed in value.
+     * @param qmsText expected text
      */
-    @Then("^usability report text should read as 'Full Usability Report'$")
-    public void usabilityReportTitleReadsAsFullUsabilityReport() {
-        assertTrue(ListingDetailsPage.usabilityReportTitle(driver).getText().contains("Full Usability Report"));
+    @Then("^QMS Standard should display \"([^\"]*)\"$")
+    public void qmsStandardDisplaysCorrectText(final String qmsText) {
+        String actualString = ListingDetailsPage.qmsStandardText(driver).getText();
+        assertTrue(actualString.contains(qmsText), "Expect " + qmsText + " to be found in " + actualString);
     }
-
-    /**
-     * Asserts for correct text in SED section.
-     */
-    @Then("^intended user description header should show as 'Description of Intended Users'$")
-    public void theHeaderShouldBeNamedDescriptionOfIntendedUsers() {
-        assertTrue(ListingDetailsPage.intendedUserDescriptionTitle(driver).getText().contains("Description of Intended Users"));
-    }
-
-    /**
-     * Asserts correct text for download button.
-     */
-    @Then("^the download button title should read as 'Download SED Details'$")
-    public void theDownloadButtonTitleShouldReadAsDownloadSEDDetails() {
-        assertTrue(ListingDetailsPage.downloadSEDDetailsButton(driver).getText().contains("Download SED Details"));
-    }
-
     /**
      * Asserts that criteria should also have the title.
      */
@@ -125,7 +120,67 @@ public class SEDTweaksSteps {
         assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "9").getText(), "170.315 (a)(14): Implantable Device List");
         assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "10").getText(), "170.315 (b)(3): Electronic Prescribing");
     }
+    /**
+     * Assert that Mandatory Disclosures URL exists and is correct.
+     * @param targetUrl the URL value to assert
+     */
+    @Then("^the Mandatory Disclosures URL should be: \"(.*)\"$")
+    public void theMandatoryDisclosuresUrlShouldBe(final String targetUrl) {
+        String actualText = ListingDetailsPage.disclosureUrl(driver).getText();
+        assertTrue(actualText.contains(targetUrl), "Expect " + targetUrl + " to be found in " + actualText);
+   }
+    /**
+     * Assert message when listing is not found.
+     */
+    @Then("^the page shows 'This listing does not exist' message$")
+    public void verifyMessageonPage() {
+        assertTrue(ListingDetailsPage.mainContent(driver).getText().contains("This listing does not exist"));
+    }
+    /**
+     * Assert that Test Procedure text is expected.
+     * @param tpText expected text
+     * @param number criteria to look in
+     */
+    @Then("^Test Procedure should display \"([^\"]*)\" for criteria \"([^\"]*)\"$")
+    public void testProcedureFieldShouldDisplay(final String tpText, final String number) {
+        String actualString = ListingDetailsPage.testProcedure(driver, number).getText();
+        assertTrue(actualString.contains(tpText), "Expect \"" + tpText + "\" to be found in \"" + actualString + "\"");
+    }
+    /**
+     * Assert that the UCD Process equals the passed in value.
+     * @param ucdText expected text
+     */
+    @Then("^UCD process should display \"([^\"]*)\"$")
+    public void ucdProcessShouldDisplayUpdatedUcdText(final String ucdText) {
+        String actualString = ListingDetailsPage.ucdProcessText(driver).getText();
+        assertEquals(actualString, ucdText);
+    }
+    /**
+     * Asserts correct text in SED section.
+     * @param reportTitle expected text
+     */
+    @Then("^usability report text should read as \"([^\"]*)\"$")
+    public void usabilityReportTitleReadsAsFullUsabilityReport(final String reportTitle) {
+        assertTrue(ListingDetailsPage.usabilityReportTitle(driver).getText().contains(reportTitle));
+    }
 
+    /**
+     * Asserts for correct text in SED section.
+     * @param userDescTitle expected text
+     */
+    @Then("^intended user description header should show as \"([^\"]*)\"$")
+    public void theHeaderShouldBeNamedDescriptionOfIntendedUsers(final String userDescTitle) {
+        assertTrue(ListingDetailsPage.intendedUserDescriptionTitle(driver).getText().contains(userDescTitle));
+    }
+
+    /**
+     * Asserts correct text for download button.
+     * @param downloadbtnTitle expected text for download button
+     */
+    @Then("^download button title should read as \"([^\"]*)\"$")
+    public void theDownloadButtonTitleShouldReadAsDownloadSEDDetails(final String downloadbtnTitle) {
+        assertTrue(ListingDetailsPage.downloadSEDDetailsButton(driver).getText().contains(downloadbtnTitle));
+    }
     /**
      * Asserts that this listing has no criteria tested for SED.
      */
@@ -133,4 +188,5 @@ public class SEDTweaksSteps {
     public void thereShouldBeTextNoCertificationCriteriaWereTestedForSED() {
         assertTrue(driver.getPageSource().contains("No Certification Criteria were tested for SED."));
     }
-}
+
+ }

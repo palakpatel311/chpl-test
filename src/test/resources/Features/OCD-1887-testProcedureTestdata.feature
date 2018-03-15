@@ -6,17 +6,13 @@ Feature: OCD-1887 - Test Procedure and Test Data field update in 2015 template V
   NCQA eCQM Test Method (valid for criteria c2, c3, c4 only)
   HIMSS-IIP Test Method (valid for criteria f1 only)
 
-  Scenario: Verify allowable values display as expected for Test Procedure field for criteria 170.315 (c)(2)
-    Given I am on the Details page of Listing "8878"
-    When I open details for criteria "170.315 (c)(2)"
-    Then Test Procedure should display "Name: ONC Test Method" for criteria "170.315 (c)(2)"
-
-  Scenario: Verify allowable values display as expected for Test Procedure field for criteria 170.315 (c)(3)
-    Given I am on the Details page of Listing "8878"
-    When I open details for criteria "170.315 (c)(3)"
-    Then Test Procedure should display "Name: ONC Test Method" for criteria "170.315 (c)(3)"
-
-  Scenario: Verify allowable values display as expected for Test Procedure field for criteria 170.315 (f)(1)
-    Given I am on the Details page of Listing "8878"
-    When I open details for criteria "170.315 (f)(1)"
-    Then Test Procedure should display "Name: ONC Test Method" for criteria "170.315 (f)(1)"
+  Scenario Outline: Verify allowable values display as expected for Test Procedure field for given criteria 
+    Given I am on listing details page of listing with database ID "<DB_ID>"
+    When I open details for criteria "<CRITERIA>"
+    Then Test Procedure should display "<tpText>" for criteria "<CRITERIA>"
+    Examples:
+		|DB_ID|CRITERIA|tpText|
+		|8878|170.315 (c)(2)|Name: ONC Test Method|
+		|8878|170.315 (c)(3)|Name: ONC Test Method|
+		|8858|170.315 (c)(4)|Name: ONC Test Method|
+		|8878|170.315 (f)(1)|Name: ONC Test Method|

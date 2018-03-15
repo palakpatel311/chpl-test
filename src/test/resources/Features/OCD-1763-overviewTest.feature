@@ -1,6 +1,6 @@
 @selenium
 @Regression
-Feature: Overview page tests
+Feature: OCD-1763 - Overview page tests
   This test checks overview page under CHPL resources and verifies that it displays correct information from Database
 
   Scenario: Overview page loads and shows correct title
