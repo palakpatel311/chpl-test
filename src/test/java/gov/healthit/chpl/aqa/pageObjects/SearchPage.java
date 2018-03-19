@@ -12,8 +12,35 @@ public class SearchPage {
     private static WebElement element = null;
 
     /**
-     * Returns the first search details button.
+     * Returns the acbFiltersLink.
      *
+     * @param driver webdriver
+     * @return acbFilters Link
+     */
+    public static WebElement acbFiltersLink(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[5]/ul/li[5]/st-list-multiple/ul/li[6]/label"));
+        return element;
+    }
+    /**
+     * Returns SLI Compliance ACB filter option.
+     * @param driver WebDriver
+     * @return SLI Compliance ACB filter option element
+     */
+    public static WebElement acbSLIFilter(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[5]/ul/li[5]/st-list-multiple/ul/li[6]/label"));
+        return element;
+    }
+    /**
+     * Returns Browse button on Search page.
+     * @param driver WebDriver
+     * @return Browse button element
+     */
+    public static WebElement browseButton(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[1]/div[1]/span[2]/button"));
+        return element;
+    }
+    /**
+     * Returns the first search details button.
      * @param driver webdriver
      * @return the first search result's details button
      */
@@ -30,7 +57,15 @@ public class SearchPage {
         element = driver.findElement(By.id("get-ehr-cert-id"));
         return element;
     }
-
+    /**
+     * Returns 'More' filter button.
+     * @param driver WebDriver
+     * @return 'More' filter button element
+     */
+    public static WebElement moreFilter(final WebDriver driver) {
+        element = driver.findElement(By.id("filter-more-button"));
+        return element;
+    }
     /**
      * Returns the pending mask "black screen".
      * @param driver WebDriver

@@ -144,6 +144,15 @@ public final class ListingDetailsPage {
         return element;
     }
     /**
+     * Returns element that holds no data in SED section text.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement nosedData(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/p"));
+        return element;
+    }
+    /**
      * Return SED Accordion on listing page.
      * @param driver WebDriver
      * @return SED Accordion element

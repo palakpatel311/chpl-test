@@ -22,4 +22,4 @@ Feature: OCD-1776 - SED Display in product details
   Scenario: Verify appropriate message shows when selected product does not have SED data to display
     Given I am on listing details page of listing with database ID "7079"
     When I look at SED details
-    Then there should be text "No Certification Criteria were tested for SED"
+	Then there should be text "No Certification Criteria were tested for SED"

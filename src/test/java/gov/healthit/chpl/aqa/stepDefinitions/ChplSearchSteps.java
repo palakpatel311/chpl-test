@@ -1,13 +1,14 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import static org.testng.Assert.assertTrue;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.testng.Assert.assertTrue;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
 /**
@@ -34,6 +35,8 @@ public class ChplSearchSteps {
     @Given("^I am on CHPL search page$")
     public void iAamOnCHPLSearchPage() {
         driver.get(url);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(driver))));
     }
     /**
      * @param chplId Search for a listing with given chplId.
@@ -41,6 +44,21 @@ public class ChplSearchSteps {
     @When("^I search for a listing with CHPL ID \"(.*)\"$")
     public void searchForCHPLID(final String chplId) {
         SearchPage.searchField(driver).sendKeys(chplId);
+    }
+    /**
+     * Open ACB filter options.
+     */
+    @When("^I look at ACB filter options$")
+    public void viewAcbFilterOptions() {
+        SearchPage.browseButton(driver).click();
+        SearchPage.moreFilter(driver).click();
+    }
+    /**
+     * Assert SLI checkbox is checked.
+     */
+    @Then("^I see that SLI checkbox is checked$")
+    public void verifySLIOptionChecked() {
+        assertTrue(SearchPage.acbSLIFilter(driver).isSelected());
     }
     /**
      * Assert message when no results found.
@@ -63,6 +81,15 @@ public class ChplSearchSteps {
         wait.until(ExpectedConditions.textToBePresentInElement(SearchPage.resultCount(driver), "1 - 1 of 1 Result"));
         SearchPage.detailsLink(driver).click();
         wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
+    }
+    /**
+     * Asserts that expected listing is returned in result.
+     * @param chplId id for listing to expect in search results
+     */
+    @Then("^I should see listing \"([^\"]*)\" in CHPL search results$")
+    public void searchResultsShowSliListing(final String chplId) {
+        String actualText = SearchPage.searchResultsChplId(driver).getText();
+        assertTrue(actualText.contains(chplId), "Expect " + chplId + " to be found in " + actualText);
     }
 
 }

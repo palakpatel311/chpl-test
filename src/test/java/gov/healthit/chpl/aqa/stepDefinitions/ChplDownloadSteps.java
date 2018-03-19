@@ -1,15 +1,14 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
+import static org.junit.Assert.assertFalse;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,11 +20,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
-import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 /**
  * Class ChplDownloadSteps definition.
  */
@@ -34,27 +33,8 @@ public class ChplDownloadSteps {
     private WebDriver driver;
     private static final int TIMEOUT = 30;
     private String url = System.getProperty("url");
-    private static String downloadPath = "\\filepath\\tempdnld";
-    private static File dir = new File(downloadPath);
-    /**
-     * Move files from download directory to other directory.
-     * This is to ensure files are archived before cleaning the directory.
-     * @throws Exception - to handle IOException
-     */
-    public void movefiles() throws Exception {
-        String source = "\\filepath\\tempdnld";
-        File srcDir = new File(source);
-
-        String destination = "\\filepath\\tempdnld1";
-        File destDir = new File(destination);
-
-        try {
-            FileUtils.copyDirectory(srcDir, destDir);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    private String downloadPath = System.getProperty("downloadPath");
+    private File dir;
     /**
      * Constructor creates new driver.
      */
@@ -63,6 +43,10 @@ public class ChplDownloadSteps {
         if (StringUtils.isEmpty(url)) {
             url = "http://localhost:3000/";
         }
+        if (StringUtils.isEmpty(downloadPath)) {
+           downloadPath = "\\target";
+        }
+        dir = new File(downloadPath);
     }
 
     /**
@@ -136,8 +120,7 @@ public class ChplDownloadSteps {
          * Clean all files from download directory so each time there is only latest
          * download file to read.
          */
-        this.movefiles();
-        FileUtils.cleanDirectory(dir);
+        //FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2015editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -152,9 +135,9 @@ public class ChplDownloadSteps {
          */
 
         String dwldFileName = "";
-        int loopBack = 0;
+        boolean fileFound = false;
 
-        while (loopBack == 0) {
+        while (!fileFound) {
             File[] filenames = dir.listFiles();
 
             for (File file : filenames) {
@@ -163,9 +146,7 @@ public class ChplDownloadSteps {
             String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
 
             if (finalName.equalsIgnoreCase("chpl-.xml")) {
-                loopBack = 1;
-            } else {
-                loopBack = 0;
+                fileFound = true;
             }
         }
         /**
@@ -186,7 +167,7 @@ public class ChplDownloadSteps {
      */
     @When("^I download the 2014 edition products file$")
     public void download2014editionProductsFile() throws Exception {
-        FileUtils.cleanDirectory(dir);
+        //FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2014editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -201,9 +182,9 @@ public class ChplDownloadSteps {
          * complete then read final filename.
          */
         String dwldFileName = "";
-        int loopBack = 0;
+        boolean fileFound = false;
 
-        while (loopBack == 0) {
+        while (!fileFound) {
             File[] filenames = dir.listFiles();
 
             for (File file : filenames) {
@@ -212,9 +193,7 @@ public class ChplDownloadSteps {
             String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
 
             if (finalName.equalsIgnoreCase("chpl-.xml")) {
-                loopBack = 1;
-            } else {
-                loopBack = 0;
+                fileFound = true;
             }
         }
         /**
@@ -234,7 +213,7 @@ public class ChplDownloadSteps {
      */
     @When("^I download the 2011 edition products file$")
     public void download2011editionProductsFile() throws Exception {
-        FileUtils.cleanDirectory(dir);
+        //FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2011editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -249,9 +228,9 @@ public class ChplDownloadSteps {
          * complete then read final filename.
          */
         String dwldFileName = "";
-        int loopBack = 0;
+        boolean fileFound = false;
 
-        while (loopBack == 0) {
+        while (!fileFound) {
             File[] filenames = dir.listFiles();
 
             for (File file : filenames) {
@@ -260,9 +239,7 @@ public class ChplDownloadSteps {
             String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
 
             if (finalName.equalsIgnoreCase("chpl-.xml")) {
-                loopBack = 1;
-            } else {
-                loopBack = 0;
+                fileFound = true;
             }
         }
         /**
@@ -306,7 +283,7 @@ public class ChplDownloadSteps {
      */
     @When("^I download the 2015 edition summary file$")
     public void download2015editionSummaryFile() throws Exception {
-        FileUtils.cleanDirectory(dir);
+        //FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2015summaryFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -320,9 +297,9 @@ public class ChplDownloadSteps {
          * complete then read final filename.
          */
         String dwldFileName = "";
-        int loopBack = 0;
+        boolean fileFound = false;
 
-        while (loopBack == 0) {
+        while (!fileFound) {
             File[] filenames = dir.listFiles();
 
             for (File file : filenames) {
@@ -331,9 +308,7 @@ public class ChplDownloadSteps {
             String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
 
             if (finalName.equalsIgnoreCase("chpl-.csv")) {
-                loopBack = 1;
-            } else {
-                loopBack = 0;
+                fileFound = true;
             }
         }
         /**
@@ -353,7 +328,7 @@ public class ChplDownloadSteps {
      */
     @When("^I download the 2014 edition summary file$")
     public void download2014editionSummaryFile() throws Exception {
-        FileUtils.cleanDirectory(dir);
+        //FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2014summaryFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -367,9 +342,9 @@ public class ChplDownloadSteps {
          * complete then read final filename.
          */
         String dwldFileName = "";
-        int loopBack = 0;
+        boolean fileFound = false;
 
-        while (loopBack == 0) {
+        while (!fileFound) {
             File[] filenames = dir.listFiles();
 
             for (File file : filenames) {
@@ -378,9 +353,7 @@ public class ChplDownloadSteps {
             String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
 
             if (finalName.equalsIgnoreCase("chpl-.csv")) {
-                loopBack = 1;
-            } else {
-                loopBack = 0;
+                fileFound = true;
             }
         }
         /**
@@ -400,7 +373,7 @@ public class ChplDownloadSteps {
      */
     @When("^I download the Surveillance Activity file$")
     public void downloadSurveillanceActivityFile() throws Exception {
-        FileUtils.cleanDirectory(dir);
+        //FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoptionSurveillanceFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -424,7 +397,7 @@ public class ChplDownloadSteps {
      */
     @When("^I download the Non-Conformities file$")
     public void downloadNonConformitiesFile() throws Exception {
-        FileUtils.cleanDirectory(dir);
+        //FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoptionNonconformitiesFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -443,4 +416,18 @@ public class ChplDownloadSteps {
         }
 
     }
+    /**
+     * Print filenames if directory is not empty.
+     * Assert that download directory is empty
+     */
+    @And("^the download directory is empty$")
+    public void checkifDownloadDirectoryisEmpty() {
+        for (String fileName : dir.list()) {
+            System.out.println(fileName);
+        }
+
+        assertFalse("directry is not empty", dir.list().length > 0);
+
+    }
+
 }

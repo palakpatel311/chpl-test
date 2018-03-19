@@ -14,5 +14,4 @@ Feature: OCD-1887 - Test Procedure and Test Data field update in 2015 template V
 		|DB_ID|CRITERIA|tpText|
 		|8878|170.315 (c)(2)|Name: ONC Test Method|
 		|8878|170.315 (c)(3)|Name: ONC Test Method|
-		|8858|170.315 (c)(4)|Name: ONC Test Method|
 		|8878|170.315 (f)(1)|Name: ONC Test Method|

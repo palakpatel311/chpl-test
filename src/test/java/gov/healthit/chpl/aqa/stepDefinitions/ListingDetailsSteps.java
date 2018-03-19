@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
 /**
@@ -138,7 +137,7 @@ public class ListingDetailsSteps {
      * @param notfoundText the text message to assert
      */
     @Then("^the page shows \"(.*)\" message$")
-    public void verifyMessageonPage(final String notfoundText) {        
+    public void verifyMessageonPage(final String notfoundText) {
         String actualString = ListingDetailsPage.mainContent(driver).getText();
         assertTrue(actualString.contains(notfoundText), "Expect " + notfoundText + " to be found in " + actualString);
     }
@@ -166,7 +165,7 @@ public class ListingDetailsSteps {
      * @param reportTitle expected text
      */
     @Then("^usability report text should read as \"([^\"]*)\"$")
-    public void usabilityReportTitleReadsAsFullUsabilityReport(final String reportTitle) {        
+    public void usabilityReportTitleReadsAsFullUsabilityReport(final String reportTitle) {
         String actualString = ListingDetailsPage.usabilityReportTitle(driver).getText();
         assertTrue(actualString.contains(reportTitle), "Expect " + reportTitle + " to be found in " + actualString);
     }
@@ -186,7 +185,7 @@ public class ListingDetailsSteps {
      * @param downloadbtnTitle expected text for download button
      */
     @Then("^download button title should read as \"([^\"]*)\"$")
-    public void theDownloadButtonTitleShouldReadAsDownloadSEDDetails(final String downloadbtnTitle) {        
+    public void theDownloadButtonTitleShouldReadAsDownloadSEDDetails(final String downloadbtnTitle) {
         String actualString = ListingDetailsPage.downloadSEDDetailsButton(driver).getText();
         assertTrue(actualString.contains(downloadbtnTitle), "Expect " + downloadbtnTitle + " to be found in " + actualString);
     }
@@ -196,7 +195,8 @@ public class ListingDetailsSteps {
      */
     @Then("^there should be text \"([^\"]*)\"$")
     public void thereShouldBeTextNoCertificationCriteriaWereTestedForSED(final String nodataText) {
-        assertTrue(driver.getPageSource().contains("nodataText"));
+        String actualString = ListingDetailsPage.nosedData(driver).getText();
+        assertTrue(actualString.contains(nodataText), "Expect " + nodataText + " to be found in " + actualString);
     }
 
- }
+}
