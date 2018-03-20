@@ -8,6 +8,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import org.apache.commons.io.FileUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -44,7 +45,7 @@ public class ChplDownloadSteps {
             url = "http://localhost:3000/";
         }
         if (StringUtils.isEmpty(downloadPath)) {
-           downloadPath = "\\target";
+           downloadPath = "\\target\\download-files";
         }
         dir = new File(downloadPath);
     }

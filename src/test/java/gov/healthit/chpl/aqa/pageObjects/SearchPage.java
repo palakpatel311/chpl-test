@@ -27,7 +27,7 @@ public class SearchPage {
      * @return SLI Compliance ACB filter option element
      */
     public static WebElement acbSLIFilter(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[5]/ul/li[5]/st-list-multiple/ul/li[6]/label"));
+        element = driver.findElement(By.id("filter-list-SLI_Compliance"));
         return element;
     }
     /**
