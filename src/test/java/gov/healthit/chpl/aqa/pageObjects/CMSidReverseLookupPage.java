@@ -21,12 +21,20 @@ public final class CMSidReverseLookupPage {
         element = driver.findElement(By.xpath("//*[@id=\"widget-dropdown\"]/ai-cms-widget-display/div/p/strong"));
         return element;
     }
-
+    /**
+     * Certification Id input field element on CMS ID Reverse Lookup Page.
+     * @param driver WebDriver
+     * @return the cert ID element
+     */
     public static WebElement inputCertificationId(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"certIdsField\"]"));
         return element;
     }
-
+    /**
+     * Element to locate chpl Id column in certification Id results table on CMS ID Reverse Lookup Page.
+     * @param driver WebDriver
+     * @return the column body element
+     */
     public static WebElement chplIdColumnInCertIdResultsTable(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"lookupCertIdResults\"]/tbody"));
         return element;
@@ -51,7 +59,11 @@ public final class CMSidReverseLookupPage {
         element = driver.findElement(By.id("mainContent"));
         return element;
     }
-
+    /**
+     * Results section that shows CMS ID look up results in reverse lookup tool.
+     * @param driver WebDriver
+     * @return results section element
+     */
     public static WebElement searchLookupResults(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div/div/div/span/button/i"));
         return element;

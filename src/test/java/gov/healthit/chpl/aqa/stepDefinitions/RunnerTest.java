@@ -1,9 +1,10 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import org.junit.runner.RunWith;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
+
 
 /**
  * Set Cucumber Options.
@@ -21,6 +22,6 @@ monochrome = false
 /**
  * Class RunnerTest definition.
  */
-public class RunnerTest extends AbstractTestNGCucumberTests {
+public class RunnerTest {
 
 }

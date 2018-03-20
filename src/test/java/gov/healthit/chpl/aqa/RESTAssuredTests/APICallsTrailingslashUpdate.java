@@ -7,10 +7,13 @@ import static io.restassured.RestAssured.given;
  * APICallsTrailingslashUpdate Class.
  */
 public class APICallsTrailingslashUpdate {
-
+    /**
+     * Send Header values Content-Type, API-KEY and Authentication token.
+     * Test response for API calls.
+     */
     @Test
     public void testAPIcallswithoutslashes() {
-        int goodResponse = 200;
+        final int goodResponse = 200;
         given()
             .header("API-KEY", "***")
             .header("content-type", "application/json")

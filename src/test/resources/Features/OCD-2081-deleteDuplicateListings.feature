@@ -1,4 +1,5 @@
-Feature: To verify duplicate listings are deleted
+@Regression
+Feature: OCD-2081 - To verify duplicate listings are deleted
  		Tests to verify 3 duplicate drummond listings are deleted
 
 Scenario Outline: Verify deleted listings do not show in search results
@@ -13,9 +14,9 @@ Examples:
 
 Scenario Outline: Verify listing details do not load for deleted listings
 Given I am on listing details page of listing with database ID "<DB_ID>"
-Then the page shows 'This listing does not exist' message
+Then the page shows "This listing does not exist" message
 Examples:
 	|DB_ID|
 	|9102|
 	|9241|
-	|9252|
+	|9252|	
