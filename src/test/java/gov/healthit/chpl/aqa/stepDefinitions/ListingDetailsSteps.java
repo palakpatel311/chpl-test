@@ -16,7 +16,7 @@ import static org.testng.Assert.assertTrue;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
 /**
- * Class DeleteDupListingsSteps definition.
+ * Class ListingDetailsSteps definition.
  */
 
 public class ListingDetailsSteps {

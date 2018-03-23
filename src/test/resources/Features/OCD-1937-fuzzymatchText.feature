@@ -16,8 +16,7 @@ Feature: OCD-1937 - Update Listings to have "cleaned" data fields
     When I open details for criteria "<CRITERIA>"
     Then QMS Standard should display "<Text>"
     Examples:
-    |DB_ID|CRITERIA|Text|
-    |8566|170.315 (g)(5)|Section 508 of the Rehabilitation Act|
+    |DB_ID|CRITERIA|Text|    
 	|8556|170.315 (g)(5)|WCAG Level|
 
   Scenario Outline: Verify text update for UCD Process text after bulk update
