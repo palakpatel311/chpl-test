@@ -10,10 +10,10 @@ Scenario Outline: Verify SLI Compliance filter option is checked by default on c
 	When I look at ACB filter options
 	Then I see that "SLI_Compliance" checkbox is checked
 	Examples:
-	|  PageTitle		       				|  PageName					|
-	|  Banned Developers					|  developers				|
-	|  Decertified Products					|  products					|
-	|  Inactive Certificates				|  inactive					|
-	|  Products: Corrective Action Status	|  correctiveAction			|
-	|  SED Information for 2015 Edition		|  sed						|	
+	|  PageTitle		       				|  PageName	|
+	|  Banned Developers					|  developers	|
+	|  Decertified Products					|  products		|
+	|  Inactive Certificates				|  inactive		|
+	|  Products: Corrective Action Status	|  correctiveAction	|
+	|  SED Information for 2015 Edition		|  sed				|	
 	|  Transparency Attestation				|  transparencyAttestations	|	
