@@ -11,10 +11,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
-/**
- * Class DeleteDupListingsSteps definition.
- */
 
+/**
+ * Class ChplSearchSteps definition.
+ */
 public class ChplSearchSteps {
     private WebDriver driver;
     private static final int TIMEOUT = 30;
@@ -48,17 +48,18 @@ public class ChplSearchSteps {
     /**
      * Open ACB filter options.
      */
-    @When("^I look at ACB filter options$")
+    @When("^I look at ACB filter options selected for default search$")
     public void viewAcbFilterOptions() {
         SearchPage.browseButton(driver).click();
         SearchPage.moreFilter(driver).click();
     }
     /**
      * Assert SLI checkbox is checked.
+     * @param acb is acb name
      */
-    @Then("^I see that SLI checkbox is checked$")
-    public void verifySLIOptionChecked() {
-        assertTrue(SearchPage.acbSLIFilter(driver).isSelected());
+    @Then("^I see that \"([^\"]*)\" checkbox is checked$")
+    public void verifySLIOptionChecked(final String acb) {
+        assertTrue(SearchPage.acbSLIFilter(driver, acb).isSelected());
     }
     /**
      * Assert message when no results found.

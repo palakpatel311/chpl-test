@@ -24,10 +24,11 @@ public class SearchPage {
     /**
      * Returns SLI Compliance ACB filter option.
      * @param driver WebDriver
+     * @param acb is acb name
      * @return SLI Compliance ACB filter option element
      */
-    public static WebElement acbSLIFilter(final WebDriver driver) {
-        element = driver.findElement(By.id("filter-list-SLI_Compliance"));
+    public static WebElement acbSLIFilter(final WebDriver driver, final String acb) {
+        element = driver.findElement(By.id("filter-list-" + acb));
         return element;
     }
     /**
