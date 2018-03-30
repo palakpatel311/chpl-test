@@ -5,6 +5,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,14 +40,23 @@ public class ChplDownloadSteps {
     private File dir;
     /**
      * Constructor creates new driver.
+     * Create a sub directory under default temp directory to set downloadPath
      */
     public ChplDownloadSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
-            url = "http://localhost:3000/";
-        }
+            url = "https://chpl.ahrqdev.org/";
+       }
         if (StringUtils.isEmpty(downloadPath)) {
-           downloadPath = "\\target\\download-files";
+            String tempDirectory;
+            try {
+              tempDirectory = Files.createTempDirectory("download-files").toString();
+              System.out.println(tempDirectory);
+            } catch (final IOException e) {
+              // Temp dir creation failed - use default
+              tempDirectory = null;
+            }
+           downloadPath = tempDirectory;
         }
         dir = new File(downloadPath);
     }
@@ -425,8 +436,7 @@ public class ChplDownloadSteps {
     public void checkifDownloadDirectoryisEmpty() {
         for (String fileName : dir.list()) {
             System.out.println(fileName);
-        }
-
+}
         assertFalse("directry is not empty", dir.list().length > 0);
 
     }

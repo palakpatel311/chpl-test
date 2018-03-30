@@ -14,10 +14,11 @@ Feature: OCD-1937 - Update Listings to have "cleaned" data fields
   Scenario Outline: Verify text update for Accessibility Standard  after bulk update
     Given I am on listing details page of listing with database ID "<DB_ID>"
     When I open details for criteria "<CRITERIA>"
-    Then QMS Standard should display "<Text>"
+    Then Accessibility Standard should display "<Text>"
     Examples:
     |DB_ID|CRITERIA|Text|    
 	|8556|170.315 (g)(5)|WCAG Level|
+	|7981|170.315 (g)(5)|WCAG 2.0 Level AA|
 
   Scenario Outline: Verify text update for UCD Process text after bulk update
     Given I am on listing details page of listing with database ID "<DB_ID>"
