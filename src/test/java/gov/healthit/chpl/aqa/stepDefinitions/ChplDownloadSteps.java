@@ -45,7 +45,7 @@ public class ChplDownloadSteps {
     public ChplDownloadSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
-            url = "https://chpl.ahrqdev.org/";
+            url = "http://localhost:3000/";
        }
         if (StringUtils.isEmpty(downloadPath)) {
             String tempDirectory;
