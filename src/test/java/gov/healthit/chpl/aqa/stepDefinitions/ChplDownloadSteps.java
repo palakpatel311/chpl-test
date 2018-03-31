@@ -41,12 +41,13 @@ public class ChplDownloadSteps {
     /**
      * Constructor creates new driver.
      * Create a sub directory under default temp directory to set downloadPath
+     * Print path to tempDirectory
      */
     public ChplDownloadSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
             url = "http://localhost:3000/";
-       }
+        }
         if (StringUtils.isEmpty(downloadPath)) {
             String tempDirectory;
             try {
