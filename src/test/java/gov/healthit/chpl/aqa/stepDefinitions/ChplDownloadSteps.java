@@ -5,6 +5,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +28,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
+
 /**
  * Class ChplDownloadSteps definition.
  */
@@ -36,8 +39,11 @@ public class ChplDownloadSteps {
     private String url = System.getProperty("url");
     private String downloadPath = System.getProperty("downloadPath");
     private File dir;
+
     /**
      * Constructor creates new driver.
+     * Create a sub directory under default temp directory to set downloadPath
+     * Print path to get download file location
      */
     public ChplDownloadSteps() {
         driver = Hooks.getDriver();
@@ -45,7 +51,20 @@ public class ChplDownloadSteps {
             url = "http://localhost:3000/";
         }
         if (StringUtils.isEmpty(downloadPath)) {
-           downloadPath = "\\target\\download-files";
+            String tempDirectory;
+            try {
+                tempDirectory = Files.createTempDirectory("download-files").toString();
+                // Print the path to the newly created directory
+                System.out.println(tempDirectory);
+            } catch (final IOException e) {
+                // If temp directory creation failed, create new directory in target folder
+                // user.dir - User working directory, make new directories in user's working directory
+                File file = new File("target", "download-files");
+                file.mkdirs();
+                tempDirectory = System.getProperty("user.dir") + File.separator + "target" + File.separator + "download-files";
+                System.out.println(tempDirectory);
+            }
+            downloadPath = tempDirectory;
         }
         dir = new File(downloadPath);
     }
@@ -101,7 +120,7 @@ public class ChplDownloadSteps {
     }
 
     /**
-     * Assert that correct number of download files exist.     *
+     * Assert that correct number of download files exist.
      * @param expectedLength the expected number of files to find
      */
     @Then("^user sees \"([^\"]*)\" download files")
@@ -110,6 +129,7 @@ public class ChplDownloadSteps {
         Select listBox = new Select(selectElement);
         assertEquals(listBox.getOptions().size(), Integer.parseInt(expectedLength));
     }
+
     /**
      * Select 2015 edition products file from drop down and download .xml file.
      * @throws Exception - to handle IOException with FileUtil
@@ -121,10 +141,11 @@ public class ChplDownloadSteps {
          * Clean all files from download directory so each time there is only latest
          * download file to read.
          */
-        //FileUtils.cleanDirectory(dir);
+        // FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2015editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
+
     /**
      * Assert filename of download file.
      */
@@ -162,16 +183,18 @@ public class ChplDownloadSteps {
 
         assertEquals(downloadfileName, currentfile, "File is not current");
     }
+
     /**
      * Select 2014 edition products file from drop down and download .xml file.
      * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the 2014 edition products file$")
     public void download2014editionProductsFile() throws Exception {
-        //FileUtils.cleanDirectory(dir);
+        // FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2014editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
+
     /**
      * Assert filename of download file.
      */
@@ -208,16 +231,18 @@ public class ChplDownloadSteps {
 
         assertEquals(downloadfileName, currentfile, "File is not current");
     }
+
     /**
      * Select 2011 edition products file from drop down and download .xml file.
      * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the 2011 edition products file$")
     public void download2011editionProductsFile() throws Exception {
-        //FileUtils.cleanDirectory(dir);
+        // FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2011editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
+
     /**
      * Assert filename of download file.
      */
@@ -278,16 +303,18 @@ public class ChplDownloadSteps {
         }
 
     }
+
     /**
      * Select 2015 edition summary file from drop down and download .csv file.
      * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the 2015 edition summary file$")
     public void download2015editionSummaryFile() throws Exception {
-        //FileUtils.cleanDirectory(dir);
+        // FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2015summaryFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
+
     /**
      * Assert filename of download file.
      */
@@ -323,16 +350,18 @@ public class ChplDownloadSteps {
 
         assertEquals(downloadfileName, currentfile, "File is not current");
     }
+
     /**
      * Select 2014 edition summary file from drop down and Download .csv file.
      * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the 2014 edition summary file$")
     public void download2014editionSummaryFile() throws Exception {
-        //FileUtils.cleanDirectory(dir);
+        // FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2014summaryFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
+
     /**
      * Assert filename of download file.
      */
@@ -368,16 +397,18 @@ public class ChplDownloadSteps {
 
         assertEquals(downloadfileName, currentfile, "File is not current");
     }
+
     /**
      * Select Surveillance Activity file from drop down and download .csv file.
      * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the Surveillance Activity file$")
     public void downloadSurveillanceActivityFile() throws Exception {
-        //FileUtils.cleanDirectory(dir);
+        // FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoptionSurveillanceFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
+
     /**
      * Assert filename of download file.
      */
@@ -392,16 +423,18 @@ public class ChplDownloadSteps {
             assertEquals(dwldFileName, currentfile, "File is not current");
         }
     }
+
     /**
      * Select surveillance-with-nonconformities file from drop down and download .csv file.
      * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the Non-Conformities file$")
     public void downloadNonConformitiesFile() throws Exception {
-        //FileUtils.cleanDirectory(dir);
+        // FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoptionNonconformitiesFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
+
     /**
      * Assert filename of download file.
      */
@@ -417,6 +450,7 @@ public class ChplDownloadSteps {
         }
 
     }
+
     /**
      * Print filenames if directory is not empty.
      * Assert that download directory is empty
@@ -426,7 +460,6 @@ public class ChplDownloadSteps {
         for (String fileName : dir.list()) {
             System.out.println(fileName);
         }
-
         assertFalse("directry is not empty", dir.list().length > 0);
 
     }
