@@ -58,9 +58,10 @@ public class ChplDownloadSteps {
                 System.out.println(tempDirectory);
             } catch (final IOException e) {
                 // If temp directory creation failed, create new directory in target folder
+                // user.dir - User working directory, make new directories in user's working directory
                 File file = new File("target", "download-files");
                 file.mkdirs();
-                tempDirectory = System.getProperty("user.dir") + "\\target\\download-files";
+                tempDirectory = System.getProperty("user.dir") + File.separator + "target" + File.separator + "download-files";
                 System.out.println(tempDirectory);
             }
             downloadPath = tempDirectory;
