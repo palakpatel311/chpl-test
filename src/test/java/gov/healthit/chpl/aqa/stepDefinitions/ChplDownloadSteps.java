@@ -41,8 +41,9 @@ public class ChplDownloadSteps {
     private File dir;
 
     /**
-     * Constructor creates new driver. Create a sub directory under default temp
-     * directory to set downloadPath Print path to get download file location
+     * Constructor creates new driver.
+     * Create a sub directory under default temp directory to set downloadPath
+     * Print path to get download file location
      */
     public ChplDownloadSteps() {
         driver = Hooks.getDriver();
@@ -113,8 +114,7 @@ public class ChplDownloadSteps {
      */
     @Then("^definition file shows based on download file selection$")
     public void definitionFileShowsBasedOnSelection() {
-        String definition = new Select(ChplDownloadPage.definitionSelectList(driver)).getFirstSelectedOption()
-                .getText();
+        String definition = new Select(ChplDownloadPage.definitionSelectList(driver)).getFirstSelectedOption().getText();
         assertTrue(definition.contains("2015 edition products (xml) Definition File"));
     }
 
@@ -171,8 +171,8 @@ public class ChplDownloadSteps {
             }
         }
         /**
-         * Replace ddmmhh part to construct a filename to match with expected. Use of
-         * DateFormat to get current system date.
+         * Replace ddmmhh part to construct a filename to match with expected.
+         * Use of DateFormat to get current system date.
          */
         String downloadfileName = dwldFileName.replaceAll("(^chpl-2015-........_).{2,10}(.xml)",
                 "$1" + "xxxxxx" + "$2");
@@ -220,8 +220,8 @@ public class ChplDownloadSteps {
             }
         }
         /**
-         * Replace ddmmhh part to construct a filename to match with expected. Use of
-         * DateFormat to get current system date.
+         * Replace ddmmhh part to construct a filename to match with expected.
+         * Use of DateFormat to get current system date.
          */
         String downloadfileName = dwldFileName.replaceAll("(^chpl-2014-........_).{2,10}(.xml)",
                 "$1" + "xxxxxx" + "$2");
@@ -268,8 +268,8 @@ public class ChplDownloadSteps {
             }
         }
         /**
-         * Replace ddmmhh part to construct a filename to match with expected. Use of
-         * DateFormat to get current system date.
+         * Replace ddmmhh part to construct a filename to match with expected.
+         * Use of DateFormat to get current system date.
          */
         String downloadfileName = dwldFileName.replaceAll("(^chpl-2011-........_).{2,10}(.xml)",
                 "$1" + "xxxxxx" + "$2");
@@ -339,8 +339,8 @@ public class ChplDownloadSteps {
             }
         }
         /**
-         * Replace ddmmhh part to construct a filename to match with expected. Use of
-         * DateFormat to get current system date.
+         * Replace ddmmhh part to construct a filename to match with expected.
+         * Use of DateFormat to get current system date.
          */
         String downloadfileName = dwldFileName.replaceAll("(^chpl-2015-........_).{2,10}(.csv)",
                 "$1" + "xxxxxx" + "$2");
@@ -386,8 +386,8 @@ public class ChplDownloadSteps {
             }
         }
         /**
-         * Replace ddmmhh part to construct a filename to match with expected. Use of
-         * DateFormat to get current system date.
+         * Replace ddmmhh part to construct a filename to match with expected.
+         * Use of DateFormat to get current system date.
          */
         String downloadfileName = dwldFileName.replaceAll("(^chpl-2014-........_).{2,10}(.csv)",
                 "$1" + "xxxxxx" + "$2");
