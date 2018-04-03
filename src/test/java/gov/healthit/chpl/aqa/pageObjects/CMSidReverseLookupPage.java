@@ -56,7 +56,7 @@ public final class CMSidReverseLookupPage {
      * @return element holding main content
      */
     public static WebElement mainContent(final WebDriver driver) {
-        element = driver.findElement(By.id("mainContent"));
+        element = driver.findElement(By.id("main-content"));
         return element;
     }
     /**
@@ -65,7 +65,7 @@ public final class CMSidReverseLookupPage {
      * @return results section element
      */
     public static WebElement searchLookupResults(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div/div/div/span/button/i"));
+        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[1]/div/div/div/div/span/button/i"));
         return element;
     }
 

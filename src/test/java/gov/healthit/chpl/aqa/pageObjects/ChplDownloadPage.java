@@ -117,7 +117,7 @@ public class ChplDownloadPage {
      * @return element holding main content
      */
     public static WebElement mainContent(final WebDriver driver) {
-        element = driver.findElement(By.id("mainContent"));
+        element = driver.findElement(By.id("main-content"));
         return element;
     }
 }
