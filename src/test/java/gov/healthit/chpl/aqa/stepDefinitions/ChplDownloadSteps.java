@@ -55,18 +55,19 @@ public class ChplDownloadSteps {
             try {
                 tempDirectory = Files.createTempDirectory("download-files").toString();
                 // Print the path to the newly created directory
-                System.out.println(tempDirectory);
             } catch (final IOException e) {
                 // If temp directory creation failed, create new directory in target folder
                 // user.dir - User working directory, make new directories in user's working directory
                 File file = new File("target", "download-files");
                 file.mkdirs();
                 tempDirectory = System.getProperty("user.dir") + File.separator + "target" + File.separator + "download-files";
-                System.out.println(tempDirectory);
             }
             downloadPath = tempDirectory;
         }
         dir = new File(downloadPath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
     }
 
     /**
@@ -448,7 +449,6 @@ public class ChplDownloadSteps {
             String currentfile = "surveillance-with-nonconformities.csv";
             assertEquals(dwldFileName, currentfile, "File is not current");
         }
-
     }
 
     /**
@@ -460,7 +460,7 @@ public class ChplDownloadSteps {
         for (String fileName : dir.list()) {
             System.out.println(fileName);
         }
-        assertFalse("directry is not empty", dir.list().length > 0);
+        assertFalse("directory is not empty", dir.list().length > 0);
 
     }
 
