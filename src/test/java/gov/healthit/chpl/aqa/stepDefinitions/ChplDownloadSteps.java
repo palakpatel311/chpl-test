@@ -133,16 +133,14 @@ public class ChplDownloadSteps {
 
     /**
      * Select 2015 edition products file from drop down and download .xml file.
-     * @throws Exception - to handle IOException with FileUtil
      */
 
     @When("^I download the 2015 edition products file$")
-    public void download2015editionProductsFile() throws Exception {
+    public void download2015editionProductsFile() {
         /**
          * Clean all files from download directory so each time there is only latest
          * download file to read.
          */
-        // FileUtils.cleanDirectory(dir);
         ChplDownloadPage.downloadoption2015editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -187,11 +185,9 @@ public class ChplDownloadSteps {
 
     /**
      * Select 2014 edition products file from drop down and download .xml file.
-     * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the 2014 edition products file$")
-    public void download2014editionProductsFile() throws Exception {
-        // FileUtils.cleanDirectory(dir);
+    public void download2014editionProductsFile() {
         ChplDownloadPage.downloadoption2014editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -235,11 +231,9 @@ public class ChplDownloadSteps {
 
     /**
      * Select 2011 edition products file from drop down and download .xml file.
-     * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the 2011 edition products file$")
-    public void download2011editionProductsFile() throws Exception {
-        // FileUtils.cleanDirectory(dir);
+    public void download2011editionProductsFile() {
         ChplDownloadPage.downloadoption2011editionProductsFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -307,11 +301,9 @@ public class ChplDownloadSteps {
 
     /**
      * Select 2015 edition summary file from drop down and download .csv file.
-     * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the 2015 edition summary file$")
-    public void download2015editionSummaryFile() throws Exception {
-        // FileUtils.cleanDirectory(dir);
+    public void download2015editionSummaryFile() {
         ChplDownloadPage.downloadoption2015summaryFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -354,11 +346,9 @@ public class ChplDownloadSteps {
 
     /**
      * Select 2014 edition summary file from drop down and Download .csv file.
-     * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the 2014 edition summary file$")
-    public void download2014editionSummaryFile() throws Exception {
-        // FileUtils.cleanDirectory(dir);
+    public void download2014editionSummaryFile() {
         ChplDownloadPage.downloadoption2014summaryFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -401,11 +391,9 @@ public class ChplDownloadSteps {
 
     /**
      * Select Surveillance Activity file from drop down and download .csv file.
-     * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the Surveillance Activity file$")
-    public void downloadSurveillanceActivityFile() throws Exception {
-        // FileUtils.cleanDirectory(dir);
+    public void downloadSurveillanceActivityFile() {
         ChplDownloadPage.downloadoptionSurveillanceFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -427,11 +415,9 @@ public class ChplDownloadSteps {
 
     /**
      * Select surveillance-with-nonconformities file from drop down and download .csv file.
-     * @throws Exception - to handle IOException with FileUtil
      */
     @When("^I download the Non-Conformities file$")
-    public void downloadNonConformitiesFile() throws Exception {
-        // FileUtils.cleanDirectory(dir);
+    public void downloadNonConformitiesFile() {
         ChplDownloadPage.downloadoptionNonconformitiesFile(driver).click();
         ChplDownloadPage.downloadFileButton(driver).click();
     }
@@ -454,14 +440,15 @@ public class ChplDownloadSteps {
     /**
      * Print filenames if directory is not empty.
      * Assert that download directory is empty
+     * @throws IOException if unable to clean the directory
      */
     @And("^the download directory is empty$")
-    public void checkifDownloadDirectoryisEmpty() {
+    public void checkifDownloadDirectoryisEmpty() throws IOException {
+        System.out.println("Clearing directory: " + dir.getAbsolutePath());
         for (String fileName : dir.list()) {
-            System.out.println(fileName);
+            System.out.println("Removing: " + fileName);
         }
+        FileUtils.cleanDirectory(dir);
         assertFalse("directory is not empty", dir.list().length > 0);
-
     }
-
 }
