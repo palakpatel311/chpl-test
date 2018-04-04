@@ -77,7 +77,7 @@ public final class ListingDetailsPage {
      * @return the transparency disclosure URL
      */
     public static WebElement disclosureUrl(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[2]/div[1]/span/div[2]/a"));
+        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[2]/div[1]/span/div[2]/a"));
         return element;
     }
     /**
@@ -131,7 +131,7 @@ public final class ListingDetailsPage {
      * @return element holding main content
      */
     public static WebElement mainContent(final WebDriver driver) {
-        element = driver.findElement(By.id("mainContent"));
+        element = driver.findElement(By.id("main-content"));
         return element;
     }
     /**
