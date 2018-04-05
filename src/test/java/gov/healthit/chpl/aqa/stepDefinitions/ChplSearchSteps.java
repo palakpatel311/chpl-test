@@ -92,5 +92,14 @@ public class ChplSearchSteps {
         String actualText = SearchPage.searchResultsChplId(driver).getText();
         assertTrue(actualText.contains(chplId), "Expect " + chplId + " to be found in " + actualText);
     }
+    /**
+     * Asserts that given listing shows expected status.
+     * @param status of listing to expect in search results
+     */
+    @Then("^the certification status of the listing shows as \"([^\"]*)\"$")
+    public void searchResultsShowNewStatus(final String status) {
+        String actualText = SearchPage.resultsStatus(driver).getText();
+        assertTrue(actualText.contains(status), "Expect " + status + " status found as " + actualText);
+    }
 
 }

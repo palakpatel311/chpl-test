@@ -104,6 +104,15 @@ public class SearchPage {
         element = driver.findElement(By.id("resultsSection"));
         return element;
     }
+    /**
+     * Returns status column in results section.
+     * @param driver webdriver
+     * @return data element in status column
+     */
+    public static WebElement resultsStatus(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"resultsSection\"]/div[2]/div/table/tbody/tr/td[7]"));
+        return element;
+    }
 
     /**
      * Returns the first search result's CHPL ID.
