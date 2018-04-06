@@ -1,11 +1,13 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 import static org.testng.Assert.assertTrue;
-
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -40,10 +42,30 @@ public class ChplSearchSteps {
     }
     /**
      * @param chplId Search for a listing with given chplId.
+     * Used text search on page here due to issues with element textFound
      */
     @When("^I search for a listing with CHPL ID \"(.*)\"$")
     public void searchForCHPLID(final String chplId) {
         SearchPage.searchField(driver).sendKeys(chplId);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), '" + chplId + "')]")));
+    }
+    /**
+     * Open Certification Status filter options.
+     */
+    @And("^I look at Certification Status options$")
+    public void viewCertStatusFilterOptions() {
+        SearchPage.browseButton(driver).click();
+        SearchPage.certStatusFiltersButton(driver).click();
+    }
+    /**
+     * Select desired filter option.
+     * @param filterOption is desired filter option
+     */
+    @And("^I apply \"([^\"]*)\" filter$")
+    public void selectFilterOption(final String filterOption) {
+        SearchPage.filterOption(driver, filterOption).click();
+        SearchPage.certStatusFiltersButton(driver).click();
     }
     /**
      * Open ACB filter options.
@@ -54,12 +76,12 @@ public class ChplSearchSteps {
         SearchPage.moreFilter(driver).click();
     }
     /**
-     * Assert SLI checkbox is checked.
-     * @param acb is acb name
+     * Assert filter option checkbox is checked.
+     * @param selectfilter is filter option selected
      */
     @Then("^I see that \"([^\"]*)\" checkbox is checked$")
-    public void verifySLIOptionChecked(final String acb) {
-        assertTrue(SearchPage.acbSLIFilter(driver, acb).isSelected());
+    public void verifySLIOptionChecked(final String selectfilter) {
+        assertTrue(SearchPage.filterOption(driver, selectfilter).isSelected());
     }
     /**
      * Assert message when no results found.
@@ -98,8 +120,8 @@ public class ChplSearchSteps {
      */
     @Then("^the certification status of the listing shows as \"([^\"]*)\"$")
     public void searchResultsShowNewStatus(final String status) {
-        String actualText = SearchPage.resultsStatus(driver).getText();
-        assertTrue(actualText.contains(status), "Expect " + status + " status found as " + actualText);
+        String currentStatus = SearchPage.resultsStatus(driver).getAttribute("uib-tooltip");
+        assertTrue(currentStatus.contains(status), "Expect " + status + " status found as " + currentStatus);
     }
 
 }

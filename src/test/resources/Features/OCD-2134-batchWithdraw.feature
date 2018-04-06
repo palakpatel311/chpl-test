@@ -1,8 +1,24 @@
-Feature: Batch update Certification Status to 'Withdrawn by Developer' for a set of Cerner and Intermountain Healthcare listings
+Feature: OCD-2134 - Batch update of Certification Status to 'Withdrawn by Developer'
+		Batch update Certification Status to 'Withdrawn by Developer' for a set of Cerner and Intermountain Healthcare listings
+		
+Background: User is on search page and 'Withdrawn by Developer' filter option is checked
+	Given I am on CHPL search page
+	And I look at Certification Status options
+	And I apply "Withdrawn_by_Developer" filter
+
+@Regression
+Scenario Outline: Verify that certification status is updated to 'Withdrawn by Developer' for Intermountain Healthcare listings after batch update
+	When I search for a listing with CHPL ID "<CHPL_ID>"
+	Then the certification status of the listing shows as "Withdrawn by Developer"
+	Examples:
+    |CHPL_ID|
+    |CHP-024522|
+    |14.07.07.1734.HEI1.03.01.1.160623|
+	|CHP-022555|
+	|14.03.07.1221.HEI3.02.01.1.160711|
 
 @Acceptance
-Scenario Outline: Verify that certification status is updated to 'Withdrawn by Developer' for Intermountain Healthcare listings after batch update
-	Given I am on CHPL search page
+Scenario Outline: Verify that certification status is updated to 'Withdrawn by Developer' for Intermountain Healthcare listings after batch update	
 	When I search for a listing with CHPL ID "<CHPL_ID>"
 	Then the certification status of the listing shows as "Withdrawn by Developer"
 	Examples:

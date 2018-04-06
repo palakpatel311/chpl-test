@@ -13,7 +13,6 @@ public class SearchPage {
 
     /**
      * Returns the acbFiltersLink.
-     *
      * @param driver webdriver
      * @return acbFilters Link
      */
@@ -22,13 +21,22 @@ public class SearchPage {
         return element;
     }
     /**
-     * Returns SLI Compliance ACB filter option.
-     * @param driver WebDriver
-     * @param acb is acb name
-     * @return SLI Compliance ACB filter option element
+     * Returns the certification status filter button.
+     * @param driver webdriver
+     * @return filter status button element
      */
-    public static WebElement acbSLIFilter(final WebDriver driver, final String acb) {
-        element = driver.findElement(By.id("filter-list-" + acb));
+    public static WebElement certStatusFiltersButton(final WebDriver driver) {
+        element = driver.findElement(By.id("filter-status-button"));
+        return element;
+    }
+    /**
+     * Returns filter option.
+     * @param driver WebDriver
+     * @param selectfilter is desired filter name
+     * @return filter option element
+     */
+    public static WebElement filterOption(final WebDriver driver, final String selectfilter) {
+        element = driver.findElement(By.id("filter-list-" + selectfilter));
         return element;
     }
     /**
@@ -110,7 +118,7 @@ public class SearchPage {
      * @return data element in status column
      */
     public static WebElement resultsStatus(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"resultsSection\"]/div[2]/div/table/tbody/tr/td[7]"));
+        element = driver.findElement(By.xpath("//*[@id=\"resultsSection\"]/div[2]/div/table/tbody/tr/td[7]/a"));
         return element;
     }
 
