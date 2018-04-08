@@ -36,7 +36,7 @@ public class SearchPage {
      * @return filter option element
      */
     public static WebElement filterOption(final WebDriver driver, final String selectfilter) {
-        element = driver.findElement(By.id("filter-list-" + selectfilter));
+        element = driver.findElement(By.id("filter-list-" + selectfilter.replaceAll(" ", "_")));
         return element;
     }
     /**

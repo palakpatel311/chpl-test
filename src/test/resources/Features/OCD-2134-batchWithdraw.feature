@@ -4,7 +4,7 @@ Feature: OCD-2134 - Batch update of Certification Status to 'Withdrawn by Develo
 Background: User is on search page and 'Withdrawn by Developer' filter option is checked
 	Given I am on CHPL search page
 	And I look at Certification Status options
-	And I apply "Withdrawn_by_Developer" filter
+	And I apply "Withdrawn by Developer" filter
 
 @Regression
 Scenario Outline: Verify that certification status is updated to 'Withdrawn by Developer' for Intermountain Healthcare listings after batch update
