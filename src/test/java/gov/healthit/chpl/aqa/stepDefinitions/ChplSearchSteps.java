@@ -31,6 +31,7 @@ public class ChplSearchSteps {
             url = "http://localhost:3000/";
            }
     }
+
     /**
      * Get user to CHPL search page.
      */
@@ -40,9 +41,10 @@ public class ChplSearchSteps {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(driver))));
     }
+
     /**
-     * @param chplId Search for a listing with given chplId.
-     * Used text search on page here due to issues with element textFound
+     * Search for a listing that I expect to find.
+     * @param chplId the Listing's CHPL ID
      */
     @When("^I search for a listing with CHPL ID \"(.*)\"$")
     public void searchForCHPLID(final String chplId) {
@@ -50,6 +52,18 @@ public class ChplSearchSteps {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), '" + chplId + "')]")));
     }
+
+    /**
+     * Searching for a listing that I expect to not find.
+     * @param chplId the Listing's CHPL ID
+     */
+    @When("^I search for a missing listing with CHPL ID \"(.*)\"$")
+    public void searchForMissingCHPLID(final String chplId) {
+        SearchPage.searchField(driver).sendKeys(chplId);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(SearchPage.noResultsFound(driver)));
+    }
+
     /**
      * Open Certification Status filter options.
      */
@@ -58,6 +72,7 @@ public class ChplSearchSteps {
         SearchPage.browseButton(driver).click();
         SearchPage.certStatusFiltersButton(driver).click();
     }
+
     /**
      * Select desired filter option.
      * @param filterOption is desired filter option
@@ -67,6 +82,7 @@ public class ChplSearchSteps {
         SearchPage.filterOption(driver, filterOption).click();
         SearchPage.certStatusFiltersButton(driver).click();
     }
+
     /**
      * Open ACB filter options.
      */
@@ -75,6 +91,7 @@ public class ChplSearchSteps {
         SearchPage.browseButton(driver).click();
         SearchPage.moreFilter(driver).click();
     }
+
     /**
      * Assert filter option checkbox is checked.
      * @param selectfilter is filter option selected
@@ -83,6 +100,7 @@ public class ChplSearchSteps {
     public void verifySLIOptionChecked(final String selectfilter) {
         assertTrue(SearchPage.filterOption(driver, selectfilter).isSelected());
     }
+
     /**
      * Assert message when no results found.
      */
@@ -90,6 +108,7 @@ public class ChplSearchSteps {
     public void verifyMessage() {
         assertTrue(SearchPage.noResultsFound(driver).getText().contains("No results found"));
     }
+
     /**
      * Loads a listing. First searches for listing, then loads that listing.
      * Waits to open Listing page until there's only one result, then waits on listing page until the Listing name exists.
@@ -105,6 +124,7 @@ public class ChplSearchSteps {
         SearchPage.detailsLink(driver).click();
         wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
     }
+
     /**
      * Asserts that expected listing is returned in result.
      * @param chplId id for listing to expect in search results
@@ -114,6 +134,7 @@ public class ChplSearchSteps {
         String actualText = SearchPage.searchResultsChplId(driver).getText();
         assertTrue(actualText.contains(chplId), "Expect " + chplId + " to be found in " + actualText);
     }
+
     /**
      * Asserts that given listing shows expected status.
      * @param status of listing to expect in search results
@@ -123,5 +144,4 @@ public class ChplSearchSteps {
         String currentStatus = SearchPage.resultsStatus(driver).getAttribute("uib-tooltip");
         assertTrue(currentStatus.contains(status), "Expect " + status + " status found as " + currentStatus);
     }
-
 }
