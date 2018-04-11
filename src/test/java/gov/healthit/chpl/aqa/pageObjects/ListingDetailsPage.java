@@ -122,7 +122,7 @@ public final class ListingDetailsPage {
      * @return listing name element
      */
     public static WebElement listingName(final WebDriver driver) {
-        element = driver.findElement(By.id("listingName"));
+        element = driver.findElement(By.id("listing-name"));
         return element;
     }
     /**

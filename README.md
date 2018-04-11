@@ -43,9 +43,9 @@ To run cucumber tests open a command prompt go to project directory where the pr
 
 Options can be used to tweak the functionality of the tests. They're used with the flag `-D`, as, for example `-Durl="http://localhost:3000/"`
 
-| option name | default value | reason |
-|---|---|---|
-| url | http://localhost:3000/ | URL to run tests against |
+| option name  | default value                                                          | reason                               |
+|--------------|------------------------------------------------------------------------|--------------------------------------|
+| url          | http://localhost:3000/                                                 | URL to run tests against             |
 | downloadPath | temporary directory, or if that fails `user.dir`/target/download-files | Directory where files are downloaded |
 
 ### Cucumber options
@@ -72,4 +72,4 @@ All together
 
 ## View Reports Reports generated after test run are saved at:
 
-target/cucumber-html-report/index.html
+target/cucumber-pretty/index.html
