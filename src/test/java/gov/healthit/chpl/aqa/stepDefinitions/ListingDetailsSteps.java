@@ -30,7 +30,7 @@ public class ListingDetailsSteps {
     public ListingDetailsSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
-            url = "https://chpl.ahrqdev.org/";
+            url = "http://localhost:3000/";
            }
     }
     /**
