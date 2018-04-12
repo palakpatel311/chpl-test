@@ -152,6 +152,15 @@ public class ListingDetailsSteps {
         assertTrue(actualString.contains(tpText), "Expect \"" + tpText + "\" to be found in \"" + actualString + "\"");
     }
     /**
+     * Assert that Listing Name is as expected.
+     * @param lname expected text
+     */
+    @Then("^the listing name shows as \"([^\"]*)\"$")
+    public void verifyListingName(final String lname) {
+        String actualString = ListingDetailsPage.listingName(driver).getText();
+        assertEquals(actualString, lname);
+    }
+    /**
      * Assert that the UCD Process equals the passed in value.
      * @param ucdText expected text
      */
