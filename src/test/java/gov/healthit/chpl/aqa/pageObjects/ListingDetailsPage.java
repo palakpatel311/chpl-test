@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
  */
 public final class ListingDetailsPage {
 
+    private static final int CRITERIA_COLUMN = 3;
+
     private ListingDetailsPage() {}
     private static WebElement element = null;
     /**
@@ -30,6 +32,23 @@ public final class ListingDetailsPage {
     public static WebElement additionalInfoAccordion(final WebDriver driver) {
         element = driver.findElement(By.id("details-additional-information"));
         return element;
+    }
+    /**
+     * Returns the element that holds associated criteria number for a Measure Name in Successfully Tested G1/G2 Measures section .
+     * @param driver WebDriver
+     * @param mName is measure Name
+     * @return associatedCriteria element
+     */
+    public static WebElement associatedCriteria(final WebDriver driver, final String mName) {
+        WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/div/table/tbody"));
+        ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
+            ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
+            if (cols.get(0).getText().equalsIgnoreCase(mName)) {
+                return cols.get(CRITERIA_COLUMN);
+            }
+        }
+        return null;
     }
     /**
      * Return Certification Criteria Accordion on listing page.
@@ -108,6 +127,26 @@ public final class ListingDetailsPage {
         return element;
     }
     /**
+     * Returns the element that holds G1 Measure Name for a criteria.
+     * @param driver WebDriver
+     * @param number is criteria number
+     * @return MeasureName element
+     */
+    public static WebElement g1MeasureName(final WebDriver driver, final String number) {
+        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[2]/td[2]"));
+        return element;
+    }
+    /**
+     * Returns the element that holds G2 Measure Name for a criteria.
+     * @param driver WebDriver
+     * @param number is criteria number
+     * @return MeasureName element
+     */
+    public static WebElement g2MeasureName(final WebDriver driver, final String number) {
+        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[3]/td[2]"));
+        return element;
+    }
+    /**
      * Returns the element that holds Intended User Description Title.
      * @param driver WebDriver
      * @return Title element
@@ -151,6 +190,23 @@ public final class ListingDetailsPage {
     public static WebElement nosedData(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/p"));
         return element;
+    }
+    /**
+     * Returns the element that holds Required Text for a Measure Name in Successfully Tested G1/G2 Measures section .
+     * @param driver WebDriver
+     * @param mName is measure Name
+     * @return requiredText element
+     */
+    public static WebElement requiredText(final WebDriver driver, final String mName) {
+        WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/div/table/tbody"));
+        ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
+            ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
+            if (cols.get(0).getText().equalsIgnoreCase(mName)) {
+                return cols.get(1);
+            }
+        }
+        return null;
     }
     /**
      * Return SED Accordion on listing page.

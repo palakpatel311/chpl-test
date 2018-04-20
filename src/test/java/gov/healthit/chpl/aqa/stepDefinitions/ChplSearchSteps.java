@@ -28,7 +28,7 @@ public class ChplSearchSteps {
     public ChplSearchSteps() {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
-            url = "http://localhost:3000/";
+            url = "https://chpl.ahrqdev.org/";
            }
     }
 
