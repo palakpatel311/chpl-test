@@ -7,9 +7,8 @@ import org.openqa.selenium.WebElement;
 /**
  * Class ChplDownloadPage definition.
  */
-public class ChplDownloadPage {
-
-    private WebDriver driver;
+public final class ChplDownloadPage {
+    private ChplDownloadPage() {}
     private static WebElement element = null;
 
     /**
@@ -21,6 +20,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"definitionSelect\"]"));
         return element;
     }
+
     /**
      * Download files list(drop down) element.
      * @param driver WebDriver
@@ -30,6 +30,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id='downloadSelect']"));
         return element;
     }
+
     /**
      * Download files button element.
      * @param driver WebDriver
@@ -39,6 +40,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadChplLink\"]"));
         return element;
     }
+
     /**
      * Download definition files button element.
      * @param driver WebDriver
@@ -48,6 +50,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadChplDefinitionLink\"]"));
         return element;
     }
+
     /**
      * Download file - 2015 edition Products file element.
      * @param driver WebDriver
@@ -57,6 +60,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[1]"));
         return element;
     }
+
     /**
      * Download file - 2014 edition Products file element.
      * @param driver WebDriver
@@ -66,6 +70,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[2]"));
         return element;
     }
+
     /**
      * Download file - 2011 edition Products file element.
      * @param driver WebDriver
@@ -75,6 +80,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[3]"));
         return element;
     }
+
     /**
      * Download file - 2015 summary file element.
      * @param driver WebDriver
@@ -84,6 +90,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[4]"));
         return element;
     }
+
     /**
      * Download file - 2014 summary file element.
      * @param driver WebDriver
@@ -93,6 +100,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[5]"));
         return element;
     }
+
     /**
      * Download file - surveillance file element.
      * @param driver WebDriver
@@ -102,6 +110,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[6]"));
         return element;
     }
+
     /**
      * Download file - surveillance with non conformities file element.
      * @param driver WebDriver
@@ -111,6 +120,7 @@ public class ChplDownloadPage {
         element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[7]"));
         return element;
     }
+
     /**
      * Returns element holding main content.
      * @param driver WebDriver

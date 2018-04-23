@@ -7,9 +7,10 @@ import org.openqa.selenium.WebElement;
 /**
  * Class CollectionsPages definition.
  */
-public class CollectionsPages {
-    private WebDriver driver;
+public final class CollectionsPages {
+    private CollectionsPages() {}
     private static WebElement element = null;
+
     /**
      * Returns ACB Filter button element.
      * @param driver WebDriver
@@ -19,6 +20,7 @@ public class CollectionsPages {
         element = driver.findElement(By.id("filter-button"));
         return element;
     }
+
     /**
      * Returns element holding main content.
      * @param driver WebDriver

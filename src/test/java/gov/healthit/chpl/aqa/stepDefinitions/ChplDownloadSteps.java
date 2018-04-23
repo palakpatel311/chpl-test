@@ -1,17 +1,19 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
-import static org.junit.Assert.assertFalse;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import org.apache.commons.io.FileUtils;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,6 +41,7 @@ public class ChplDownloadSteps {
     private String url = System.getProperty("url");
     private String downloadPath = System.getProperty("downloadPath");
     private File dir;
+    private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
 
     /**
      * Constructor creates new driver.
@@ -132,261 +135,85 @@ public class ChplDownloadSteps {
     }
 
     /**
-     * Select 2015 edition products file from drop down and download .xml file.
+     * Download one of the five product files.
+     * @param edition which edition to download
+     * @param type whether to get the xml or csv file
      */
-
-    @When("^I download the 2015 edition products file$")
-    public void download2015editionProductsFile() {
-        /**
-         * Clean all files from download directory so each time there is only latest
-         * download file to read.
-         */
-        ChplDownloadPage.downloadoption2015editionProductsFile(driver).click();
+    @When("^I download the \"(.*)\" \"(.*)\" products file$")
+    public void downloadProductFile(final String edition, final String type) {
+        switch (edition) {
+        case "2011":
+            ChplDownloadPage.downloadoption2011editionProductsFile(driver).click();
+            break;
+        case "2014":
+            switch (type) {
+            case "csv":
+                ChplDownloadPage.downloadoption2014summaryFile(driver).click();
+                break;
+            case "xml":
+                ChplDownloadPage.downloadoption2014editionProductsFile(driver).click();
+                break;
+            default:
+                break;
+            }
+            break;
+        case "2015":
+            switch (type) {
+            case "csv":
+                ChplDownloadPage.downloadoption2015summaryFile(driver).click();
+                break;
+            case "xml":
+                ChplDownloadPage.downloadoption2015editionProductsFile(driver).click();
+                break;
+            default:
+                break;
+            }
+            break;
+        default:
+            break;
+        }
         ChplDownloadPage.downloadFileButton(driver).click();
     }
 
     /**
-     * Assert filename of download file.
+     * Assert that file is not older than expected value. Checks files in download directory
+     * until file is found matching expected filename pattern, then parses filename's date field
+     * and compares with "today".
+     * @param days maximum number of days old the file may be
      */
-    @Then("^the downloaded file shows chpl-2015-currentdate.xml filename$")
-    public void verify2015editionProductsFilename() {
-        /**
-         * Get latest download file in the directory. Keep checking until download is
-         * complete then read final filename.
-         */
-
-        String dwldFileName = "";
+    @Then("^the downloaded file is no more than \"(.*)\" days old")
+    public void theDownloadedFileIsNotOld(final String days) {
+        final int startOfDateInFilename = 10;
+        final int endOfDateInFilename = 18;
+        String downloadFileName = null;
         boolean fileFound = false;
 
         while (!fileFound) {
-            File[] filenames = dir.listFiles();
+            File[] files = dir.listFiles();
 
-            for (File file : filenames) {
-                dwldFileName = file.getName();
-            }
-            String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
-
-            if (finalName.equalsIgnoreCase("chpl-.xml")) {
-                fileFound = true;
-            }
-        }
-        /**
-         * Replace ddmmhh part to construct a filename to match with expected.
-         * Use of DateFormat to get current system date.
-         */
-        String downloadfileName = dwldFileName.replaceAll("(^chpl-2015-........_).{2,10}(.xml)",
-                "$1" + "xxxxxx" + "$2");
-
-        String sysfilename = new SimpleDateFormat("yyyyMMdd_").format(new Date());
-        String currentfile = "chpl-2015-" + sysfilename + "xxxxxx.xml";
-
-        assertEquals(downloadfileName, currentfile, "File is not current");
-    }
-
-    /**
-     * Select 2014 edition products file from drop down and download .xml file.
-     */
-    @When("^I download the 2014 edition products file$")
-    public void download2014editionProductsFile() {
-        ChplDownloadPage.downloadoption2014editionProductsFile(driver).click();
-        ChplDownloadPage.downloadFileButton(driver).click();
-    }
-
-    /**
-     * Assert filename of download file.
-     */
-    @Then("^the downloaded file shows chpl-2014-currentdate.xml filename$")
-    public void verify2014editionProductsFilename() {
-
-        /**
-         * Get latest download file in the directory. Keep checking until download is
-         * complete then read final filename.
-         */
-        String dwldFileName = "";
-        boolean fileFound = false;
-
-        while (!fileFound) {
-            File[] filenames = dir.listFiles();
-
-            for (File file : filenames) {
-                dwldFileName = file.getName();
-            }
-            String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
-
-            if (finalName.equalsIgnoreCase("chpl-.xml")) {
-                fileFound = true;
+            for (File file : files) {
+                downloadFileName = file.getName();
+                if (downloadFileName
+                        .replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2")
+                        .equalsIgnoreCase("chpl-.xml")
+                        || downloadFileName
+                        .replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2")
+                        .equalsIgnoreCase("chpl-.csv")) {
+                    fileFound = true;
+                }
             }
         }
-        /**
-         * Replace ddmmhh part to construct a filename to match with expected.
-         * Use of DateFormat to get current system date.
-         */
-        String downloadfileName = dwldFileName.replaceAll("(^chpl-2014-........_).{2,10}(.xml)",
-                "$1" + "xxxxxx" + "$2");
-        String sysfilename = new SimpleDateFormat("yyyyMMdd_").format(new Date());
-        String currentfile = "chpl-2014-" + sysfilename + "xxxxxx.xml";
-
-        assertEquals(downloadfileName, currentfile, "File is not current");
-    }
-
-    /**
-     * Select 2011 edition products file from drop down and download .xml file.
-     */
-    @When("^I download the 2011 edition products file$")
-    public void download2011editionProductsFile() {
-        ChplDownloadPage.downloadoption2011editionProductsFile(driver).click();
-        ChplDownloadPage.downloadFileButton(driver).click();
-    }
-
-    /**
-     * Assert filename of download file.
-     */
-    @Then("^the downloaded file shows 2011-chpl-lastrun.xml filename$")
-    public void verify2011editionProductsFilename() {
-
-        /**
-         * Get latest download file in the directory. Keep checking until download is
-         * complete then read final filename.
-         */
-        String dwldFileName = "";
-        boolean fileFound = false;
-
-        while (!fileFound) {
-            File[] filenames = dir.listFiles();
-
-            for (File file : filenames) {
-                dwldFileName = file.getName();
-            }
-            String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
-
-            if (finalName.equalsIgnoreCase("chpl-.xml")) {
-                fileFound = true;
-            }
+        String downloadFileDate = downloadFileName.substring(startOfDateInFilename, endOfDateInFilename);
+        try {
+            Date fileDate = new SimpleDateFormat("yyyyMMdd").parse(downloadFileDate);
+            Date currentDate = new Date();
+            int numDays = Integer.parseInt(days);
+            double age = Math.ceil((currentDate.getTime() - fileDate.getTime()) / MILLIS_IN_A_DAY);
+            assertTrue(age <= numDays,
+                    "File " + downloadFileName + " is " + age + " days old, should be no more than " + numDays);
+        } catch (ParseException e) {
+            fail("Could not parse filename: " + downloadFileName + "'s date");
         }
-        /**
-         * Replace ddmmhh part to construct a filename to match with expected.
-         * Use of DateFormat to get current system date.
-         */
-        String downloadfileName = dwldFileName.replaceAll("(^chpl-2011-........_).{2,10}(.xml)",
-                "$1" + "xxxxxx" + "$2");
-
-        String sysMonth = new SimpleDateFormat("MM").format(new Date());
-        String sysYear = new SimpleDateFormat("yyyy").format(new Date());
-        /**
-         * Construct filename for each quarter to validate download filename. 2011
-         * product xml file is generated on first day of a quarter. Compare filenames
-         * generated within a quarter against constructed filename.
-         */
-
-        String sysfilenameQ1 = "chpl-2011-" + sysYear + "0101_xxxxxx.xml";
-        String sysfilenameQ2 = "chpl-2011-" + sysYear + "0401_xxxxxx.xml";
-        String sysfilenameQ3 = "chpl-2011-" + sysYear + "0701_xxxxxx.xml";
-        String sysfilenameQ4 = "chpl-2011-" + sysYear + "1001_xxxxxx.xml";
-
-        if (sysMonth.equalsIgnoreCase("01") || sysMonth.equalsIgnoreCase("02")
-                || sysMonth.equalsIgnoreCase("03") && downloadfileName.equals(sysfilenameQ1)) {
-            assertEquals(downloadfileName, sysfilenameQ1, "File is not current");
-        } else if (sysMonth.equalsIgnoreCase("04") || sysMonth.equalsIgnoreCase("05")
-                || sysMonth.equalsIgnoreCase("06") && downloadfileName.equals(sysfilenameQ2)) {
-            assertEquals(downloadfileName, sysfilenameQ2, "File is not current");
-        } else if (sysMonth.equalsIgnoreCase("07") || sysMonth.equalsIgnoreCase("08")
-                || sysMonth.equalsIgnoreCase("09") && downloadfileName.equals(sysfilenameQ3)) {
-            assertEquals(downloadfileName, sysfilenameQ3, "File is not current");
-        } else if (sysMonth.equalsIgnoreCase("10") || sysMonth.equalsIgnoreCase("11")
-                || sysMonth.equalsIgnoreCase("12") && downloadfileName.equals(sysfilenameQ4)) {
-            assertEquals(downloadfileName, sysfilenameQ4, "File is not current");
-        }
-
-    }
-
-    /**
-     * Select 2015 edition summary file from drop down and download .csv file.
-     */
-    @When("^I download the 2015 edition summary file$")
-    public void download2015editionSummaryFile() {
-        ChplDownloadPage.downloadoption2015summaryFile(driver).click();
-        ChplDownloadPage.downloadFileButton(driver).click();
-    }
-
-    /**
-     * Assert filename of download file.
-     */
-    @Then("^the downloaded file shows chpl-2015-currentdate.csv filename$")
-    public void verify2015editionSummaryFilename() {
-        /**
-         * Get latest download file in the directory. Keep checking until download is
-         * complete then read final filename.
-         */
-        String dwldFileName = "";
-        boolean fileFound = false;
-
-        while (!fileFound) {
-            File[] filenames = dir.listFiles();
-
-            for (File file : filenames) {
-                dwldFileName = file.getName();
-            }
-            String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
-
-            if (finalName.equalsIgnoreCase("chpl-.csv")) {
-                fileFound = true;
-            }
-        }
-        /**
-         * Replace ddmmhh part to construct a filename to match with expected.
-         * Use of DateFormat to get current system date.
-         */
-        String downloadfileName = dwldFileName.replaceAll("(^chpl-2015-........_).{2,10}(.csv)",
-                "$1" + "xxxxxx" + "$2");
-        String sysfilename = new SimpleDateFormat("yyyyMMdd_").format(new Date());
-        String currentfile = "chpl-2015-" + sysfilename + "xxxxxx.csv";
-
-        assertEquals(downloadfileName, currentfile, "File is not current");
-    }
-
-    /**
-     * Select 2014 edition summary file from drop down and Download .csv file.
-     */
-    @When("^I download the 2014 edition summary file$")
-    public void download2014editionSummaryFile() {
-        ChplDownloadPage.downloadoption2014summaryFile(driver).click();
-        ChplDownloadPage.downloadFileButton(driver).click();
-    }
-
-    /**
-     * Assert filename of download file.
-     */
-    @Then("^the downloaded file shows chpl-2014-currentdate.csv filename$")
-    public void verify2014editionSummaryFilename() {
-        /**
-         * Get latest download file in the directory. Keep checking until download is
-         * complete then read final filename.
-         */
-        String dwldFileName = "";
-        boolean fileFound = false;
-
-        while (!fileFound) {
-            File[] filenames = dir.listFiles();
-
-            for (File file : filenames) {
-                dwldFileName = file.getName();
-            }
-            String finalName = dwldFileName.replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2");
-
-            if (finalName.equalsIgnoreCase("chpl-.csv")) {
-                fileFound = true;
-            }
-        }
-        /**
-         * Replace ddmmhh part to construct a filename to match with expected.
-         * Use of DateFormat to get current system date.
-         */
-        String downloadfileName = dwldFileName.replaceAll("(^chpl-2014-........_).{2,10}(.csv)",
-                "$1" + "xxxxxx" + "$2");
-        String sysfilename = new SimpleDateFormat("yyyyMMdd_").format(new Date());
-        String currentfile = "chpl-2014-" + sysfilename + "xxxxxx.csv";
-
-        assertEquals(downloadfileName, currentfile, "File is not current");
     }
 
     /**
@@ -449,6 +276,6 @@ public class ChplDownloadSteps {
             System.out.println("Removing: " + fileName);
         }
         FileUtils.cleanDirectory(dir);
-        assertFalse("directory is not empty", dir.list().length > 0);
+        assertFalse(dir.list().length > 0, "directory is not empty");
     }
 }
