@@ -1,4 +1,5 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -206,6 +207,44 @@ public class ListingDetailsSteps {
     public void thereShouldBeTextNoCertificationCriteriaWereTestedForSED(final String nodataText) {
         String actualString = ListingDetailsPage.nosedData(driver).getText();
         assertTrue(actualString.contains(nodataText), "Expect " + nodataText + " to be found in " + actualString);
+    }
+    /**
+     * Asserts Measure Name for input value for G1/G2.
+     * @param measureName expected text
+     * @param number is criteria number
+     * @param gOption for G1/G2 Measure selection
+     */
+    @Then("^Measure Successfully Tested for \"([^\"]*)\" should display \"([^\"]*)\" for \"([^\"]*)\"$")
+    public void assertMeasureName(final String gOption, final String measureName, final String number) {
+
+        if (gOption.equals("G1")) {
+        String actualString = ListingDetailsPage.gMeasureName(driver, number, "2").getText();
+        assertTrue(actualString.contains(measureName), "Expect " + measureName + " to be found in " + actualString);
+        } else {
+            String actualString = ListingDetailsPage.gMeasureName(driver, number, "3").getText();
+            assertTrue(actualString.contains(measureName), "Expect " + measureName + " to be found in " + actualString);
+        }
+    }
+    /**
+     * Open the G1/G2 panel.
+     */
+    @When("^I look at  Successfully Tested G1G2 Measures$")
+    public void iLookAtG1G2Measures() {
+        WebElement link = ListingDetailsPage.g1g2Accordion(driver);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+    }
+    /**
+     * Asserts Measure required text and associated criteria show correct.
+     * @param mName expected text
+     * @param reqText is expected toggle tip text
+     * @param criteria is criteria number
+     */
+    @Then("^the \"([^\"]*)\" shows Required Text as \"([^\"]*)\" and associated criteria as \"([^\"]*)\"$")
+    public void assetRequiredText(final String mName, final String reqText, final String criteria) {
+        String actualString = ListingDetailsPage.requiredText(driver, mName).getText();
+        assertTrue(actualString.contains(reqText), "Expect \"" + reqText + "\" to be found in \"" + actualString + "\"");
+        String associatedCriteria = ListingDetailsPage.associatedCriteria(driver, mName).getText();
+        assertTrue(associatedCriteria.contains(criteria), "Expect " + criteria + " to be found in " + associatedCriteria);
     }
 
 }
