@@ -38,6 +38,7 @@ public final class ListingDetailsPage {
      * @param driver WebDriver
      * @param mName is measure Name
      * @return associatedCriteria element
+     * return null if criteria was not found in Associated Criteria column
      */
     public static WebElement associatedCriteria(final WebDriver driver, final String mName) {
         WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/div/table/tbody"));
@@ -127,23 +128,14 @@ public final class ListingDetailsPage {
         return element;
     }
     /**
-     * Returns the element that holds G1 Measure Name for a criteria.
+     * Returns the element that holds G1/G2 Measure Name for a criteria.
      * @param driver WebDriver
      * @param number is criteria number
      * @return MeasureName element
+     * @param index is table row index for G1/G2
      */
-    public static WebElement g1MeasureName(final WebDriver driver, final String number) {
-        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[2]/td[2]"));
-        return element;
-    }
-    /**
-     * Returns the element that holds G2 Measure Name for a criteria.
-     * @param driver WebDriver
-     * @param number is criteria number
-     * @return MeasureName element
-     */
-    public static WebElement g2MeasureName(final WebDriver driver, final String number) {
-        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[3]/td[2]"));
+    public static WebElement gMeasureName(final WebDriver driver, final String number, final String index) {
+        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[" + index + "]/td[2]"));
         return element;
     }
     /**
@@ -196,6 +188,7 @@ public final class ListingDetailsPage {
      * @param driver WebDriver
      * @param mName is measure Name
      * @return requiredText element
+     * return null if Required text was not found as expected
      */
     public static WebElement requiredText(final WebDriver driver, final String mName) {
         WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/div/table/tbody"));
