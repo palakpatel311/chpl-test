@@ -44,7 +44,7 @@ public class DpManagementPage {
     }
 
     /**
-     * Returns Developer & Product Management link.
+     * Returns Developer and Product Management link.
      * @param driver WebDriver
      * @return link element
      */
