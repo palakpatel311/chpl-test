@@ -1,6 +1,5 @@
 package gov.healthit.chpl.aqa.pageObjects;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +21,7 @@ public class DpManagementPage {
         element = driver.findElement(By.id("listing-file-upload"));
         return element;
     }
+
     /**
      * Returns choose file button for bulk surveillance upload.
      * @param driver WebDriver
@@ -31,6 +31,7 @@ public class DpManagementPage {
         element = driver.findElement(By.id("surveillance-file-upload"));
         return element;
     }
+
     /**
      * Get the CHPL Product Number value in surveillance search results.
      * @param driver WebDriver
@@ -41,6 +42,7 @@ public class DpManagementPage {
         element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div/div[3]/table/tbody/tr[1]/td"));
         return element;
     }
+
     /**
      * Returns Developer & Product Management link.
      * @param driver WebDriver
@@ -50,6 +52,7 @@ public class DpManagementPage {
         element = driver.findElement(By.linkText("Developer & Product Management"));
         return element;
     }
+
     /**
      * Returns Manage Surveillance Activity link.
      * @param driver WebDriver
@@ -59,6 +62,7 @@ public class DpManagementPage {
         element = driver.findElement(By.linkText("Manage Surveillance Activity"));
         return element;
     }
+
     /**
      * Returns Confirm Pending Products link.
      * @param driver WebDriver
@@ -68,6 +72,7 @@ public class DpManagementPage {
         element = driver.findElement(By.linkText("Confirm Pending Product"));
         return element;
     }
+
     /**
      * Returns Pending Listings table in Confirm Pending Listings section.
      * @param driver WebDriver
@@ -77,6 +82,7 @@ public class DpManagementPage {
         element = driver.findElement(By.id("pending-listings-table"));
         return element;
     }
+
     /**
      * Returns surveillanceSearch input box.
      * @param driver WebDriver
@@ -86,6 +92,7 @@ public class DpManagementPage {
         element = driver.findElement(By.id("surveillanceSearch"));
         return element;
     }
+
     /**
      * Returns Surveillance search button.
      * @param driver WebDriver
@@ -95,6 +102,7 @@ public class DpManagementPage {
         element = driver.findElement(By.id("surveillance-search-button"));
         return element;
     }
+
     /**
      * Returns upload file button for new listing upload.
      * @param driver WebDriver
@@ -104,6 +112,7 @@ public class DpManagementPage {
         element = driver.findElement(By.cssSelector("[id^='listing-file-confirm-']"));
         return element;
     }
+
     /**
      * Returns upload file button for new listing upload.
      * @param driver WebDriver

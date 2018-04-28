@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.LoginPage;
 
 /**
@@ -40,6 +39,7 @@ public class LoginSteps {
             throw new IllegalArgumentException("Missing value for password!");
            }
     }
+
     /**
      * Loads CHPL admin page to show login form.
      */
@@ -49,13 +49,15 @@ public class LoginSteps {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(LoginPage.username(driver)));
     }
+
     /**
      * Enter username in Username field.
      */
-    @When("^I fill in username$")
+    @And("^I fill in username$")
     public void enterUsername() {
         LoginPage.username(driver).sendKeys(username);
     }
+
     /**
      * Enter password in Password field.
      */
@@ -63,13 +65,15 @@ public class LoginSteps {
     public void enterPassword() {
         LoginPage.password(driver).sendKeys(password);
     }
+
     /**
      * Click login button.
      */
-    @When("^I click Log in button$")
+    @And("^I click Log in button$")
     public void clickLoginButton() {
         LoginPage.loginButton(driver).click();
     }
+
     /**
      * Verify login attempt was successful.
      */
@@ -77,14 +81,6 @@ public class LoginSteps {
     public void verifyLoginWasSuccessful() {
         String actualString = LoginPage.welcomeText(driver).getText();
         assertTrue(actualString.contains("Welcome"));
-    }
-    /**
-     * User logout.
-     */
-    @Then("^I log out$")
-    public void iLogOut() {
-        LoginPage.loginLogoutPopUp(driver).click();
-        LoginPage.logoutButton(driver).click();
     }
 
 }

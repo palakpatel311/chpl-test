@@ -1,9 +1,11 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
+
 import static org.testng.Assert.assertTrue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
@@ -14,7 +16,6 @@ import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 
 public class DpManagementSteps {
     private WebDriver driver;
-    private static final int TIMEOUT = 30;
     private String url = System.getProperty("url");
 
     /**
@@ -26,14 +27,16 @@ public class DpManagementSteps {
             url = "http://localhost:3000/";
            }
     }
+
     /**
      * Get user to CHPL search page.
      */
-    @Then("^I navigate to Manage Surveillnace Activity section$")
+    @And("^I navigate to Manage Surveillnace Activity section$")
     public void iAamOnCHPLSearchPage() {
         DpManagementPage.dpManagementLink(driver).click();
         DpManagementPage.manageSurveillanceActivityLink(driver).click();
     }
+
     /**
      * Get user to CHPL search page.
      * @param chplId is chplId to look up
@@ -43,6 +46,7 @@ public class DpManagementSteps {
         DpManagementPage.surveillanceSearch(driver).sendKeys(chplId);
         DpManagementPage.survSearchButton(driver).click();
     }
+
     /**
      * Verify surveillance search results load by validating CHPL ID in results.
      * @param chplId is chplId to look up
