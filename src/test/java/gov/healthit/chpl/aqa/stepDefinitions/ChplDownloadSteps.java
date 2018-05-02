@@ -135,12 +135,13 @@ public class ChplDownloadSteps {
     }
 
     /**
-     * Download one of the five product files.
+     * Download one of the five product files. Waits to exit until file has been downloaded.
      * @param edition which edition to download
      * @param type whether to get the xml or csv file
+     * @throws InterruptedException if thread.sleep is interrupted
      */
     @When("^I download the \"(.*)\" \"(.*)\" products file$")
-    public void downloadProductFile(final String edition, final String type) {
+    public void downloadProductFile(final String edition, final String type) throws InterruptedException {
         switch (edition) {
         case "2011":
             ChplDownloadPage.downloadoption2011editionProductsFile(driver).click();
@@ -173,20 +174,10 @@ public class ChplDownloadSteps {
             break;
         }
         ChplDownloadPage.downloadFileButton(driver).click();
-    }
 
-    /**
-     * Assert that file is not older than expected value. Checks files in download directory
-     * until file is found matching expected filename pattern, then parses filename's date field
-     * and compares with "today".
-     * @param days maximum number of days old the file may be
-     */
-    @Then("^the downloaded file is no more than \"(.*)\" days old")
-    public void theDownloadedFileIsNotOld(final String days) {
-        final int startOfDateInFilename = 10;
-        final int endOfDateInFilename = 18;
         String downloadFileName = null;
         boolean fileFound = false;
+        final long sleepTime = 5 * 1000;
 
         while (!fileFound) {
             File[] files = dir.listFiles();
@@ -194,14 +185,30 @@ public class ChplDownloadSteps {
             for (File file : files) {
                 downloadFileName = file.getName();
                 if (downloadFileName
-                        .replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2")
-                        .equalsIgnoreCase("chpl-.xml")
-                        || downloadFileName
-                        .replaceAll("(^....).{2,30}(....$)", "$1" + "-" + "$2")
-                        .equalsIgnoreCase("chpl-.csv")) {
+                        .replaceAll("(^.........).*(....$)", "$1" + "$2")
+                        .equalsIgnoreCase("chpl-" + edition + "." + type)) {
                     fileFound = true;
                 }
+                Thread.sleep(sleepTime);
             }
+        }
+    }
+
+    /**
+     * Assert that file is not older than expected value. Reads file in download directory
+     * then parses filename's date field and compares with "today".
+     * @param days maximum number of days old the file may be
+     */
+    @Then("^the downloaded file is no more than \"(.*)\" days old")
+    public void theDownloadedFileIsNotOld(final String days) {
+        final int startOfDateInFilename = 10;
+        final int endOfDateInFilename = 18;
+        String downloadFileName = null;
+
+        File[] files = dir.listFiles();
+
+        for (File file : files) {
+            downloadFileName = file.getName();
         }
         String downloadFileDate = downloadFileName.substring(startOfDateInFilename, endOfDateInFilename);
         try {

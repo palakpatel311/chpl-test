@@ -43,10 +43,12 @@ To run cucumber tests open a command prompt go to project directory where the pr
 
 Options can be used to tweak the functionality of the tests. They're used with the flag `-D`, as, for example `-Durl="http://localhost:3000/"`
 
-| option name  | default value                                                          | reason                               |
-|--------------|------------------------------------------------------------------------|--------------------------------------|
-| url          | http://localhost:3000/                                                 | URL to run tests against             |
-| downloadPath | temporary directory, or if that fails `user.dir`/target/download-files | Directory where files are downloaded |
+| option name  | default value                                                                  | reason                               |
+|--------------|--------------------------------------------------------------------------------|--------------------------------------|
+| url          | http://localhost:3000/                                                         | URL to run tests against             |
+| downloadPath | temporary directory, or if that fails `user.dir`/target/download-files         | Directory where files are downloaded |
+| username     | no default; if a test needs the username and one is not specified it will fail | User to log in as                    |
+| password     | no default; if a test needs the password and one is not specified it will fail | Password to use                      |
 
 ### Cucumber options
 
