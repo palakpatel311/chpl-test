@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.util.List;
+
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
 /**
@@ -34,6 +36,7 @@ public class ListingDetailsSteps {
             url = "http://localhost:3000/";
            }
     }
+
     /**
      * Assert that the Accessibility Standard equals the passed in value.
      * @param accessibilityText expected text
@@ -43,6 +46,7 @@ public class ListingDetailsSteps {
         String actualString = ListingDetailsPage.accessibilityStandardText(driver).getText();
         assertEquals(actualString, accessibilityText);
     }
+
     /**
      * Loads a listing for given Database ID.
      * @param dbId the Database Id of a listing to load
@@ -53,6 +57,7 @@ public class ListingDetailsSteps {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(driver)));
     }
+
     /**
      * Open the details for designated certification criteria.
      * @param number criteria to open
@@ -62,6 +67,7 @@ public class ListingDetailsSteps {
         WebElement link = ListingDetailsPage.certificationCriteriaDetailsLink(driver, number);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
     }
+
     /**
      * Open the SED panel.
      */
@@ -70,6 +76,7 @@ public class ListingDetailsSteps {
         WebElement link = ListingDetailsPage.sedAccordion(driver);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
     }
+
     /**
      * Asserts that elements exist on the accordion.
      */
@@ -99,6 +106,7 @@ public class ListingDetailsSteps {
         assertTrue(driver.findElement(By.cssSelector("div.panel:nth-child(6) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Surveillance Activities"));
         assertTrue(driver.findElement(By.cssSelector("div.panel:nth-child(7) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Additional Information"));
     }
+
     /**
      * Assert that the QMS Standard section has the passed in value.
      * @param qmsText expected text
@@ -108,6 +116,7 @@ public class ListingDetailsSteps {
         String actualString = ListingDetailsPage.qmsStandardText(driver).getText();
         assertTrue(actualString.contains(qmsText), "Expect " + qmsText + " to be found in " + actualString);
     }
+
     /**
      * Asserts that criteria should also have the title.
      */
@@ -124,6 +133,7 @@ public class ListingDetailsSteps {
         assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "9").getText(), "170.315 (a)(14): Implantable Device List");
         assertEquals(ListingDetailsPage.sedCertificationCriteria(driver, "10").getText(), "170.315 (b)(3): Electronic Prescribing");
     }
+
     /**
      * Assert that Mandatory Disclosures URL exists and is correct.
      * @param targetUrl the URL value to assert
@@ -133,6 +143,7 @@ public class ListingDetailsSteps {
         String actualText = ListingDetailsPage.disclosureUrl(driver).getText();
         assertTrue(actualText.contains(targetUrl), "Expect " + targetUrl + " to be found in " + actualText);
    }
+
     /**
      * Assert message when listing is not found.
      * @param notfoundText the text message to assert
@@ -142,6 +153,7 @@ public class ListingDetailsSteps {
         String actualString = ListingDetailsPage.mainContent(driver).getText();
         assertTrue(actualString.contains(notfoundText), "Expect " + notfoundText + " to be found in " + actualString);
     }
+
     /**
      * Assert that Test Procedure text is expected.
      * @param tpText expected text
@@ -152,6 +164,7 @@ public class ListingDetailsSteps {
         String actualString = ListingDetailsPage.testProcedure(driver, number).getText();
         assertTrue(actualString.contains(tpText), "Expect \"" + tpText + "\" to be found in \"" + actualString + "\"");
     }
+
     /**
      * Assert that Listing Name is as expected.
      * @param lname expected text
@@ -161,6 +174,7 @@ public class ListingDetailsSteps {
         String actualString = ListingDetailsPage.listingName(driver).getText();
         assertEquals(actualString, lname);
     }
+
     /**
      * Assert that the UCD Process equals the passed in value.
      * @param ucdText expected text
@@ -170,6 +184,7 @@ public class ListingDetailsSteps {
         String actualString = ListingDetailsPage.ucdProcessText(driver).getText();
         assertEquals(actualString, ucdText);
     }
+
     /**
      * Asserts correct text in SED section.
      * @param reportTitle expected text
@@ -199,6 +214,7 @@ public class ListingDetailsSteps {
         String actualString = ListingDetailsPage.downloadSEDDetailsButton(driver).getText();
         assertTrue(actualString.contains(downloadbtnTitle), "Expect " + downloadbtnTitle + " to be found in " + actualString);
     }
+
     /**
      * Asserts that this listing has no criteria tested for SED.
      * @param nodataText expected text
@@ -208,6 +224,7 @@ public class ListingDetailsSteps {
         String actualString = ListingDetailsPage.nosedData(driver).getText();
         assertTrue(actualString.contains(nodataText), "Expect " + nodataText + " to be found in " + actualString);
     }
+
     /**
      * Asserts Measure Name for input value for G1/G2.
      * @param measureName expected text
@@ -225,6 +242,7 @@ public class ListingDetailsSteps {
             assertTrue(actualString.contains(measureName), "Expect " + measureName + " to be found in " + actualString);
         }
     }
+
     /**
      * Open the G1/G2 panel.
      */
@@ -233,6 +251,7 @@ public class ListingDetailsSteps {
         WebElement link = ListingDetailsPage.g1g2Accordion(driver);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
     }
+
     /**
      * Asserts Measure required text and associated criteria show correct.
      * @param mName expected text
@@ -245,6 +264,35 @@ public class ListingDetailsSteps {
         assertTrue(actualString.contains(reqText), "Expect \"" + reqText + "\" to be found in \"" + actualString + "\"");
         String associatedCriteria = ListingDetailsPage.associatedCriteria(driver, mName).getText();
         assertTrue(associatedCriteria.contains(criteria), "Expect " + criteria + " to be found in " + associatedCriteria);
+    }
+
+    /**
+     * Asserts text on product history pop up.
+     */
+    @Then("^I click the 'Eye'$")
+    public void iClickEye() {
+        ListingDetailsPage.productHistoryEye(driver).click();
+    }
+
+    /**
+     * Asserts text on product history pop up.
+     * @param historyText is expected text on pop up
+     */
+    @Then("^the 'Eye' pop-up opens to show Product History \"(.*)\"$")
+    public void eyePopupShowsText(final String historyText) {
+        boolean isFound = false;
+
+        WebElement table = ListingDetailsPage.productHistoryTable(driver);
+        List<WebElement> rows = table.findElements(By.xpath("tbody/tr"));
+
+        for (WebElement row : rows) {
+            List<WebElement> cols = row.findElements(By.xpath("td"));
+            if (cols.get(1).getText().equals(historyText)) {
+                isFound = true;
+                break;
+            }
+        }
+        assertTrue(isFound, "Text: " + historyText + " not found");
     }
 
 }
