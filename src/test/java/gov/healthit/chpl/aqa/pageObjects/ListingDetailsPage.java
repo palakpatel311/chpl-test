@@ -165,6 +165,27 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.id("main-content"));
         return element;
     }
+
+    /**
+     * Returns product history eye button element.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement productHistoryEye(final WebDriver driver) {
+        element = driver.findElement(By.id("view-product-history"));
+        return element;
+    }
+
+    /**
+     * Returns product history eye button element.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement productHistoryTable(final WebDriver driver) {
+        element = driver.findElement(By.id("product-history-table"));
+        return element;
+    }
+
     /**
      * Returns element that holds QMS Standard text.
      * @param driver WebDriver
