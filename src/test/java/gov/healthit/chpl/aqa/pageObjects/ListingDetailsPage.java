@@ -187,6 +187,16 @@ public final class ListingDetailsPage {
     }
 
     /**
+     * Returns text on product history modal.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement productHistoryText(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"product-history-modal\"]/div[2]/span"));
+        return element;
+    }
+
+    /**
      * Returns element that holds QMS Standard text.
      * @param driver WebDriver
      * @return text element

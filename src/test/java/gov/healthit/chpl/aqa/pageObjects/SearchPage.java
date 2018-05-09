@@ -154,4 +154,14 @@ public final class SearchPage {
         return element;
     }
 
+    /**
+     * Returns 'Select All' link on Certification Status' filter.
+     * @param driver WebDriver
+     * @return link element
+     */
+    public static WebElement selectAllStatus(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[1]/ul/st-list-multiple/ul/li[1]/a[1]"));
+        return element;
+    }
+
 }

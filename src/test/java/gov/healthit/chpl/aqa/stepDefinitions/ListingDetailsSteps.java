@@ -295,4 +295,13 @@ public class ListingDetailsSteps {
         assertTrue(isFound, "Text: " + historyText + " not found");
     }
 
+    /**
+     * Asserts text on product history pop up.
+     * @param htext is expected text on pop up
+     */
+    @Then("^the 'Eye' pop-up opens to show appropriate text \"(.*)\"$")
+    public void eyeShowsExpectedText(final String htext) {
+        String expectedText = ListingDetailsPage.productHistoryText(driver).getText();
+        assertTrue(expectedText.contains(htext), "Expect " + htext + " to be found in " + expectedText);
+    }
 }
