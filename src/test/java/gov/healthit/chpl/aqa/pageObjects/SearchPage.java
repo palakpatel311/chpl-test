@@ -164,14 +164,4 @@ public final class SearchPage {
         return element;
     }
 
-    /**
-     * Returns item count text on search results.
-     * @param driver WebDriver
-     * @return text element
-     */
-    public static WebElement totalItemCount(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"resultsSection\"]/div[2]/div/table/thead/tr[1]/td/div/div/div/div"));
-        return element;
-    }
-
 }

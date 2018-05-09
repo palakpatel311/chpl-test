@@ -153,7 +153,7 @@ public class ChplSearchSteps {
     public void searchResultsShowListing(final String chplId) {
         String listing = SearchPage.searchResultsChplId(driver).getText();
         assertTrue(listing.contains(chplId), "Expect " + chplId + " found as " + listing);
-        String itemcount = SearchPage.totalItemCount(driver).getText();
+        String itemcount = SearchPage.resultCount(driver).getText();
         assertTrue(itemcount.contains("1 - 1 of 1 Result"), "Expect" + itemcount + " count found as " + itemcount);
     }
 
