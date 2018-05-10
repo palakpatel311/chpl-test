@@ -16,7 +16,7 @@ Examples:
 	|CHP-021692|
 
 Scenario Outline: Listing details load successfully for added listings
-	Given I am on listing details page of listing with database ID "<CHPL_ID>"
+	Given I am on listing details page of listing with CHPL ID "<CHPL_ID>"
 	Then the listing name shows as "<Listing_Name>"		
 Examples:	
 	|CHPL_ID|Listing_Name|
