@@ -13,7 +13,7 @@ Feature: OCD-2081: Verify incorrectly uploaded listings have been removed
       | 14.04.04.1221.Cern.05.05.0.180214 |
 
   Scenario Outline: Verify listing details do not load for deleted listings
-    Given I am on listing details page of listing with database ID "<DB_ID>"
+    Given I am on listing details page of listing with ID "<DB_ID>"
     Then the page shows "This listing does not exist" message
     Examples:
       | DB_ID |

@@ -2,7 +2,7 @@
 Feature: OCD-1970 - Addition / modification of available G1/G2 values
 
 Scenario Outline: Mapping legacy values for G1/G2
-	Given I am on listing details page of listing with database ID "<DB_ID>"
+	Given I am on listing details page of listing with ID "<DB_ID>"
 	When I open details for criteria "<CRITERIA>"
 	Then Measure Successfully Tested for "<gOption>" should display "<Measure_Name>" for "<CRITERIA>" 
 	When I look at  Successfully Tested G1G2 Measures

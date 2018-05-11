@@ -3,7 +3,7 @@ Feature: OCD-1954 - Regression test to test Mandatory Disclosures URL for listin
 
 @Regression
 Scenario Outline: Verify Mandatory Disclosures URL exists and shows correct URL for that listing
-	Given I am on listing details page of listing with database ID "<DB_ID>"
+	Given I am on listing details page of listing with ID "<DB_ID>"
 	Then the Mandatory Disclosures URL should be: "<URL>"
 	Examples:
 		|DB_ID|URL|
@@ -12,7 +12,7 @@ Scenario Outline: Verify Mandatory Disclosures URL exists and shows correct URL 
 
  @Acceptance
   Scenario Outline: Verify mandatory disclosure link update for Cerner listings
-    Given I am on listing details page of listing with CHPL ID "<CHPL_ID>"
+    Given I am on listing details page of listing with ID "<CHPL_ID>"
     Then the Mandatory Disclosures URL should be: "<URL>"
     Examples:
       | CHPL_ID                           | URL                                                 |
