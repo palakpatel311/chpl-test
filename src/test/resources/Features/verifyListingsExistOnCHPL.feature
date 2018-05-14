@@ -1,4 +1,4 @@
-Feature: Add missing listings to the CHPL
+Feature: Verify Listings exist on CHPL
 	OCD-2244 - Two Listings from InfoGard had been uploaded to the Legacy CHPL after we got the last download from Deloitte,
 	and so those Listings were not uploaded to the new CHPL. Tests below are to test listings were added to the new CHPL.
 	OCD-2132 - Load listing details to verify missing listing reappears - Tests below are to verify bugfix in database view that caused a listing to 
@@ -16,7 +16,7 @@ Examples:
 	|CHP-021692|
 
 Scenario Outline: Listing details load successfully for added listings
-	Given I am on listing details page of listing with CHPL ID "<CHPL_ID>"
+	Given I am on listing details page of listing with ID "<CHPL_ID>"
 	Then the listing name shows as "<Listing_Name>"		
 Examples:	
 	|CHPL_ID|Listing_Name|

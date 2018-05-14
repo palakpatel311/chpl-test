@@ -7,7 +7,7 @@ Feature: OCD-1887 - Test Procedure and Test Data field update in 2015 template V
   HIMSS-IIP Test Method (valid for criteria f1 only)
 
   Scenario Outline: Verify allowable values display as expected for Test Procedure field for given criteria 
-    Given I am on listing details page of listing with database ID "<DB_ID>"
+    Given I am on listing details page of listing with ID "<DB_ID>"
     When I open details for criteria "<CRITERIA>"
     Then Test Procedure should display "<tpText>" for criteria "<CRITERIA>"
     Examples:

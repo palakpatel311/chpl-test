@@ -288,6 +288,25 @@ public final class ListingDetailsPage {
         }
         return null;
     }
+
+    /**
+     * Get the Test tool value for a given criteria.
+     * @param driver WebDriver
+     * @param number certification criteria
+     * @return the test tool text element
+     */
+    public static WebElement testTool(final WebDriver driver, final String number) {
+        WebElement table = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody"));
+        ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
+            ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
+            if (cols.get(0).getText().equalsIgnoreCase("Test tool")) {
+                return cols.get(1);
+            }
+        }
+        return null;
+    }
+
     /**
      * Returns element that holds UCD Process Text.
      * @param driver WebDriver

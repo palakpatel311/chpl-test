@@ -49,11 +49,11 @@ public class ListingDetailsSteps {
 
     /**
      * Loads a listing for given Database ID.
-     * @param dbId the Database Id of a listing to load
+     * @param id the Database or CHPL ID of a listing to load
      */
-    @Given("^I am on listing details page of listing with database ID \"(.*)\"$")
-    public void loadListingWithDbId(final String dbId) {
-        driver.get(url + "#/product/" + dbId);
+    @Given("^I am on listing details page of listing with ID \"(.*)\"$")
+    public void loadListingWithDbId(final String id) {
+        driver.get(url + "#/product/" + id);
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(driver)));
     }
@@ -155,7 +155,7 @@ public class ListingDetailsSteps {
     }
 
     /**
-     * Assert that Test Procedure text is expected.
+     * Assert that Test Procedure text is as expected.
      * @param tpText expected text
      * @param number criteria to look in
      */
@@ -163,6 +163,17 @@ public class ListingDetailsSteps {
     public void testProcedureFieldShouldDisplay(final String tpText, final String number) {
         String actualString = ListingDetailsPage.testProcedure(driver, number).getText();
         assertTrue(actualString.contains(tpText), "Expect \"" + tpText + "\" to be found in \"" + actualString + "\"");
+    }
+
+    /**
+     * Assert that Test tool text is as expected.
+     * @param testTool expected text
+     * @param number criteria to look in
+     */
+    @Then("^Test Tool should display \"([^\"]*)\" for criteria \"([^\"]*)\"$")
+    public void testToolFieldShouldDisplay(final String testTool, final String number) {
+        String actualString = ListingDetailsPage.testTool(driver, number).getText();
+        assertTrue(actualString.contains(testTool), "Expect \"" + testTool + "\" to be found in \"" + actualString + "\"");
     }
 
     /**
