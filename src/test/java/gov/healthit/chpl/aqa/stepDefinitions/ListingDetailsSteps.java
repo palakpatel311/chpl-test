@@ -266,14 +266,16 @@ public class ListingDetailsSteps {
     /**
      * Asserts Measure required text and associated criteria show correct.
      * @param mName expected text
-     * @param reqText is expected toggle tip text
+     * @param reqTest is expected toggle tip text
      * @param criteria is criteria number
      */
-    @Then("^the \"([^\"]*)\" shows Required Text as \"([^\"]*)\" and associated criteria as \"([^\"]*)\"$")
-    public void assetRequiredText(final String mName, final String reqText, final String criteria) {
-        String actualString = ListingDetailsPage.requiredText(driver, mName).getText();
-        assertTrue(actualString.contains(reqText), "Expect \"" + reqText + "\" to be found in \"" + actualString + "\"");
+    @Then("^the Required Test shows as \"([^\"]*)\" for \"([^\"]*)\" and associated criteria \"([^\"]*)\"$")
+    public void requiredTestValidationBasedOnMeasureName(final String reqTest, final String mName, final String criteria) {
+        String actualString = ListingDetailsPage.measureNameForReqTest(driver, reqTest).getText();
+        System.out.println(actualString);
+        assertTrue(actualString.contains(mName), "Expect \"" + mName + "\" to be found in \"" + actualString + "\"");
         String associatedCriteria = ListingDetailsPage.associatedCriteria(driver, mName).getText();
+        System.out.println(associatedCriteria);
         assertTrue(associatedCriteria.contains(criteria), "Expect " + criteria + " to be found in " + associatedCriteria);
     }
 
