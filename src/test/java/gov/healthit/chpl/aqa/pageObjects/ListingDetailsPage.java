@@ -217,17 +217,17 @@ public final class ListingDetailsPage {
     /**
      * Returns the element that holds Required Text for a Measure Name in Successfully Tested G1/G2 Measures section .
      * @param driver WebDriver
-     * @param mName is measure Name
+     * @param reqTest is Required Test text
      * @return requiredText element
      * return null if Required text was not found as expected
      */
-    public static WebElement requiredText(final WebDriver driver, final String mName) {
+    public static WebElement measureNameForReqTest(final WebDriver driver, final String reqTest) {
         WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/div/table/tbody"));
         ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
         for (WebElement row : rows) {
             ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
-            if (cols.get(0).getText().equalsIgnoreCase(mName)) {
-                return cols.get(1);
+            if (cols.get(1).getText().equalsIgnoreCase(reqTest)) {
+                return cols.get(0);
             }
         }
         return null;
