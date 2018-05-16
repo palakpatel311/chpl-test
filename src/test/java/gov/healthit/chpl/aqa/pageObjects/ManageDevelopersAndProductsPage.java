@@ -18,7 +18,7 @@ import org.openqa.selenium.WebElement;
          * @return link element
          */
         public static WebElement editCertifiedProductLink(final WebDriver driver) {
-            element = driver.findElement(By.linkText(" Edit Certified Product"));
+            element = driver.findElement(By.linkText("Edit Certified Product"));
             return element;
         }
 
@@ -28,7 +28,7 @@ import org.openqa.selenium.WebElement;
          * @return date element
          */
         public static WebElement sedEndDateOfTesting(final WebDriver driver) {
-            element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div[3]/div[5]/div/div/div/div[2]/span/text()[16]"));
+            element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div[3]/div[5]/div/div/div/div[2]/span"));
             return element;
        }
 

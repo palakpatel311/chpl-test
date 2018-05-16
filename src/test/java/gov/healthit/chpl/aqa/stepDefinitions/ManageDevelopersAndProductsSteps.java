@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.ManageDevelopersAndProductsPage;
 
 /**
@@ -43,12 +44,22 @@ public class ManageDevelopersAndProductsSteps {
     }
 
     /**
-     * Assert that SED End Date of Testing displays date value on UI.
-     * @param sedEndDate the URL value to assert
+     * Assert that SED End Date of Testing displays date value on Manage Developers and Products page.
+     * @param sedEndDate the date value to assert
      */
-    @Then("^SED End Date of Testing field should display the date \"([^\"]*)\"$")
-    public void sedEndDateOfTestingShouldDisplayDate(final String sedEndDate) {
+    @Then("^SED End Date of Testing field should display the date \"([^\"]*)\" in listing details section$")
+    public void sedEndDateOfTestingDisplayedInListingDetailsDpmgmt(final String sedEndDate) {
         String actualText = ManageDevelopersAndProductsPage.sedEndDateOfTesting(driver).getText();
+        assertTrue(actualText.contains(sedEndDate), "Expect " + sedEndDate + " to be found in " + actualText);
+    }
+
+    /**
+     * Assert that SED End Date of Testing displays date value on listing details page.
+     * @param sedEndDate the date value to assert
+     */
+    @Then("^SED Testing End Date shows as \"([^\"]*)\" in SED details section$")
+    public void sedTestingEndDateDisplayedInSedDetails(final String sedEndDate) {
+        String actualText = ListingDetailsPage.sedPanel(driver).getText();
         assertTrue(actualText.contains(sedEndDate), "Expect " + sedEndDate + " to be found in " + actualText);
     }
 

@@ -232,6 +232,7 @@ public final class ListingDetailsPage {
         }
         return null;
     }
+
     /**
      * Return SED Accordion on listing page.
      * @param driver WebDriver
@@ -241,6 +242,17 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.id("details-sed"));
         return element;
     }
+
+    /**
+     * Return SED panel containing SED details on listing page.
+     * @param driver WebDriver
+     * @return SED panel element
+     */
+    public static WebElement sedPanel(final WebDriver driver) {
+        element = driver.findElement(By.id("panel-sed"));
+        return element;
+    }
+
     /**
      * Returns SED Criteria Table element.
      * @param driver WebDriver
@@ -261,6 +273,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[" + index + "]"));
         return element;
     }
+
     /**
      * Returns Surveillance Activities Accordion on listing details page.
      * @param driver WebDriver
@@ -316,6 +329,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr/td[2]"));
         return element;
     }
+
     /**
      * Returns the element that holds Usability Report Title.
      * @param driver WebDriver
