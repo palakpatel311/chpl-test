@@ -272,10 +272,8 @@ public class ListingDetailsSteps {
     @Then("^the Required Test shows as \"([^\"]*)\" for \"([^\"]*)\" and associated criteria \"([^\"]*)\"$")
     public void requiredTestValidationBasedOnMeasureName(final String reqTest, final String mName, final String criteria) {
         String actualString = ListingDetailsPage.measureNameForReqTest(driver, reqTest).getText();
-        System.out.println(actualString);
         assertTrue(actualString.contains(mName), "Expect \"" + mName + "\" to be found in \"" + actualString + "\"");
         String associatedCriteria = ListingDetailsPage.associatedCriteria(driver, mName).getText();
-        System.out.println(associatedCriteria);
         assertTrue(associatedCriteria.contains(criteria), "Expect " + criteria + " to be found in " + associatedCriteria);
     }
 
