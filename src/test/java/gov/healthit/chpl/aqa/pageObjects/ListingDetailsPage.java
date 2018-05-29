@@ -100,6 +100,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[2]/div[1]/span/div[2]/a"));
         return element;
     }
+
     /**
      * Returns download SED details button element to download SED data.
      * @param driver WebDriver
@@ -109,6 +110,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"sed-tasks-table\"]/tfoot/tr/td/button"));
         return element;
     }
+
     /**
      * Get the link to edit certified product page.
      * @param driver WebDriver
@@ -118,6 +120,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.linkText("Edit Certified Product"));
         return element;
     }
+
     /**
      * Return G1/G2 Accordion on listing page.
      * @param driver WebDriver
@@ -127,6 +130,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.id("details-g1g2"));
         return element;
     }
+
     /**
      * Returns the element that holds G1/G2 Measure Name for a criteria.
      * @param driver WebDriver
@@ -138,6 +142,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[" + index + "]/td[2]"));
         return element;
     }
+
     /**
      * Returns the element that holds Intended User Description Title.
      * @param driver WebDriver
@@ -147,6 +152,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[2]/h4"));
         return element;
     }
+
     /**
      * Returns listing name of a listing.
      * @param driver WebDriver
@@ -156,6 +162,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.id("listing-name"));
         return element;
     }
+
     /**
      * Returns element holding main content.
      * @param driver WebDriver
@@ -205,6 +212,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[53]/div/div/div/table/tbody/tr[3]/td[2]/ul/li"));
         return element;
     }
+
     /**
      * Returns element that holds no data in SED section text.
      * @param driver WebDriver
@@ -214,6 +222,7 @@ public final class ListingDetailsPage {
         element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/p"));
         return element;
     }
+
     /**
      * Returns the element that holds Required Text for a Measure Name in Successfully Tested G1/G2 Measures section .
      * @param driver WebDriver
@@ -321,6 +330,16 @@ public final class ListingDetailsPage {
     }
 
     /**
+     * Returns the Test Results Summary URL.
+     * @param driver WebDriver
+     * @return the value of URL element
+     */
+    public static WebElement testResultsSummaryUrl(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[1]/a"));
+        return element;
+    }
+
+    /**
      * Returns element that holds UCD Process Text.
      * @param driver WebDriver
      * @return Text element
@@ -337,6 +356,16 @@ public final class ListingDetailsPage {
      */
     public static WebElement usabilityReportTitle(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/h4"));
+        return element;
+    }
+
+    /**
+     * Returns the UCD (Full Usability Report) URL.
+     * @param driver WebDriver
+     * @return the UCD URL element
+     */
+    public static WebElement ucdUrl(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/a"));
         return element;
     }
 }

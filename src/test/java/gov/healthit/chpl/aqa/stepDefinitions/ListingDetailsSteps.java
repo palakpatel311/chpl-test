@@ -78,6 +78,15 @@ public class ListingDetailsSteps {
     }
 
     /**
+     * Open Additional Information Accordion.
+     */
+    @When("^I look at Additional Information$")
+    public void iLookAtAdditionalInformation() {
+        WebElement link = ListingDetailsPage.additionalInfoAccordion(driver);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+    }
+
+    /**
      * Asserts that elements exist on the accordion.
      */
     @Then("^I should see these accordions exist on the details page: Criteria, CQMs, SED, G1/G2, Surveillance, Additional Info$")
@@ -141,6 +150,26 @@ public class ListingDetailsSteps {
     @Then("^the Mandatory Disclosures URL should be: \"(.*)\"$")
     public void theMandatoryDisclosuresUrlShouldBe(final String targetUrl) {
         String actualText = ListingDetailsPage.disclosureUrl(driver).getText();
+        assertTrue(actualText.contains(targetUrl), "Expect " + targetUrl + " to be found in " + actualText);
+   }
+
+    /**
+     * Assert that Test Results Summary URL exists and is correct.
+     * @param targetUrl the URL value to assert
+     */
+    @Then("^the Test Results Summary URL should be: \"(.*)\"$")
+    public void theTestResultsSummaryUrlShouldBe(final String targetUrl) {
+        String actualText = ListingDetailsPage.testResultsSummaryUrl(driver).getText();
+        assertTrue(actualText.contains(targetUrl), "Expect " + targetUrl + " to be found in " + actualText);
+   }
+
+    /**
+     * Assert that UCD URL exists and is correct.
+     * @param targetUrl the URL value to assert
+     */
+    @Then("^the UCD URL should be: \"(.*)\"$")
+    public void ucdUrlShouldBe(final String targetUrl) {
+        String actualText = ListingDetailsPage.ucdUrl(driver).getText();
         assertTrue(actualText.contains(targetUrl), "Expect " + targetUrl + " to be found in " + actualText);
    }
 
