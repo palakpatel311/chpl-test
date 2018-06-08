@@ -20,6 +20,7 @@ target/
 test-output/
 APICalls.*
 Rest.*
+src/test/resources/Features/OCD-2006-UploadListingsRegularly.feature
 
 # External tool builders
 .externalToolBuilders/

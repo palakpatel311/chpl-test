@@ -5,11 +5,13 @@ Feature: OCD-1937 - Update Listings to have "cleaned" data fields
   Scenario Outline: Verify text update for QMS Standard after bulk update
     Given I am on listing details page of listing with ID "<DB_ID>"
     When I open details for criteria "<CRITERIA>"
-    Then QMS Standard should display "<Text>"
+    Then QMS Standard should display "<Text>" for criteria "<CRITERIA>"
     Examples:
     |DB_ID|CRITERIA|Text|
     |8566|170.315 (g)(4)|Home Grown|
-	|8556|170.315 (g)(4)|21 CFR Part 820|
+	|8556|170.315 (g)(4)|21 CFR Part 820|	
+	|8490|170.314 (g)(4)|Home Grown|
+	|9378|170.314 (g)(4)|21 CFR Part 820|	
 
   Scenario Outline: Verify text update for Accessibility Standard  after bulk update
     Given I am on listing details page of listing with ID "<DB_ID>"

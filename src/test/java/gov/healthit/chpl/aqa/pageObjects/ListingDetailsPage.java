@@ -206,10 +206,11 @@ public final class ListingDetailsPage {
     /**
      * Returns element that holds QMS Standard text.
      * @param driver WebDriver
+     * @param number certification criteria
      * @return text element
      */
-    public static WebElement qmsStandardText(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[53]/div/div/div/table/tbody/tr[3]/td[2]/ul/li"));
+    public static WebElement qmsStandardText(final WebDriver driver, final String number) {
+        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[3]/td[2]/ul/li"));
         return element;
     }
 
