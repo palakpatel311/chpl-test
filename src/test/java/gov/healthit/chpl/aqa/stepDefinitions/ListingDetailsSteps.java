@@ -119,10 +119,11 @@ public class ListingDetailsSteps {
     /**
      * Assert that the QMS Standard section has the passed in value.
      * @param qmsText expected text
+     * @param number certification criteria
      */
-    @Then("^QMS Standard should display \"([^\"]*)\"$")
-    public void qmsStandardDisplaysCorrectText(final String qmsText) {
-        String actualString = ListingDetailsPage.qmsStandardText(driver).getText();
+    @Then("^QMS Standard should display \"([^\"]*)\" for criteria \"([^\"]*)\"$")
+    public void qmsStandardDisplaysCorrectText(final String qmsText, final String number) {
+        String actualString = ListingDetailsPage.qmsStandardText(driver, number).getText();
         assertTrue(actualString.contains(qmsText), "Expect " + qmsText + " to be found in " + actualString);
     }
 
