@@ -89,7 +89,7 @@ public class DpManagementPage {
      * @return surveillanceSearch element
      */
     public static WebElement surveillanceSearch(final WebDriver driver) {
-        element = driver.findElement(By.id("surveillanceSearch"));
+        element = driver.findElement(By.id("surveillance-search"));
         return element;
     }
 
