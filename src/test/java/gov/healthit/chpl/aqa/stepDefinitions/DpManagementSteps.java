@@ -29,7 +29,7 @@ public class DpManagementSteps {
     }
 
     /**
-     * Get user to Manage Surveillnace Activity section.
+     * Get user to Manage Surveillance Activity section.
      */
     @And("^I navigate to Manage Surveillance Activity section$")
     public void loadManageSurveillanceActivityPage() {
