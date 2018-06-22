@@ -29,7 +29,7 @@ public class DpManagementSteps {
     }
 
     /**
-     * Get user to CHPL search page.
+     * Get user to Manage Surveillnace Activity section.
      */
     @And("^I navigate to Manage Surveillnace Activity section$")
     public void iAamOnCHPLSearchPage() {
