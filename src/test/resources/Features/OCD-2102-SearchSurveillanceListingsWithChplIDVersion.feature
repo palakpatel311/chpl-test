@@ -6,7 +6,7 @@ Scenario Outline: Verify surveillance search for a listing with CHPL ID version 
 	And I fill in username
 	And I fill in Password
 	And I click Log in button
-	And I navigate to Manage Surveillnace Activity section
+	And I navigate to Manage Surveillance Activity section
 	When I search for "<CHPL_ID>" in Manage Surveillance Activity section
 	Then I see the surveillance results for "<CHPL_ID>"
 Examples:
