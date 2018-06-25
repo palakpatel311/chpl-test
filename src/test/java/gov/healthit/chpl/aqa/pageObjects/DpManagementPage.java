@@ -17,7 +17,7 @@ public class DpManagementPage {
      * @param driver WebDriver
      * @return button element
      */
-    public static WebElement chooseFileForNewListingUploadButton(final WebDriver driver) {
+    public static WebElement chooseFileButton(final WebDriver driver) {
         element = driver.findElement(By.id("listing-file-upload"));
         return element;
     }
@@ -44,6 +44,16 @@ public class DpManagementPage {
     }
 
     /**
+     * Returns Confirm Pending Products link.
+     * @param driver WebDriver
+     * @return link element
+     */
+    public static WebElement confirmPendingProductsLink(final WebDriver driver) {
+        element = driver.findElement(By.linkText("Confirm Pending Product"));
+        return element;
+    }
+
+    /**
      * Returns Developer and Product Management link.
      * @param driver WebDriver
      * @return link element
@@ -60,16 +70,6 @@ public class DpManagementPage {
      */
     public static WebElement manageSurveillanceActivityLink(final WebDriver driver) {
         element = driver.findElement(By.linkText("Manage Surveillance Activity"));
-        return element;
-    }
-
-    /**
-     * Returns Confirm Pending Products link.
-     * @param driver WebDriver
-     * @return link element
-     */
-    public static WebElement confirmPendingProductsLink(final WebDriver driver) {
-        element = driver.findElement(By.linkText("Confirm Pending Product"));
         return element;
     }
 
@@ -104,22 +104,42 @@ public class DpManagementPage {
     }
 
     /**
-     * Returns upload file button for new listing upload.
+     * Returns upload listing file button element.
      * @param driver WebDriver
      * @return button element
      */
-    public static WebElement uploadChosenNewListingFileButton(final WebDriver driver) {
-        element = driver.findElement(By.cssSelector("[id^='listing-file-confirm-']"));
+    public static WebElement uploadFileButton(final WebDriver driver) {
+        element = driver.findElement(By.id("listing-file-confirm-0"));
         return element;
     }
 
     /**
-     * Returns upload file button for new listing upload.
+     * Returns upload surveillance file button element for bulk surveillance upload.
      * @param driver WebDriver
      * @return button element
      */
-    public static WebElement uploadChosenSurveillanceFileButton(final WebDriver driver) {
-        element = driver.findElement(By.cssSelector("[id^='surveillance-file-confirm-']"));
+    public static WebElement uploadSurveillanceFileButton(final WebDriver driver) {
+        element = driver.findElement(By.id("surveillance-file-confirm-0"));
+        return element;
+    }
+
+    /**
+     * Returns element that holds text message displayed after successful listing upload.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement uploadSuccessfulText(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[1]/div"));
+        return element;
+    }
+
+    /**
+     * Returns Upload Products and Surveillance link.
+     * @param driver WebDriver
+     * @return link element
+     */
+    public static WebElement uploadProductsAndSurveillanceLink(final WebDriver driver) {
+        element = driver.findElement(By.linkText("Upload Products & Surveillance"));
         return element;
     }
 

@@ -29,16 +29,16 @@ public class DpManagementSteps {
     }
 
     /**
-     * Get user to CHPL search page.
+     * Get user to Manage Surveillance Activity section.
      */
-    @And("^I navigate to Manage Surveillnace Activity section$")
-    public void iAamOnCHPLSearchPage() {
+    @And("^I navigate to Manage Surveillance Activity section$")
+    public void loadManageSurveillanceActivityPage() {
         DpManagementPage.dpManagementLink(driver).click();
         DpManagementPage.manageSurveillanceActivityLink(driver).click();
     }
 
     /**
-     * Get user to CHPL search page.
+     * Search for given CHPL Id on Manage Surveillance Activity Page.
      * @param chplId is chplId to look up
      */
     @When("^I search for \"([^\"]*)\" in Manage Surveillance Activity section$")
