@@ -19,6 +19,7 @@ public class CollectionsPages {
         element = driver.findElement(By.id("filter-button"));
         return element;
     }
+
     /**
      * Returns element holding main content.
      * @param driver WebDriver
@@ -28,4 +29,15 @@ public class CollectionsPages {
         element = driver.findElement(By.id("main-content"));
         return element;
     }
+
+    /**
+     * Returns element holding CMS FAQ link.
+     * @param driver WebDriver
+     * @return link element
+     */
+    public static WebElement cmsFaqLink(final WebDriver driver) {
+        element = driver.findElement(By.linkText("CMS FAQ"));
+        return element;
+    }
+
 }
