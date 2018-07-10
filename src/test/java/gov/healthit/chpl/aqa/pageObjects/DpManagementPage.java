@@ -64,6 +64,16 @@ public class DpManagementPage {
     }
 
     /**
+     * Returns element holding main content.
+     * @param driver WebDriver
+     * @return element holding main content
+     */
+    public static WebElement mainContent(final WebDriver driver) {
+        element = driver.findElement(By.id("main-content"));
+        return element;
+    }
+
+    /**
      * Returns Manage Surveillance Activity link.
      * @param driver WebDriver
      * @return link element
@@ -104,6 +114,26 @@ public class DpManagementPage {
     }
 
     /**
+     * Returns element that shows as pop up post successful upload.
+     * @param driver WebDriver
+     * @return pop up element
+     */
+    public static WebElement updateSuccessfulToastContainer(final WebDriver driver) {
+        element = driver.findElement(By.id("toast-container"));
+        return element;
+    }
+
+    /**
+     * Returns element that holds post upload success text.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement updateSuccessfulToatContainerText(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div[1]"));
+        return element;
+    }
+
+    /**
      * Returns upload listing file button element.
      * @param driver WebDriver
      * @return button element
@@ -140,6 +170,66 @@ public class DpManagementPage {
      */
     public static WebElement uploadProductsAndSurveillanceLink(final WebDriver driver) {
         element = driver.findElement(By.linkText("Upload Products & Surveillance"));
+        return element;
+    }
+
+    /**
+     * Returns Inspect button element on pending products page.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement nextOnInspectButton(final WebDriver driver) {
+        element = driver.findElement(By.id("inspect-next"));
+        return element;
+    }
+
+    /**
+     * Returns Inspect button element on pending products page.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement confirmButtonOnInspect(final WebDriver driver) {
+        element = driver.findElement(By.id("inspect-confirm"));
+        return element;
+    }
+
+    /**
+     * Returns edit certified product button on inspect form.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement editOnInspectButton(final WebDriver driver) {
+        element = driver.findElement(By.id("inspect-edit"));
+        return element;
+    }
+
+    /**
+     * Returns product Id in CHPL ID on inspect form.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement productIdOnInspect(final WebDriver driver) {
+        element = driver.findElement(By.id("id-prod"));
+        return element;
+    }
+
+    /**
+     * Returns save certified product button on inspect form.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement saveCpOnInspect(final WebDriver driver) {
+        element = driver.findElement(By.id("edit-save"));
+        return element;
+    }
+
+    /**
+     * Returns 'Yes' button element on Confirm alert.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement yesOnConfirm(final WebDriver driver) {
+        element = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/button[1]"));
         return element;
     }
 
