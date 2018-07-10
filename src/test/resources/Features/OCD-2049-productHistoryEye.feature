@@ -1,6 +1,6 @@
-@Regression
 Feature: OCD-2049 - Verify 'Eye' on listing details page works and displays Product History 
 
+@Regression
 Scenario Outline: Verify 'Eye' opens on click and displays Product History
 	Given I am on listing details page of listing with ID "<DB_ID>"
 	When I click the 'Eye'
@@ -13,6 +13,7 @@ Examples:
 	|5138|Certification Status became "Active"|
 	|5243|Certification Status became "Active"|
 	
+@ignore
 Scenario Outline: Verify 'Eye' opens on click and displays appropriate message when there is no history to display
 Given I am on listing details page of listing with ID "<DB_ID>"
 	When I click the 'Eye'
