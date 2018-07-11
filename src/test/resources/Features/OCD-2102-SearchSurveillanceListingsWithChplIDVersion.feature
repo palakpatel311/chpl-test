@@ -12,4 +12,4 @@ Scenario Outline: Verify surveillance search for a listing with CHPL ID version 
 Examples:
 	|CHPL_ID|
 	|15.04.04.2484.Updo.16.00.0.170720|
-	|15.04.04.2913.Gree.11.01.1.171101|
+	|15.04.04.2913.Gree.11.00.1.171101|
