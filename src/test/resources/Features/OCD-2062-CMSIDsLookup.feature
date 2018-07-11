@@ -10,7 +10,7 @@ Feature: OCD-2062: Verify that newly generated & incorrectly removed CMS IDs sti
     Examples:
       | CMS_ID          | CHPL_ID                           |
       | 0015H8GK6K0ZZB2 | 14.07.07.2452.VEI1.01.01.0.161111 |
-      | 0015H8GK6K0ZZB2 | 15.04.04.2891.Sunr.07.01.1.171201 |
+      | 0015H8GK6K0ZZB2 | 15.04.04.2891.Sunr.07.02.1.171201 |
 
   Scenario Outline: Generating a CMS ID
     When I add "<CHPL_IDs>" Listings to the CMS Widget
