@@ -15,15 +15,15 @@ Scenario Outline: Verify that certification status is updated to 'Withdrawn by D
     |CHPL_ID|
     |CHP-024522|
     |14.07.07.1734.HEI1.03.01.1.160623|
-	|CHP-022555|
-	|14.03.07.1221.HEI3.02.01.1.160711|
-	|CHP-028479|
-	|CHP-028571|
-	|CHP-029222|
-	|14.03.07.1221.HEI2.01.01.1.160711|
-	|14.07.07.1221.FI01.22.01.1.171109|
-	|15.07.07.1221.AN03.01.00.1.170705|
-	|15.07.07.1221.P201.01.00.0.170619|
+    |CHP-022555|
+    |14.03.07.1221.HEI3.02.01.1.160711|
+    |CHP-028479|
+    |CHP-028571|
+    |CHP-029222|
+    |14.03.07.1221.HEI2.01.01.1.160711|
+    |14.07.07.1221.FI01.22.01.1.171109|
+    |15.07.07.1221.AN03.01.00.1.170705|
+    |15.07.07.1221.P201.01.00.0.170619|
 	
 
 @Acceptance
@@ -104,7 +104,7 @@ Scenario Outline: Verify that certification status is updated to 'Withdrawn by D
 	When I search for a listing with CHPL ID "<CHPL_ID>"
 	Then the certification status of the listing shows as "Withdrawn by Developer"
 	Examples:
-    |CHPL_ID|
+|CHPL_ID|
     |CHP-021411|
 	|CHP-021717|
 	|CHP-023122|
