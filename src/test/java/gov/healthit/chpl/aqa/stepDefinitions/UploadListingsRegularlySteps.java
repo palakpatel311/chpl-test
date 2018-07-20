@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,6 +34,7 @@ public class UploadListingsRegularlySteps {
     private String filePath = System.getProperty("filePath");
     private static final int TIMEOUT = 30;
     private static final DateFormat DATEFORMAT = new SimpleDateFormat("MMdd");
+    private static final DateFormat DATEFORMATV = new SimpleDateFormat("dd");
 
     /**
      * Constructor creates new driver.
@@ -43,7 +45,7 @@ public class UploadListingsRegularlySteps {
             url = "http://localhost:3000/";
        }
         if (StringUtils.isEmpty(filePath)) {
-            String tempDirectory = System.getProperty("user.dir") + File.separator + "upload-files";
+            String tempDirectory = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator + "resources";
             filePath = tempDirectory;
        }
     }
@@ -62,7 +64,7 @@ public class UploadListingsRegularlySteps {
      */
     @When("^I upload a \"([^\"]*)\" listing$")
     public void iUploadAlisting(final String edition) {
-        DpManagementPage.chooseFileButton(driver).sendKeys(filePath + File.separator + edition + "_Test.csv");
+        DpManagementPage.chooseFileButton(driver).sendKeys(filePath + File.separator + edition + "_Test_SLI.csv");
         DpManagementPage.uploadFileButton(driver).click();
     }
 
@@ -109,23 +111,44 @@ public class UploadListingsRegularlySteps {
    }
 
     DpManagementPage.nextOnInspectButton(driver).click();
+
+    try {
+
+        DpManagementPage.createNewProductOptionOnInspect(driver).click();
+
+    } catch (NoSuchElementException e) {
+
+    }
+
     DpManagementPage.nextOnInspectButton(driver).click();
+
+    try {
+
+        DpManagementPage.createNewVersionOptionOnInspect(driver).click();
+
+    } catch (NoSuchElementException e) {
+
+    }
+
     DpManagementPage.nextOnInspectButton(driver).click();
     DpManagementPage.editOnInspectButton(driver).click();
-    String productId = DpManagementPage.productIdOnInspect(driver).getText();
 
     Date date = new Date();
     String newpId = DATEFORMAT.format(date);
     DpManagementPage.productIdOnInspect(driver).clear();
     DpManagementPage.productIdOnInspect(driver).sendKeys(newpId);
 
+    Date dateV = new Date();
+    String newV = DATEFORMATV.format(dateV);
+    DpManagementPage.productVersionOnInspect(driver).clear();
+    DpManagementPage.productVersionOnInspect(driver).sendKeys(newV);
+
     DpManagementPage.saveCpOnInspect(driver).click();
 
     DpManagementPage.confirmButtonOnInspect(driver).click();
-
     DpManagementPage.yesOnConfirm(driver).click();
-    WebDriverWait waitd = new WebDriverWait(driver, TIMEOUT);
-    waitd.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(driver)));
+    WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+    wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToatContainerText(driver)));
 
     }
 
@@ -138,12 +161,12 @@ public class UploadListingsRegularlySteps {
         driver.navigate().refresh();
 
         Date date = new Date();
-        String confListingId = ed + ".07.07.1447." + DATEFORMAT.format(date) + ".v1.00.1.180708";
+        String confListingId = ed + ".05.05.1447." + DATEFORMAT.format(date) + "." + DATEFORMATV.format(date) + ".00.1.180707";
 
         driver.get(url + "/#/product/" + confListingId);
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(driver)));
-        String testListingName = "testProduct";
+        String testListingName = "New product";
         String actualString = ListingDetailsPage.listingName(driver).getText();
         assertEquals(actualString, testListingName);
 

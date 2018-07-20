@@ -49,7 +49,27 @@ public class DpManagementPage {
      * @return link element
      */
     public static WebElement confirmPendingProductsLink(final WebDriver driver) {
-        element = driver.findElement(By.linkText("Confirm Pending Product"));
+        element = driver.findElement(By.xpath("/html/body/ai-compare-widget/div[2]/div/section/div[2]/div[1]/div/ul/li[3]/a"));
+        return element;
+    }
+
+    /**
+     * Returns 'Create new product' radio button element on Inspect screen.
+     * @param driver WebDriver
+     * @return radio button element
+     */
+    public static WebElement createNewProductOptionOnInspect(final WebDriver driver) {
+        element = driver.findElement(By.id("create-product"));
+        return element;
+    }
+
+    /**
+     * Returns 'Create new version' radio button element on Inspect screen.
+     * @param driver WebDriver
+     * @return radio button element
+     */
+    public static WebElement createNewVersionOptionOnInspect(final WebDriver driver) {
+        element = driver.findElement(By.id("create-version"));
         return element;
     }
 
@@ -90,6 +110,16 @@ public class DpManagementPage {
      */
     public static WebElement pendingListingsTable(final WebDriver driver) {
         element = driver.findElement(By.id("pending-listings-table"));
+        return element;
+    }
+
+    /**
+     * Returns 'previous' button on Inspect screen to navigate to previous screen.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement previousButtonOnInspect(final WebDriver driver) {
+        element = driver.findElement(By.id("inspect-previous"));
         return element;
     }
 
@@ -174,7 +204,7 @@ public class DpManagementPage {
     }
 
     /**
-     * Returns Inspect button element on pending products page.
+     * Returns 'next' button on Inspect screen to navigate to next screen.
      * @param driver WebDriver
      * @return button element
      */
@@ -184,7 +214,7 @@ public class DpManagementPage {
     }
 
     /**
-     * Returns Inspect button element on pending products page.
+     * Returns 'confirm' button on Inspect screen.
      * @param driver WebDriver
      * @return button element
      */
@@ -194,7 +224,7 @@ public class DpManagementPage {
     }
 
     /**
-     * Returns edit certified product button on inspect form.
+     * Returns edit certified product button on Inspect screen.
      * @param driver WebDriver
      * @return button element
      */
@@ -214,6 +244,16 @@ public class DpManagementPage {
     }
 
     /**
+     * Returns product version in CHPL ID on inspect form.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement productVersionOnInspect(final WebDriver driver) {
+        element = driver.findElement(By.id("id-ver"));
+        return element;
+    }
+
+    /**
      * Returns save certified product button on inspect form.
      * @param driver WebDriver
      * @return button element
@@ -224,7 +264,7 @@ public class DpManagementPage {
     }
 
     /**
-     * Returns 'Yes' button element on Confirm alert.
+     * Returns 'Yes' button on Confirm alert.
      * @param driver WebDriver
      * @return button element
      */

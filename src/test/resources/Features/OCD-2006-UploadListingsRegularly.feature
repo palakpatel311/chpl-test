@@ -13,7 +13,8 @@ Scenario Outline: Upload sample listings for 2014 and 2015 editions
 	And I confirm "<Edition>" listing with CHPL ID "<testChplId>"
 	Then I see that listing was uploaded successfully to CHPL and listing details load as expected for uploaded 20 "<ed>" listing
 Examples:
-	|Edition|testChplId|ed|
-	|2014|14.07.07.1447.CHP1.v1.00.1.180708|14|
-	|2015|15.07.07.1447.CHP1.v1.00.1.180708|15|
+    |Edition|testChplId|ed|
+    |2014|14.05.05.1447.SL14.v1.00.1.180707|14|
+    |2015|15.05.05.1447.SLI1.v1.00.1.180707|15|	
+	
 	
