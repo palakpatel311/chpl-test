@@ -24,6 +24,7 @@ import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
+
 /**
  * Class UploadListingsRegularlySteps definition.
  */
@@ -95,16 +96,16 @@ public class UploadListingsRegularlySteps {
     @And("^I confirm \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
     public void confirmUploadedListing(final String edition, final String testChplId) {
 
-       WebElement table = DpManagementPage.pendingListingsTable(driver);
+        WebElement table = DpManagementPage.pendingListingsTable(driver);
        List<WebElement> allrows = table.findElements(By.tagName("tr"));
        for (int i = 1; i <= allrows.size(); i++) {
            String colChplId = null;
            colChplId = driver.findElement(By.xpath(".//*[@id=\"pending-listings-table\"]/tbody/tr[ " + i + " ]/td[1]")).getText();
            if (colChplId.equalsIgnoreCase(testChplId)) {
 
-              WebElement inspectButton = driver.findElement(By.xpath(".//*[@id=\"pending-listings-table\"]/tbody/tr[ " + i + " ]/td[7]/button/i"));
-              JavascriptExecutor executor = (JavascriptExecutor) driver;
-              executor.executeScript("arguments[0].click()", inspectButton);
+               WebElement inspectButton = driver.findElement(By.xpath(".//*[@id=\"pending-listings-table\"]/tbody/tr[ " + i + " ]/td[7]/button/i"));
+               JavascriptExecutor executor = (JavascriptExecutor) driver;
+               executor.executeScript("arguments[0].click()", inspectButton);
 
               break;
        }
@@ -146,7 +147,10 @@ public class UploadListingsRegularlySteps {
     DpManagementPage.saveCpOnInspect(driver).click();
 
     DpManagementPage.confirmButtonOnInspect(driver).click();
-    DpManagementPage.yesOnConfirm(driver).click();
+
+    WebElement button = DpManagementPage.yesOnConfirm(driver);
+    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+
     WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
     wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToatContainerText(driver)));
 
@@ -156,7 +160,7 @@ public class UploadListingsRegularlySteps {
      * Load listing details to verify listing was uploaded successfully.
      * @param ed - edition digits in CHPL ID
      */
-    @Then("^I see that listing was uploaded successfully to CHPL and listing details load as expected for uploaded 20 \"([^\"]*)\" listing$")
+    @Then("^I see that listing was uploaded successfully to CHPL and listing details load as expected for uploaded \"([^\"]*)\" listing$")
     public void verifyUploadWasSuccessful(final String ed) {
         driver.navigate().refresh();
 
@@ -169,6 +173,5 @@ public class UploadListingsRegularlySteps {
         String testListingName = "New product";
         String actualString = ListingDetailsPage.listingName(driver).getText();
         assertEquals(actualString, testListingName);
-
     }
 }
