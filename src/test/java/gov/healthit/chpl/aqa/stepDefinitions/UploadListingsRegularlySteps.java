@@ -36,7 +36,6 @@ public class UploadListingsRegularlySteps {
     private static final int TIMEOUT = 30;
     private static final DateFormat DATEFORMAT = new SimpleDateFormat("MMdd");
     private static final DateFormat DATEFORMATV = new SimpleDateFormat("dd");
-    private static final int LOAD_TIMEOUT = 5000;
 
     /**
      * Constructor creates new driver.
@@ -96,17 +95,6 @@ public class UploadListingsRegularlySteps {
      */
     @And("^I confirm \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
     public void confirmUploadedListing(final String edition, final String testChplId) {
-        long end = System.currentTimeMillis() + LOAD_TIMEOUT;
-
-        while (System.currentTimeMillis() < end) {
-
-            if (String.valueOf(
-                    ((JavascriptExecutor) driver)
-                            .executeScript("return document.readyState"))
-                    .equals("complete")) {
-                break;
-            }
-        }
 
         WebElement table = DpManagementPage.pendingListingsTable(driver);
        List<WebElement> allrows = table.findElements(By.tagName("tr"));
@@ -185,6 +173,5 @@ public class UploadListingsRegularlySteps {
         String testListingName = "New product";
         String actualString = ListingDetailsPage.listingName(driver).getText();
         assertEquals(actualString, testListingName);
-        driver.quit();
     }
 }
