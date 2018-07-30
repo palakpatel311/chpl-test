@@ -44,11 +44,11 @@ public class UploadListingsRegularlySteps {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
             url = "http://localhost:3000/";
-       }
+        }
         if (StringUtils.isEmpty(filePath)) {
             String tempDirectory = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator + "resources";
             filePath = tempDirectory;
-       }
+        }
     }
 
     /**
@@ -97,62 +97,61 @@ public class UploadListingsRegularlySteps {
     public void confirmUploadedListing(final String edition, final String testChplId) {
 
         WebElement table = DpManagementPage.pendingListingsTable(driver);
-       List<WebElement> allrows = table.findElements(By.tagName("tr"));
-       for (int i = 1; i <= allrows.size(); i++) {
-           String colChplId = null;
-           colChplId = driver.findElement(By.xpath(".//*[@id=\"pending-listings-table\"]/tbody/tr[ " + i + " ]/td[1]")).getText();
-           if (colChplId.equalsIgnoreCase(testChplId)) {
+        // TODO: All of these table looping / cell finding things should be methods in the Page Object definition file
+        List<WebElement> allRows = table.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
+        for (int i = 0; i < allRows.size(); i++) {
+            List<WebElement> cells = allRows.get(i).findElements(By.tagName("td"));
+            if (cells.get(0).getText().equalsIgnoreCase(testChplId)) {
+                WebElement inspectButton = cells.get(6)
+                        .findElement(By.tagName("button"));
+                JavascriptExecutor executor = (JavascriptExecutor) driver;
+                executor.executeScript("arguments[0].click()", inspectButton);
+                break;
+            }
+        }
 
-               WebElement inspectButton = driver.findElement(By.xpath(".//*[@id=\"pending-listings-table\"]/tbody/tr[ " + i + " ]/td[7]/button/i"));
-               JavascriptExecutor executor = (JavascriptExecutor) driver;
-               executor.executeScript("arguments[0].click()", inspectButton);
+        DpManagementPage.nextOnInspectButton(driver).click();
 
-              break;
-       }
-   }
+        try {
 
-    DpManagementPage.nextOnInspectButton(driver).click();
+            DpManagementPage.createNewProductOptionOnInspect(driver).click();
 
-    try {
+        } catch (NoSuchElementException e) {
 
-        DpManagementPage.createNewProductOptionOnInspect(driver).click();
+        }
 
-    } catch (NoSuchElementException e) {
+        DpManagementPage.nextOnInspectButton(driver).click();
 
-    }
+        try {
 
-    DpManagementPage.nextOnInspectButton(driver).click();
+            DpManagementPage.createNewVersionOptionOnInspect(driver).click();
 
-    try {
+        } catch (NoSuchElementException e) {
 
-        DpManagementPage.createNewVersionOptionOnInspect(driver).click();
+        }
 
-    } catch (NoSuchElementException e) {
+        DpManagementPage.nextOnInspectButton(driver).click();
+        DpManagementPage.editOnInspectButton(driver).click();
 
-    }
+        Date date = new Date();
+        String newpId = DATEFORMAT.format(date);
+        DpManagementPage.productIdOnInspect(driver).clear();
+        DpManagementPage.productIdOnInspect(driver).sendKeys(newpId);
 
-    DpManagementPage.nextOnInspectButton(driver).click();
-    DpManagementPage.editOnInspectButton(driver).click();
+        Date dateV = new Date();
+        String newV = DATEFORMATV.format(dateV);
+        DpManagementPage.productVersionOnInspect(driver).clear();
+        DpManagementPage.productVersionOnInspect(driver).sendKeys(newV);
 
-    Date date = new Date();
-    String newpId = DATEFORMAT.format(date);
-    DpManagementPage.productIdOnInspect(driver).clear();
-    DpManagementPage.productIdOnInspect(driver).sendKeys(newpId);
+        DpManagementPage.saveCpOnInspect(driver).click();
 
-    Date dateV = new Date();
-    String newV = DATEFORMATV.format(dateV);
-    DpManagementPage.productVersionOnInspect(driver).clear();
-    DpManagementPage.productVersionOnInspect(driver).sendKeys(newV);
+        DpManagementPage.confirmButtonOnInspect(driver).click();
 
-    DpManagementPage.saveCpOnInspect(driver).click();
+        WebElement button = DpManagementPage.yesOnConfirm(driver);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
 
-    DpManagementPage.confirmButtonOnInspect(driver).click();
-
-    WebElement button = DpManagementPage.yesOnConfirm(driver);
-    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
-
-    WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-    wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToatContainerText(driver)));
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToatContainerText(driver)));
 
     }
 
