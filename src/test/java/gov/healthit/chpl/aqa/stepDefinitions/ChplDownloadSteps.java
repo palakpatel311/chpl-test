@@ -104,7 +104,7 @@ public class ChplDownloadSteps {
             url = "https://chpl.ahrqdev.org";
           } else if (tEnv.equalsIgnoreCase("STG")) {
             url = "https://chpl.ahrqstg.org";
-          } else if (tEnv.equalsIgnoreCase("STG")) {
+          } else if (tEnv.equalsIgnoreCase("PROD")) {
             url = "https://chpl.healthit.gov";
           }
         driver.get(url + "#/resources/download");
