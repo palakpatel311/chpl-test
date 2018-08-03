@@ -77,9 +77,10 @@ public class ChplDownloadSteps {
      * Get user to the Download CHPL page. Chrome options are necessary to get past
      * keep/discard pop ups for successful download of a file to directory.
      * @throws Throwable throws exception if there is an issue with Chrome options.
+     * @param tEnv test environment in which tests will be run
      */
-    @Given("^I am on download the CHPL resources page$")
-    public void iAmOnDownloadTheCHPLResourcesPage() throws Throwable {
+    @Given("^I am on download the CHPL resources page on \"([^\"]*)\"$")
+    public void iAmOnDownloadTheCHPLResourcesPage(final String tEnv) throws Throwable {
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("profile.default_content_settings.popups", 0);
         chromePrefs.put("download.default_directory", downloadPath);
@@ -99,6 +100,13 @@ public class ChplDownloadSteps {
         cap.setCapability(ChromeOptions.CAPABILITY, options);
 
         driver = new ChromeDriver(cap);
+        if (tEnv.equalsIgnoreCase("DEV")) {
+            url = "https://chpl.ahrqdev.org";
+          } else if (tEnv.equalsIgnoreCase("STG")) {
+            url = "https://chpl.ahrqstg.org";
+          } else if (tEnv.equalsIgnoreCase("STG")) {
+            url = "https://chpl.healthit.gov";
+          }
         driver.get(url + "#/resources/download");
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(driver)));
