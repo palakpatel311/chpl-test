@@ -7,9 +7,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Class DpManagementPage definition.
  */
-
 public class DpManagementPage {
-    private WebDriver driver;
     private static WebElement element = null;
 
     /**
@@ -49,8 +47,89 @@ public class DpManagementPage {
      * @return link element
      */
     public static WebElement confirmPendingProductsLink(final WebDriver driver) {
-        element = driver.findElement(By.xpath("/html/body/ai-compare-widget/div[2]/div/section/div[2]/div[1]/div/ul/li[3]/a"));
+        element = driver.findElement(By.xpath("//*[@id=\"admin-nav.dpManagement.confirm\"]/a"));
         return element;
+    }
+
+    /**
+     * Returns true iff "Developer New" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isDeveloperNewDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("developer-new")).size() > 0;
+    }
+
+    /**
+     * Returns true iff "Developer System" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isDeveloperSystemDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("developer-system")).size() > 0;
+    }
+
+    /**
+     * Returns true iff "Developer Uploaded" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isDeveloperUploadedDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("developer-uploaded")).size() > 0;
+    }
+
+    /**
+     * Returns true iff "Product New" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isProductNewDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("product-new")).size() > 0;
+    }
+
+    /**
+     * Returns true iff "Product System" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isProductSystemDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("product-system")).size() > 0;
+    }
+
+    /**
+     * Returns true iff "Product Uploaded" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isProductUploadedDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("product-uploaded")).size() > 0;
+    }
+
+    /**
+     * Returns true iff "Version New" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isVersionNewDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("version-new")).size() > 0;
+    }
+
+    /**
+     * Returns true iff "Version System" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isVersionSystemDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("version-system")).size() > 0;
+    }
+
+    /**
+     * Returns true iff "Version Uploaded" DIV exists on the Inspect screen.
+     * @param driver WebDriver
+     * @return true iff element exists
+     */
+    public static boolean isVersionUploadedDivElementPresent(final WebDriver driver) {
+        return driver.findElements(By.id("version-uploaded")).size() > 0;
     }
 
     /**
@@ -144,21 +223,11 @@ public class DpManagementPage {
     }
 
     /**
-     * Returns element that shows as pop up post successful upload.
-     * @param driver WebDriver
-     * @return pop up element
-     */
-    public static WebElement updateSuccessfulToastContainer(final WebDriver driver) {
-        element = driver.findElement(By.id("toast-container"));
-        return element;
-    }
-
-    /**
      * Returns element that holds post upload success text.
      * @param driver WebDriver
      * @return text element
      */
-    public static WebElement updateSuccessfulToatContainerText(final WebDriver driver) {
+    public static WebElement updateSuccessfulToastContainerText(final WebDriver driver) {
         element = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div[1]"));
         return element;
     }
@@ -199,7 +268,7 @@ public class DpManagementPage {
      * @return link element
      */
     public static WebElement uploadProductsAndSurveillanceLink(final WebDriver driver) {
-        element = driver.findElement(By.linkText("Upload Products & Surveillance"));
+        element = driver.findElement(By.xpath("//*[@id=\"admin-nav.dpManagement.upload\"]/a"));
         return element;
     }
 

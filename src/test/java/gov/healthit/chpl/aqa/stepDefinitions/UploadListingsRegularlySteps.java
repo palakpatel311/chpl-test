@@ -109,28 +109,18 @@ public class UploadListingsRegularlySteps {
                 break;
             }
         }
-
         DpManagementPage.nextOnInspectButton(driver).click();
 
-        try {
-
+        if (DpManagementPage.isProductNewDivElementPresent(driver)) {
             DpManagementPage.createNewProductOptionOnInspect(driver).click();
-
-        } catch (NoSuchElementException e) {
-
         }
-
         DpManagementPage.nextOnInspectButton(driver).click();
 
-        try {
-
+        if (DpManagementPage.isVersionNewDivElementPresent(driver)) {
             DpManagementPage.createNewVersionOptionOnInspect(driver).click();
-
-        } catch (NoSuchElementException e) {
-
         }
-
         DpManagementPage.nextOnInspectButton(driver).click();
+
         DpManagementPage.editOnInspectButton(driver).click();
 
         Date date = new Date();
@@ -151,7 +141,7 @@ public class UploadListingsRegularlySteps {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
 
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToatContainerText(driver)));
+        wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainerText(driver)));
 
     }
 
@@ -164,7 +154,7 @@ public class UploadListingsRegularlySteps {
         driver.navigate().refresh();
 
         Date date = new Date();
-        String confListingId = ed + ".05.05.1447." + DATEFORMAT.format(date) + "." + DATEFORMATV.format(date) + ".00.1.180707";
+        String confListingId = ed.substring(2) + ".05.05.1447." + DATEFORMAT.format(date) + "." + DATEFORMATV.format(date) + ".00.1.180707";
 
         driver.get(url + "/#/product/" + confListingId);
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
