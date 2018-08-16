@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 /**
  * Class DpManagementPage definition.
  */
-public class DpManagementPage {
-    private static WebElement element = null;
+public final class DpManagementPage {
+    private DpManagementPage() {}
 
     /**
      * Returns choose file button for new listing upload.
@@ -16,8 +16,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement chooseFileButton(final WebDriver driver) {
-        element = driver.findElement(By.id("listing-file-upload"));
-        return element;
+        return driver.findElement(By.id("listing-file-upload"));
     }
 
     /**
@@ -26,8 +25,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement chooseFileForSurveillanceUploadButton(final WebDriver driver) {
-        element = driver.findElement(By.id("surveillance-file-upload"));
-        return element;
+        return driver.findElement(By.id("surveillance-file-upload"));
     }
 
     /**
@@ -37,8 +35,7 @@ public class DpManagementPage {
      * returns null if element was not found
      */
     public static WebElement chplProductNumber(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div/div[3]/table/tbody/tr[1]/td"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div/div[3]/table/tbody/tr[1]/td"));
     }
 
     /**
@@ -47,8 +44,7 @@ public class DpManagementPage {
      * @return link element
      */
     public static WebElement confirmPendingProductsLink(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"admin-nav.dpManagement.confirm\"]/a"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"admin-nav.dpManagement.confirm\"]/a"));
     }
 
     /**
@@ -138,8 +134,7 @@ public class DpManagementPage {
      * @return radio button element
      */
     public static WebElement createNewProductOptionOnInspect(final WebDriver driver) {
-        element = driver.findElement(By.id("create-product"));
-        return element;
+        return driver.findElement(By.id("create-product"));
     }
 
     /**
@@ -148,8 +143,7 @@ public class DpManagementPage {
      * @return radio button element
      */
     public static WebElement createNewVersionOptionOnInspect(final WebDriver driver) {
-        element = driver.findElement(By.id("create-version"));
-        return element;
+        return driver.findElement(By.id("create-version"));
     }
 
     /**
@@ -158,8 +152,7 @@ public class DpManagementPage {
      * @return link element
      */
     public static WebElement dpManagementLink(final WebDriver driver) {
-        element = driver.findElement(By.linkText("Developer & Product Management"));
-        return element;
+        return driver.findElement(By.linkText("Developer & Product Management"));
     }
 
     /**
@@ -168,8 +161,7 @@ public class DpManagementPage {
      * @return element holding main content
      */
     public static WebElement mainContent(final WebDriver driver) {
-        element = driver.findElement(By.id("main-content"));
-        return element;
+        return driver.findElement(By.id("main-content"));
     }
 
     /**
@@ -178,8 +170,7 @@ public class DpManagementPage {
      * @return link element
      */
     public static WebElement manageSurveillanceActivityLink(final WebDriver driver) {
-        element = driver.findElement(By.linkText("Manage Surveillance Activity"));
-        return element;
+        return driver.findElement(By.linkText("Manage Surveillance Activity"));
     }
 
     /**
@@ -188,8 +179,7 @@ public class DpManagementPage {
      * @return table element
      */
     public static WebElement pendingListingsTable(final WebDriver driver) {
-        element = driver.findElement(By.id("pending-listings-table"));
-        return element;
+        return driver.findElement(By.id("pending-listings-table"));
     }
 
     /**
@@ -198,8 +188,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement previousButtonOnInspect(final WebDriver driver) {
-        element = driver.findElement(By.id("inspect-previous"));
-        return element;
+        return driver.findElement(By.id("inspect-previous"));
     }
 
     /**
@@ -208,8 +197,7 @@ public class DpManagementPage {
      * @return surveillanceSearch element
      */
     public static WebElement surveillanceSearch(final WebDriver driver) {
-        element = driver.findElement(By.id("surveillance-search"));
-        return element;
+        return driver.findElement(By.id("surveillance-search"));
     }
 
     /**
@@ -218,8 +206,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement survSearchButton(final WebDriver driver) {
-        element = driver.findElement(By.id("surveillance-search-button"));
-        return element;
+        return driver.findElement(By.id("surveillance-search-button"));
     }
 
     /**
@@ -228,8 +215,7 @@ public class DpManagementPage {
      * @return text element
      */
     public static WebElement updateSuccessfulToastContainerText(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div[1]"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div[1]"));
     }
 
     /**
@@ -238,8 +224,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement uploadFileButton(final WebDriver driver) {
-        element = driver.findElement(By.id("listing-file-confirm-0"));
-        return element;
+        return driver.findElement(By.id("listing-file-confirm-0"));
     }
 
     /**
@@ -248,8 +233,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement uploadSurveillanceFileButton(final WebDriver driver) {
-        element = driver.findElement(By.id("surveillance-file-confirm-0"));
-        return element;
+        return driver.findElement(By.id("surveillance-file-confirm-0"));
     }
 
     /**
@@ -258,8 +242,7 @@ public class DpManagementPage {
      * @return text element
      */
     public static WebElement uploadSuccessfulText(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[1]/div"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[1]/div"));
     }
 
     /**
@@ -268,8 +251,7 @@ public class DpManagementPage {
      * @return link element
      */
     public static WebElement uploadProductsAndSurveillanceLink(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"admin-nav.dpManagement.upload\"]/a"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"admin-nav.dpManagement.upload\"]/a"));
     }
 
     /**
@@ -278,8 +260,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement nextOnInspectButton(final WebDriver driver) {
-        element = driver.findElement(By.id("inspect-next"));
-        return element;
+        return driver.findElement(By.id("inspect-next"));
     }
 
     /**
@@ -288,8 +269,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement confirmButtonOnInspect(final WebDriver driver) {
-        element = driver.findElement(By.id("inspect-confirm"));
-        return element;
+        return driver.findElement(By.id("inspect-confirm"));
     }
 
     /**
@@ -298,8 +278,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement editOnInspectButton(final WebDriver driver) {
-        element = driver.findElement(By.id("inspect-edit"));
-        return element;
+        return driver.findElement(By.id("inspect-edit"));
     }
 
     /**
@@ -308,8 +287,7 @@ public class DpManagementPage {
      * @return text element
      */
     public static WebElement productIdOnInspect(final WebDriver driver) {
-        element = driver.findElement(By.id("id-prod"));
-        return element;
+        return driver.findElement(By.id("id-prod"));
     }
 
     /**
@@ -318,8 +296,7 @@ public class DpManagementPage {
      * @return text element
      */
     public static WebElement productVersionOnInspect(final WebDriver driver) {
-        element = driver.findElement(By.id("id-ver"));
-        return element;
+        return driver.findElement(By.id("id-ver"));
     }
 
     /**
@@ -328,8 +305,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement saveCpOnInspect(final WebDriver driver) {
-        element = driver.findElement(By.id("edit-save"));
-        return element;
+        return driver.findElement(By.id("edit-save"));
     }
 
     /**
@@ -338,8 +314,7 @@ public class DpManagementPage {
      * @return button element
      */
     public static WebElement yesOnConfirm(final WebDriver driver) {
-        element = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/button[1]"));
-        return element;
+        return driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/button[1]"));
     }
 
 }
