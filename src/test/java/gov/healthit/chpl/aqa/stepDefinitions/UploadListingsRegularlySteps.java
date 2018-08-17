@@ -23,7 +23,6 @@ import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
-
 /**
  * Class UploadListingsRegularlySteps definition.
  */
@@ -33,6 +32,7 @@ public class UploadListingsRegularlySteps {
     private String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
     private static final int TIMEOUT = 30;
+    private static final int LONG_TIMEOUT = 90;
     private static final DateFormat DATEFORMAT = new SimpleDateFormat("MMdd");
     private static final DateFormat DATEFORMATV = new SimpleDateFormat("dd");
 
@@ -108,6 +108,7 @@ public class UploadListingsRegularlySteps {
                 break;
             }
         }
+        System.out.println("Opened inspect");
         DpManagementPage.nextOnInspectButton(driver).click();
 
         if (DpManagementPage.isProductNewDivElementPresent(driver)) {
@@ -119,6 +120,7 @@ public class UploadListingsRegularlySteps {
             DpManagementPage.createNewVersionOptionOnInspect(driver).click();
         }
         DpManagementPage.nextOnInspectButton(driver).click();
+        System.out.println("Into Listing");
 
         DpManagementPage.editOnInspectButton(driver).click();
 
@@ -133,13 +135,15 @@ public class UploadListingsRegularlySteps {
         DpManagementPage.productVersionOnInspect(driver).sendKeys(newV);
 
         DpManagementPage.saveCpOnInspect(driver).click();
+        System.out.println("Done editing");
 
         DpManagementPage.confirmButtonOnInspect(driver).click();
 
         WebElement button = DpManagementPage.yesOnConfirm(driver);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+        System.out.println("Confirmed");
 
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        WebDriverWait wait = new WebDriverWait(driver, LONG_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainerText(driver)));
 
     }
