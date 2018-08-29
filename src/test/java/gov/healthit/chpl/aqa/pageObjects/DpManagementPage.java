@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
  * Class DpManagementPage definition.
  */
 public final class DpManagementPage {
-    private static final int CRITERIA_COLUMN = 6;
+    private static final int ACTION_COLUMN = 6;
 
     private DpManagementPage() {}
 
@@ -64,7 +64,7 @@ public final class DpManagementPage {
         for (WebElement row : rows) {
             ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
             if (cols.get(0).getText().equalsIgnoreCase(testChplId)) {
-                return cols.get(CRITERIA_COLUMN).findElement(By.tagName("button"));
+                return cols.get(ACTION_COLUMN).findElement(By.tagName("button"));
             }
         }
         return null;

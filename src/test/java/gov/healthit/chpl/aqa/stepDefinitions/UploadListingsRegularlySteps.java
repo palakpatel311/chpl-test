@@ -80,11 +80,12 @@ public class UploadListingsRegularlySteps {
 
     /**
      * Navigate to Confirm Pending Products page.
-     * @throws Exception if there is an exception
      */
     @When("^I go to Confirm Pending Products Page$")
-    public void loadConfirmPendingProductsPage() throws Exception {
+    public void loadConfirmPendingProductsPage() {
         DpManagementPage.confirmPendingProductsLink(driver).click();
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(driver)));
     }
 
     /**
