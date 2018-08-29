@@ -4,9 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,8 +32,9 @@ public class UploadListingsRegularlySteps {
     private String filePath = System.getProperty("filePath");
     private static final int TIMEOUT = 30;
     private static final int LONG_TIMEOUT = 90;
-    private static final DateFormat DATEFORMAT = new SimpleDateFormat("MMdd");
-    private static final DateFormat DATEFORMATV = new SimpleDateFormat("dd");
+    //    private static final DateFormat DATEFORMAT = new SimpleDateFormat("MMdd");
+    //    private static final DateFormat DATEFORMATV = new SimpleDateFormat("dd");
+    private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     /**
      * Constructor creates new driver.
@@ -96,59 +95,71 @@ public class UploadListingsRegularlySteps {
      */
     @And("^I confirm \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
     public void confirmUploadedListing(final String edition, final String testChplId) throws Exception {
-       JavascriptExecutor executor = (JavascriptExecutor) driver;
-       executor.executeScript("arguments[0].click()", DpManagementPage.inspectButtonForUploadedListing(driver, testChplId));
+        Calendar now = Calendar.getInstance();
 
-        System.out.println("Opened inspect");
+        String newPid = "" + CHARS.charAt(now.get(Calendar.MONTH))
+        + CHARS.charAt(now.get(Calendar.DAY_OF_MONTH))
+        + CHARS.charAt(now.get(Calendar.HOUR_OF_DAY))
+        + CHARS.charAt(now.get(Calendar.MINUTE));
+
+        String newVid = "" + CHARS.charAt(now.get(Calendar.MINUTE))
+        + CHARS.charAt(now.get(Calendar.SECOND));
+
+        String confListingId = edition.substring(2) + ".05.05.1447." + newPid + "." + newVid + ".00.1.180707";
+
         try {
-        DpManagementPage.nextOnInspectButton(driver).click();
+            WebDriverWait shortWait = new WebDriverWait(driver, TIMEOUT);
+            WebDriverWait longWait = new WebDriverWait(driver, LONG_TIMEOUT);
+            longWait.until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(driver, testChplId)));
+            longWait.until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(driver, testChplId)));
+            DpManagementPage.inspectButtonForUploadedListing(driver, testChplId).click();
 
-        if (DpManagementPage.isProductNewDivElementPresent(driver)) {
-            DpManagementPage.createNewProductOptionOnInspect(driver).click();
-        }
-        DpManagementPage.nextOnInspectButton(driver).click();
+            DpManagementPage.nextOnInspectButton(driver).click();
 
-        if (DpManagementPage.isVersionNewDivElementPresent(driver)) {
-            DpManagementPage.createNewVersionOptionOnInspect(driver).click();
-        }
-        DpManagementPage.nextOnInspectButton(driver).click();
-        System.out.println("Into Listing");
+            if (DpManagementPage.isProductNewDivElementPresent(driver)) {
+                DpManagementPage.createNewProductOptionOnInspect(driver).click();
+            }
+            DpManagementPage.nextOnInspectButton(driver).click();
 
-        DpManagementPage.editOnInspectButton(driver).click();
+            if (DpManagementPage.isVersionNewDivElementPresent(driver)) {
+                DpManagementPage.createNewVersionOptionOnInspect(driver).click();
+            }
+            DpManagementPage.nextOnInspectButton(driver).click();
 
-        Date date = new Date();
-        String newpId = DATEFORMAT.format(date);
-        DpManagementPage.productIdOnInspect(driver).clear();
-        DpManagementPage.productIdOnInspect(driver).sendKeys(newpId);
+            DpManagementPage.editOnInspectButton(driver).click();
 
-        Date dateV = new Date();
-        String newV = DATEFORMATV.format(dateV);
-        DpManagementPage.productVersionOnInspect(driver).clear();
-        DpManagementPage.productVersionOnInspect(driver).sendKeys(newV);
+            DpManagementPage.productIdOnInspect(driver).clear();
+            DpManagementPage.productIdOnInspect(driver).sendKeys(newPid);
 
-        DpManagementPage.saveCpOnInspect(driver).click();
-        System.out.println("Done editing");
+            DpManagementPage.productVersionOnInspect(driver).clear();
+            DpManagementPage.productVersionOnInspect(driver).sendKeys(newVid);
 
-        DpManagementPage.confirmButtonOnInspect(driver).click();
+            DpManagementPage.saveCpOnInspect(driver).click();
+            shortWait.until(ExpectedConditions.textToBePresentInElement(DpManagementPage.inspectModalLabel(driver), confListingId));
 
-        WebElement button = DpManagementPage.yesOnConfirm(driver);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
-        System.out.println("Confirmed");
+            DpManagementPage.confirmButtonOnInspect(driver).click();
 
-        WebDriverWait wait = new WebDriverWait(driver, LONG_TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(driver)));
+            WebElement button = DpManagementPage.yesOnConfirm(driver);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+
+            longWait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(driver)));
+
+            driver.get(url + "/#/product/" + confListingId);
+            longWait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(driver)));
         } catch (Exception e) {
-            takeScreenshot();
+            System.out.println(e.getMessage());
+            takeScreenshot(confListingId);
         }
     }
 
     /**
      * Take a screenshot.
+     * @param hash a string that will be inserted into the filename to avoid overwriting images
      * @throws Exception if there is an exception
      */
-    public void takeScreenshot() throws Exception {
+    public void takeScreenshot(final String hash) throws Exception {
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(filePath + File.separator + "failed-test.png"));
+        FileUtils.copyFile(scrFile, new File(filePath + File.separator + "failed-test-" + hash + ".png"));
     }
 
     /**
@@ -157,14 +168,6 @@ public class UploadListingsRegularlySteps {
      */
     @Then("^I see that listing was uploaded successfully to CHPL and listing details load as expected for uploaded \"([^\"]*)\" listing$")
     public void verifyUploadWasSuccessful(final String ed) {
-        driver.navigate().refresh();
-
-        Date date = new Date();
-        String confListingId = ed.substring(2) + ".05.05.1447." + DATEFORMAT.format(date) + "." + DATEFORMATV.format(date) + ".00.1.180707";
-
-        driver.get(url + "/#/product/" + confListingId);
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(driver)));
         String testListingName = "New product";
         String actualString = ListingDetailsPage.listingName(driver).getText();
         assertEquals(actualString, testListingName);
