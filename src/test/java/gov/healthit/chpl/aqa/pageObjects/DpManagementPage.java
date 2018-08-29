@@ -1,7 +1,5 @@
 package gov.healthit.chpl.aqa.pageObjects;
 
-import java.util.ArrayList;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +8,6 @@ import org.openqa.selenium.WebElement;
  * Class DpManagementPage definition.
  */
 public final class DpManagementPage {
-    private static final int ACTION_COLUMN = 6;
 
     private DpManagementPage() {}
 
@@ -59,16 +56,17 @@ public final class DpManagementPage {
      * @throws Exception if there is an exception
      */
     public static WebElement inspectButtonForUploadedListing(final WebDriver driver, final String testChplId) {
-        WebElement table = driver.findElement(By.id("pending-listings-table"));
-        ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
-        for (WebElement row : rows) {
-            ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
-            if (cols.get(0).getText().equalsIgnoreCase(testChplId)) {
-                return cols.get(ACTION_COLUMN).findElement(By.tagName("button"));
-            }
-        }
-        return null;
-        }
+        return driver.findElement(By.id("pending-listing-inspect-" + testChplId));
+    }
+
+    /**
+     * Label of the inspect modal dialog work flow.
+     * @param driver WebDriver
+     * @return the label element
+     */
+    public static WebElement inspectModalLabel(final WebDriver driver) {
+        return driver.findElement(By.id("inspect-label"));
+    }
 
     /**
      * Returns true iff "Developer New" DIV exists on the Inspect screen.
