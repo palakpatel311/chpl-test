@@ -7,11 +7,12 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -79,36 +80,26 @@ public class UploadListingsRegularlySteps {
 
     /**
      * Navigate to Confirm Pending Products page.
+     * @throws Exception if there is an exception
      */
     @When("^I go to Confirm Pending Products Page$")
-    public void loadConfirmPendingProductsPage() {
+    public void loadConfirmPendingProductsPage() throws Exception {
         DpManagementPage.confirmPendingProductsLink(driver).click();
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(driver)));
     }
 
     /**
      * Confirm uploaded listing.
      * @param edition is listing edition
      * @param testChplId is chpl id of listing to confirm
+     * @throws Exception if there is an exception
      */
     @And("^I confirm \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
-    public void confirmUploadedListing(final String edition, final String testChplId) {
+    public void confirmUploadedListing(final String edition, final String testChplId) throws Exception {
+       JavascriptExecutor executor = (JavascriptExecutor) driver;
+       executor.executeScript("arguments[0].click()", DpManagementPage.inspectButtonForUploadedListing(driver, testChplId));
 
-        WebElement table = DpManagementPage.pendingListingsTable(driver);
-        // TODO: All of these table looping / cell finding things should be methods in the Page Object definition file
-        List<WebElement> allRows = table.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
-        for (int i = 0; i < allRows.size(); i++) {
-            List<WebElement> cells = allRows.get(i).findElements(By.tagName("td"));
-            if (cells.get(0).getText().equalsIgnoreCase(testChplId)) {
-                WebElement inspectButton = cells.get(6)
-                        .findElement(By.tagName("button"));
-                JavascriptExecutor executor = (JavascriptExecutor) driver;
-                executor.executeScript("arguments[0].click()", inspectButton);
-                break;
-            }
-        }
         System.out.println("Opened inspect");
+        try {
         DpManagementPage.nextOnInspectButton(driver).click();
 
         if (DpManagementPage.isProductNewDivElementPresent(driver)) {
@@ -144,8 +135,19 @@ public class UploadListingsRegularlySteps {
         System.out.println("Confirmed");
 
         WebDriverWait wait = new WebDriverWait(driver, LONG_TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainerText(driver)));
+        wait.until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(driver)));
+        } catch (Exception e) {
+            takeScreenshot();
+        }
+    }
 
+    /**
+     * Take a screenshot.
+     * @throws Exception if there is an exception
+     */
+    public void takeScreenshot() throws Exception {
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File(filePath + File.separator + "failed-test.png"));
     }
 
     /**
