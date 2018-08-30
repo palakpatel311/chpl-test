@@ -176,7 +176,7 @@ public final class DpManagementPage {
     }
 
     /**
-     * Returns Products & Surveillance Upload link.
+     * Returns Products and Surveillance Upload link.
      * @param driver WebDriver
      * @return link element
      */

@@ -19,7 +19,7 @@ import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.ManageDevelopersAndProductsPage;
 
 /**
- * All steps related to activities in the "Developer & Product Management" admin section,
+ * All steps related to activities in the "Developer and Product Management" admin section,
  * navigated to via #/admin/dpManagement and including both ROLE_ADMIN and ROLE_ACB activities.
  */
 public class ManageDevelopersAndProductsSteps extends BaseSteps {
