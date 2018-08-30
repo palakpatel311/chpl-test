@@ -2,10 +2,7 @@
 Feature: OCD-2102 - Allow surveillance search for listings with CHPL ID version
 
 Scenario Outline: Verify surveillance search for a listing with CHPL ID version loads search results
-	Given I am on CHPL admin page	
-	And I fill in username
-	And I fill in Password
-	And I click Log in button
+	Given I'm logged in as an ACB
 	And I navigate to Manage Surveillance Activity section
 	When I search for "<CHPL_ID>" in Manage Surveillance Activity section
 	Then I see the surveillance results for "<CHPL_ID>"

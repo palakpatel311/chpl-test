@@ -5,7 +5,7 @@ Scenario Outline: Mapping legacy values for G1/G2
 	Given I am on listing details page of listing with ID "<DB_ID>"
 	When I open details for criteria "<CRITERIA>"
 	Then Measure Successfully Tested for "<gOption>" should display "<Measure_Name>" for "<CRITERIA>" 
-	When I look at  Successfully Tested G1G2 Measures
+	When I look at Successfully Tested G1G2 Measures
 	Then the Required Test shows as "<Required_Test>" for "<Measure_Name>" and associated criteria "<CRITERIA>"
 	Examples:
     |DB_ID|CRITERIA|gOption|Measure_Name|Required_Test|
