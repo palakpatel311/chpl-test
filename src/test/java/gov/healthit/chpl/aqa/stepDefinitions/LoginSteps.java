@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.LoginPage;
@@ -30,47 +29,26 @@ public class LoginSteps {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
             url = "http://localhost:3000/";
-           }
+        }
 
         if (StringUtils.isEmpty(username)) {
             throw new IllegalArgumentException("Missing value for username!");
-           }
+        }
         if (StringUtils.isEmpty(password)) {
             throw new IllegalArgumentException("Missing value for password!");
-           }
+        }
     }
 
     /**
-     * Loads CHPL admin page to show login form.
+     * Log the user in as an ACB.
      */
-    @Given("^I am on CHPL admin page$")
-    public void iAmOnChplAdminPage() {
-        driver.get(url + "#/admin/");
+    @Given("^I'm logged in as an ACB$")
+    public void logInAsAcb() {
+        driver.get(url + "#/admin/dpManagement");
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(LoginPage.username(driver)));
-    }
-
-    /**
-     * Enter username in Username field.
-     */
-    @And("^I fill in username$")
-    public void enterUsername() {
         LoginPage.username(driver).sendKeys(username);
-    }
-
-    /**
-     * Enter password in Password field.
-     */
-    @And("^I fill in Password$")
-    public void enterPassword() {
         LoginPage.password(driver).sendKeys(password);
-    }
-
-    /**
-     * Click login button.
-     */
-    @And("^I click Log in button$")
-    public void clickLoginButton() {
         LoginPage.loginButton(driver).click();
     }
 
@@ -82,5 +60,4 @@ public class LoginSteps {
         String actualString = LoginPage.welcomeText(driver).getText();
         assertTrue(actualString.contains("Welcome"));
     }
-
 }

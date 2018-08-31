@@ -287,7 +287,7 @@ public class ListingDetailsSteps {
     /**
      * Open the G1/G2 panel.
      */
-    @When("^I look at  Successfully Tested G1G2 Measures$")
+    @When("^I look at Successfully Tested G1G2 Measures$")
     public void iLookAtG1G2Measures() {
         WebElement link = ListingDetailsPage.g1g2Accordion(driver);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);

@@ -53,7 +53,6 @@ public final class DpManagementPage {
      * @param driver WebDriver
      * @param testChplId is chpl id of listing to confirm
      * @return the inspect button element
-     * @throws Exception if there is an exception
      */
     public static WebElement inspectButtonForUploadedListing(final WebDriver driver, final String testChplId) {
         return driver.findElement(By.id("pending-listing-inspect-" + testChplId));
@@ -177,6 +176,15 @@ public final class DpManagementPage {
     }
 
     /**
+     * Returns Products and Surveillance Upload link.
+     * @param driver WebDriver
+     * @return link element
+     */
+    public static WebElement dpManagementUploadProductsSurveillance(final WebDriver driver) {
+        return driver.findElement(By.linkText("Upload Products & Surveillance"));
+    }
+
+   /**
      * Returns element holding main content.
      * @param driver WebDriver
      * @return element holding main content
