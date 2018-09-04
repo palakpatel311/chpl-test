@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.Calendar;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -73,6 +74,7 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
     public void searchForChplIdInSurvSearch(final String chplId) {
         DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
         DpManagementPage.survSearchButton(getDriver()).click();
+        getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
     }
 
     /**
@@ -175,8 +177,13 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
      */
     @Then("^I see the surveillance results for \"([^\"]*)\"$")
     public void testSurveillanceResultsAsExpected(final String chplId) throws Exception {
-        String actualString = DpManagementPage.chplProductNumber(getDriver()).getText();
-        assertTrue(actualString.contains(chplId), "Expect \"" + chplId + "\" to be found in \"" + actualString + "\"");
+        try {
+            String actualString = DpManagementPage.chplProductNumber(getDriver()).getText();
+            assertTrue(actualString.contains(chplId), "Expect \"" + chplId + "\" to be found in \"" + actualString + "\"");
+        } catch (NoSuchElementException nsee) {
+            this.takeScreenshot(chplId);
+            throw nsee;
+        }
     }
 
     /**

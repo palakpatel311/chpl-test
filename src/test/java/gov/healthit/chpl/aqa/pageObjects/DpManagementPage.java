@@ -33,12 +33,19 @@ public final class DpManagementPage {
      * Get the CHPL Product Number value in surveillance search results.
      * @param driver WebDriver
      * @return the CHPL Product Number element
-     * returns null if element was not found
      */
     public static WebElement chplProductNumber(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div/div[3]/table/tbody/tr[1]/td"));
+        return driver.findElement(By.xpath("//*[@id=\"surveillance-search-single-result\"]/tbody/tr[1]/td"));
     }
 
+    /**
+     * Return the table containing surveillance details for a single Listing.
+     * @param driver WebDriver
+     * @return the table
+     */
+    public static WebElement surveillanceSearchSingleResultTable(final WebDriver driver) {
+        return driver.findElement(By.id("surveillance-search-single-result"));
+    }
     /**
      * Returns Confirm Pending Products link.
      * @param driver WebDriver
