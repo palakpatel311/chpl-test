@@ -69,12 +69,18 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
     /**
      * Search for given CHPL Id on Manage Surveillance Activity Page.
      * @param chplId is chplId to look up
+     * @throws Exception if screenshot cannot be taken
      */
     @When("^I search for \"([^\"]*)\" in Manage Surveillance Activity section$")
-    public void searchForChplIdInSurvSearch(final String chplId) {
-        DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
-        DpManagementPage.survSearchButton(getDriver()).click();
-        getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
+    public void searchForChplIdInSurvSearch(final String chplId) throws Exception {
+        try {
+            DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
+            DpManagementPage.survSearchButton(getDriver()).click();
+            getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
+        } catch (NoSuchElementException nsee) {
+            takeScreenshot(chplId);
+            throw nsee;
+        }
     }
 
     /**
