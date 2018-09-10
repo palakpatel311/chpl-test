@@ -23,7 +23,6 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -34,14 +33,14 @@ import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
 /**
  * Class ChplDownloadSteps definition.
  */
-public class ChplDownloadSteps {
+public class ChplDownloadSteps extends BaseSteps {
 
     private WebDriver driver;
-    private static final int TIMEOUT = 30;
-    private String url = System.getProperty("url");
     private String downloadPath = System.getProperty("downloadPath");
     private File dir;
     private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
+    private static final long BYTES_PER_KILOBYTE = 1024;
+    private static final double FILE_TOO_LARGE_FACTOR = 1.1;
 
     /**
      * Constructor creates new driver.
@@ -49,10 +48,8 @@ public class ChplDownloadSteps {
      * Print path to get download file location
      */
     public ChplDownloadSteps() {
+        super();
         driver = Hooks.getDriver();
-        if (StringUtils.isEmpty(url)) {
-            url = "http://localhost:3000/";
-        }
         if (StringUtils.isEmpty(downloadPath)) {
             String tempDirectory;
             try {
@@ -99,17 +96,19 @@ public class ChplDownloadSteps {
         cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         cap.setCapability(ChromeOptions.CAPABILITY, options);
 
+        String url;
         driver = new ChromeDriver(cap);
         if (tEnv.equalsIgnoreCase("DEV")) {
             url = "https://chpl.ahrqdev.org";
-          } else if (tEnv.equalsIgnoreCase("STG")) {
+        } else if (tEnv.equalsIgnoreCase("STG")) {
             url = "https://chpl.ahrqstg.org";
-          } else if (tEnv.equalsIgnoreCase("PROD")) {
+        } else if (tEnv.equalsIgnoreCase("PROD")) {
             url = "https://chpl.healthit.gov";
-          }
+        } else {
+            url = "http://localhost:3000";
+        }
         driver.get(url + "#/resources/download");
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(driver)));
+        getShortWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(driver)));
     }
 
     /**
@@ -231,6 +230,35 @@ public class ChplDownloadSteps {
         }
     }
 
+    /**
+     * Assert that the file is at least the expected size. Will also give an error if the actual size is more than
+     * 10% larger than the minimum size, in order to encourage the file size values to get updated as the files grow.
+     * @param sizeParam expected size
+     * @param units expected file unit scale (MB or KB)
+     */
+    @And("^the downloaded file is at least \"(.*)\" \"(.*)\" in size$")
+    public void theDownloadedFileIsNotTooSmall(final String sizeParam, final String units) {
+        Long size = Long.valueOf(sizeParam);
+        File[] files = dir.listFiles();
+        for (File f : files) {
+            Long rawSize = f.length();
+            Long fileSize;
+            switch (units) {
+            case "MB": fileSize = rawSize / BYTES_PER_KILOBYTE / BYTES_PER_KILOBYTE;
+            break;
+            case "KB": fileSize = rawSize / BYTES_PER_KILOBYTE;
+            break;
+            default:
+                fileSize = rawSize;
+            }
+            String fileName = f.getName();
+            assertTrue(fileSize >= size,
+                    "File " + fileName + " is " + fileSize + " " + units + " in size; should be at least " + size + " " + units);
+            assertTrue(fileSize <= (size * FILE_TOO_LARGE_FACTOR),
+                    "File " + fileName + " is " + fileSize + " " + units + " in size; should be no more than "
+                            + size * FILE_TOO_LARGE_FACTOR + " " + units + ". Please update the AQA test values.");
+        }
+    }
     /**
      * Select Surveillance Activity file from drop down and download .csv file.
      */
