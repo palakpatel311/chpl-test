@@ -31,4 +31,3 @@ Rest.*
 ## Custom
 #################
 .checkstyle
-src/test/resources/failed-test-*.png

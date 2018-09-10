@@ -305,7 +305,7 @@ public final class ListingDetailsPage {
         ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
         for (WebElement row : rows) {
             ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
-            if (cols.get(0).getText().equalsIgnoreCase("Test procedure")) {
+            if (cols.get(0).getText().contains("Test procedure")) {
                 return cols.get(1);
             }
         }
@@ -323,7 +323,7 @@ public final class ListingDetailsPage {
         ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
         for (WebElement row : rows) {
             ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
-            if (cols.get(0).getText().equalsIgnoreCase("Test tool")) {
+            if (cols.get(0).getText().contains("Test tool")) {
                 return cols.get(1);
             }
         }
