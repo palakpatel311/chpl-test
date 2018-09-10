@@ -301,15 +301,7 @@ public final class ListingDetailsPage {
      * @return the test procedure element
      */
     public static WebElement testProcedure(final WebDriver driver, final String number) {
-        WebElement table = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody"));
-        ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
-        for (WebElement row : rows) {
-            ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
-            if (cols.get(0).getText().contains("Test procedure")) {
-                return cols.get(1);
-            }
-        }
-        return null;
+        return driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_row_Test_procedure\"]/td[2]"));
     }
 
     /**
@@ -319,16 +311,8 @@ public final class ListingDetailsPage {
      * @return the test tool text element
      */
     public static WebElement testTool(final WebDriver driver, final String number) {
-        WebElement table = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody"));
-        ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
-        for (WebElement row : rows) {
-            ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
-            if (cols.get(0).getText().contains("Test tool")) {
-                return cols.get(1);
-            }
-        }
-        return null;
-    }
+        return driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_row_Test_tool\"]/td[2]"));
+     }
 
     /**
      * Returns the Test Results Summary URL.
