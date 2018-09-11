@@ -17,6 +17,7 @@ public class BaseSteps {
     private WebDriverWait longWait;
     private String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
+    private String screenshotPath;
     protected static final int TIMEOUT = 30;
     protected static final int LONG_TIMEOUT = 90;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -34,16 +35,19 @@ public class BaseSteps {
             String tempDirectory = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator + "resources";
             this.setFilePath(tempDirectory);
         }
+        screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
     }
 
     /**
      * Take a screenshot.
-     * @param hash a string that will be inserted into the filename to avoid overwriting images
+     * @param hash a string that will be inserted into the filename to avoid overwriting images.
+     * All "non-word characters" will be replaced with "_"
      * @throws Exception if there is an exception
      */
     public void takeScreenshot(final String hash) throws Exception {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(getFilePath() + File.separator + "failed-test-" + hash + ".png"));
+        File outFile = new File(screenshotPath + File.separator + "failed-test-" + hash.replaceAll("\\W+", "_") + ".png");
+        FileUtils.copyFile(scrFile, outFile);
     }
 
     public WebDriver getDriver() {
