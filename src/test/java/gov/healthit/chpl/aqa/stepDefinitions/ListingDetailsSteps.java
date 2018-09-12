@@ -188,8 +188,8 @@ public class ListingDetailsSteps extends BaseSteps {
             String actualString = ListingDetailsPage.testProcedure(getDriver(), number).getText();
             assertTrue(actualString.contains(tpText), "Expect \"" + tpText + "\" to be found in \"" + actualString + "\"");
         } catch (NullPointerException npe) {
-            this.takeScreenshot(tpText + "_" + number);
-            throw npe;
+            Hooks.takeScreenshot(tpText + "_" + number);
+            assertTrue(false, tpText + "_" + number + ": " + npe.getMessage());
         }
     }
 
@@ -205,8 +205,8 @@ public class ListingDetailsSteps extends BaseSteps {
             String actualString = ListingDetailsPage.testTool(getDriver(), number).getText();
             assertTrue(actualString.contains(testTool), "Expect \"" + testTool + "\" to be found in \"" + actualString + "\"");
         } catch (NullPointerException npe) {
-            this.takeScreenshot(testTool + "_" + number);
-            throw npe;
+            Hooks.takeScreenshot(testTool + "_" + number);
+            assertTrue(false, testTool + "_" + number + ": " + npe.getMessage());
         }
     }
 

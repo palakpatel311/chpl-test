@@ -78,8 +78,8 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
             DpManagementPage.survSearchButton(getDriver()).click();
             getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
         } catch (NoSuchElementException nsee) {
-            takeScreenshot(chplId);
-            throw nsee;
+            Hooks.takeScreenshot(chplId);
+            assertTrue(false, "chpl id search:" + nsee.getMessage());
         }
     }
 
@@ -151,8 +151,8 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
             getDriver().get(getUrl() + "/#/product/" + confListingId);
             getLongWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(getDriver())));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            takeScreenshot(confListingId);
+            Hooks.takeScreenshot(confListingId);
+            assertTrue(false, "in confirm:" + e.getMessage());
         }
     }
 
@@ -187,8 +187,8 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
             String actualString = DpManagementPage.chplProductNumber(getDriver()).getText();
             assertTrue(actualString.contains(chplId), "Expect \"" + chplId + "\" to be found in \"" + actualString + "\"");
         } catch (NoSuchElementException nsee) {
-            this.takeScreenshot(chplId);
-            throw nsee;
+            Hooks.takeScreenshot(chplId);
+            assertTrue(false, chplId + ": " + nsee.getMessage());
         }
     }
 
