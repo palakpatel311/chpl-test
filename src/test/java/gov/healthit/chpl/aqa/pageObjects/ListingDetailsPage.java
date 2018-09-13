@@ -97,7 +97,7 @@ public final class ListingDetailsPage {
      * @return the transparency disclosure URL
      */
     public static WebElement disclosureUrl(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[2]/div[1]/span/div[2]/a"));
+        element = driver.findElement(By.xpath("//*[@id=\"product-information-mandatory-disclosures-url\"]/a"));
         return element;
     }
 
