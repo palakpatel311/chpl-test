@@ -7,20 +7,12 @@ import static org.testng.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -35,39 +27,15 @@ import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
  */
 public class ChplDownloadSteps extends BaseSteps {
 
-    private WebDriver driver;
-    private String downloadPath = System.getProperty("downloadPath");
-    private File dir;
     private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
     private static final long BYTES_PER_KILOBYTE = 1024;
     private static final double FILE_TOO_LARGE_FACTOR = 1.1;
 
     /**
      * Constructor creates new driver.
-     * Create a sub directory under default temp directory to set downloadPath
-     * Print path to get download file location
      */
     public ChplDownloadSteps() {
         super();
-        driver = Hooks.getDriver();
-        if (StringUtils.isEmpty(downloadPath)) {
-            String tempDirectory;
-            try {
-                tempDirectory = Files.createTempDirectory("download-files").toString();
-                // Print the path to the newly created directory
-            } catch (final IOException e) {
-                // If temp directory creation failed, create new directory in target folder
-                // user.dir - User working directory, make new directories in user's working directory
-                File file = new File("target", "download-files");
-                file.mkdirs();
-                tempDirectory = System.getProperty("user.dir") + File.separator + "target" + File.separator + "download-files";
-            }
-            downloadPath = tempDirectory;
-        }
-        dir = new File(downloadPath);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
     }
 
     /**
@@ -78,37 +46,22 @@ public class ChplDownloadSteps extends BaseSteps {
      */
     @Given("^I am on download the CHPL resources page on \"([^\"]*)\"$")
     public void iAmOnDownloadTheCHPLResourcesPage(final String tEnv) throws Throwable {
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-        chromePrefs.put("profile.default_content_settings.popups", 0);
-        chromePrefs.put("download.default_directory", downloadPath);
-        /**
-         * Save Chrome Options
-         */
-        ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
-        options.setExperimentalOption("prefs", chromePrefs);
-        chromePrefs.put("safebrowsing.enabled", "true");
-        options.addArguments("--safebrowsing-disable-download-protection");
-        options.addArguments("disable-popup-blocking");
-
-        DesiredCapabilities cap = DesiredCapabilities.chrome();
-        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
-        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        cap.setCapability(ChromeOptions.CAPABILITY, options);
-
+        // Get download page of system URL, then change to page of passed in environment
+        getDriver().get(getUrl() + "#/resources/download");
+        getShortWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
         String url;
-        driver = new ChromeDriver(cap);
-        if (tEnv.equalsIgnoreCase("DEV")) {
-            url = "https://chpl.ahrqdev.org";
-        } else if (tEnv.equalsIgnoreCase("STG")) {
-            url = "https://chpl.ahrqstg.org";
-        } else if (tEnv.equalsIgnoreCase("PROD")) {
-            url = "https://chpl.healthit.gov";
-        } else {
-            url = "http://localhost:3000";
+        switch (tEnv) {
+        case "DEV": url = "https://chpl.ahrqdev.org";
+        break;
+        case "STG": url = "https://chpl.ahrqstg.org";
+        break;
+        case "PROD": url = "https://chpl.healthit.gov";
+        break;
+        default: url = getUrl();
+        break;
         }
-        driver.get(url + "#/resources/download");
-        getShortWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(driver)));
+        getDriver().get(url + "#/resources/download");
+        getShortWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
     }
 
     /**
@@ -116,7 +69,7 @@ public class ChplDownloadSteps extends BaseSteps {
      */
     @When("^user selects a file in download file box")
     public void userSelectsAFileInDownloadFileBox() {
-        WebElement selectBox = ChplDownloadPage.downloadSelectList(driver);
+        WebElement selectBox = ChplDownloadPage.downloadSelectList(getDriver());
         Select dropdown = new Select(selectBox);
         dropdown.selectByVisibleText("2015 edition products (xml)");
     }
@@ -126,7 +79,7 @@ public class ChplDownloadSteps extends BaseSteps {
      */
     @Then("^definition file shows based on download file selection$")
     public void definitionFileShowsBasedOnSelection() {
-        String definition = new Select(ChplDownloadPage.definitionSelectList(driver)).getFirstSelectedOption().getText();
+        String definition = new Select(ChplDownloadPage.definitionSelectList(getDriver())).getFirstSelectedOption().getText();
         assertTrue(definition.contains("2015 edition products (xml) Definition File"));
     }
 
@@ -136,7 +89,7 @@ public class ChplDownloadSteps extends BaseSteps {
      */
     @Then("^user sees \"([^\"]*)\" download files")
     public void userSeesDownloadFiles(final String expectedLength) {
-        WebElement selectElement = ChplDownloadPage.downloadSelectList(driver);
+        WebElement selectElement = ChplDownloadPage.downloadSelectList(getDriver());
         Select listBox = new Select(selectElement);
         assertEquals(listBox.getOptions().size(), Integer.parseInt(expectedLength));
     }
@@ -151,15 +104,15 @@ public class ChplDownloadSteps extends BaseSteps {
     public void downloadProductFile(final String edition, final String type) throws InterruptedException {
         switch (edition) {
         case "2011":
-            ChplDownloadPage.downloadoption2011editionProductsFile(driver).click();
+            ChplDownloadPage.downloadoption2011editionProductsFile(getDriver()).click();
             break;
         case "2014":
             switch (type) {
             case "csv":
-                ChplDownloadPage.downloadoption2014summaryFile(driver).click();
+                ChplDownloadPage.downloadoption2014summaryFile(getDriver()).click();
                 break;
             case "xml":
-                ChplDownloadPage.downloadoption2014editionProductsFile(driver).click();
+                ChplDownloadPage.downloadoption2014editionProductsFile(getDriver()).click();
                 break;
             default:
                 break;
@@ -168,10 +121,10 @@ public class ChplDownloadSteps extends BaseSteps {
         case "2015":
             switch (type) {
             case "csv":
-                ChplDownloadPage.downloadoption2015summaryFile(driver).click();
+                ChplDownloadPage.downloadoption2015summaryFile(getDriver()).click();
                 break;
             case "xml":
-                ChplDownloadPage.downloadoption2015editionProductsFile(driver).click();
+                ChplDownloadPage.downloadoption2015editionProductsFile(getDriver()).click();
                 break;
             default:
                 break;
@@ -180,14 +133,14 @@ public class ChplDownloadSteps extends BaseSteps {
         default:
             break;
         }
-        ChplDownloadPage.downloadFileButton(driver).click();
+        ChplDownloadPage.downloadFileButton(getDriver()).click();
 
         String downloadFileName = null;
         boolean fileFound = false;
         final long sleepTime = 5 * 1000;
 
         while (!fileFound) {
-            File[] files = dir.listFiles();
+            File[] files = Hooks.getDownloadDirectory().listFiles();
 
             for (File file : files) {
                 downloadFileName = file.getName();
@@ -212,7 +165,7 @@ public class ChplDownloadSteps extends BaseSteps {
         final int endOfDateInFilename = 18;
         String downloadFileName = null;
 
-        File[] files = dir.listFiles();
+        File[] files = Hooks.getDownloadDirectory().listFiles();
 
         for (File file : files) {
             downloadFileName = file.getName();
@@ -239,7 +192,7 @@ public class ChplDownloadSteps extends BaseSteps {
     @And("^the downloaded file is at least \"(.*)\" \"(.*)\" in size$")
     public void theDownloadedFileIsNotTooSmall(final String sizeParam, final String units) {
         Long size = Long.valueOf(sizeParam);
-        File[] files = dir.listFiles();
+        File[] files = Hooks.getDownloadDirectory().listFiles();
         for (File f : files) {
             Long rawSize = f.length();
             Long fileSize;
@@ -264,8 +217,8 @@ public class ChplDownloadSteps extends BaseSteps {
      */
     @When("^I download the Surveillance Activity file$")
     public void downloadSurveillanceActivityFile() {
-        ChplDownloadPage.downloadoptionSurveillanceFile(driver).click();
-        ChplDownloadPage.downloadFileButton(driver).click();
+        ChplDownloadPage.downloadoptionSurveillanceFile(getDriver()).click();
+        ChplDownloadPage.downloadFileButton(getDriver()).click();
     }
 
     /**
@@ -274,7 +227,7 @@ public class ChplDownloadSteps extends BaseSteps {
     @Then("^the downloaded file shows surveillance-all.csv filename$")
     public void verifySurveillanceActivityFilename() {
 
-        File[] filenames = dir.listFiles();
+        File[] filenames = Hooks.getDownloadDirectory().listFiles();
 
         for (File file : filenames) {
             String dwldFileName = file.getName();
@@ -288,8 +241,8 @@ public class ChplDownloadSteps extends BaseSteps {
      */
     @When("^I download the Non-Conformities file$")
     public void downloadNonConformitiesFile() {
-        ChplDownloadPage.downloadoptionNonconformitiesFile(driver).click();
-        ChplDownloadPage.downloadFileButton(driver).click();
+        ChplDownloadPage.downloadoptionNonconformitiesFile(getDriver()).click();
+        ChplDownloadPage.downloadFileButton(getDriver()).click();
     }
 
     /**
@@ -298,7 +251,7 @@ public class ChplDownloadSteps extends BaseSteps {
     @Then("^the downloaded file shows surveillance-with-nonconformities.csv filename$")
     public void verifyNonConformitiesFilename() {
 
-        File[] filenames = dir.listFiles();
+        File[] filenames = Hooks.getDownloadDirectory().listFiles();
 
         for (File file : filenames) {
             String dwldFileName = file.getName();
@@ -314,11 +267,11 @@ public class ChplDownloadSteps extends BaseSteps {
      */
     @And("^the download directory is empty$")
     public void checkifDownloadDirectoryisEmpty() throws IOException {
-        System.out.println("Clearing directory: " + dir.getAbsolutePath());
-        for (String fileName : dir.list()) {
+        System.out.println("Clearing directory: " + Hooks.getDownloadDirectory().getAbsolutePath());
+        for (String fileName : Hooks.getDownloadDirectory().list()) {
             System.out.println("Removing: " + fileName);
         }
-        FileUtils.cleanDirectory(dir);
-        assertFalse(dir.list().length > 0, "directory is not empty");
+        FileUtils.cleanDirectory(Hooks.getDownloadDirectory());
+        assertFalse(Hooks.getDownloadDirectory().list().length > 0, "directory is not empty");
     }
 }

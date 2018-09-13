@@ -1,14 +1,21 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 //import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -22,9 +29,11 @@ import cucumber.api.java.Before;
  */
 public class Hooks {
 
+    private static File dir;
     private static EventFiringWebDriver driver;
     private static final int DELAY = 30;
     private static String screenshotPath;
+    private static String downloadPath = System.getProperty("downloadPath");
 
     /**
      * Launch ChromeDriver.
@@ -38,8 +47,44 @@ public class Hooks {
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
          */
+        if (StringUtils.isEmpty(downloadPath)) {
+            String tempDirectory;
+            try {
+                tempDirectory = Files.createTempDirectory("download-files").toString();
+                // Print the path to the newly created directory
+            } catch (final IOException e) {
+                // If temp directory creation failed, create new directory in target folder
+                // user.dir - User working directory, make new directories in user's working directory
+                File file = new File("target", "download-files");
+                file.mkdirs();
+                tempDirectory = System.getProperty("user.dir") + File.separator + "target" + File.separator + "download-files";
+            }
+            downloadPath = tempDirectory;
+        }
+        dir = new File(downloadPath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+        chromePrefs.put("download.default_directory", downloadPath);
+        /**
+         * Save Chrome Options
+         */
+        ChromeOptions options = new ChromeOptions();
+        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+        options.setExperimentalOption("prefs", chromePrefs);
+        chromePrefs.put("safebrowsing.enabled", "true");
+        options.addArguments("--safebrowsing-disable-download-protection");
+        options.addArguments("disable-popup-blocking");
+
+        DesiredCapabilities cap = DesiredCapabilities.chrome();
+        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
+        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
+
         screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
-        driver = new EventFiringWebDriver(new ChromeDriver());
+        driver = new EventFiringWebDriver(new ChromeDriver(cap));
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
             @Override
@@ -66,6 +111,10 @@ public class Hooks {
         return driver;
     }
 
+    public static File getDownloadDirectory() {
+        return dir;
+    }
+
     /**
      * Take a screenshot.
      * @param hash a string that will be inserted into the filename to avoid overwriting images.
@@ -82,7 +131,7 @@ public class Hooks {
      * Take a screenshot. Generates hash based on current time.
      * @throws Exception if screenshot cannot be created
      */
-    public void takeScreenshot() throws Exception {
+    public static void takeScreenshot() throws Exception {
         String hash = String.valueOf(new Date().getTime());
         takeScreenshot(hash);
     }
