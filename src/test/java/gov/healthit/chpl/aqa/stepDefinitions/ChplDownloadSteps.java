@@ -21,9 +21,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -35,7 +39,7 @@ import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
  */
 public class ChplDownloadSteps extends BaseSteps {
 
-    private WebDriver driver;
+    private EventFiringWebDriver driver;
     private String downloadPath = System.getProperty("downloadPath");
     private File dir;
     private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
@@ -71,6 +75,14 @@ public class ChplDownloadSteps extends BaseSteps {
     }
 
     /**
+     * Close browser windows and terminate WebDriver session.
+     */
+    @After
+    public void afterMethod() {
+        driver.quit();
+    }
+
+    /**
      * Get user to the Download CHPL page. Chrome options are necessary to get past
      * keep/discard pop ups for successful download of a file to directory.
      * @throws Throwable throws exception if there is an issue with Chrome options.
@@ -97,7 +109,18 @@ public class ChplDownloadSteps extends BaseSteps {
         cap.setCapability(ChromeOptions.CAPABILITY, options);
 
         String url;
-        driver = new ChromeDriver(cap);
+        driver = new EventFiringWebDriver(new ChromeDriver(cap));
+        WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
+            @Override
+            public void onException(final Throwable throwable, final WebDriver activeDriver) {
+                try {
+                    Hooks.takeScreenshot();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        driver.register(errorListener);
         if (tEnv.equalsIgnoreCase("DEV")) {
             url = "https://chpl.ahrqdev.org";
         } else if (tEnv.equalsIgnoreCase("STG")) {

@@ -82,7 +82,7 @@ public class Hooks {
      * Take a screenshot. Generates hash based on current time.
      * @throws Exception if screenshot cannot be created
      */
-    public void takeScreenshot() throws Exception {
+    public static void takeScreenshot() throws Exception {
         String hash = String.valueOf(new Date().getTime());
         takeScreenshot(hash);
     }
