@@ -46,15 +46,19 @@ public class ChplDownloadSteps extends BaseSteps {
      */
     @Given("^I am on download the CHPL resources page on \"([^\"]*)\"$")
     public void iAmOnDownloadTheCHPLResourcesPage(final String tEnv) throws Throwable {
+        // Get download page of system URL, then change to page of passed in environment
+        getDriver().get(getUrl() + "#/resources/download");
+        getShortWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
         String url;
-        if (tEnv.equalsIgnoreCase("DEV")) {
-            url = "https://chpl.ahrqdev.org";
-        } else if (tEnv.equalsIgnoreCase("STG")) {
-            url = "https://chpl.ahrqstg.org";
-        } else if (tEnv.equalsIgnoreCase("PROD")) {
-            url = "https://chpl.healthit.gov";
-        } else {
-            url = "http://localhost:3000";
+        switch (tEnv) {
+        case "DEV": url = "https://chpl.ahrqdev.org";
+        break;
+        case "STG": url = "https://chpl.ahrqstg.org";
+        break;
+        case "PROD": url = "https://chpl.healthit.gov";
+        break;
+        default: url = getUrl();
+        break;
         }
         getDriver().get(url + "#/resources/download");
         getShortWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
