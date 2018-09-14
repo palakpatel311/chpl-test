@@ -1,3 +1,4 @@
+@Regression
 Feature: Verify endpoints return correct response 
          OCD-2398- Verify the "basic information" product endpoint reports correct addl s/w code in CHPL ID
          
