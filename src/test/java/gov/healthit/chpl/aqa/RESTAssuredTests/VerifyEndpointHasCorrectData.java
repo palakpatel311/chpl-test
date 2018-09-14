@@ -14,8 +14,6 @@ import io.restassured.response.Response;
 public class VerifyEndpointHasCorrectData {
     private String url = System.getProperty("url");
     private String apikey = System.getProperty("apikey");
-    private String username = System.getProperty("username");
-    private String password = System.getProperty("password");
 
     /**
      * Set BaseUrl and other parameters.
@@ -28,12 +26,6 @@ public class VerifyEndpointHasCorrectData {
         if (StringUtils.isEmpty(apikey)) {
             throw new IllegalArgumentException("Missing value for apikey!");
         }
-        if (StringUtils.isEmpty(username)) {
-            throw new IllegalArgumentException("Missing value for username!");
-        }
-        if (StringUtils.isEmpty(password)) {
-            throw new IllegalArgumentException("Missing value for password!");
-        }
     }
 
     /**
@@ -43,18 +35,10 @@ public class VerifyEndpointHasCorrectData {
      */
     @Given("^I send request for product details using basic information product endpoint with \"([^\"]*)\" then I should get correct \"([^\"]*)\" in response$")
     public void validateResponseCP(final String dbId, final String chplId) {
-        Response token = given()
-                .header("API-KEY", apikey)
-                .header("content-type", "application/json")
-                .body("{\"userName\":\"" + username + "\",\"password\":\"" + password + "\"}")
-                .post(url + "/rest/auth/authenticate");
-        JsonPath jsonPathEvaluatorT = token.jsonPath();
-        String t1 = jsonPathEvaluatorT.get("token");
 
         Response response = given()
         .header("API-KEY", apikey)
         .header("content-type", "application/json")
-        .header("Authorization", "Bearer" + " " + t1)
         .get(url + "/rest/certified_products/" + dbId);
 
         // Get JsonPath object instance from the Response interface
@@ -69,7 +53,6 @@ public class VerifyEndpointHasCorrectData {
         Response responseDetail = given()
                 .header("API-KEY", apikey)
                 .header("content-type", "application/json")
-                .header("Authorization", "Bearer" + " " + t1)
                 .get(url + "/rest/certified_products/" + dbId + "/details");
 
                 JsonPath jsonPathEvaluator = responseDetail.jsonPath();
