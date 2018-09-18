@@ -28,8 +28,7 @@ Scenario Outline: Mapping legacy values for G1/G2
     |9287|170.315 (e)(1)|G1|Patient Electronic Access: Eligible Hospital/Critical Access Hospital|Required Test 2: Stage 2 Objective 8 Measure 1|
     |9287|170.315 (e)(1)|G1|View, Download, or Transmit (VDT): Eligible Hospital/Critical Access Hospital|Required Test 4: Stage 2 Objective 8 Measure 2| 
     |9608|170.315 (g)(8)|G2|View, Download, or Transmit (VDT): Eligible Clinician|Required Test 4: ACI Transition Objective 3 Measure 2|
-    |9608|170.315 (g)(8)|G2|View, Download, or Transmit (VDT): Eligible Clinician|Required Test 4: ACI Objective 4 Measure 1|
-    |9608|170.315 (b)(1)|G1|Support Electronic Referral Loops by Receiving and Incorporating Health Information: Eligible Hospital/Critical Access Hospital|Required Test 15: Stage 3|    
+    |9608|170.315 (g)(8)|G2|View, Download, or Transmit (VDT): Eligible Clinician|Required Test 4: ACI Objective 4 Measure 1|        
     |9608|170.315 (e)(1)|G2|Patient Electronic Access: Eligible Clinician|Required Test 2: ACI Transition Objective 3 Measure 1|
     |8859|170.315 (e)(3)|G1|Patient-Generated Health Data: Eligible Clinician|Required Test 6: ACI Objective 4 Measure 3|
     |8878|170.315 (g)(8)|G2|View, Download, or Transmit (VDT): Eligible Provider|Required Test 4: Stage 2 Objective 8 Measure 2|
