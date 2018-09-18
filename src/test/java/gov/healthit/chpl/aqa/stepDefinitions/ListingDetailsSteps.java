@@ -280,10 +280,10 @@ public class ListingDetailsSteps extends BaseSteps {
     public void assertMeasureName(final String gOption, final String measureName, final String number) {
 
         if (gOption.equals("G1")) {
-            String actualString = ListingDetailsPage.gMeasureName(getDriver(), number, "2").getText();
+            String actualString = ListingDetailsPage.gMeasureName(getDriver(), number, "G1").getText();
             assertTrue(actualString.contains(measureName), "Expect " + measureName + " to be found in " + actualString);
         } else {
-            String actualString = ListingDetailsPage.gMeasureName(getDriver(), number, "3").getText();
+            String actualString = ListingDetailsPage.gMeasureName(getDriver(), number, "G2").getText();
             assertTrue(actualString.contains(measureName), "Expect " + measureName + " to be found in " + actualString);
         }
     }
