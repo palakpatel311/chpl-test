@@ -16,7 +16,7 @@ public class BaseSteps {
     private String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
     protected static final int TIMEOUT = 30;
-    protected static final int LONG_TIMEOUT = 90;
+    protected static final int LONG_TIMEOUT = 120;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     /** Default constructor. */

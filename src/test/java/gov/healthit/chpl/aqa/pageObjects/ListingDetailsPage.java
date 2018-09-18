@@ -134,12 +134,12 @@ public final class ListingDetailsPage {
     /**
      * Returns the element that holds G1/G2 Measure Name for a criteria.
      * @param driver WebDriver
-     * @param number is criteria number
-     * @return MeasureName element
-     * @param index is table row index for G1/G2
+     * @param criteriaNumber relevant criteria
+     * @param g either "G1" or "G2"
+     * @return the table cell containing the list of G1 or G2 Measure Names (or "None", if none exist)
      */
-    public static WebElement gMeasureName(final WebDriver driver, final String number, final String index) {
-        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[" + index + "]/td[2]"));
+    public static WebElement gMeasureName(final WebDriver driver, final String criteriaNumber, final String g) {
+        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + criteriaNumber + "_details_row_Measures_" + g + "]/td[2]"));
         return element;
     }
 

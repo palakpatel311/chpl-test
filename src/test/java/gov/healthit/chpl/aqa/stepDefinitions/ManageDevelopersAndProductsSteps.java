@@ -78,7 +78,7 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
             DpManagementPage.survSearchButton(getDriver()).click();
             getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
         } catch (NoSuchElementException nsee) {
-            Hooks.takeScreenshot(chplId);
+            Hooks.takeScreenshot("searchForChplIdInSurvSearch" + chplId);
             assertTrue(false, "chpl id search:" + nsee.getMessage());
         }
     }
