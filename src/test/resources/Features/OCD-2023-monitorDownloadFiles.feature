@@ -20,19 +20,19 @@ Feature: OCD-2023: Monitor that download files on CHPL download resources page a
       | DEV  |    2015 | csv  |    1 |  230 | KB    |
       | STG  |    2011 | xml  |   92 |  380 | MB    |
       | STG  |    2014 | xml  |    1 |  440 | MB    |
-      | STG  |    2014 | csv  |    1 | 1900 | KB    |
+      | STG  |    2014 | csv  |    1 | 2400 | KB    |
       | STG  |    2015 | xml  |    1 |  120 | MB    |
       | STG  |    2015 | csv  |    1 |  230 | KB    |
       | PROD |    2011 | xml  |   92 |  380 | MB    |
       | PROD |    2014 | xml  |    1 |  440 | MB    |
       | PROD |    2014 | csv  |    1 | 2400 | KB    |
       | PROD |    2015 | xml  |    1 |  120 | MB    |
-      | PROD |    2015 | csv  |    1 |  230 | KB    |
+      | PROD |    2015 | csv  |    1 |  250 | KB    |
 
-#  Scenario: At any given time, when downloaded, Surveillance Activity file is up-to-date
-#    When I download the Surveillance Activity file
-#    Then the downloaded file shows surveillance-all.csv filename
+  Scenario: At any given time, when downloaded, Surveillance Activity file is up-to-date
+    When I download the Surveillance Activity file
+    Then the downloaded file shows surveillance-all.csv filename
 
-#  Scenario: At any given time, when downloaded, Non-Conformities file is up-to-date
-#    When I download the Non-Conformities file
-#    Then the downloaded file shows surveillance-with-nonconformities.csv filename
+  Scenario: At any given time, when downloaded, Non-Conformities file is up-to-date
+    When I download the Non-Conformities file
+    Then the downloaded file shows surveillance-with-nonconformities.csv filename
