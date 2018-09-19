@@ -35,4 +35,3 @@ Scenario Outline: Mapping legacy values for G1/G2
     |8878|170.315 (g)(8)|G2|View, Download, or Transmit (VDT): Eligible Provider|Required Test 4: Stage 2 Objective 8 Measure 2|
     |9482|170.315 (g)(8)|G2|Provider to Patient Exchange (formerly Patient Electronic Access): Eligible Hospital/Critical Access Hospital|Required Test 2: Stage 3 Objective 5 Measure 1|
     |9482|170.315 (g)(9)|G2|Provider to Patient Exchange (formerly Patient Electronic Access): Eligible Hospital/Critical Access Hospital|Required Test 2: Stage 3 Objective 5 Measure 1|            
-    
