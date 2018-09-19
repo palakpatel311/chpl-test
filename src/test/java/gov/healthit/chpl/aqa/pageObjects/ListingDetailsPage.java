@@ -139,7 +139,7 @@ public final class ListingDetailsPage {
      * @return the table cell containing the list of G1 or G2 Measure Names (or "None", if none exist)
      */
     public static WebElement gMeasureName(final WebDriver driver, final String criteriaNumber, final String g) {
-        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + criteriaNumber + "_details_row_Measures_" + g + "]/td[2]"));
+        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + criteriaNumber + "_details_row_Measures_" + g + "\"]/td[2]"));
         return element;
     }
 
