@@ -5,6 +5,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -73,13 +74,21 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
      */
     @When("^I search for \"([^\"]*)\" in Manage Surveillance Activity section$")
     public void searchForChplIdInSurvSearch(final String chplId) throws Exception {
+        final long millisPerSecond = 1000;
+        Date start = new Date();
+        Date end;
         try {
             DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
             DpManagementPage.survSearchButton(getDriver()).click();
+            start = new Date();
             getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
+            end = new Date();
+            System.out.println("Found table in " + ((end.getTime() - start.getTime()) / millisPerSecond) + " seconds");
         } catch (NoSuchElementException nsee) {
+            end = new Date();
+            System.out.println("Did not find table in " + ((end.getTime() - start.getTime()) / millisPerSecond) + " seconds");
             Hooks.takeScreenshot("searchForChplIdInSurvSearch" + chplId);
-            assertTrue(false, "chpl id search:" + nsee.getMessage());
+            assertTrue(false, "chpl id search: " + nsee.getMessage());
         }
     }
 
