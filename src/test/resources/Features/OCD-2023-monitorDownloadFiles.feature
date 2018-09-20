@@ -26,7 +26,7 @@ Feature: OCD-2023: Monitor that download files on CHPL download resources page a
       | PROD |    2011 | xml  |   92 |  380 | MB    |
       | PROD |    2014 | xml  |    1 |  440 | MB    |
       | PROD |    2014 | csv  |    1 | 2400 | KB    |
-      | PROD |    2015 | xml  |    1 |  120 | MB    |
+      | PROD |    2015 | xml  |    1 |  130 | MB    |
       | PROD |    2015 | csv  |    1 |  250 | KB    |
 
   Scenario: At any given time, when downloaded, Surveillance Activity file is up-to-date
