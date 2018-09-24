@@ -11,20 +11,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BaseSteps {
 
     private EventFiringWebDriver driver;
-    private WebDriverWait shortWait;
-    private WebDriverWait longWait;
+    private WebDriverWait wait;
     private String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
-    protected static final int TIMEOUT = 30;
-    protected static final int LONG_TIMEOUT = 120;
+    protected static final long TIMEOUT = 30;
+    protected static final long LONG_TIMEOUT = 120;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     /** Default constructor. */
     public BaseSteps() {
         super();
         this.driver = Hooks.getDriver();
-        this.setShortWait(new WebDriverWait(this.driver, TIMEOUT));
-        this.setLongWait(new WebDriverWait(this.driver, LONG_TIMEOUT));
+        this.setWait(new WebDriverWait(this.driver, TIMEOUT));
         if (StringUtils.isEmpty(this.url)) {
             this.setUrl("http://localhost:3000/");
         }
@@ -58,19 +56,11 @@ public class BaseSteps {
         this.url = url;
     }
 
-    public WebDriverWait getLongWait() {
-        return longWait;
+    public WebDriverWait getWait() {
+        return wait;
     }
 
-    public void setLongWait(final WebDriverWait longWait) {
-        this.longWait = longWait;
-    }
-
-    public WebDriverWait getShortWait() {
-        return shortWait;
-    }
-
-    public void setShortWait(final WebDriverWait shortWait) {
-        this.shortWait = shortWait;
+    public void setWait(final WebDriverWait wait) {
+        this.wait = wait;
     }
 }

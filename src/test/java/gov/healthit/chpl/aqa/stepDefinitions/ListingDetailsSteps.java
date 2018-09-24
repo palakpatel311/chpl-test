@@ -45,7 +45,7 @@ public class ListingDetailsSteps extends BaseSteps {
     @Given("^I am on listing details page of listing with ID \"(.*)\"$")
     public void loadListingWithDbId(final String id) {
         getDriver().get(getUrl() + "#/product/" + id);
-        getShortWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(getDriver())));
     }
 
     /**
@@ -85,7 +85,7 @@ public class ListingDetailsSteps extends BaseSteps {
      */
     @Then("^I should see these accordions exist on the details page: Criteria, CQMs, SED, G1/G2, Surveillance, Additional Info$")
     public void iShouldSeeTheAccordionsExistOnDetailsPage() {
-        getShortWait().until(ExpectedConditions.presenceOfElementLocated(By.id("details-certification-criteria")));
+        getWait().until(ExpectedConditions.presenceOfElementLocated(By.id("details-certification-criteria")));
         assertTrue(getDriver().findElement(By.id("details-certification-criteria")).getText().contains("Certification Criteria"));
         assertTrue(getDriver().findElement(By.id("details-cqm")).getText().contains("Clinical Quality Measures"));
         assertTrue(getDriver().findElement(By.id("details-sed")).getText().contains("Safety Enhanced Design (SED)"));
@@ -99,7 +99,7 @@ public class ListingDetailsSteps extends BaseSteps {
      */
     @Then("^I should see the accordions in the following order: Criteria, CQMs, SED, G1/G2, Surveillance, Additional Info$")
     public void iShouldSeeTheAccordionsInTheFollowingOrderCriteriaCQMsSEDG1G2SurveillanceAdditionalInfo() {
-        getShortWait().until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.panel:nth-child(2) > div:nth-child(1) > a:nth-child(1)")));
+        getWait().until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.panel:nth-child(2) > div:nth-child(1) > a:nth-child(1)")));
         assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(2) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Certification Criteria"));
         assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(3) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Clinical Quality Measures"));
         assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(4) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Safety Enhanced Design (SED)"));

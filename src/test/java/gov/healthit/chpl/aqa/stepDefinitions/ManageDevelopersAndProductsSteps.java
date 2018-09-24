@@ -4,9 +4,20 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -25,6 +36,9 @@ import gov.healthit.chpl.aqa.pageObjects.ManageDevelopersAndProductsPage;
  * navigated to via #/admin/dpManagement and including both ROLE_ADMIN and ROLE_ACB activities.
  */
 public class ManageDevelopersAndProductsSteps extends BaseSteps {
+    private static final int CHPL_PRODUCT_NUMBER_PREFIX = 14;
+    private String chplProductNumber; // Used to pass newly generated CHPL Product number between steps during upload
+
     /** Default constructor. */
     public ManageDevelopersAndProductsSteps() {
         super();
@@ -37,7 +51,7 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
     @Given("^I navigate to Manage Developers and Products page listing details section of listing with ID \"([^\"]*)\"$")
     public void loadListingDetailsDpManagementPage(final String id) {
         getDriver().get(getUrl() + "#/admin/dpManagement/manage/" + id);
-        getShortWait().until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver())));
     }
 
     /**
@@ -64,7 +78,7 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
     @When("^I go to Confirm Pending Products Page$")
     public void loadConfirmPendingProductsPage() {
         DpManagementPage.confirmPendingProductsLink(getDriver()).click();
-        getShortWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
     }
 
     /**
@@ -81,7 +95,9 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
             DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
             DpManagementPage.survSearchButton(getDriver()).click();
             start = new Date();
-            getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
             end = new Date();
             System.out.println("Found table in " + ((end.getTime() - start.getTime()) / millisPerSecond) + " seconds");
         } catch (NoSuchElementException nsee) {
@@ -95,10 +111,14 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
     /**
      * Upload a listing.
      * @param edition is listing edition
+     * @param inputChplId initial CHPL ID
      */
-    @When("^I upload a \"([^\"]*)\" listing$")
-    public void uploadAlisting(final String edition) {
-        DpManagementPage.chooseFileButton(getDriver()).sendKeys(getFilePath() + File.separator + edition + "_Test_SLI.csv");
+    @When("^I upload a \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
+    public void uploadAlisting(final String edition, final String inputChplId) {
+        List<CSVRecord> listing = getUploadFile(edition);
+        String filename = writeTempFile(listing, inputChplId);
+        System.out.println("Sending filename: " + filename);
+        DpManagementPage.chooseFileButton(getDriver()).sendKeys(filename);
         DpManagementPage.uploadFileButton(getDriver()).click();
     }
 
@@ -110,22 +130,14 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
      */
     @And("^I confirm \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
     public void confirmUploadedListing(final String edition, final String testChplId) throws Exception {
-        Calendar now = Calendar.getInstance();
-
-        String newPid = "" + CHARS.charAt(now.get(Calendar.MONTH))
-        + CHARS.charAt(now.get(Calendar.DAY_OF_MONTH))
-        + CHARS.charAt(now.get(Calendar.HOUR_OF_DAY))
-        + CHARS.charAt(now.get(Calendar.MINUTE));
-
-        String newVid = "" + CHARS.charAt(now.get(Calendar.MINUTE))
-        + CHARS.charAt(now.get(Calendar.SECOND));
-
-        String confListingId = edition.substring(2) + ".05.05.1447." + newPid + "." + newVid + ".00.1.180707";
-
         try {
-            getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), testChplId)));
-            getLongWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(), testChplId)));
-            DpManagementPage.inspectButtonForUploadedListing(getDriver(), testChplId).click();
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
+            DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber).click();
 
             DpManagementPage.nextOnInspectButton(getDriver()).click();
 
@@ -139,28 +151,21 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
             }
             DpManagementPage.nextOnInspectButton(getDriver()).click();
 
-            DpManagementPage.editOnInspectButton(getDriver()).click();
-
-            DpManagementPage.productIdOnInspect(getDriver()).clear();
-            DpManagementPage.productIdOnInspect(getDriver()).sendKeys(newPid);
-
-            DpManagementPage.productVersionOnInspect(getDriver()).clear();
-            DpManagementPage.productVersionOnInspect(getDriver()).sendKeys(newVid);
-
-            DpManagementPage.saveCpOnInspect(getDriver()).click();
-            getShortWait().until(ExpectedConditions.textToBePresentInElement(DpManagementPage.inspectModalLabel(getDriver()), confListingId));
-
             DpManagementPage.confirmButtonOnInspect(getDriver()).click();
 
             WebElement button = DpManagementPage.yesOnConfirm(getDriver());
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
 
-            getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
 
-            getDriver().get(getUrl() + "/#/product/" + confListingId);
-            getLongWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(getDriver())));
+            getDriver().get(getUrl() + "/#/product/" + this.chplProductNumber);
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(getDriver())));
         } catch (Exception e) {
-            Hooks.takeScreenshot(confListingId);
+            Hooks.takeScreenshot(this.chplProductNumber);
             assertTrue(false, "in confirm:" + e.getMessage());
         }
     }
@@ -203,11 +208,17 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
 
     /**
      * Assert upload success message.
+     * @throws Exception if screenshot can't be taken
      */
     @Then("^I see upload successful message$")
-    public void testUploadSuccessText() {
+    public void testUploadSuccessText() throws Exception {
         String successText = DpManagementPage.uploadSuccessfulText(getDriver()).getText();
-        assertTrue(successText.contains("was uploaded successfully"));
+        try {
+            assertTrue(successText.contains("was uploaded successfully"));
+        } catch (AssertionError ae) {
+            Hooks.takeScreenshot();
+            throw (ae);
+        }
     }
 
     /**
@@ -219,5 +230,65 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
         String testListingName = "New product";
         String actualString = ListingDetailsPage.listingName(getDriver()).getText();
         assertEquals(actualString, testListingName);
+    }
+
+    private List<CSVRecord> getUploadFile(final String edition) {
+        try {
+            File listing = new File(System.getProperty("user.dir") + File.separator + "src"
+                    + File.separator + "test" + File.separator + "resources" + File.separator + edition + "_Test_SLI.csv");
+            /**
+             * This should work, but I can't figure out why it isn't.
+             * InputStream listing = ManageDevelopersAndProductsSteps.class.getResourceAsStream("test/resources/" + edition + "_Test_SLI.csv");
+             */
+            CSVParser parser = CSVParser.parse(listing, Charset.forName("UTF-8"), CSVFormat.EXCEL);
+            return parser.getRecords();
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    private String writeTempFile(final List<CSVRecord> listing, final String inputChplId) {
+        File temp = null;
+        OutputStreamWriter writer = null;
+        CSVPrinter csvPrinter = null;
+        String newChplId = getNewChplId(inputChplId);
+        try {
+            temp = File.createTempFile("upload", ".csv");
+            temp.deleteOnExit();
+            writer = new OutputStreamWriter(
+                    new FileOutputStream(temp),
+                    Charset.forName("UTF-8").newEncoder()
+                    );
+            csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL);
+            for (CSVRecord record : listing) {
+                ArrayList<String> row = new ArrayList<String>();
+                for (String s : record) {
+                    if (s.equalsIgnoreCase(inputChplId)) {
+                        s = newChplId;
+                    }
+                    row.add(s);
+                }
+                csvPrinter.printRecord(row);
+            }
+            csvPrinter.close();
+            return temp.getAbsolutePath();
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    private String getNewChplId(final String inputChplId) {
+        Calendar now = Calendar.getInstance();
+
+        String newPid = "" + CHARS.charAt(now.get(Calendar.MONTH))
+        + CHARS.charAt(now.get(Calendar.DAY_OF_MONTH))
+        + CHARS.charAt(now.get(Calendar.HOUR_OF_DAY))
+        + CHARS.charAt(now.get(Calendar.MINUTE));
+
+        String newVid = "" + CHARS.charAt(now.get(Calendar.MINUTE))
+        + CHARS.charAt(now.get(Calendar.SECOND));
+
+        this.chplProductNumber = inputChplId.substring(0, CHPL_PRODUCT_NUMBER_PREFIX) + newPid + "." + newVid + ".00.1.180707";
+        return this.chplProductNumber;
     }
 }
