@@ -51,7 +51,7 @@ public class ChplDownloadSteps extends BaseSteps {
     public void iAmOnDownloadTheCHPLResourcesPage(final String tEnv) throws Throwable {
         // Get download page of system URL, then change to page of passed in environment
         getDriver().get(getUrl() + "#/resources/download");
-        getShortWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
         String url;
         switch (tEnv) {
         case "DEV": url = "https://chpl.ahrqdev.org";
@@ -64,7 +64,7 @@ public class ChplDownloadSteps extends BaseSteps {
         break;
         }
         getDriver().get(url + "#/resources/download");
-        getShortWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
     }
 
     /**

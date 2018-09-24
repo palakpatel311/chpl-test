@@ -6,6 +6,7 @@ import static org.testng.Assert.assertTrue;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -37,7 +38,7 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
     @Given("^I navigate to Manage Developers and Products page listing details section of listing with ID \"([^\"]*)\"$")
     public void loadListingDetailsDpManagementPage(final String id) {
         getDriver().get(getUrl() + "#/admin/dpManagement/manage/" + id);
-        getShortWait().until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver())));
     }
 
     /**
@@ -64,7 +65,7 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
     @When("^I go to Confirm Pending Products Page$")
     public void loadConfirmPendingProductsPage() {
         DpManagementPage.confirmPendingProductsLink(getDriver()).click();
-        getShortWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
     }
 
     /**
@@ -81,7 +82,9 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
             DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
             DpManagementPage.survSearchButton(getDriver()).click();
             start = new Date();
-            getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
             end = new Date();
             System.out.println("Found table in " + ((end.getTime() - start.getTime()) / millisPerSecond) + " seconds");
         } catch (NoSuchElementException nsee) {
@@ -123,8 +126,12 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
         String confListingId = edition.substring(2) + ".05.05.1447." + newPid + "." + newVid + ".00.1.180707";
 
         try {
-            getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), testChplId)));
-            getLongWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(), testChplId)));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), testChplId)));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(), testChplId)));
             DpManagementPage.inspectButtonForUploadedListing(getDriver(), testChplId).click();
 
             DpManagementPage.nextOnInspectButton(getDriver()).click();
@@ -148,17 +155,21 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
             DpManagementPage.productVersionOnInspect(getDriver()).sendKeys(newVid);
 
             DpManagementPage.saveCpOnInspect(getDriver()).click();
-            getShortWait().until(ExpectedConditions.textToBePresentInElement(DpManagementPage.inspectModalLabel(getDriver()), confListingId));
+            getWait().until(ExpectedConditions.textToBePresentInElement(DpManagementPage.inspectModalLabel(getDriver()), confListingId));
 
             DpManagementPage.confirmButtonOnInspect(getDriver()).click();
 
             WebElement button = DpManagementPage.yesOnConfirm(getDriver());
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
 
-            getLongWait().until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
 
             getDriver().get(getUrl() + "/#/product/" + confListingId);
-            getLongWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(getDriver())));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(getDriver())));
         } catch (Exception e) {
             Hooks.takeScreenshot(confListingId);
             assertTrue(false, "in confirm:" + e.getMessage());
