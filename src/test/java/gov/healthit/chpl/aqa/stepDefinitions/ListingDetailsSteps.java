@@ -195,18 +195,37 @@ public class ListingDetailsSteps extends BaseSteps {
 
     /**
      * Assert that Test tool text is as expected.
-     * @param testTool expected text
+     * @param testToolName expected text
+     * @param number criteria to look in
+     * @param testToolVersion expected test tool version
+     * @throws Exception if screenshot unable to be taken
+     */
+    @Then("^Test Tool should display \"([^\"]*)\" and \"([^\"]*)\" for criteria \"([^\"]*)\"$")
+    public void testToolFieldShouldDisplay(final String testToolName, final String testToolVersion, final String number) throws Exception {
+        try {
+            String actualString = ListingDetailsPage.testTool(getDriver(), number).getText();
+            assertTrue(actualString.contains(testToolName), "Expect \"" + testToolName + "\" to be found in \"" + actualString + "\"");
+            assertTrue(actualString.contains(testToolVersion), "Expect \"" + testToolVersion + "\" to be found in \"" + actualString + "\"");
+        } catch (NullPointerException npe) {
+            Hooks.takeScreenshot(testToolName + "_" + number);
+            assertTrue(false, testToolName + "_" + number + ": " + npe.getMessage());
+        }
+    }
+
+    /**
+     * Assert that Privacy and Security Framework is as expected.
+     * @param privacySecurity expected text
      * @param number criteria to look in
      * @throws Exception if screenshot unable to be taken
      */
-    @Then("^Test Tool should display \"([^\"]*)\" for criteria \"([^\"]*)\"$")
-    public void testToolFieldShouldDisplay(final String testTool, final String number) throws Exception {
+    @Then("^Privacy and security Framework should display \"([^\"]*)\" for criteria \"([^\"]*)\"$")
+    public void verifyPrivacySecurityFrameworkValue(final String privacySecurity, final String number) throws Exception {
         try {
-            String actualString = ListingDetailsPage.testTool(getDriver(), number).getText();
-            assertTrue(actualString.contains(testTool), "Expect \"" + testTool + "\" to be found in \"" + actualString + "\"");
+            String actualString = ListingDetailsPage.privacySecurityFramework(getDriver(), number).getText();
+            assertTrue(actualString.contains(privacySecurity), "Expect \"" + privacySecurity + "\" to be found in \"" + actualString + "\"");
         } catch (NullPointerException npe) {
-            Hooks.takeScreenshot(testTool + "_" + number);
-            assertTrue(false, testTool + "_" + number + ": " + npe.getMessage());
+            Hooks.takeScreenshot(privacySecurity + "_" + number);
+            assertTrue(false, privacySecurity + "_" + number + ": " + npe.getMessage());
         }
     }
 
