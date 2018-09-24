@@ -174,6 +174,16 @@ public final class ListingDetailsPage {
     }
 
     /**
+     * Get the Privacy and Security Framework value for a given criteria.
+     * @param driver WebDriver
+     * @param number certification criteria
+     * @return the Privacy and Security Framework value
+     */
+    public static WebElement privacySecurityFramework(final WebDriver driver, final String number) {
+        return driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_row_Privacy_Security_Framework\"]/td[2]"));
+    }
+
+    /**
      * Returns product history eye button element.
      * @param driver WebDriver
      * @return button element
