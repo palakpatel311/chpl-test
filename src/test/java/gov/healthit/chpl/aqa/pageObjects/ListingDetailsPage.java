@@ -242,7 +242,7 @@ public final class ListingDetailsPage {
      * return null if Required text was not found as expected
      */
     public static WebElement measureNameForReqTest(final WebDriver driver, final String reqTest) {
-        WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/div/table/tbody"));
+        WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/ai-g1g2/div/table/tbody"));
         ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
         for (WebElement row : rows) {
             ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
