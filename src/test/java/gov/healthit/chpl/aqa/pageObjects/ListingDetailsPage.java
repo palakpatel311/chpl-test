@@ -41,7 +41,7 @@ public final class ListingDetailsPage {
      * return null if criteria was not found in Associated Criteria column
      */
     public static WebElement associatedCriteria(final WebDriver driver, final String mName) {
-        WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/div/table/tbody"));
+        WebElement table = driver.findElement(By.xpath("//*[@id=\"panel-g1g2\"]/ai-g1g2/div/table/tbody"));
         ArrayList<WebElement> rows = (ArrayList<WebElement>) table.findElements(By.tagName("tr"));
         for (WebElement row : rows) {
             ArrayList<WebElement> cols = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
