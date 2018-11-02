@@ -3,7 +3,9 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import java.io.File;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BaseSteps {
 
     private EventFiringWebDriver driver;
+    private static WebElement element;
     private WebDriverWait wait;
     private String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
@@ -63,4 +66,15 @@ public class BaseSteps {
     public void setWait(final WebDriverWait wait) {
         this.wait = wait;
     }
+
+    /**
+     * Returns element holding main content.
+     * @param driver WebDriver
+     * @return element holding main content
+     */
+    public static WebElement mainContent(final WebDriver driver) {
+        element = driver.findElement(By.id("main-content"));
+        return element;
+    }
+
 }
