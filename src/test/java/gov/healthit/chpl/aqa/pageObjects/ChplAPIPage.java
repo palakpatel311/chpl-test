@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 /**
  * Class ChplAPIPage definition.
  */
-public final class ChplAPIPage {
+public final class ChplAPIPage extends BasePage {
+
     private ChplAPIPage() {}
-    private static WebElement element = null;
 
      /**
      * Controller link.
@@ -18,8 +18,7 @@ public final class ChplAPIPage {
      * @param controller desired controller to open
      */
     public static WebElement controllerLink(final WebDriver driver, final String controller) {
-        element = driver.findElement(By.xpath("//*[@id=\"" + controller + "*\"]/li/h4/a"));
-        return element;
+       return driver.findElement(By.xpath("//*[@id=\"" + controller + "*\"]/li/h4/a"));
     }
 
     /**
@@ -28,8 +27,7 @@ public final class ChplAPIPage {
      * @return text element
      */
     public static WebElement certifiedProductsImplementationNotes(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[3]/div/div[2]/div/ul/li[19]/ul/li[1]/div[2]/div/p"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[3]/div/div[2]/div/ul"));
     }
 
     /**
@@ -39,8 +37,7 @@ public final class ChplAPIPage {
      * @param endpoint is given endpoint to view details
      */
     public static WebElement endpointLink(final WebDriver driver, final String endpoint) {
-        element = driver.findElement(By.xpath("//*[@id=\"" + endpoint + "\"]/a/div/span[1]"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"" + endpoint + "\"]/a/div/span[1]"));
     }
 
 }

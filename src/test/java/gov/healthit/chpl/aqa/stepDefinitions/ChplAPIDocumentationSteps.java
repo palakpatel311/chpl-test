@@ -1,6 +1,7 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,7 +11,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gov.healthit.chpl.aqa.pageObjects.BasePage;
 import gov.healthit.chpl.aqa.pageObjects.ChplAPIPage;
 
 /**
@@ -32,7 +32,7 @@ public class ChplAPIDocumentationSteps extends BaseSteps {
     public void userLoadsAPIPage() {
         getDriver().get(getUrl() + "#/resources/chpl_api");
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(BasePage.mainContent(getDriver())));
+        wait.until(ExpectedConditions.visibilityOf(ChplAPIPage.mainContent(getDriver())));
     }
 
     /**

@@ -9,4 +9,5 @@ Scenario Outline: Verify API documentation updates to endpoint details
     Examples:
     |controller_name|API_endpoint|endpoint_link|text|
     |certified-product-controller|certified_products|getCertifiedProductsByVersionUsingGET|The required 'versionId' parameter filters the certified products to those assigned to that version|
+    |authentication-controller|auth/authenticate|authenticateJSONUsingPOST|Specifically, the Authorization header must have a value of 'Bearer token-that-gets-returned'.|
     
