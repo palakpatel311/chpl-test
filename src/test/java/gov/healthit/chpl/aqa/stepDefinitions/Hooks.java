@@ -33,7 +33,7 @@ public class Hooks {
     private static EventFiringWebDriver driver;
     private static final int DELAY = 30;
     private static String screenshotPath;
-    private static String downloadPath = System.getProperty("downloadPath");
+    private static String downloadPath = System.getProperty("downloadPath"); //download files test
 
     /**
      * Launch ChromeDriver.
