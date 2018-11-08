@@ -1,3 +1,4 @@
+@Regression
 Feature: API Documentation updates
          OCD-2505 - Update Implementation Note for /certified_products endpoint
 
