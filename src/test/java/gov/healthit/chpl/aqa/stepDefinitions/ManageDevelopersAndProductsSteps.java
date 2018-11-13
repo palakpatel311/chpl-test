@@ -291,4 +291,24 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
         this.chplProductNumber = inputChplId.substring(0, CHPL_PRODUCT_NUMBER_PREFIX) + newPid + "." + newVid + ".00.1.180707";
         return this.chplProductNumber;
     }
+
+    /**
+     * Open Edit form.
+     */
+    @And("^I open listing edit page$")
+    public void openListingEditPage() {
+        WebElement link = ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+    }
+
+    /**
+     * Asserts newly added version for CQMs are correct.
+     * @param version is expected version
+     * @param cqm is given CQM
+     */
+    @Then("^there should be version \"([^\"]*)\" available for \"([^\"]*)\"$")
+    public void checkCqmVersion(final String version, final String cqm) {
+        String cmsversion = ManageDevelopersAndProductsPage.cmsVersion(getDriver(), cqm).getText();
+        assertTrue(cmsversion.contains(version), "Expect " + version + " to be found in " + cmsversion);
+    }
 }

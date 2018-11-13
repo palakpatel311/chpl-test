@@ -9,30 +9,30 @@ import org.openqa.selenium.WebElement;
 /**
  * Class ListingDetailsPage definition.
  */
-public final class ListingDetailsPage {
+public final class ListingDetailsPage extends BasePage {
 
     private static final int CRITERIA_COLUMN = 3;
 
     private ListingDetailsPage() {}
-    private static WebElement element = null;
+
     /**
      * Returns element that holds Accessibility Standard Process Text.
      * @param driver WebDriver
      * @return Text element
      */
     public static WebElement accessibilityStandardText(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[54]/div/div/div/table/tbody/tr[3]/td[2]/ul/li[1]"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[54]/div/div/div/table/tbody/tr[3]/td[2]/ul/li[1]"));
     }
+
     /**
      * Returns Additional Information Accordion element.
      * @param driver WebDriver
      * @return Additional Information Accordion element
      */
     public static WebElement additionalInfoAccordion(final WebDriver driver) {
-        element = driver.findElement(By.id("details-additional-information"));
-        return element;
+        return driver.findElement(By.id("details-additional-information"));
     }
+
     /**
      * Returns the element that holds associated criteria number for a Measure Name in Successfully Tested G1/G2 Measures section .
      * @param driver WebDriver
@@ -51,15 +51,16 @@ public final class ListingDetailsPage {
         }
         return null;
     }
+
     /**
      * Return Certification Criteria Accordion on listing page.
      * @param driver WebDriver
      * @return Certification Criteria Accordion element
      */
     public static WebElement certificationCriteriaAccordion(final WebDriver driver) {
-        element = driver.findElement(By.id("details-certification-criteria"));
-        return element;
+        return driver.findElement(By.id("details-certification-criteria"));
     }
+
     /**
      * Get the link to a criteria details section.
      * @param driver WebDriver
@@ -67,8 +68,7 @@ public final class ListingDetailsPage {
      * @return the link element
      */
     public static WebElement certificationCriteriaDetailsLink(final WebDriver driver, final String number) {
-        element = driver.findElement(By.id("criteria_" + number + "_details_link"));
-        return element;
+        return driver.findElement(By.id("criteria_" + number + "_details_link"));
     }
 
     /**
@@ -78,17 +78,16 @@ public final class ListingDetailsPage {
      * @return the button
      */
     public static WebElement cmsWidgetButton(final WebDriver driver, final String id) {
-        element = driver.findElement(By.id("toggle-cms-" + id));
-        return element;
+        return driver.findElement(By.id("toggle-cms-" + id));
     }
+
     /**
-     * Return CQM Accordion on listing page.
+     * CQM data Table under CQM accordion.
      * @param driver WebDriver
-     * @return CQM Accordion element
+     * @return Table element
      */
-    public static WebElement cqmAccordion(final WebDriver driver) {
-        element = driver.findElement(By.id("details-cqm"));
-        return element;
+    public static WebElement cqmDataTable(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"panel-cqm\"]/table"));
     }
 
     /**
@@ -97,8 +96,7 @@ public final class ListingDetailsPage {
      * @return the transparency disclosure URL
      */
     public static WebElement disclosureUrl(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"product-information-mandatory-disclosures-url\"]/a"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"product-information-mandatory-disclosures-url\"]/a"));
     }
 
     /**
@@ -107,8 +105,7 @@ public final class ListingDetailsPage {
      * @return download SED details button element
      */
     public static WebElement downloadSEDDetailsButton(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-tasks-table\"]/tfoot/tr/td/button"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"sed-tasks-table\"]/tfoot/tr/td/button"));
     }
 
     /**
@@ -117,8 +114,7 @@ public final class ListingDetailsPage {
      * @return edit certified product link element
      */
     public static WebElement editCertifiedProductLink(final WebDriver driver) {
-        element = driver.findElement(By.linkText("Edit Certified Product"));
-        return element;
+        return driver.findElement(By.linkText("Edit Certified Product"));
     }
 
     /**
@@ -127,8 +123,7 @@ public final class ListingDetailsPage {
      * @return G1/G2 Accordion element
      */
     public static WebElement g1g2Accordion(final WebDriver driver) {
-        element = driver.findElement(By.id("details-g1g2"));
-        return element;
+        return driver.findElement(By.id("details-g1g2"));
     }
 
     /**
@@ -139,8 +134,7 @@ public final class ListingDetailsPage {
      * @return the table cell containing the list of G1 or G2 Measure Names (or "None", if none exist)
      */
     public static WebElement gMeasureName(final WebDriver driver, final String criteriaNumber, final String g) {
-        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + criteriaNumber + "_details_row_Measures_" + g + "\"]/td[2]"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"criteria_" + criteriaNumber + "_details_row_Measures_" + g + "\"]/td[2]"));
     }
 
     /**
@@ -149,8 +143,7 @@ public final class ListingDetailsPage {
      * @return Title element
      */
     public static WebElement intendedUserDescriptionTitle(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[2]/h4"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[2]/h4"));
     }
 
     /**
@@ -159,8 +152,7 @@ public final class ListingDetailsPage {
      * @return listing name element
      */
     public static WebElement listingName(final WebDriver driver) {
-        element = driver.findElement(By.id("listing-name"));
-        return element;
+        return driver.findElement(By.id("listing-name"));
     }
 
     /**
@@ -169,8 +161,7 @@ public final class ListingDetailsPage {
      * @return element holding main content
      */
     public static WebElement mainContent(final WebDriver driver) {
-        element = driver.findElement(By.id("main-content"));
-        return element;
+        return driver.findElement(By.id("main-content"));
     }
 
     /**
@@ -189,8 +180,7 @@ public final class ListingDetailsPage {
      * @return button element
      */
     public static WebElement productHistoryEye(final WebDriver driver) {
-        element = driver.findElement(By.id("view-product-history"));
-        return element;
+        return driver.findElement(By.id("view-product-history"));
     }
 
     /**
@@ -199,8 +189,7 @@ public final class ListingDetailsPage {
      * @return button element
      */
     public static WebElement productHistoryTable(final WebDriver driver) {
-        element = driver.findElement(By.id("product-history-table"));
-        return element;
+        return driver.findElement(By.id("product-history-table"));
     }
 
     /**
@@ -209,8 +198,7 @@ public final class ListingDetailsPage {
      * @return text element
      */
     public static WebElement productHistoryText(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"product-history-modal\"]/div[2]/span"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"product-history-modal\"]/div[2]/span"));
     }
 
     /**
@@ -220,8 +208,7 @@ public final class ListingDetailsPage {
      * @return text element
      */
     public static WebElement qmsStandardText(final WebDriver driver, final String number) {
-        element = driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[3]/td[2]/ul/li"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[3]/td[2]/ul/li"));
     }
 
     /**
@@ -230,8 +217,7 @@ public final class ListingDetailsPage {
      * @return text element
      */
     public static WebElement nosedData(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/p"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/p"));
     }
 
     /**
@@ -254,13 +240,21 @@ public final class ListingDetailsPage {
     }
 
     /**
+     * View all certification criteria and CQMs check box.
+     * @param driver WebDriver
+     * @return checkbox input element
+     */
+    public static WebElement viewAllCertificationCriteriaCQMs(final WebDriver driver) {
+       return driver.findElement(By.id("viewAllCerts"));
+    }
+
+    /**
      * Return SED Accordion on listing page.
      * @param driver WebDriver
      * @return SED Accordion element
      */
     public static WebElement sedAccordion(final WebDriver driver) {
-        element = driver.findElement(By.id("details-sed"));
-        return element;
+        return driver.findElement(By.id("details-sed"));
     }
 
     /**
@@ -269,8 +263,7 @@ public final class ListingDetailsPage {
      * @return SED panel element
      */
     public static WebElement sedPanel(final WebDriver driver) {
-        element = driver.findElement(By.id("panel-sed"));
-        return element;
+        return driver.findElement(By.id("panel-sed"));
     }
 
     /**
@@ -279,8 +272,7 @@ public final class ListingDetailsPage {
      * @return Table element
      */
     public static WebElement sedCriteriaTable(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]"));
-        return element;
+       return driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]"));
     }
 
     /**
@@ -290,8 +282,7 @@ public final class ListingDetailsPage {
      * @return the criteria at the "nth" position
      */
     public static WebElement sedCertificationCriteria(final WebDriver driver, final String index) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[" + index + "]"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr[1]/td[1]/ul/li[" + index + "]"));
     }
 
     /**
@@ -300,8 +291,7 @@ public final class ListingDetailsPage {
      * @return Surveillance Activities Accordion element
      */
     public static WebElement surveillanceActivitiesAccordion(final WebDriver driver) {
-        element = driver.findElement(By.id("details-surveillance-activities"));
-        return element;
+        return driver.findElement(By.id("details-surveillance-activities"));
     }
 
     /**
@@ -330,8 +320,7 @@ public final class ListingDetailsPage {
      * @return the value of URL element
      */
     public static WebElement testResultsSummaryUrl(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[1]/a"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[1]/a"));
     }
 
     /**
@@ -340,8 +329,7 @@ public final class ListingDetailsPage {
      * @return Text element
      */
     public static WebElement ucdProcessText(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr/td[2]"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]/tbody/tr/td[2]"));
     }
 
     /**
@@ -350,8 +338,7 @@ public final class ListingDetailsPage {
      * @return Title element
      */
     public static WebElement usabilityReportTitle(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/h4"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/h4"));
     }
 
     /**
@@ -360,7 +347,6 @@ public final class ListingDetailsPage {
      * @return the UCD URL element
      */
     public static WebElement ucdUrl(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/a"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/a"));
     }
 }
