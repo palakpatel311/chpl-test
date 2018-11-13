@@ -82,6 +82,15 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
+     * CQM Accordion on listing details page.
+     * @param driver WebDriver
+     * @return CQM Accordion element
+     */
+    public static WebElement cqmAccordion(final WebDriver driver) {
+       return driver.findElement(By.id("details-cqm"));
+    }
+
+    /**
      * CQM data Table under CQM accordion.
      * @param driver WebDriver
      * @return Table element

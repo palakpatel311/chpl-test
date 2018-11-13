@@ -302,6 +302,15 @@ public class ManageDevelopersAndProductsSteps extends BaseSteps {
     }
 
     /**
+     * Open CQM accordion.
+     */
+    @When("^I look at CQM details$")
+    public void opencqmPanel() {
+        WebElement link = ManageDevelopersAndProductsPage.cqmAccordion(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+    }
+
+    /**
      * Asserts newly added version for CQMs are correct.
      * @param version is expected version
      * @param cqm is given CQM

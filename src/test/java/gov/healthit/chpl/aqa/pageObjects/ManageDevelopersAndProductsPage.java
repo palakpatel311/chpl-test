@@ -14,22 +14,13 @@ import org.openqa.selenium.WebElement;
         private ManageDevelopersAndProductsPage() {}
 
         /**
-         * Returns Edit Certified Product link.
+         * CQM Accordion on Edit CP page.
          * @param driver WebDriver
-         * @return link element
+         * @return CQM Accordion element
          */
-        public static WebElement editCertifiedProductLink(final WebDriver driver) {
-            return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div[3]/div[5]/div/div/div/div[1]/span[2]/span/a"));
+        public static WebElement cqmAccordion(final WebDriver driver) {
+           return driver.findElement(By.id("details-cqm"));
         }
-
-        /**
-         * Returns element that holds date string.
-         * @param driver WebDriver
-         * @return date element
-         */
-        public static WebElement sedEndDateOfTesting(final WebDriver driver) {
-            return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div[3]/div[5]/div/div/div/div[2]/span"));
-       }
 
         /**
          * Returns the element that holds version number for CQM.
@@ -49,4 +40,22 @@ import org.openqa.selenium.WebElement;
             }
             return null;
         }
+
+        /**
+         * Returns Edit Certified Product link.
+         * @param driver WebDriver
+         * @return link element
+         */
+        public static WebElement editCertifiedProductLink(final WebDriver driver) {
+            return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div[3]/div[5]/div/div/div/div[1]/span[2]/span/a"));
+        }
+
+        /**
+         * Returns element that holds date string.
+         * @param driver WebDriver
+         * @return date element
+         */
+        public static WebElement sedEndDateOfTesting(final WebDriver driver) {
+            return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div[3]/div[5]/div/div/div/div[2]/span"));
+       }
 }

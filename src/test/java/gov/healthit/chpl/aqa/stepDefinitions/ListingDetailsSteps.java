@@ -373,7 +373,7 @@ public class ListingDetailsSteps extends BaseSteps {
     /**
      * Select view all CQMs and open CQM accordion.
      */
-    @When("^I look at CQM details$")
+    @When("^I look at CQM details on listing details page$")
     public void opencqmPanel() {
         ListingDetailsPage.viewAllCertificationCriteriaCQMs(getDriver()).click();
         WebElement link = ListingDetailsPage.cqmAccordion(getDriver());
