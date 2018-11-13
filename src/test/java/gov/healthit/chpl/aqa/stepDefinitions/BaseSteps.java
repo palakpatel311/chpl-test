@@ -17,7 +17,6 @@ public class BaseSteps {
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
     /** Default constructor. */
     public BaseSteps() {
         super();
