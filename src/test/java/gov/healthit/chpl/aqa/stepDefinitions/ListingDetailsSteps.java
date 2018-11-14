@@ -15,6 +15,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
+
 /**
  * Class ListingDetailsSteps definition.
  */
@@ -367,5 +368,36 @@ public class ListingDetailsSteps extends BaseSteps {
     public void eyeShowsExpectedText(final String htext) {
         String expectedText = ListingDetailsPage.productHistoryText(getDriver()).getText();
         assertTrue(expectedText.contains(htext), "Expect " + htext + " to be found in " + expectedText);
+    }
+
+    /**
+     * Select view all CQMs and open CQM accordion.
+     */
+    @When("^I look at CQM details on listing details page$")
+    public void opencqmPanel() {
+        ListingDetailsPage.viewAllCertificationCriteriaCQMs(getDriver()).click();
+        WebElement link = ListingDetailsPage.cqmAccordion(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+    }
+
+    /**
+     * Assert text in CQM panel.
+     * @param cqm is CMS number
+     */
+    @Then("^I see newly added CQMs \"([^\"]*)\"$")
+    public void opencqmPanel(final String cqm) {
+        boolean isFound = false;
+
+        WebElement table = ListingDetailsPage.cqmDataTable(getDriver());
+        List<WebElement> rows = table.findElements(By.xpath("tbody/tr"));
+
+        for (WebElement row : rows) {
+            List<WebElement> cols = row.findElements(By.xpath("td"));
+            if (cols.get(1).getText().equals(cqm)) {
+                isFound = true;
+                break;
+            }
+        }
+        assertTrue(isFound, "Text: " + cqm + " not found");
     }
 }

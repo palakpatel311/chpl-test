@@ -74,10 +74,6 @@ public class CMSIDsLookupSteps {
     @When("^I generate a CMS ID$")
     public void generateCmsId() {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        if (CMSidReverseLookupPage.widgetToggle(driver).getAttribute("aria-expanded").equals("false")) {
-            CMSidReverseLookupPage.widgetToggle(driver).click();
-        }
-        wait.until(ExpectedConditions.visibilityOf(CMSidReverseLookupPage.generateCmsIdButton(driver)));
         CMSidReverseLookupPage.generateCmsIdButton(driver).click();
         wait.until(ExpectedConditions.visibilityOf(CMSidReverseLookupPage.cmsIdResults(driver)));
     }
