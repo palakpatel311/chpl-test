@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ChartsPage;
-
 /**
  * Class ChartsSteps definition.
  */
@@ -28,7 +27,6 @@ public class ChartsSteps extends BaseSteps {
      * @param textName expected Health IT Feedback Form
      * @param urlLink expected 'https://www.healthit.gov/form/healthit-feedback-form'
      */
-
     @Then("^\"([^\"]*)\" points to \"([^\"]*)\"$")
     public void healthITFeedbackFormPointsToURL(final String textName, final String urlLink) {
         WebDriver driver = getDriver();

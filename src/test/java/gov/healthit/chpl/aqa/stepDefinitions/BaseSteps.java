@@ -1,15 +1,14 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.io.File;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import gov.healthit.chpl.aqa.pageObjects.BasePage;
 /** Base class for step definition files. */
 public class BaseSteps {
-
     private EventFiringWebDriver driver;
     private WebDriverWait wait;
     private String url = System.getProperty("url");
@@ -29,6 +28,13 @@ public class BaseSteps {
             String tempDirectory = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator + "resources";
             this.setFilePath(tempDirectory);
         }
+    }
+    /**
+     * Click CHPL Resources Top Navigation.
+     */
+    public void iclickCHPLResourcesTopNavigationLink() {
+        wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(BasePage.chplResourcesDropdown(driver))).click();
     }
 
     public WebDriver getDriver() {

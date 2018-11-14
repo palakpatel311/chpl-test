@@ -33,7 +33,7 @@ public class Hooks {
     private static EventFiringWebDriver driver;
     private static final int DELAY = 30;
     private static String screenshotPath;
-    private static String downloadPath = System.getProperty("downloadPath"); //download files test
+    private static String downloadPath = System.getProperty("downloadPath");
 
     /**
      * Launch ChromeDriver.
@@ -45,7 +45,7 @@ public class Hooks {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--auto-open-devtools-for-tabs");
         driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
+        driver.manage().window().maximize();
          */
         if (StringUtils.isEmpty(downloadPath)) {
             String tempDirectory;

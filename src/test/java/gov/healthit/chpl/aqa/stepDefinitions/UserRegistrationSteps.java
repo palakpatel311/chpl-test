@@ -1,7 +1,5 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
-
 import static org.testng.Assert.assertEquals;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;

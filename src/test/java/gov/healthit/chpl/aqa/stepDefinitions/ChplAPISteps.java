@@ -4,7 +4,6 @@ import static org.testng.Assert.assertEquals;
 import org.openqa.selenium.WebDriver;
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ChplAPIPage;
-
 /**
  * Class ChplAPISteps definition.
  */
@@ -14,7 +13,7 @@ public class ChplAPISteps extends BaseSteps {
      * @param urlLink expected as Link
      * @param text expected as Content
      */
-    @Then("^Verify the \"(.*)\" under Certified Health IT Product Listing and \"(.*)\"$")
+    @Then("^Verify \"(.*)\" under Certified Health IT Product Listing is followed by \"(.*)\"$")
     public void verifyContentUnderCertifiedHealthITProductListingAndURL(final String text, final String urlLink) {
         WebDriver driver = getDriver();
         String actualText = ChplAPIPage.chplContentText(driver).getText();
