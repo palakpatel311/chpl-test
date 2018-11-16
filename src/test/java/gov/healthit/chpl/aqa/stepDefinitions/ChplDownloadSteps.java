@@ -25,7 +25,7 @@ import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
 /**
  * Class ChplDownloadSteps definition.
  */
-public class ChplDownloadSteps extends BaseSteps {
+public class ChplDownloadSteps extends Base {
 
     private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
     private static final long BYTES_PER_KILOBYTE = 1024;

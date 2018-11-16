@@ -1,4 +1,5 @@
 package gov.healthit.chpl.aqa.pageObjects;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ public class BasePage {
         element = driver.findElement(By.id("main-content"));
         return element;
     }
+
     /**
      * Returns button id of CHPL Resources Dropdown.
      * @param driver WebDriver
@@ -28,6 +30,7 @@ public class BasePage {
     public static WebElement chplResourcesDropdown(final WebDriver driver) {
         return driver.findElement(By.id("resource-toggle"));
     }
+
     /**
      * Returns URL of Contact Us Link.
      * @param driver WebDriver

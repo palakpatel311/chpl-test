@@ -13,6 +13,7 @@ Scenario: Verify in CHPL Resources Dropdown - Contact us
 
 Scenario: Verify in User Registration Page
     Given I am on User Registration page
+    When I open create a new account form
     Then "Health IT Feedback Form", points to "https://www.healthit.gov/form/healthit-feedback-form"
 
 Scenario: Verify in CHPL API Page

@@ -1,16 +1,19 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
-import static org.junit.Assert.assertEquals;
+
 import static org.testng.Assert.assertEquals;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ChartsPage;
+
 /**
  * Class ChartsSteps definition.
  */
-public class ChartsSteps extends BaseSteps {
+public class ChartsSteps extends Base {
     /**
      * Get user to the Charts page.
      */

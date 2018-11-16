@@ -1,21 +1,16 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
+
 import static org.junit.Assert.assertEquals;
+
 import org.openqa.selenium.WebDriver;
+
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.BasePage;
+
 /**
  * Class CHPLResourcesDropdownSteps definition.
  */
-public class CHPLResourcesDropdownSteps extends BaseSteps {
-    /**
-     * Click CHPL Resources Top Navigation.
-    */
-    @When("^I click CHPL Resources Top Navigation Link$")
-    public void iclickCHPLResourcesTopNavigationLink() {
-       super.iclickCHPLResourcesTopNavigationLink();
-    }
-
+public class CHPLResourcesDropdownSteps extends Base {
     /**
      * Assert that Contact Us contains URL.
      * @param urlLink expected 'https://www.healthit.gov/form/healthit-feedback-form'

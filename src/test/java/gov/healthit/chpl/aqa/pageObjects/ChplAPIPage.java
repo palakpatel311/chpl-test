@@ -1,7 +1,9 @@
 package gov.healthit.chpl.aqa.pageObjects;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 /**
  * Class ChplAPIPage definition.
  */
@@ -38,7 +40,7 @@ public final class ChplAPIPage extends BasePage {
     }
 
     /**
-     * Content text under Certified Health IT Product Listing.
+     * Returns Content text under Certified Health IT Product Listing.
      * @param driver Webdriver
      * @return content
      */
@@ -47,7 +49,7 @@ public final class ChplAPIPage extends BasePage {
     }
 
     /**
-     * Health IT Feedback Form URL.
+     * Returns Health IT Feedback Form URL.
      * @param driver WebDriver
      * @return URL
      */

@@ -45,7 +45,7 @@ public class Hooks {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--auto-open-devtools-for-tabs");
         driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize();
+        driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
          */
         if (StringUtils.isEmpty(downloadPath)) {
             String tempDirectory;

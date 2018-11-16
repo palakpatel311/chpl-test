@@ -35,7 +35,7 @@ import gov.healthit.chpl.aqa.pageObjects.ManageDevelopersAndProductsPage;
  * All steps related to activities in the "Developer and Product Management" admin section,
  * navigated to via #/admin/dpManagement and including both ROLE_ADMIN and ROLE_ACB activities.
  */
-public class ManageDevelopersAndProductsSteps extends BaseSteps {
+public class ManageDevelopersAndProductsSteps extends Base {
     private static final int CHPL_PRODUCT_NUMBER_PREFIX = 14;
     private String chplProductNumber; // Used to pass newly generated CHPL Product number between steps during upload
 
