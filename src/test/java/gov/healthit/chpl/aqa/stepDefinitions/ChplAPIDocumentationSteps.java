@@ -16,7 +16,7 @@ import gov.healthit.chpl.aqa.pageObjects.ChplAPIPage;
 /**
  * Class ChplAPIDocumentationSteps definition.
  */
-public class ChplAPIDocumentationSteps extends BaseSteps {
+public class ChplAPIDocumentationSteps extends Base {
 
     /**
      * Constructor creates new driver.

@@ -8,17 +8,16 @@ import org.openqa.selenium.WebElement;
  * Class ChplAPIPage definition.
  */
 public final class ChplAPIPage extends BasePage {
-
     private ChplAPIPage() {}
 
-     /**
+    /**
      * Controller link.
      * @param driver WebDriver
      * @return controller link element
      * @param controller desired controller to open
      */
     public static WebElement controllerLink(final WebDriver driver, final String controller) {
-       return driver.findElement(By.xpath("//*[@id=\"" + controller + "*\"]/li/h4/a"));
+        return driver.findElement(By.xpath("//*[@id=\"" + controller + "*\"]/li/h4/a"));
     }
 
     /**
@@ -38,6 +37,24 @@ public final class ChplAPIPage extends BasePage {
      */
     public static WebElement endpointLink(final WebDriver driver, final String endpoint) {
         return driver.findElement(By.xpath("//*[@id=\"" + endpoint + "\"]/a/div/span[1]"));
+    }
+
+    /**
+     * Returns Content text under Certified Health IT Product Listing.
+     * @param driver Webdriver
+     * @return content
+     */
+    public static WebElement chplContentText(final WebDriver driver) {
+        return driver.findElement(By.xpath("//span[@swagger-translate='infoContactCreatedBy']"));
+    }
+
+    /**
+     * Returns Health IT Feedback Form URL.
+     * @param driver WebDriver
+     * @return URL
+     */
+    public static WebElement healthITFeedBackFormURL(final WebDriver driver) {
+        return driver.findElement(By.xpath("//a[@ng-bind='ui.infos.contact.url']"));
     }
 
 }

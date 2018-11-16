@@ -20,7 +20,7 @@ import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
  * Class ListingDetailsSteps definition.
  */
 
-public class ListingDetailsSteps extends BaseSteps {
+public class ListingDetailsSteps extends Base {
 
     /**
      * Default constructor.

@@ -25,14 +25,15 @@ import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
 /**
  * Class ChplDownloadSteps definition.
  */
-public class ChplDownloadSteps extends BaseSteps {
+public class ChplDownloadSteps extends Base {
 
     private static final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
     private static final long BYTES_PER_KILOBYTE = 1024;
-    private static final double FILE_TOO_LARGE_FACTOR = 1.2; /** amount over the minimum that the file shouldn't get.
-                                                              * trying to check that no file balloons too quickly.
-                                                              * e.g., 1.2 = 20% over the minimum value
-                                                              **/
+    private static final double FILE_TOO_LARGE_FACTOR = 1.2;
+    /** amount over the minimum that the file shouldn't get.
+     * trying to check that no file balloons too quickly.
+     * e.g., 1.2 = 20% over the minimum value
+     **/
 
     /**
      * Constructor creates new driver.
