@@ -7,3 +7,6 @@ Feature: Verify endpoints return correct response
     Examples:
       | DB_ID | CHPL_ID                           |
       |  8252 | 15.04.04.2945.Ligh.21.00.1.161229 |
+
+  Scenario: Verify cache_status endpoint returns status of "okay" for "all caches are populated"
+    Then the cache_status endpoint returns status "OK" for all caches are populated status

@@ -62,4 +62,24 @@ public class ApiAccessSteps {
         Assert.assertEquals(chplProductNumberInDetails, chplId, "CHPL ID is as expected");
         Assert.assertEquals(chplProductNumberInBasic, chplProductNumberInDetails, "CHPL IDs match as expected");
     }
+
+    /**
+     * Runs API call request using given end point to get cache status in response.
+     * @param status is the expected status in response
+     */
+    @Then("^the cache_status endpoint returns status \"([^\"]*)\" for all caches are populated status$")
+    public void validateResponseCacheStatus(final String status) {
+
+        Response response = given()
+                .header("API-KEY", apikey)
+                .header("content-type", "application/json")
+                .get(url + "/rest/cache_status/");
+
+        JsonPath jsonPathEvaluatorC = response.jsonPath();
+
+        String statusInResopnse = jsonPathEvaluatorC.get("status");
+
+        Assert.assertEquals(statusInResopnse, status, "status is as expected");
+    }
+
 }
