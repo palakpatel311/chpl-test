@@ -2,6 +2,7 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import static io.restassured.RestAssured.given;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.xerces.util.SynchronizedSymbolTable;
 import org.testng.Assert;
 
 import cucumber.api.java.en.Then;
@@ -73,13 +74,12 @@ public class ApiAccessSteps {
         Response response = given()
                 .header("API-KEY", apikey)
                 .header("content-type", "application/json")
-                .get(url + "/rest/cache_status/");
+                .get(url + "/rest/cache_status");
 
-        JsonPath jsonPathEvaluatorC = response.jsonPath();
-
-        String statusInResopnse = jsonPathEvaluatorC.get("status");
+        String statusInResopnse = response.then().extract().path("status");
 
         Assert.assertEquals(statusInResopnse, status, "status is as expected");
     }
 
 }
+
