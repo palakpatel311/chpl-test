@@ -69,16 +69,17 @@ public class ApiAccessSteps {
      * @param status is the expected status in response
      */
     @Then("^the cache_status endpoint returns status \"([^\"]*)\" for all caches are populated status$")
-    public void validateResponseCacheStatus(final String status) {
+    public void validateResponseCacheStatus(final String expStatus) {
 
         Response response = given()
                 .header("API-KEY", apikey)
                 .header("content-type", "application/json")
                 .get(url + "/rest/cache_status");
 
-        String statusInResopnse = response.then().extract().path("status");
+        JsonPath jsonPathEvaluator = response.jsonPath();
+        String cacheStatus = jsonPathEvaluator.getString("status");
 
-        Assert.assertEquals(statusInResopnse, status, "status is as expected");
+        Assert.assertTrue(cacheStatus.equalsIgnoreCase(expStatus));
     }
 
 }
