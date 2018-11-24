@@ -1,5 +1,7 @@
 package gov.healthit.chpl.aqa.pageObjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,4 +59,33 @@ public final class ChplAPIPage extends BasePage {
         return driver.findElement(By.xpath("//a[@ng-bind='ui.infos.contact.url']"));
     }
 
+    /**
+     * Returns element holding page title.
+     * @param driver WebDriver
+     * @return element holding page title
+     */
+    public static WebElement title(final WebDriver driver) {
+        return driver.findElement(By.xpath("//h1[contains(text(),'CHPL API')]"));
+    }
+
+    /**
+     * Returns element swagger holding contents of Controller.
+     * @param driver WebDriver
+     * @return element holding contents of Controller
+     */
+    public static List<WebElement> controllerElementList(final WebDriver driver) {
+        return driver.findElements(By.xpath("//span[@class='description pull-right ng-binding']"));
+    }
+
+    /**
+     * Returns element holding the name of Controller.
+     * @param driver WebDriver
+     * @param xPathElement holding name of Controller
+     * @return element holding name of Controller
+     */
+    public static WebElement controllerElementName(final WebDriver driver, final String xPathElement) {
+        return driver.findElement(By.xpath(xPathElement));
+    }
 }
+
+

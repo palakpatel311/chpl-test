@@ -45,7 +45,6 @@ public class UserRegistrationSteps extends Base {
     @Then("^\"([^\"]*)\", points to \"([^\"]*)\"$")
     public void userRegistrationHealthITForm(final String textName, final String urlLink) {
         WebDriver driver = getDriver();
-        //UserRegistrationPage.createNewAccount(driver).click();
         String actualText = UserRegistrationPage.healthITFeedbackForm(driver).getText();
         String actualURL = UserRegistrationPage.healthITFeedbackForm(driver).getAttribute("href");
         assertEquals(actualText, textName);
