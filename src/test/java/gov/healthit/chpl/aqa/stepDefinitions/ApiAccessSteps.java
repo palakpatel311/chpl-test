@@ -77,7 +77,7 @@ public class ApiAccessSteps {
 
         JsonPath jsonPathEvaluator = response.jsonPath();
         String cacheStatus = jsonPathEvaluator.get("status");
-System.out.println(cacheStatus);
+
         Assert.assertTrue(cacheStatus.equalsIgnoreCase(expStatus));
     }
 
