@@ -2,7 +2,6 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import static io.restassured.RestAssured.given;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.xerces.util.SynchronizedSymbolTable;
 import org.testng.Assert;
 
 import cucumber.api.java.en.Then;
@@ -66,7 +65,7 @@ public class ApiAccessSteps {
 
     /**
      * Runs API call request using given end point to get cache status in response.
-     * @param status is the expected status in response
+     * @param expStatus is the expected status in response
      */
     @Then("^the cache_status endpoint returns status \"([^\"]*)\" for all caches are populated status$")
     public void validateResponseCacheStatus(final String expStatus) {
@@ -77,8 +76,8 @@ public class ApiAccessSteps {
                 .get(url + "/rest/cache_status");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
-        String cacheStatus = jsonPathEvaluator.getString("status");
-
+        String cacheStatus = jsonPathEvaluator.get("status");
+System.out.println(cacheStatus);
         Assert.assertTrue(cacheStatus.equalsIgnoreCase(expStatus));
     }
 

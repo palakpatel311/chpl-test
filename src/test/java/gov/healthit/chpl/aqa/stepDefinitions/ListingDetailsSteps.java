@@ -214,6 +214,23 @@ public class ListingDetailsSteps extends Base {
     }
 
     /**
+     * Assert that Functionality Tested is as expected.
+     * @param functTested is expected text
+     * @param number criteria to look in
+     * @throws Exception if screenshot unable to be taken
+     */
+    @Then("^Functionality Tested should display \"([^\"]*)\" for criteria \"([^\"]*)\"$")
+    public void verifyFunctionalityTestedValue(final String functTested, final String number) throws Exception {
+        try {
+            String actualString = ListingDetailsPage.functionalityTested(getDriver(), number).getText();
+            assertTrue(actualString.contains(functTested), "Expect \"" + functTested + "\" to be found in \"" + actualString + "\"");
+        } catch (NullPointerException npe) {
+            Hooks.takeScreenshot(functTested + "_" + number);
+            assertTrue(false, functTested + "_" + number + ": " + npe.getMessage());
+        }
+    }
+
+    /**
      * Assert that Privacy and Security Framework is as expected.
      * @param privacySecurity expected text
      * @param number criteria to look in
