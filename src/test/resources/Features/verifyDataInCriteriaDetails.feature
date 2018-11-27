@@ -3,6 +3,7 @@ Feature: Verify data in criteria details
   OCD-1951 - Clean up test tool options. Tests below verify update where some of the Test Tools have been consoliated,
   Test tool field displays correct values as per the update.
   OCD-2445- Update missing values in database for 2014 c1 Test tool and 2015 a7 Privacy and Security field
+  OCD-746, OCD-1424, OCD-2532- Restrict Functionality Tested values by edition, criteria and display correct description
 
   Scenario Outline: Verify Test Tool field displays correct values in applicable criteria details
     Given I am on listing details page of listing with ID "<CHPL_ID>"
@@ -50,3 +51,16 @@ Scenario Outline: Verify Privacy and security Framework field displays correct v
       | 15.07.07.1447.EP04.02.04.1.170403 | 170.315 (a)(7) |  Approach 2     |
       | 15.07.07.1456.TH02.01.00.1.170203 | 170.315 (a)(7) |  Approach 2     |
       | 15.02.02.2669.A067.01.00.1.180411 | 170.315 (a)(7) |  Approach 1     |
+      
+Scenario Outline: Verify Functionality Tested field displays correct edition and criteria specific values in applicable criteria details 
+    Given I am on listing details page of listing with ID "<CHPL_ID>"
+    When I open details for criteria "<CRITERIA>"
+    Then Functionality Tested should display "<Functionality_Tested>" for criteria "<CRITERIA>"
+    Examples:
+    | CHPL_ID                           | CRITERIA       | Functionality_Tested |
+    | 15.04.04.2087.Acui.02.00.1.180409 | 170.315 (a)(4) | Alternative: 170.315(a)(4)(ii)(B)(1) To a specific set of identified users|  
+    | 15.04.04.2087.Acui.02.00.1.180409 | 170.315 (a)(7) | Ambulatory: 170.315(a)(7)(i) Over multiple encounters|
+    | 15.04.04.2087.Acui.02.00.1.180409 | 170.315 (a)(8) | Ambulatory: 170.315(a)(8)(i) Over multiple encounters|
+    | 14.04.04.2916.Smar.61.01.0.170411 | 170.314 (a)(6) | Ambulatory setting: 170.314(a)(6)(i) Over multiple encounters|
+    | 14.04.04.2916.Smar.61.01.0.170411 | 170.314 (a)(7) | Ambulatory setting: 170.314(a)(7)(i) Over multiple encounters|
+    
