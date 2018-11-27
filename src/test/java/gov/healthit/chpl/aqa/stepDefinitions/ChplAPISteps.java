@@ -1,5 +1,6 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
+import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -19,8 +20,6 @@ import gov.healthit.chpl.aqa.pageObjects.ChplAPIPage;
  * Class ChplAPISteps definition.
  */
 public class ChplAPISteps extends Base {
-    private static final String CORR_ACT_PLN_CTRL = "corrective-action-plan-controller";
-    private static final String CORR_ACT_PLN = "corrective-action-plan";
     /**
      * Assert that link is correct.
      * @param urlLink expected as Link
@@ -47,43 +46,33 @@ public class ChplAPISteps extends Base {
 
     /**
      * Click all the controller elements link.
-     * @param arg1 as controller elements
+     * @param controllerName as the name of Controller
      */
     @When("^I click on \"([^\"]*)\" link$")
-    public void iClickOnLink(final String arg1) {
-        String xPath = "//*[text()='" + arg1 + "']";
-        WebElement link = ChplAPIPage.controllerElementName(getDriver(), xPath);
+    public void iClickOnLink(final String controllerName) {
+        WebElement link = ChplAPIPage.controllerLink(getDriver(), controllerName);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
     /**
-     * Assert that contents from webpage matches the contents of excel.
-     * @param str as sheet name in the excel
+     * Assert that APIs from webpage is present in the example API Endpoints.
+     * @param apiEndpoints as the details of controller
      */
     @Then("^list of \"([^\"]*)\" operations should be displayed without deprecated calls$")
-    public void listOfOperationsShouldBeDisplayed(final String str) {
-        String sheetName = null;
+    public void listOfOperationsShouldBeDisplayed(final String apiEndpoints) {
         WebDriver driver = getDriver();
         // Get element from the webpage into the list
         List<WebElement> listWebElements = ChplAPIPage.controllerElementList(driver);
-        if (str.equalsIgnoreCase(CORR_ACT_PLN_CTRL)) {
-            sheetName = CORR_ACT_PLN;
-        } else {
-            sheetName = str;
-        }
-        ExcelUtil.setExcelFile(sheetName);
-        // Creating the list to hold all the API listed on the webpage by swagger
+        // Creating a list to hold all the API listed on the webpage by swagger
         List<String> apiListFromPage = new ArrayList<>();
         // Get text of the Web Elements list
         for (WebElement wElement : listWebElements) {
             apiListFromPage.add(wElement.getText());
         }
-        List<String> apiLstExl = new ArrayList<>();
-        // Getting api list from the excel into the list
-        apiLstExl = ExcelUtil.getAllCellData();
-        // Checking if the api from the webpage present in the excel
+        System.out.println("apiEndpoints" + apiEndpoints);
+        // Checking if the API from the webpage is present in the example API endpoints
         for (String api : apiListFromPage) {
-            assertEquals(apiLstExl.contains(api), true);
+            assertTrue(apiEndpoints.contains(api));
         }
     }
 }

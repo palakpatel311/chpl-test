@@ -6,45 +6,41 @@ Scenario: CHPL API page loads and shows correct title
     Given I am on CHPL API page 
     Then CHPL API page title should be "CHPL API" 
 
+@Regression
 Scenario Outline: 
     Verify API list in Controller does not contain deprecated calls 
     Given I am on CHPL API page 
     When I click on "<Controller>" link 
-    Then list of "<Controller>" operations should be displayed without deprecated calls 
+    Then list of "<API Endpoints>" operations should be displayed without deprecated calls 
     Examples: 
-        | Controller |
-        | product-controller |
-        | scheduler-controller |
-        | collections-controller |
-        | api-key-controller |
-        | status-controller |
+        | Controller                    |API Endpoints|
+        | product-controller            |List all products, Update a product or merge products., Get information about a specific product., Get all listings owned by the specified product., Split a product - some versions stay with the existing product and some versions are moved to a new product.|
+        | scheduler-controller          |Get the list of all jobs that are applicable to the currently logged in user, Update a given job, Get the list of all triggers and their associated scheduled jobs that are applicable to the currently logged in user, Create a new trigger and return it, Update an existing trigger and return it, Delete an existing trigger|
+        | collections-controller        |Get basic data about all certified products in the system., Get a list of all developers with transparency attestation URLsand ACB attestations.|
 
 @Acceptance
 Scenario Outline: 
     Verify API list in Controller does not contain deprecated calls 
     Given I am on CHPL API page 
     When I click on "<Controller>" link 
-    Then list of "<Controller>" operations should be displayed without deprecated calls 
-    Examples: 
-        | Controller |
-        | product-controller |
-        | scheduler-controller |
-        | collections-controller |
-        | api-key-controller |
-        | status-controller |
-        | authentication-controller |
-        | search-view-controller |
-        | activity-controller |
-        | certification-body-controller |
-        | developer-controller |
-        | notification-controller |
-        | testing-lab-controller |
-        | certification-id-controller |
-        | user-management-controller |
-        | corrective-action-plan-controller |
-        | product-version-controller |
-        | announcement-controller |
-        | job-controller |
-        | certified-product-controller |
-        | surveillance-controller |
-        
+    Then list of "<API Endpoints>" operations should be displayed without deprecated calls 
+    Examples:
+        | Controller                    |API Endpoints|
+        | product-controller            |List all products, Update a product or merge products., Get information about a specific product., Get all listings owned by the specified product., Split a product - some versions stay with the existing product and some versions are moved to a new product.|
+        | scheduler-controller          |Get the list of all jobs that are applicable to the currently logged in user, Update a given job, Get the list of all triggers and their associated scheduled jobs that are applicable to the currently logged in user, Create a new trigger and return it, Update an existing trigger and return it, Delete an existing trigger|
+        | collections-controller        |Get basic data about all certified products in the system., Get a list of all developers with transparency attestation URLsand ACB attestations.|
+        | api-key-controller            |List all API keys that have been created., Sign up for a new API key., View the calls made per API key., View the calls made by a specific API key., Remove an API key.|
+        | status-controller             |Check if the basic search cache has completed loading. { status: 'OK', age: long } is returned if it's finished and { status: 'INITIALIZING' } is returned if not. Age indicates the number of miliseconds since the cache was last refreshed., Check that the rest services are up and running.|
+        | search-view-controller        |Get all possible accessibility standard options in the CHPL, Get all possible test participant age ranges in the CHPL, Get all possible ACBs in the CHPL, Get all possible certificaiton editions in the CHPL, Get all possible certification statuses in the CHPL, Get all possible classifications in the CHPL, Get all possible developer status options in the CHPL, Get all possible developer names in the CHPL, Get all possible education types in the CHPL, Get all fuzzy matching choices for the items that be fuzzy matched., Change existing fuzzy matching choices., Get all possible types of jobs that can be created in the system., Get all possible macra measure options in the CHPL, Get all possible nonconformity status type options in the CHPL, Get all possible nonconformity type options in the CHPL, Get all possible types of notifications that a user can sign up for., Get all possible practice types in the CHPL, Get all possible product names in the CHPL, Get all possible qms standard options in the CHPL, Get all search options in the CHPL, Get all possible surveillance requirement type options in the CHPL, Get all possible surveillance requirement options in the CHPL, Get all possible surveillance result type options in the CHPL, Get all possible surveillance type options in the CHPL, Get all possible targeted user options in the CHPL, Get all possible test data options in the CHPL, Get all possible test functionality options in the CHPL, Get all possible test procedure options in the CHPL, Get all possible test standard options in the CHPL, Get all possible test tool options in the CHPL, Get all possible UCD process options in the CHPL, Get all available pending listing upload template versions., Get all developer decertifications in the CHPL, Download the entire CHPL as XML., Search the CHPL, Search the CHPL with an HTTP POST Request.|
+        | activity-controller           |Get auditable data for certification bodies., Get auditable data for a specific certification body., Get auditable data for all announcements, Get auditable data for a specific announcement, Get auditable data for all API keys, Get auditable data for testing labs., Get auditable data for a specific testing lab., Get auditable data for all certifications, Get auditable data for a specific certification, Get auditable data for certified products, Get auditable data for a specific certified product based on a legacy CHPL Product Number., Get auditable data for a specific certified product., Get auditable data for a specific certified product based on CHPL Product Number., Get auditable data for corrective action plans, Get auditable data about all developers, Get auditable data for a specific developer., Get auditable data for all pending certified products, Get auditable data for a specific pending certified product., Get auditable data for all products, Get auditable data for a specific product., Track the actions of all users in the system, Track the actions of a specific user in the system, Get auditable data about all CHPL user accounts, Get auditable data about a specific CHPL user account., Get auditable data for all versions, Get auditable data for a specific version.|
+        | certification-body-controller |List all certification bodies (ACBs)., Create a new ACB., Get details about a specific certification body (ACB)., Update an existing ACB., Delete an ACB., Restore a deleted ACB., List users with permissions on a specified ACB., Add a user to an ACB., Remove user permissions from an ACB.|
+        | developer-controller          |List all developers in the system., Update a developer or merge developers., Get information about a specific developer.|
+        | notification-controller       |Get the list of all recipients and their associated subscriptions that are applicable to the currently logged in user, Creates a new recipient with any subscriptions included in the request body. At least 1 subscription is required., Update the email address and associated subscriptions of the recipient specified., Remove subscription(s) for a recipient.|
+        | testing-lab-controller        |List all testing labs (ATLs)., Create a new testing lab., Get details about a specific testing lab (ATL)., Update an existing ATL., Delete an ATL., Restore a deleted ATL., List users with permissions on a specified ATL., Add a user to an ATL., Remove user permissions from an ATL.|
+        | certification-id-controller   |Retrieves a list of all CMS EHR Certification IDs along with the date they were created., Creates a new CMS EHR Certification ID for a collection of products if one does not already exist., Retrieves a CMS EHR Certification ID for a collection of products., Verify whether one or more specific EHR Certification IDs are valid or not., Verify whether one or more specific EHR Certification IDs are valid or not., Get information about a specific EHR Certification ID.|
+        | user-management-controller    |View users of the system., Confirm that a user's email address is valid., Create a new user account from an invitation., Invite a user to the CHPL., Modify user information., Delete a user., Update an existing user account with new permissions., View a specific user's details., Give additional roles to a user., Remove roles previously granted to a user.|
+        | product-version-controller    |List all versions for a specific product., Update a version or merge versions., Get information about a specific version.|
+        | announcement-controller       |Get all announcements., Create a new announcement., Get a specific announcement., Change an existing announcement., Delete an existing announcement.|
+        | job-controller                |Get the list of all jobs currently running in the system and thosethat have completed within a configurable amount of time (usually a short window like the last 7 days).|
+        | certified-product-controller  |List all certified products, List pending certified products., Reject several pending certified products., List a specific pending certified product., Reject a pending certified product., Confirm a pending certified product., Download all SED details that are certified to 170.315(g)(3)., Upload a file with certified products, Get all basic information for a specified certified product. Does not include the CQM results and certification results., Update an existing certified product., Get all of the certification results for a specified certified product., Get all of the CQM results for a specified certified product., Get all details for a specified certified product., Get the ICS family tree for the specified certified product., Get all basic information for a specified certified product. Does not include the CQM results and certification results., Get all of the certification results for a specified certified product based on a legacy CHPL Product Number., Get all of the CQM results for a specified certified product based on a legacy CHPL Product Number., Get all details for a specified certified product., Get the ICS family tree for the specified certified product based on a legacy CHPL Product Number, Get all basic information for a specified certified product. Does not include the CQM results and certification results., Get all of the certification results for a specified certified product based on a CHPL Product Number., Get all of the CQM results for a specified certified product., Get all details for a specified certified product., Get the ICS family tree for the specified certified product based on a CHPL Product Number.|
+        | surveillance-controller       |Create a new surveillance activity for a certified product., Download nonconformity supporting documentation., Download surveillance as CSV., Get the listing of all pending surveillance items that this user has access to., Reject several pending surveillance., Confirm a pending surveillance activity., Reject (effectively delete) a pending surveillance item., Upload a file with surveillance and nonconformities for certified products., Update a surveillance activity for a certified product., Delete a surveillance activity for a certified product., Remove documentation from a nonconformity., Add documentation to an existing nonconformity.|

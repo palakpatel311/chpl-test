@@ -76,16 +76,6 @@ public final class ChplAPIPage extends BasePage {
     public static List<WebElement> controllerElementList(final WebDriver driver) {
         return driver.findElements(By.xpath("//span[@class='description pull-right ng-binding']"));
     }
-
-    /**
-     * Returns element holding the name of Controller.
-     * @param driver WebDriver
-     * @param xPathElement holding name of Controller
-     * @return element holding name of Controller
-     */
-    public static WebElement controllerElementName(final WebDriver driver, final String xPathElement) {
-        return driver.findElement(By.xpath(xPathElement));
-    }
 }
 
 
