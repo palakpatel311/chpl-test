@@ -1,6 +1,7 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,12 +10,9 @@ import java.util.List;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import static org.testng.Assert.assertTrue;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
 import gov.healthit.chpl.aqa.pageObjects.ChplAPIPage;
 
 /**
@@ -36,16 +34,6 @@ public class ChplAPISteps extends Base {
     }
 
     /**
-     * Assert that title should be CHPL API.
-     * @param title expected as CHPL API
-     */
-    @Then("^CHPL API page title should be \"([^\"]*)\"$")
-    public void chplApiPageTitleShouldBe(final String title) {
-        String chplAPITitle = getDriver().getTitle();
-        Assert.assertEquals(chplAPITitle, title);
-    }
-
-    /**
      * Click all the controller elements link.
      * @param controllerName as the name of Controller
      */
@@ -62,15 +50,11 @@ public class ChplAPISteps extends Base {
     @Then("^list of \"(.*)\" operations should be displayed without deprecated calls$")
     public void listOfOperationsShouldBeDisplayed(final String apiEndpoints) {
         WebDriver driver = getDriver();
-        // Get element from the webpage into the list
         List<WebElement> apiElements = ChplAPIPage.controllerElementList(driver);
-        // Creating a list to hold all the API listed on the webpage by swagger
         List<String> apiListFromPage = new ArrayList<>();
-        //Splitting string into tokens of APIs separated by "--" and putting into a list
         List<String> apiListFromEndpoints = Arrays.asList(apiEndpoints.split("--"));
         // Checking if the API from the webpage is present in the API Endpoints
         for (WebElement apiLink : apiElements) {
-        // Get text of the Web Elements list
             String apiName = apiLink.getText();
             apiListFromPage.add(apiName);
             assertTrue(apiListFromEndpoints.contains(apiName), "Unknown API found: " + apiName);
