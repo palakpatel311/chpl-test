@@ -3,7 +3,9 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.BasePage;
 /**
@@ -18,5 +20,15 @@ public class BaseSteps extends Base {
         WebDriver driver =  getDriver();
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(BasePage.chplResourcesDropdown(driver))).click();
+    }
+
+    /**
+     * Assert that title should be CHPL API.
+     * @param title expected as CHPL API
+     */
+    @Then("^Page title should be \"([^\"]*)\"$")
+    public void chplApiPageTitleShouldBe(final String title) {
+        String chplAPITitle = getDriver().getTitle();
+        Assert.assertEquals(chplAPITitle, title);
     }
 }
