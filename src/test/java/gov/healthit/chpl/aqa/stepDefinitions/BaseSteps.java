@@ -26,9 +26,9 @@ public class BaseSteps extends Base {
      * Assert that title should be CHPL API.
      * @param title expected as CHPL API
      */
-    @Then("^Page title should be \"([^\"]*)\"$")
-    public void chplApiPageTitleShouldBe(final String title) {
-        String chplAPITitle = getDriver().getTitle();
-        Assert.assertEquals(chplAPITitle, title);
+    @Then("^the page title should be \"([^\"]*)\"$")
+    public void pageTitleShouldBe(final String title) {
+        String pageTitle = getDriver().getTitle();
+        Assert.assertEquals(pageTitle, title);
     }
 }

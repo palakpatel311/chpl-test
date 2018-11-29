@@ -63,17 +63,17 @@ public class ChplAPISteps extends Base {
     public void listOfOperationsShouldBeDisplayed(final String apiEndpoints) {
         WebDriver driver = getDriver();
         // Get element from the webpage into the list
-        List<WebElement> listWebElements = ChplAPIPage.controllerElementList(driver);
+        List<WebElement> apiElements = ChplAPIPage.controllerElementList(driver);
         // Creating a list to hold all the API listed on the webpage by swagger
         List<String> apiListFromPage = new ArrayList<>();
         //Splitting string into tokens of APIs separated by "--" and putting into a list
         List<String> apiListFromEndpoints = Arrays.asList(apiEndpoints.split("--"));
         // Checking if the API from the webpage is present in the API Endpoints
-        for (WebElement wElement : listWebElements) {
+        for (WebElement apiLink : apiElements) {
         // Get text of the Web Elements list
-            String apiName = wElement.getText();
+            String apiName = apiLink.getText();
             apiListFromPage.add(apiName);
-            assertTrue(apiListFromEndpoints.contains(apiName), "API is deprecated/newly added api not found in the dataset:-" + apiName);
+            assertTrue(apiListFromEndpoints.contains(apiName), "Unknown API found: " + apiName);
         }
         // Checking if the API from the API Endpoints is present in the webpage
         for (String apiData : apiListFromEndpoints) {
