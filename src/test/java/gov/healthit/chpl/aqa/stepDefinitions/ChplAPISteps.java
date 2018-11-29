@@ -1,15 +1,16 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
-import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import static org.testng.Assert.assertTrue;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -58,7 +59,7 @@ public class ChplAPISteps extends Base {
      * Assert that APIs from webpage is present in the example API Endpoints.
      * @param apiEndpoints as the details of controller
      */
-    @Then("^list of \"([^\"]*)\" operations should be displayed without deprecated calls$")
+    @Then("^list of \"(.*)\" operations should be displayed without deprecated calls$")
     public void listOfOperationsShouldBeDisplayed(final String apiEndpoints) {
         WebDriver driver = getDriver();
         // Get element from the webpage into the list
@@ -69,10 +70,15 @@ public class ChplAPISteps extends Base {
         for (WebElement wElement : listWebElements) {
             apiListFromPage.add(wElement.getText());
         }
-        System.out.println("apiEndpoints" + apiEndpoints);
-        // Checking if the API from the webpage is present in the example API endpoints
-        for (String api : apiListFromPage) {
-            assertTrue(apiEndpoints.contains(api));
+        // Splitting string into tokens of APIs separated by "--" and putting into a list
+        List<String> apiListFromEndpoints = Arrays.asList(apiEndpoints.split("--"));
+        // Checking if the API from the webpage is present in the API Endpoints
+        for (String apiPage : apiListFromPage) {
+            assertTrue(apiListFromEndpoints.contains(apiPage), "API is deprecated/newly added api not found in the API Endpoints:-" + apiPage);
+        }
+        // Checking if the API from the API Endpoints is present in the webpage
+        for (String apiData : apiListFromEndpoints) {
+            assertTrue(apiListFromPage.contains(apiData), "API not found in the webpage :-" + apiData);
         }
     }
 }
