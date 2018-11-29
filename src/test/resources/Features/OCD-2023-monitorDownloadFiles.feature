@@ -14,20 +14,20 @@ Feature: OCD-2023: Monitor that download files on CHPL download resources page a
     Examples:
       | env  | edition | type | days | size | units |
       | DEV  |    2011 | xml  |   92 |  148 | MB    |
-      | DEV  |    2014 | xml  |    1 |  470 | MB    |
-      | DEV  |    2014 | csv  |    1 | 3000 | KB    |
-      | DEV  |    2015 | xml  |    1 |  155 | MB    |
-      | DEV  |    2015 | csv  |    1 |  400 | KB    |
+      | DEV  |    2014 | xml  |    1 |  450 | MB    |
+      | DEV  |    2014 | csv  |    1 | 2900 | KB    |
+      | DEV  |    2015 | xml  |    1 |  150 | MB    |
+      | DEV  |    2015 | csv  |    1 |  350 | KB    |
       | STG  |    2011 | xml  |   92 |  148 | MB    |
-      | STG  |    2014 | xml  |    1 |  470 | MB    |
-      | STG  |    2014 | csv  |    1 | 3000 | KB    |
-      | STG  |    2015 | xml  |    1 |  155 | MB    |
-      | STG  |    2015 | csv  |    1 |  400 | KB    |
+      | STG  |    2014 | xml  |    1 |  450 | MB    |
+      | STG  |    2014 | csv  |    1 | 2900 | KB    |
+      | STG  |    2015 | xml  |    1 |  150 | MB    |
+      | STG  |    2015 | csv  |    1 |  350 | KB    |
       | PROD |    2011 | xml  |   92 |  148 | MB    |
-      | PROD |    2014 | xml  |    1 |  470 | MB    |
-      | PROD |    2014 | csv  |    1 | 3000 | KB    |
-      | PROD |    2015 | xml  |    1 |  155 | MB    |
-      | PROD |    2015 | csv  |    1 |  400 | KB    |
+      | PROD |    2014 | xml  |    1 |  450 | MB    |
+      | PROD |    2014 | csv  |    1 | 2900 | KB    |
+      | PROD |    2015 | xml  |    1 |  150 | MB    |
+      | PROD |    2015 | csv  |    1 |  350 | KB    |
 
   Scenario: At any given time, when downloaded, Surveillance Activity file is up-to-date
     When I download the Surveillance Activity file
