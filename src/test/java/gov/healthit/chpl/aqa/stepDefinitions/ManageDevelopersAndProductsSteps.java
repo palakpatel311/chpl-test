@@ -240,8 +240,9 @@ public class ManageDevelopersAndProductsSteps extends Base {
              * This should work, but I can't figure out why it isn't.
              * InputStream listing = ManageDevelopersAndProductsSteps.class.getResourceAsStream("test/resources/" + edition + "_Test_SLI.csv");
              */
-            CSVParser parser = CSVParser.parse(listing, Charset.forName("UTF-8"), CSVFormat.EXCEL);
-            return parser.getRecords();
+            try (CSVParser parser = CSVParser.parse(listing, Charset.forName("UTF-8"), CSVFormat.EXCEL)) {
+                return parser.getRecords();
+            }
         } catch (IOException e) {
             return null;
         }
@@ -249,28 +250,26 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
     private String writeTempFile(final List<CSVRecord> listing, final String inputChplId) {
         File temp = null;
-        OutputStreamWriter writer = null;
-        CSVPrinter csvPrinter = null;
         String newChplId = getNewChplId(inputChplId);
         try {
             temp = File.createTempFile("upload", ".csv");
             temp.deleteOnExit();
-            writer = new OutputStreamWriter(
+            try (OutputStreamWriter writer = new OutputStreamWriter(
                     new FileOutputStream(temp),
                     Charset.forName("UTF-8").newEncoder()
                     );
-            csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL);
-            for (CSVRecord record : listing) {
-                ArrayList<String> row = new ArrayList<String>();
-                for (String s : record) {
-                    if (s.equalsIgnoreCase(inputChplId)) {
-                        s = newChplId;
+                    CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL)) {
+                for (CSVRecord record : listing) {
+                    ArrayList<String> row = new ArrayList<String>();
+                    for (String s : record) {
+                        if (s.equalsIgnoreCase(inputChplId)) {
+                            s = newChplId;
+                        }
+                        row.add(s);
                     }
-                    row.add(s);
+                    csvPrinter.printRecord(row);
                 }
-                csvPrinter.printRecord(row);
             }
-            csvPrinter.close();
             return temp.getAbsolutePath();
         } catch (IOException e) {
             return null;
