@@ -1,25 +1,11 @@
+@Regression
 Feature: OCD-2262 - Remove API POST calls that were deprecated in favor of PUT/DELETE 
     This test checks whether deprecated calls are removed from CHPL API webpage
 
-@Regression
 Scenario: CHPL API page loads and shows correct title 
     Given I am on CHPL API page 
     Then the page title should be "CHPL API" 
-
-@Regression
-Scenario Outline: 
-    Verify API list in Controller does not contain deprecated calls 
-    Given I am on CHPL API page 
-    When I click on "<Controller>" link 
-    Then list of "<API Endpoints>" operations should be displayed without deprecated calls 
-    Examples: 
-        | Controller                    |API Endpoints|
-        | product-controller            |List all products--Update a product or merge products.--Get information about a specific product.--Get all listings owned by the specified product.--Split a product - some versions stay with the existing product and some versions are moved to a new product.|
-        | scheduler-controller          |Get the list of all jobs that are applicable to the currently logged in user--Update a given job--Get the list of all triggers and their associated scheduled jobs that are applicable to the currently logged in user--Create a new trigger and return it--Update an existing trigger and return it--Delete an existing trigger|
-        | collections-controller        |Get basic data about all certified products in the system.--Get a list of all developers with transparency attestation URLsand ACB attestations.|
-        | surveillance-controller       |Create a new surveillance activity for a certified product.--Download nonconformity supporting documentation.--Download surveillance as CSV.--Get the listing of all pending surveillance items that this user has access to.--Reject several pending surveillance.--Confirm a pending surveillance activity.--Reject (effectively delete) a pending surveillance item.--Upload a file with surveillance and nonconformities for certified products.--Update a surveillance activity for a certified product.--Delete a surveillance activity for a certified product.--Remove documentation from a nonconformity.--Add documentation to an existing nonconformity.|
-
-@Acceptance
+ 
 Scenario Outline: 
     Verify API list in Controller does not contain deprecated calls 
     Given I am on CHPL API page 
@@ -46,4 +32,3 @@ Scenario Outline:
         | job-controller                |Get the list of all jobs currently running in the system and thosethat have completed within a configurable amount of time (usually a short window like the last 7 days).|
         | certified-product-controller  |List all certified products--List pending certified products.--Reject several pending certified products.--List a specific pending certified product.--Reject a pending certified product.--Confirm a pending certified product.--Download all SED details that are certified to 170.315(g)(3).--Upload a file with certified products--Get all basic information for a specified certified product. Does not include the CQM results and certification results.--Update an existing certified product.--Get all of the certification results for a specified certified product.--Get all of the CQM results for a specified certified product.--Get all details for a specified certified product.--Get the ICS family tree for the specified certified product.--Get all basic information for a specified certified product. Does not include the CQM results and certification results.--Get all of the certification results for a specified certified product based on a legacy CHPL Product Number.--Get all of the CQM results for a specified certified product based on a legacy CHPL Product Number.--Get all details for a specified certified product.--Get the ICS family tree for the specified certified product based on a legacy CHPL Product Number--Get all basic information for a specified certified product. Does not include the CQM results and certification results.--Get all of the certification results for a specified certified product based on a CHPL Product Number.--Get all of the CQM results for a specified certified product.--Get all details for a specified certified product.--Get the ICS family tree for the specified certified product based on a CHPL Product Number.|
         | surveillance-controller       |Create a new surveillance activity for a certified product.--Download nonconformity supporting documentation.--Download surveillance as CSV.--Get the listing of all pending surveillance items that this user has access to.--Reject several pending surveillance.--Confirm a pending surveillance activity.--Reject (effectively delete) a pending surveillance item.--Upload a file with surveillance and nonconformities for certified products.--Update a surveillance activity for a certified product.--Delete a surveillance activity for a certified product.--Remove documentation from a nonconformity.--Add documentation to an existing nonconformity.|
-        
