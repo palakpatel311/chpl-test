@@ -13,7 +13,7 @@ Scenario Outline:
     Then list of "<API Endpoints>" operations should be displayed without deprecated calls 
     Examples: 
         | Controller                    |API Endpoints|
-        | chpl-file-controller          |Retrieve an API Documenation file--Upload an API Documenation file--Retrieve details about an API Documenation file|
+        | chpl-file-controller          |Retrieve an API Documentation file--Upload an API Documentation file--Retrieve details about an API Documentation file|
         | product-controller            |List all products--Update a product or merge products.--Get information about a specific product.--Get all listings owned by the specified product.--Split a product - some versions stay with the existing product and some versions are moved to a new product.|
         | scheduler-controller          |Get the list of all jobs that are applicable to the currently logged in user--Update a given job--Get the list of all triggers and their associated scheduled jobs that are applicable to the currently logged in user--Create a new trigger and return it--Update an existing trigger and return it--Delete an existing trigger|
         | collections-controller        |Get basic data about all certified products in the system.--Get a list of all developers with transparency attestation URLsand ACB attestations.|
