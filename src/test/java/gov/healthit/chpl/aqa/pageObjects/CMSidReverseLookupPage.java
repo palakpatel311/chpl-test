@@ -47,15 +47,6 @@ public final class CMSidReverseLookupPage extends BasePage {
     }
 
     /**
-     * Returns element holding main content.
-     * @param driver WebDriver
-     * @return element holding main content
-     */
-    public static WebElement mainContent(final WebDriver driver) {
-        return driver.findElement(By.id("main-content"));
-    }
-
-    /**
      * Results section that shows CMS ID look up results in reverse lookup tool.
      * @param driver WebDriver
      * @return results section element
