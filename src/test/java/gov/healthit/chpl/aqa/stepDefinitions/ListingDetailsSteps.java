@@ -400,4 +400,24 @@ public class ListingDetailsSteps extends Base {
         }
         assertTrue(isFound, "Text: " + cqm + " not found");
     }
+
+    /**
+     * Select view all CQMs and open CQM accordion.
+     */
+    @When("^I look at \"([^\"]*)\"$")
+    public void lookAtCHPLProductNumber() {
+        ListingDetailsPage.viewAllCertificationCriteriaCQMs(getDriver()).click();
+        WebElement link = ListingDetailsPage.cqmAccordion(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+    }
+
+    /**
+     * Assert CHPL Product number is correct.
+     * @param expectedProductNumber is CHPL Expected Product number
+     */
+    @Then("^the correct CHPL Product number \"([^\"]*)\" is displayed$")
+    public void correctCHPLProductNumber(final String expectedProductNumber) {
+         String productNumber = ListingDetailsPage.productNumber(getDriver()).getText();
+         assertTrue(productNumber.contains(expectedProductNumber), "Expected product number [ " + expectedProductNumber + " ] but found [ " + productNumber + " ]");
+    }
 }
