@@ -7,10 +7,8 @@ import org.openqa.selenium.WebElement;
 /**
  * Class CMSidReverseLookupPage definition.
  */
-public final class CMSidReverseLookupPage {
-
+public final class CMSidReverseLookupPage extends BasePage {
     private CMSidReverseLookupPage() {}
-    private static WebElement element = null;
 
     /**
      * Returns paragraph that contains CMS ID.
@@ -18,26 +16,25 @@ public final class CMSidReverseLookupPage {
      * @return the results paragraph
      */
     public static WebElement cmsIdResults(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"widget-dropdown\"]/ai-cms-widget-display/div/p/strong"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"widget-dropdown\"]/ai-cms-widget-display/div/p/strong"));
     }
+
     /**
      * Certification Id input field element on CMS ID Reverse Lookup Page.
      * @param driver WebDriver
      * @return the cert ID element
      */
     public static WebElement inputCertificationId(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"certIdsField\"]"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"certIdsField\"]"));
     }
+
     /**
      * Element to locate chpl Id column in certification Id results table on CMS ID Reverse Lookup Page.
      * @param driver WebDriver
      * @return the column body element
      */
     public static WebElement chplIdColumnInCertIdResultsTable(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"lookupCertIdResults\"]/tbody"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"lookupCertIdResults\"]/tbody"));
     }
 
     /**
@@ -46,27 +43,16 @@ public final class CMSidReverseLookupPage {
      * @return the button
      */
     public static WebElement generateCmsIdButton(final WebDriver driver) {
-        element = driver.findElement(By.id("get-ehr-cert-id"));
-        return element;
+       return driver.findElement(By.id("get-ehr-cert-id"));
     }
 
-    /**
-     * Returns element holding main content.
-     * @param driver WebDriver
-     * @return element holding main content
-     */
-    public static WebElement mainContent(final WebDriver driver) {
-        element = driver.findElement(By.id("main-content"));
-        return element;
-    }
     /**
      * Results section that shows CMS ID look up results in reverse lookup tool.
      * @param driver WebDriver
      * @return results section element
      */
     public static WebElement searchLookupResults(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[1]/div/div/div/div/span/button/i"));
-        return element;
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[1]/div/div/div/div/span/button/i"));
     }
 
     /**
@@ -75,7 +61,6 @@ public final class CMSidReverseLookupPage {
      * @return the toggle
      */
     public static WebElement widgetToggle(final WebDriver driver) {
-        element = driver.findElement(By.id("widget-toggle"));
-        return element;
+        return driver.findElement(By.id("widget-toggle"));
     }
 }
