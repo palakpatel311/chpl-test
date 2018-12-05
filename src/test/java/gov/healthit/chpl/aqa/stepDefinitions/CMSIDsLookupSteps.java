@@ -2,7 +2,6 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -65,7 +64,6 @@ public class CMSIDsLookupSteps extends Base {
      */
     @When("^I generate a CMS ID$")
     public void generateCmsId() {
-       ((JavascriptExecutor) getDriver()).executeScript("arguments[0].removeAttribute('disabled','disabled')", CMSidReverseLookupPage.generateCmsIdButton(getDriver()));
        getWait().until(ExpectedConditions.elementToBeClickable(CMSidReverseLookupPage.generateCmsIdButton(getDriver())));
         CMSidReverseLookupPage.generateCmsIdButton(getDriver()).click();
    }
