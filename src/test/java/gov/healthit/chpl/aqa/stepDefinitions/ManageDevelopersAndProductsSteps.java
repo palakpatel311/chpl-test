@@ -153,7 +153,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
             DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber).click();
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(DpManagementPage.warningErrorTextOnInspect(getDriver())));
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.nextOnInspectButton(getDriver())));
         } catch (Exception e) {
             Hooks.takeScreenshot(this.chplProductNumber);
             assertTrue(false, "in confirm:" + e.getMessage());
