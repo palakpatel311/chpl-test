@@ -87,7 +87,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return CQM Accordion element
      */
     public static WebElement cqmAccordion(final WebDriver driver) {
-       return driver.findElement(By.id("details-cqm"));
+        return driver.findElement(By.id("details-cqm"));
     }
 
     /**
@@ -264,7 +264,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return checkbox input element
      */
     public static WebElement viewAllCertificationCriteriaCQMs(final WebDriver driver) {
-       return driver.findElement(By.id("viewAllCerts"));
+        return driver.findElement(By.id("viewAllCerts"));
     }
 
     /**
@@ -291,7 +291,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return Table element
      */
     public static WebElement sedCriteriaTable(final WebDriver driver) {
-       return driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]"));
+        return driver.findElement(By.xpath("//*[@id=\"sed-ucd-processes-table\"]"));
     }
 
     /**
@@ -331,7 +331,7 @@ public final class ListingDetailsPage extends BasePage {
      */
     public static WebElement testTool(final WebDriver driver, final String number) {
         return driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_row_Test_tool\"]/td[2]"));
-     }
+    }
 
     /**
      * Returns the Test Results Summary URL.
@@ -367,5 +367,14 @@ public final class ListingDetailsPage extends BasePage {
      */
     public static WebElement ucdUrl(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/a"));
+    }
+
+    /**
+     * Returns CHPL Product number.
+     * @param driver WebDriver
+     * @return CHPL Product number element
+     */
+    public static WebElement productNumber(final WebDriver driver) {
+        return driver.findElement(By.xpath("//p[contains(text(),'CHPL Product Number:')]"));
     }
 }
