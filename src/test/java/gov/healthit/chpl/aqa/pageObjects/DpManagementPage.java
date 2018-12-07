@@ -353,4 +353,13 @@ public final class DpManagementPage {
         return driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/button[1]"));
     }
 
+    /**
+     * Returns element that holds error and warning text.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement warningErrorTextOnInspect(final WebDriver driver) {
+        return driver.findElement(By.xpath("//html/body/div[1]/div/div/div/div[3]/div/div/div/ul"));
+   }
+
 }
