@@ -73,7 +73,7 @@ public class ApiAccessSteps {
         Response response = given()
                 .header("API-KEY", apikey)
                 .header("content-type", "application/json")
-                .get(url + "/rest/cache_status");
+                .get(url + "rest/cache_status");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
         String cacheStatus = jsonPathEvaluator.get("status");
