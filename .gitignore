@@ -31,3 +31,4 @@ Rest.*
 ## Custom
 #################
 .checkstyle
+node_modules/
