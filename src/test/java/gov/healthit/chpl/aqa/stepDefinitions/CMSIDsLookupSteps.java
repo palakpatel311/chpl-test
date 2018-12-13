@@ -60,7 +60,6 @@ public class CMSIDsLookupSteps extends Base {
 
     /**
      * Generate a CMS ID.
-     * @throws Exception
      */
     @When("^I generate a CMS ID$")
     public void generateCmsId() {
