@@ -12,12 +12,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gov.healthit.chpl.aqa.pageObjects.ChartsPage;
 import gov.healthit.chpl.aqa.pageObjects.CollectionsPages;
 
 /**
  * Class CollectionsPagesSteps definition.
  */
-public class CollectionsPagesSteps {
+public class CollectionsPagesSteps extends Base {
     private WebDriver driver;
     private static final int TIMEOUT = 30;
     private String url = System.getProperty("url");
@@ -29,7 +30,7 @@ public class CollectionsPagesSteps {
         driver = Hooks.getDriver();
         if (StringUtils.isEmpty(url)) {
             url = "http://localhost:3000/";
-           }
+        }
     }
 
     /**
@@ -48,9 +49,9 @@ public class CollectionsPagesSteps {
      */
     @Given("^I am on \"([^\"]*)\" collections page: \"([^\"]*)\"$")
     public void loadCollectionsPage(final String ptitle, final String pname) {
-      driver.get(url + "#/collections/" + pname);
-      WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-      wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(driver)));
+        driver.get(url + "#/collections/" + pname);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(driver)));
     }
 
     /**
@@ -63,4 +64,27 @@ public class CollectionsPagesSteps {
         assertTrue(link.contains(cmsfaqLink), "Expect " + cmsfaqLink + " to be found in " + link);
     }
 
+    /**
+     * Get user to the Collections page.
+     */
+    @Given("^I am on the Collections page$")
+    public void iAmOnCollectionsPage() {
+        driver.get(url + "#/collections/sed");
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(ChartsPage.mainContent(driver)));
+    }
+
+    /**
+     * Download SED Details.csv file.
+     * @param fileName expected file name
+     */
+    @When("^I download the \"([^\"]*)\" file$")
+    public void downloadSurveillanceActivityFile(final String fileName) {
+        WebElement link = CollectionsPages.sedDetailsFileButton(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        System.out.println("Out of the ");
+        super.downloadFile(fileName);
+        System.out.println("Done");
+    }
 }
+

@@ -61,4 +61,31 @@ public class Base {
     public void setWait(final WebDriverWait wait) {
         this.wait = wait;
     }
+
+    /**
+     * Check whether file is downloaded.
+     * @param fileName expected File name
+     */
+    public void downloadFile(final String fileName) {
+        System.out.println("Inside");
+        String downloadFileName = null;
+        boolean fileFound = false;
+        final long sleepTime = 5 * 1000;
+        while (!fileFound) {
+            System.out.println("Inside the loop--->");
+            File[] files = Hooks.getDownloadDirectory().listFiles();
+            for (File file : files) {
+                downloadFileName = file.getName();
+                if (downloadFileName.startsWith(fileName)) {
+                    System.out.println("File found");
+                    fileFound = true;
+                }
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

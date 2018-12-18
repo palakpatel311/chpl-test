@@ -64,6 +64,7 @@ public class ChplDownloadSteps extends Base {
         default: url = getUrl();
         break;
         }
+        System.out.println("The environment is :-" + tEnv);
         getDriver().get(url + "#/resources/download");
         getWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
     }
@@ -216,37 +217,31 @@ public class ChplDownloadSteps extends Base {
                             + size * FILE_TOO_LARGE_FACTOR + " " + units + ". Please update the AQA test values.");
         }
     }
+
     /**
-     * Select Surveillance Activity file from drop down and download .csv file.
+     * Select Surveillance Activity file from drop down.
      */
-    @When("^I download the Surveillance Activity file$")
-    public void downloadSurveillanceActivityFile() {
+    @When("^I select the Surveillance Activity file from drop-down$")
+    public void selectSurveillanceActivityFile() {
         ChplDownloadPage.downloadoptionSurveillanceFile(getDriver()).click();
+    }
+
+    /**
+     * Download the file.
+     * @param fileName expected file name
+     */
+    @And("^I download \"([^\"]*)\" file$")
+    public void downloadFile(final String fileName) {
         ChplDownloadPage.downloadFileButton(getDriver()).click();
+        super.downloadFile(fileName);
     }
 
     /**
-     * Assert filename of download file.
+     * Select surveillance-with-nonconformities file from drop down.
      */
-    @Then("^the downloaded file shows surveillance-all.csv filename$")
-    public void verifySurveillanceActivityFilename() {
-
-        File[] filenames = Hooks.getDownloadDirectory().listFiles();
-
-        for (File file : filenames) {
-            String dwldFileName = file.getName();
-            String currentfile = "surveillance-all.csv";
-            assertEquals(dwldFileName, currentfile, "File is not current");
-        }
-    }
-
-    /**
-     * Select surveillance-with-nonconformities file from drop down and download .csv file.
-     */
-    @When("^I download the Non-Conformities file$")
+    @When("^I select the Non-Conformities file from drop-down$")
     public void downloadNonConformitiesFile() {
         ChplDownloadPage.downloadoptionNonconformitiesFile(getDriver()).click();
-        ChplDownloadPage.downloadFileButton(getDriver()).click();
     }
 
     /**
@@ -278,4 +273,36 @@ public class ChplDownloadSteps extends Base {
         FileUtils.cleanDirectory(Hooks.getDownloadDirectory());
         assertFalse(Hooks.getDownloadDirectory().list().length > 0, "directory is not empty");
     }
+
+    /**
+     * Assert filename ends with date and time stamp.
+     * @param dateTimeFormat expected Date and Time
+     * @param fileName expected File name
+     */
+    @Then("^the \"([^\"]*)\" file ends with \"([^\"]*)\"$")
+    public void surveillanceActivityFileEndsWithDateTimeFormat(final String fileName, final String dateTimeFormat) {
+        File[] filenames = Hooks.getDownloadDirectory().listFiles();
+        System.out.println("Inside ------>" + filenames.length);
+        for (File file : filenames) {
+            System.out.println("File" + file.getName());
+            String dwldFileName = file.getName();
+            if (dwldFileName.startsWith(fileName)) {
+                String[] fileTokens = dwldFileName.split("-");
+                String extToken = fileTokens[fileTokens.length - 1];
+                System.out.println("tokens - " + extToken);
+                String[] dTokens = extToken.split("\\.");
+                String fileDate = "-" + dTokens[0];
+                System.out.println("fileDate " + fileDate);
+                SimpleDateFormat df = new SimpleDateFormat(dateTimeFormat);
+                df.setLenient(false);
+                try {
+                    df.parse(fileDate);
+                    assertTrue(true);
+                } catch (ParseException e) {
+                    fail("Could not parse filename: " + dwldFileName + "for date format [ " + fileDate + " ]");
+                }
+            }
+        }
+    }
 }
+

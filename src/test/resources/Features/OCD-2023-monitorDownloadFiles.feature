@@ -29,10 +29,17 @@ Feature: OCD-2023: Monitor that download files on CHPL download resources page a
       | PROD |    2015 | xml  |    1 |  130 | MB    |
       | PROD |    2015 | csv  |    1 |  250 | KB    |
 
-  Scenario: At any given time, when downloaded, Surveillance Activity file is up-to-date
-    When I download the Surveillance Activity file
-    Then the downloaded file shows surveillance-all.csv filename
-
-  Scenario: At any given time, when downloaded, Non-Conformities file is up-to-date
-    When I download the Non-Conformities file
+ Scenario: At any given time, when downloaded, Non-Conformities file is up-to-date
+    When I select the Non-Conformities file from drop-down
+    And I download "surveillance-with-nonconformities" file
     Then the downloaded file shows surveillance-with-nonconformities.csv filename
+
+  Scenario: At any given time, when downloaded, Surveillance activity file name ends with Date and time format
+    When I select the Surveillance Activity file from drop-down
+    And I download "surveillance-all" file
+    Then the "surveillance-all" file ends with "-yyyyMMdd_HHmmss"
+
+  Scenario: At any given time, when downloaded, SED Details file name ends with Date and time format
+    Given I am on the Collections page
+    When I download the "chpl-sed" file
+    Then the "chpl-sed" file ends with "-yyyyMMdd_HHmmss"
