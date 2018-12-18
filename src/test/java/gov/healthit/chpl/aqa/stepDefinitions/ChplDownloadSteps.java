@@ -6,12 +6,23 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.XMLEvent;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -164,8 +175,8 @@ public class ChplDownloadSteps extends Base {
      * then parses filename's date field and compares with "today".
      * @param days maximum number of days old the file may be
      */
-    @Then("^the downloaded file is no more than \"(.*)\" days old")
-    public void theDownloadedFileIsNotOld(final String days) {
+    @Then("^the download file is no more than \"(.*)\" days old$")
+    public void theDownloadFileIsNotOld(final String days) {
         final int startOfDateInFilename = 10;
         final int endOfDateInFilename = 18;
         String downloadFileName = null;
@@ -194,8 +205,8 @@ public class ChplDownloadSteps extends Base {
      * @param sizeParam expected size
      * @param units expected file unit scale (MB or KB)
      */
-    @And("^the downloaded file is at least \"(.*)\" \"(.*)\" in size$")
-    public void theDownloadedFileIsNotTooSmall(final String sizeParam, final String units) {
+    @And("^the download file is at least \"(.*)\" \"(.*)\" in size$")
+    public void theDownloadFileIsNotTooSmall(final String sizeParam, final String units) {
         Long size = Long.valueOf(sizeParam);
         File[] files = Hooks.getDownloadDirectory().listFiles();
         for (File f : files) {
@@ -215,6 +226,35 @@ public class ChplDownloadSteps extends Base {
             assertTrue(fileSize <= (size * FILE_TOO_LARGE_FACTOR),
                     "File " + fileName + " is " + fileSize + " " + units + " in size; should be no more than "
                             + size * FILE_TOO_LARGE_FACTOR + " " + units + ". Please update the AQA test values.");
+        }
+    }
+
+    /**
+     * Assert that the file has at least the expected number of items. Will also give an error if the actual count is
+     * 10% more than the expected count, in order to encourage the counts to get updated as the files grow.
+     * @param itemParam expected item count
+     */
+    @And("^the download file has at least \"(.*)\" items$")
+    public void theDownloadFileHasAtLeastItems(final String itemParam) {
+        Long items = Long.valueOf(itemParam);
+        File[] files = Hooks.getDownloadDirectory().listFiles();
+        for (File f : files) {
+            String fileName = f.getName();
+            if (StringUtils.endsWith(fileName, ".csv")) {
+                Long rawItems = getCsvItemCount(f);
+                assertTrue(rawItems >= items,
+                        "File " + fileName + " has " + rawItems + " items; should have at least " + items);
+                assertTrue(rawItems <= (items * FILE_TOO_LARGE_FACTOR),
+                        "File " + fileName + " has " + rawItems + " items; should be no more than "
+                                + items * FILE_TOO_LARGE_FACTOR + ". Please update the AQA test values.");
+            } else if (StringUtils.endsWith(fileName, ".xml")) {
+                Long rawItems = getXmlItemCount(f);
+                assertTrue(rawItems >= items,
+                        "File " + fileName + " has " + rawItems + " items; should have at least " + items);
+                assertTrue(rawItems <= (items * FILE_TOO_LARGE_FACTOR),
+                        "File " + fileName + " has " + rawItems + " items; should be no more than "
+                                + items * FILE_TOO_LARGE_FACTOR + ". Please update the AQA test values.");
+            }
         }
     }
 
@@ -303,6 +343,38 @@ public class ChplDownloadSteps extends Base {
                 }
             }
         }
+    }
+
+    private long getCsvItemCount(final File input) {
+        List<String> lines = new ArrayList<String>();
+        try {
+            lines = Files.readAllLines(input.toPath());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return lines.size() - 1;
+    }
+
+    private long getXmlItemCount(final File input) {
+        long items = 0;
+        XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+        try (InputStream in = new FileInputStream(input)) {
+            XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+            while (eventReader.hasNext()) {
+                XMLEvent event = eventReader.nextEvent();
+                if (event.isStartElement()) {
+                    if (event.asStartElement().getName().getLocalPart().equalsIgnoreCase("listing")) {
+                        items += 1;
+                    }
+                }
+            }
+        } catch (XMLStreamException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return items;
     }
 }
 

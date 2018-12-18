@@ -127,6 +127,16 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
+     * Get the Functionality Tested value for a given criteria.
+     * @param driver WebDriver
+     * @param number certification criteria
+     * @return the Functionality Tested value
+     */
+    public static WebElement functionalityTested(final WebDriver driver, final String number) {
+        return driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_row_Functionality_Tested\"]/td[2]"));
+    }
+
+    /**
      * Return G1/G2 Accordion on listing page.
      * @param driver WebDriver
      * @return G1/G2 Accordion element

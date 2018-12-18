@@ -64,24 +64,6 @@ public class ManageDevelopersAndProductsSteps extends Base {
     }
 
     /**
-     * Navigate to Upload Certified Products page.
-     */
-    @And("^I am on Upload Certified Products page$")
-    public void loadUploadCertifiedProductsPage() {
-        DpManagementPage.dpManagementLink(getDriver()).click();
-        DpManagementPage.dpManagementUploadProductsSurveillance(getDriver()).click();
-    }
-
-    /**
-     * Navigate to Confirm Pending Products page.
-     */
-    @When("^I go to Confirm Pending Products Page$")
-    public void loadConfirmPendingProductsPage() {
-        DpManagementPage.confirmPendingProductsLink(getDriver()).click();
-        getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
-    }
-
-    /**
      * Search for given CHPL Id on Manage Surveillance Activity Page.
      * @param chplId is chplId to look up
      * @throws Exception if screenshot cannot be taken
@@ -109,6 +91,15 @@ public class ManageDevelopersAndProductsSteps extends Base {
     }
 
     /**
+     * Navigate to Upload Certified Products page.
+     */
+    @And("^I am on Upload Certified Products page$")
+    public void loadUploadCertifiedProductsPage() {
+        DpManagementPage.dpManagementLink(getDriver()).click();
+        DpManagementPage.dpManagementUploadProductsSurveillance(getDriver()).click();
+    }
+
+    /**
      * Upload a listing.
      * @param edition is listing edition
      * @param inputChplId initial CHPL ID
@@ -123,6 +114,68 @@ public class ManageDevelopersAndProductsSteps extends Base {
     }
 
     /**
+     * Assert upload success message.
+     * @throws Exception if screenshot can't be taken
+     */
+    @Then("^I see upload successful message$")
+    public void testUploadSuccessText() throws Exception {
+        String successText = DpManagementPage.uploadSuccessfulText(getDriver()).getText();
+        try {
+            assertTrue(successText.contains("was uploaded successfully"));
+        } catch (AssertionError ae) {
+            Hooks.takeScreenshot();
+            throw (ae);
+        }
+    }
+
+    /**
+     * Navigate to Confirm Pending Products page.
+     */
+    @When("^I go to Confirm Pending Products Page$")
+    public void loadConfirmPendingProductsPage() {
+        DpManagementPage.confirmPendingProductsLink(getDriver()).click();
+        getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
+    }
+
+    /**
+     * Open inspect screen.
+     * @throws Exception if there is an exception
+     */
+    @And("^I open inspect form to inspect listing details$")
+    public void openInspectScreen() throws Exception {
+        try {
+        getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
+            DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber).click();
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.nextOnInspectButton(getDriver())));
+        } catch (Exception e) {
+            Hooks.takeScreenshot(this.chplProductNumber);
+            assertTrue(false, "in confirm:" + e.getMessage());
+        }
+    }
+
+    /**
+     * Verify warning on inspect screen.
+     */
+    @Then("^I see warnings for duplicate macra measures in G1 and G2$")
+    public void verifyWarningOnInspect() {
+
+        String warning = DpManagementPage.warningErrorTextOnInspect(getDriver()).getText();
+        assertTrue(warning
+        .contains("Certification 170.315 (a)(1) contains duplicate G1 Macra Measure: 'EH/CAH Stage 3'. The duplicates have been removed"),
+        "no warnings were found");
+        assertTrue(warning
+        .contains("Certification 170.315 (a)(1) contains duplicate G2 Macra Measure: 'EH/CAH Stage 3'. The duplicates have been removed"),
+        "no warnings were found");
+    }
+
+    /**
      * Confirm uploaded listing.
      * @param edition is listing edition
      * @param testChplId is chpl id of listing to confirm
@@ -131,14 +184,6 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @And("^I confirm \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
     public void confirmUploadedListing(final String edition, final String testChplId) throws Exception {
         try {
-            getWait()
-            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
-            getWait()
-            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
-            DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber).click();
-
             DpManagementPage.nextOnInspectButton(getDriver()).click();
 
             if (DpManagementPage.isProductNewDivElementPresent(getDriver())) {
@@ -207,21 +252,6 @@ public class ManageDevelopersAndProductsSteps extends Base {
     }
 
     /**
-     * Assert upload success message.
-     * @throws Exception if screenshot can't be taken
-     */
-    @Then("^I see upload successful message$")
-    public void testUploadSuccessText() throws Exception {
-        String successText = DpManagementPage.uploadSuccessfulText(getDriver()).getText();
-        try {
-            assertTrue(successText.contains("was uploaded successfully"));
-        } catch (AssertionError ae) {
-            Hooks.takeScreenshot();
-            throw (ae);
-        }
-    }
-
-    /**
      * Load listing details to verify listing was uploaded successfully.
      * @param ed - edition digits in CHPL ID
      */
@@ -240,8 +270,9 @@ public class ManageDevelopersAndProductsSteps extends Base {
              * This should work, but I can't figure out why it isn't.
              * InputStream listing = ManageDevelopersAndProductsSteps.class.getResourceAsStream("test/resources/" + edition + "_Test_SLI.csv");
              */
-            CSVParser parser = CSVParser.parse(listing, Charset.forName("UTF-8"), CSVFormat.EXCEL);
-            return parser.getRecords();
+            try (CSVParser parser = CSVParser.parse(listing, Charset.forName("UTF-8"), CSVFormat.EXCEL)) {
+                return parser.getRecords();
+            }
         } catch (IOException e) {
             return null;
         }
@@ -249,28 +280,26 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
     private String writeTempFile(final List<CSVRecord> listing, final String inputChplId) {
         File temp = null;
-        OutputStreamWriter writer = null;
-        CSVPrinter csvPrinter = null;
         String newChplId = getNewChplId(inputChplId);
         try {
             temp = File.createTempFile("upload", ".csv");
             temp.deleteOnExit();
-            writer = new OutputStreamWriter(
+            try (OutputStreamWriter writer = new OutputStreamWriter(
                     new FileOutputStream(temp),
                     Charset.forName("UTF-8").newEncoder()
                     );
-            csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL);
-            for (CSVRecord record : listing) {
-                ArrayList<String> row = new ArrayList<String>();
-                for (String s : record) {
-                    if (s.equalsIgnoreCase(inputChplId)) {
-                        s = newChplId;
+                    CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.EXCEL)) {
+                for (CSVRecord record : listing) {
+                    ArrayList<String> row = new ArrayList<String>();
+                    for (String s : record) {
+                        if (s.equalsIgnoreCase(inputChplId)) {
+                            s = newChplId;
+                        }
+                        row.add(s);
                     }
-                    row.add(s);
+                    csvPrinter.printRecord(row);
                 }
-                csvPrinter.printRecord(row);
             }
-            csvPrinter.close();
             return temp.getAbsolutePath();
         } catch (IOException e) {
             return null;

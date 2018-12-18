@@ -1,9 +1,13 @@
 @Regression
 Feature: Verify endpoints return correct response
   OCD-2398- Verify the "basic information" product endpoint reports correct addl s/w code in CHPL ID
+  OCD-2557- Verify cache_status endpoint reports status of all cache
 
   Scenario Outline: Certified products basic information endpoint returns correct CHPL ID
     Then the certified_product basic and details endpoints for "<DB_ID>" have the same CHPL ID: "<CHPL_ID>"
     Examples:
       | DB_ID | CHPL_ID                           |
       |  8252 | 15.04.04.2945.Ligh.21.00.1.161229 |
+
+  Scenario: Verify cache_status endpoint returns status of "okay" for "all caches are populated"
+    Then the cache_status endpoint returns status "OK" for all caches are populated status
