@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gov.healthit.chpl.aqa.pageObjects.ChartsPage;
 import gov.healthit.chpl.aqa.pageObjects.CollectionsPages;
 
 /**
@@ -71,7 +70,7 @@ public class CollectionsPagesSteps extends Base {
     public void iAmOnCollectionsPage() {
         driver.get(url + "#/collections/sed");
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(ChartsPage.mainContent(driver)));
+        wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(driver)));
     }
 
     /**

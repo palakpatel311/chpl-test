@@ -75,7 +75,6 @@ public class ChplDownloadSteps extends Base {
         default: url = getUrl();
         break;
         }
-        System.out.println("The environment is :-" + tEnv);
         getDriver().get(url + "#/resources/download");
         getWait().until(ExpectedConditions.visibilityOf(ChplDownloadPage.downloadSelectList(getDriver())));
     }
@@ -373,4 +372,3 @@ public class ChplDownloadSteps extends Base {
         return items;
     }
 }
-
