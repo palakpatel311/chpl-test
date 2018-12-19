@@ -259,7 +259,7 @@ public class ChplDownloadSteps extends Base {
     }
 
     /**
-     * Select Surveillance Activity file from drop down.
+     * Select Surveillance Activity file from drop-down.
      */
     @When("^I select the Surveillance Activity file from drop-down$")
     public void selectSurveillanceActivityFile() {
@@ -322,17 +322,13 @@ public class ChplDownloadSteps extends Base {
     @Then("^the \"([^\"]*)\" file ends with \"([^\"]*)\"$")
     public void surveillanceActivityFileEndsWithDateTimeFormat(final String fileName, final String dateTimeFormat) {
         File[] filenames = Hooks.getDownloadDirectory().listFiles();
-        System.out.println("Inside ------>" + filenames.length);
         for (File file : filenames) {
-            System.out.println("File" + file.getName());
             String dwldFileName = file.getName();
             if (dwldFileName.startsWith(fileName)) {
                 String[] fileTokens = dwldFileName.split("-");
                 String extToken = fileTokens[fileTokens.length - 1];
-                System.out.println("tokens - " + extToken);
                 String[] dTokens = extToken.split("\\.");
                 String fileDate = "-" + dTokens[0];
-                System.out.println("fileDate " + fileDate);
                 SimpleDateFormat df = new SimpleDateFormat(dateTimeFormat);
                 df.setLenient(false);
                 try {

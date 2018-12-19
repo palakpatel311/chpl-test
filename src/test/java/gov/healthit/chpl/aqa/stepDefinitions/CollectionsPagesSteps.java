@@ -82,9 +82,7 @@ public class CollectionsPagesSteps extends Base {
     public void downloadSurveillanceActivityFile(final String fileName) {
         WebElement link = CollectionsPages.sedDetailsFileButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
-        System.out.println("Out of the ");
         super.downloadFile(fileName);
-        System.out.println("Done");
     }
 }
 
