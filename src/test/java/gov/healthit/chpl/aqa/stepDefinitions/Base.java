@@ -1,6 +1,7 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,7 @@ public class Base {
     private String filePath = System.getProperty("filePath");
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
+    private static final int MAX_RETRYCOUNT = 8;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     /** Default constructor. */
     public Base() {
@@ -63,26 +65,33 @@ public class Base {
     }
 
     /**
-     * Check whether the file is downloaded.
-     * @param fileName expected File name
+     * Checks whether the specified file is downloaded or not by iterating 8 times where each iteration has a wait of 5 seconds.
+     * @param fileName expected downloaded file name
+     * @throws FileNotFoundException if the expected file not found
      */
-    public void downloadFile(final String fileName) {
+    public void checkIfFileIsDownloaded(final String fileName)throws FileNotFoundException {
         String downloadFileName = null;
         boolean fileFound = false;
         final long sleepTime = 5 * 1000;
-        while (!fileFound) {
+        int retryCount = 0;
+        while (!fileFound && retryCount <= MAX_RETRYCOUNT) {
             File[] files = Hooks.getDownloadDirectory().listFiles();
             for (File file : files) {
                 downloadFileName = file.getName();
                 if (downloadFileName.startsWith(fileName)) {
                     fileFound = true;
+                    break;
                 }
                 try {
                     Thread.sleep(sleepTime);
+                    retryCount++;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+        }
+        if (!fileFound) {
+            throw new FileNotFoundException("File: " + fileName + " not downloaded");
         }
     }
 }

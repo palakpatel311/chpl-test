@@ -7,6 +7,7 @@ import static org.testng.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -23,6 +24,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -258,44 +260,17 @@ public class ChplDownloadSteps extends Base {
     }
 
     /**
-     * Select Surveillance Activity file from drop-down.
+     * Select a file from drop down and download the file.
+     * @param fileName expected name of the file in drop-down list
+     * @param downloadedFileName expected downloaded file name
+     * @throws FileNotFoundException if the expected file not found
      */
-    @When("^I select the Surveillance Activity file from drop-down$")
-    public void selectSurveillanceActivityFile() {
-        ChplDownloadPage.downloadoptionSurveillanceFile(getDriver()).click();
-    }
-
-    /**
-     * Download the file.
-     * @param fileName expected file name
-     */
-    @And("^I download \"([^\"]*)\" file$")
-    public void downloadFile(final String fileName) {
+    @When("^I select the \"([^\"]*)\", download it from drop-down and I see the \"([^\"]*)\"$")
+    public void selectAndDownloadFileFromDropdown(final String fileName, final String downloadedFileName) throws FileNotFoundException {
+        WebElement link =   ChplDownloadPage.selectFilefromDropdown(getDriver(), fileName);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         ChplDownloadPage.downloadFileButton(getDriver()).click();
-        super.downloadFile(fileName);
-    }
-
-    /**
-     * Select surveillance-with-nonconformities file from drop down.
-     */
-    @When("^I select the Non-Conformities file from drop-down$")
-    public void downloadNonConformitiesFile() {
-        ChplDownloadPage.downloadoptionNonconformitiesFile(getDriver()).click();
-    }
-
-    /**
-     * Assert filename of download file.
-     */
-    @Then("^the downloaded file shows surveillance-with-nonconformities.csv filename$")
-    public void verifyNonConformitiesFilename() {
-
-        File[] filenames = Hooks.getDownloadDirectory().listFiles();
-
-        for (File file : filenames) {
-            String dwldFileName = file.getName();
-            String currentfile = "surveillance-with-nonconformities.csv";
-            assertEquals(dwldFileName, currentfile, "File is not current");
-        }
+        super.checkIfFileIsDownloaded(downloadedFileName);
     }
 
     /**
@@ -314,12 +289,12 @@ public class ChplDownloadSteps extends Base {
     }
 
     /**
-     * Assert filename ends with date and time stamp.
-     * @param dateTimeFormat expected Date and Time
-     * @param fileName expected File name
+     * Assert filename ends with date and time format.
+     *  @param fileName expected File name
+     *  @param dateTimeFormat expected Date and Time
      */
-    @Then("^the \"([^\"]*)\" file ends with \"([^\"]*)\"$")
-    public void surveillanceActivityFileEndsWithDateTimeFormat(final String fileName, final String dateTimeFormat) {
+    @Then("^the \"([^\"]*)\" ends with \"([^\"]*)\"$")
+    public void fileEndsWithDateTimeFormat(final String fileName, final String dateTimeFormat) {
         File[] filenames = Hooks.getDownloadDirectory().listFiles();
         for (File file : filenames) {
             String dwldFileName = file.getName();
@@ -327,7 +302,7 @@ public class ChplDownloadSteps extends Base {
                 String[] fileTokens = dwldFileName.split("-");
                 String extToken = fileTokens[fileTokens.length - 1];
                 String[] dTokens = extToken.split("\\.");
-                String fileDate = "-" + dTokens[0];
+                String fileDate = dTokens[0];
                 SimpleDateFormat df = new SimpleDateFormat(dateTimeFormat);
                 df.setLenient(false);
                 try {
@@ -336,6 +311,8 @@ public class ChplDownloadSteps extends Base {
                 } catch (ParseException e) {
                     fail("Could not parse filename: " + dwldFileName + "for date format [ " + fileDate + " ]");
                 }
+            } else {
+                fail("filename: " + fileName + "not found in downloaded file [ " + dwldFileName + " ]");
             }
         }
     }

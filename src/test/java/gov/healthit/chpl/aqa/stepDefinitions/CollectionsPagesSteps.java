@@ -2,6 +2,8 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static org.testng.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -64,24 +66,15 @@ public class CollectionsPagesSteps extends Base {
     }
 
     /**
-     * Get user to the Collections page.
-     */
-    @Given("^I am on the Collections page$")
-    public void iAmOnCollectionsPage() {
-        driver.get(url + "#/collections/sed");
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(driver)));
-    }
-
-    /**
      * Download SED Details.csv file.
      * @param fileName expected file name
+     * @throws FileNotFoundException if the SED Details File not found
      */
     @When("^I download the \"([^\"]*)\" file$")
-    public void downloadSurveillanceActivityFile(final String fileName) {
+    public void downloadSEDDetailsFile(final String fileName) throws FileNotFoundException {
         WebElement link = CollectionsPages.sedDetailsFileButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
-        super.downloadFile(fileName);
+        super.checkIfFileIsDownloaded(fileName);
     }
 }
 

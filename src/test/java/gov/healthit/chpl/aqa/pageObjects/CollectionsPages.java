@@ -41,12 +41,7 @@ public final class CollectionsPages {
         return element;
     }
 
-    /**
-     * Returns element holding SED Details File.
-     * @param driver WebDriver
-     * @return element holding SED Details File
-     */
     public static WebElement sedDetailsFileButton(final WebDriver driver) {
-        return driver.findElement(By.xpath("//a[@type='button']"));
+        return driver.findElement(By.xpath("//a[contains(text(),'Download All SED Details')]"));
     }
 }
