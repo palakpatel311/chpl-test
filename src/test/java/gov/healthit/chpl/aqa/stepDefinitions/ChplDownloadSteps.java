@@ -267,7 +267,7 @@ public class ChplDownloadSteps extends Base {
      */
     @When("^I select the \"([^\"]*)\", download it from drop-down and I see the \"([^\"]*)\"$")
     public void selectAndDownloadFileFromDropdown(final String fileName, final String downloadedFileName) throws FileNotFoundException {
-        WebElement link =   ChplDownloadPage.selectFilefromDropdown(getDriver(), fileName);
+        WebElement link = ChplDownloadPage.selectFilefromDropdown(getDriver(), fileName);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         ChplDownloadPage.downloadFileButton(getDriver()).click();
         super.checkIfFileIsDownloaded(downloadedFileName);

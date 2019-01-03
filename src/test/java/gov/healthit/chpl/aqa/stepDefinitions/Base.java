@@ -17,6 +17,7 @@ public class Base {
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
     private static final int MAX_RETRYCOUNT = 8;
+    private static final int SLEEP_TIME = 5000;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     /** Default constructor. */
     public Base() {
@@ -72,22 +73,22 @@ public class Base {
     public void checkIfFileIsDownloaded(final String fileName)throws FileNotFoundException {
         String downloadFileName = null;
         boolean fileFound = false;
-        final long sleepTime = 5 * 1000;
+        final long sleepTime = SLEEP_TIME;
         int retryCount = 0;
         while (!fileFound && retryCount <= MAX_RETRYCOUNT) {
-            File[] files = Hooks.getDownloadDirectory().listFiles();
-            for (File file : files) {
-                downloadFileName = file.getName();
-                if (downloadFileName.startsWith(fileName)) {
-                    fileFound = true;
-                    break;
-                }
-                try {
+            try {
+                File[] files = Hooks.getDownloadDirectory().listFiles();
+                for (File file : files) {
+                    downloadFileName = file.getName();
+                    if (downloadFileName.startsWith(fileName)) {
+                        fileFound = true;
+                        break;
+                    }
                     Thread.sleep(sleepTime);
                     retryCount++;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         if (!fileFound) {
