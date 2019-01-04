@@ -73,7 +73,6 @@ public class Base {
     public void checkIfFileIsDownloaded(final String fileName)throws FileNotFoundException {
         String downloadFileName = null;
         boolean fileFound = false;
-        final long sleepTime = SLEEP_TIME;
         int retryCount = 0;
         while (!fileFound && retryCount <= MAX_RETRYCOUNT) {
             try {
@@ -84,7 +83,7 @@ public class Base {
                         fileFound = true;
                         break;
                     }
-                    Thread.sleep(sleepTime);
+                    Thread.sleep(SLEEP_TIME);
                     retryCount++;
                 }
             } catch (Exception e) {
@@ -94,5 +93,25 @@ public class Base {
         if (!fileFound) {
             throw new FileNotFoundException("File: " + fileName + " not downloaded");
         }
+    }
+
+    /**
+     * Navigate to a specific environment.
+     * @param env test environment in which tests will be run
+     * @return envURL
+     */
+    public String getEnvUrl(final String env) {
+        String envUrl;
+        switch (env) {
+        case "DEV": envUrl = "https://chpl.ahrqdev.org";
+        break;
+        case "STG": envUrl = "https://chpl.ahrqstg.org";
+        break;
+        case "PROD": envUrl = "https://chpl.healthit.gov";
+        break;
+        default: envUrl = getUrl();
+        break;
+        }
+        return envUrl;
     }
 }

@@ -4,9 +4,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,27 +18,13 @@ import gov.healthit.chpl.aqa.pageObjects.CollectionsPages;
  * Class CollectionsPagesSteps definition.
  */
 public class CollectionsPagesSteps extends Base {
-    private WebDriver driver;
-    private static final int TIMEOUT = 30;
-    private String url = System.getProperty("url");
-
-    /**
-     * Constructor creates new driver.
-     */
-    public CollectionsPagesSteps() {
-        driver = Hooks.getDriver();
-        if (StringUtils.isEmpty(url)) {
-            url = "http://localhost:3000/";
-        }
-    }
-
     /**
      * Open ACB filter options.
      */
     @When("^I look at ACB filter options$")
     public void openAcbFilterOptions() {
-        WebElement button = CollectionsPages.acbFilterButton(driver);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+        WebElement button = CollectionsPages.acbFilterButton(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
     }
 
     /**
@@ -50,9 +34,21 @@ public class CollectionsPagesSteps extends Base {
      */
     @Given("^I am on \"([^\"]*)\" collections page: \"([^\"]*)\"$")
     public void loadCollectionsPage(final String ptitle, final String pname) {
-        driver.get(url + "#/collections/" + pname);
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(driver)));
+        getDriver().get(getUrl() + "#/collections/" + pname);
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(getDriver())));
+    }
+
+    /**
+     * Loads collections pages.
+     * @param pname to get page name in url
+     * @param tEnv test environment in which tests will be run
+     */
+    @Given("^I am on collections page: \"([^\"]*)\" on \"([^\"]*)\"$")
+    public void loadCollectionPage(final String pname, final String tEnv) {
+        getDriver().get(getEnvUrl(tEnv) + "#/collections/" + pname);
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(getDriver())));
     }
 
     /**
@@ -61,7 +57,7 @@ public class CollectionsPagesSteps extends Base {
      */
     @Then("^the CMS FAQ link should point to updated link: \"([^\"]*)\"$")
     public void verifyCMSFAQLink(final String cmsfaqLink) {
-        String link = CollectionsPages.cmsFaqLink(driver).getAttribute("href");
+        String link = CollectionsPages.cmsFaqLink(getDriver()).getAttribute("href");
         assertTrue(link.contains(cmsfaqLink), "Expect " + cmsfaqLink + " to be found in " + link);
     }
 

@@ -292,9 +292,10 @@ public class ChplDownloadSteps extends Base {
      * Assert filename ends with date and time format.
      *  @param fileName expected File name
      *  @param dateTimeFormat expected Date and Time
+     *  @param days maximum number of days old the file may be
      */
-    @Then("^the \"([^\"]*)\" ends with \"([^\"]*)\"$")
-    public void fileEndsWithDateTimeFormat(final String fileName, final String dateTimeFormat) {
+    @Then("^the \"([^\"]*)\" ends with \"([^\"]*)\" and is no more than Days \"([^\"]*)\" old$")
+    public void fileEndsWithDateTimeFormat(final String fileName, final String dateTimeFormat, final String days) {
         File[] filenames = Hooks.getDownloadDirectory().listFiles();
         for (File file : filenames) {
             String dwldFileName = file.getName();
@@ -306,10 +307,14 @@ public class ChplDownloadSteps extends Base {
                 SimpleDateFormat df = new SimpleDateFormat(dateTimeFormat);
                 df.setLenient(false);
                 try {
-                    df.parse(fileDate);
-                    assertTrue(true);
+                    Date fileDownloadedDate =  df.parse(fileDate);
+                    Date currentDate = new Date();
+                    int numDays = Integer.parseInt(days);
+                    double age = Math.ceil((currentDate.getTime() - fileDownloadedDate.getTime()) / MILLIS_IN_A_DAY);
+                    assertTrue(age <= numDays,
+                            "File " + dwldFileName + " is " + age + " days old, should be no more than " + numDays);
                 } catch (ParseException e) {
-                    fail("Could not parse filename: " + dwldFileName + "for date format [ " + fileDate + " ]");
+                    fail("Could not parse filename: " + dwldFileName + " for date format [ " + fileDate + " ]");
                 }
             } else {
                 fail("filename: " + fileName + "not found in downloaded file [ " + dwldFileName + " ]");
