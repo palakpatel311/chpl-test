@@ -43,4 +43,4 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     |Certification 170.314 (b)(1) contains duplicate Test Tool: Name 'Transport Testing Tool', Version '181'. The duplicates have been removed.|Test Tool|
     |Listing contains duplicate QMS Standard: 'ISO 9001. The duplicates have been removed.|QMS Standard|
     |Listing contains duplicate Testing Lab: 'SLI Compliance'. The duplicates have been removed.|Testing Lab|
-      
+    
