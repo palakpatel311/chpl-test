@@ -28,24 +28,12 @@ public class CollectionsPagesSteps extends Base {
     }
 
     /**
-     * Loads collections pages.
-     * @param ptitle to get the actual title of the page
-     * @param pname to get page name in url
-     */
-    @Given("^I am on \"([^\"]*)\" collections page: \"([^\"]*)\"$")
-    public void loadCollectionsPage(final String ptitle, final String pname) {
-        getDriver().get(getUrl() + "#/collections/" + pname);
-        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(getDriver())));
-    }
-
-    /**
      * Loads collections page in test environment.
      * @param pageName to get page name in url
-     * @param tEnv test environment in which tests will be run
+     * @param tEnv environment in which tests will be run
      */
     @Given("^I am on collections page: \"([^\"]*)\" on \"([^\"]*)\"$")
-    public void loadCollectionsPageInTestEnv(final String pageName, final String tEnv) {
+    public void loadCollectionsPage(final String pageName, final String tEnv) {
         getDriver().get(getEnvUrl(tEnv) + "#/collections/" + pageName);
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(CollectionsPages.mainContent(getDriver())));

@@ -51,7 +51,7 @@ Feature: OCD-2023: Monitor that download files on CHPL download resources page a
     When I download the "<File Name>" file 
     Then the "<File Name>" ends with "yyyyMMdd_HHmmss" and is no more than Days "<Days>" old 
     Examples: 
-      | env  | Page Title                       | Page Name| File Name |Days|
-      | DEV  | SED Information for 2015 Edition | sed      | chpl-sed  |1   |
-      | STG  | SED Information for 2015 Edition | sed      | chpl-sed  |1   |
-      | PROD | SED Information for 2015 Edition | sed      | chpl-sed  |1   |
+      | env  | Page Name| File Name |Days|
+      | DEV  | sed      | chpl-sed  |1   |
+      | STG  | sed      | chpl-sed  |1   |
+      | PROD | sed      | chpl-sed  |1   |
