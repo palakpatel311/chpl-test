@@ -1,6 +1,7 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,8 @@ public class Base {
     private String filePath = System.getProperty("filePath");
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
+    private static final int MAX_RETRYCOUNT = 8;
+    private static final int SLEEP_TIME = 5000;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     /** Default constructor. */
     public Base() {
@@ -60,5 +63,55 @@ public class Base {
 
     public void setWait(final WebDriverWait wait) {
         this.wait = wait;
+    }
+
+    /**
+     * Checks whether the specified file is downloaded or not by iterating 8 times where each iteration has a wait of 5 seconds.
+     * @param fileName expected downloaded file name
+     * @throws FileNotFoundException if the expected file not found
+     */
+    public void checkIfFileIsDownloaded(final String fileName)throws FileNotFoundException {
+        String downloadFileName = null;
+        boolean fileFound = false;
+        int retryCount = 0;
+        while (!fileFound && retryCount <= MAX_RETRYCOUNT) {
+            try {
+                File[] files = Hooks.getDownloadDirectory().listFiles();
+                for (File file : files) {
+                    downloadFileName = file.getName();
+                    if (downloadFileName.startsWith(fileName)) {
+                        fileFound = true;
+                        break;
+                    }
+                    Thread.sleep(SLEEP_TIME);
+                    retryCount++;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (!fileFound) {
+            throw new FileNotFoundException("File: " + fileName + " not downloaded");
+        }
+    }
+
+    /**
+     * Navigate to a specific environment.
+     * @param env test environment in which tests will be run
+     * @return envURL
+     */
+    public String getEnvUrl(final String env) {
+        String envUrl;
+        switch (env) {
+        case "DEV": envUrl = "https://chpl.ahrqdev.org";
+        break;
+        case "STG": envUrl = "https://chpl.ahrqstg.org";
+        break;
+        case "PROD": envUrl = "https://chpl.healthit.gov";
+        break;
+        default: envUrl = getUrl();
+        break;
+        }
+        return envUrl;
     }
 }

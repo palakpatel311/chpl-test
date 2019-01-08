@@ -41,4 +41,7 @@ public final class CollectionsPages {
         return element;
     }
 
+    public static WebElement sedDetailsFileButton(final WebDriver driver) {
+        return driver.findElement(By.xpath("//a[contains(text(),'Download All SED Details')]"));
+    }
 }

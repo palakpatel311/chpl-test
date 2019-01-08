@@ -3,6 +3,8 @@ package gov.healthit.chpl.aqa.pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 
 /**
  * Class ChplDownloadPage definition.
@@ -102,26 +104,6 @@ public final class ChplDownloadPage {
     }
 
     /**
-     * Download file - surveillance file element.
-     * @param driver WebDriver
-     * @return surveillance file element
-     */
-    public static WebElement downloadoptionSurveillanceFile(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[6]"));
-        return element;
-    }
-
-    /**
-     * Download file - surveillance with non conformities file element.
-     * @param driver WebDriver
-     * @return surveillance with non conformities file element
-     */
-    public static WebElement downloadoptionNonconformitiesFile(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//*[@id=\"downloadSelect\"]/option[7]"));
-        return element;
-    }
-
-    /**
      * Returns element holding main content.
      * @param driver WebDriver
      * @return element holding main content
@@ -129,5 +111,11 @@ public final class ChplDownloadPage {
     public static WebElement mainContent(final WebDriver driver) {
         element = driver.findElement(By.id("main-content"));
         return element;
+    }
+
+    public static WebElement selectFilefromDropdown(final WebDriver driver, final String fileName) {
+        Select selectDropdown = new Select(driver.findElement(By.id("downloadSelect")));
+        selectDropdown.selectByVisibleText(fileName);
+        return driver.findElement(By.id("downloadSelect"));
     }
 }

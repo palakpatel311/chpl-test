@@ -6,14 +6,14 @@ Scenario: Verify SLI Compliance filter option under ACB filters is checked by de
 	Then I see that "SLI Compliance" checkbox is checked
 
 Scenario Outline: Verify SLI Compliance filter option is checked by default on collections pages
-	Given I am on "<PageTitle>" collections page: "<PageName>"
+	Given I am on collections page: "<PageName>" on "DEV"
 	When I look at ACB filter options
 	Then I see that "SLI Compliance" checkbox is checked
 	Examples:
-	|  PageTitle		       				|  PageName	|
-	|  Banned Developers					|  developers	|
-	|  Decertified Products					|  products		|
-	|  Inactive Certificates				|  inactive		|
-	|  Products: Corrective Action Status	|  correctiveAction	|
-	|  SED Information for 2015 Edition		|  sed				|	
-	|  Transparency Attestation				|  transparencyAttestations	|	
+	|  PageName                 |
+	|  developers               |
+	|  products                 |
+	|  inactive                 |
+	|  correctiveAction	        |
+	|  sed                      |
+	|  transparencyAttestations |

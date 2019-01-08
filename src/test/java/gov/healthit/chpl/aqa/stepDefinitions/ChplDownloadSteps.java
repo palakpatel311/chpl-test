@@ -7,6 +7,7 @@ import static org.testng.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -23,6 +24,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -258,51 +260,17 @@ public class ChplDownloadSteps extends Base {
     }
 
     /**
-     * Select Surveillance Activity file from drop down and download .csv file.
+     * Select a file from drop down and download the file.
+     * @param fileName expected name of the file in drop-down list
+     * @param downloadedFileName expected downloaded file name
+     * @throws FileNotFoundException if the expected file not found
      */
-    @When("^I download the Surveillance Activity file$")
-    public void downloadSurveillanceActivityFile() {
-        ChplDownloadPage.downloadoptionSurveillanceFile(getDriver()).click();
+    @When("^I select the \"([^\"]*)\", download it from drop-down and I see the \"([^\"]*)\"$")
+    public void selectAndDownloadFileFromDropdown(final String fileName, final String downloadedFileName) throws FileNotFoundException {
+        WebElement link = ChplDownloadPage.selectFilefromDropdown(getDriver(), fileName);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         ChplDownloadPage.downloadFileButton(getDriver()).click();
-    }
-
-    /**
-     * Assert filename of download file.
-     */
-    @Then("^the downloaded file shows surveillance-all.csv filename$")
-    public void verifySurveillanceActivityFilename() {
-
-        File[] filenames = Hooks.getDownloadDirectory().listFiles();
-
-        for (File file : filenames) {
-            String dwldFileName = file.getName();
-            String currentfile = "surveillance-all.csv";
-            assertEquals(dwldFileName, currentfile, "File is not current");
-        }
-    }
-
-    /**
-     * Select surveillance-with-nonconformities file from drop down and download .csv file.
-     */
-    @When("^I download the Non-Conformities file$")
-    public void downloadNonConformitiesFile() {
-        ChplDownloadPage.downloadoptionNonconformitiesFile(getDriver()).click();
-        ChplDownloadPage.downloadFileButton(getDriver()).click();
-    }
-
-    /**
-     * Assert filename of download file.
-     */
-    @Then("^the downloaded file shows surveillance-with-nonconformities.csv filename$")
-    public void verifyNonConformitiesFilename() {
-
-        File[] filenames = Hooks.getDownloadDirectory().listFiles();
-
-        for (File file : filenames) {
-            String dwldFileName = file.getName();
-            String currentfile = "surveillance-with-nonconformities.csv";
-            assertEquals(dwldFileName, currentfile, "File is not current");
-        }
+        super.checkIfFileIsDownloaded(downloadedFileName);
     }
 
     /**
@@ -318,6 +286,40 @@ public class ChplDownloadSteps extends Base {
         }
         FileUtils.cleanDirectory(Hooks.getDownloadDirectory());
         assertFalse(Hooks.getDownloadDirectory().list().length > 0, "directory is not empty");
+    }
+
+    /**
+     * Assert filename ends with date and time format.
+     *  @param fileName expected File name
+     *  @param dateTimeFormat expected Date and Time
+     *  @param days maximum number of days old the file may be
+     */
+    @Then("^the \"([^\"]*)\" ends with \"([^\"]*)\" and is no more than Days \"([^\"]*)\" old$")
+    public void fileEndsWithDateTimeFormat(final String fileName, final String dateTimeFormat, final String days) {
+        File[] filenames = Hooks.getDownloadDirectory().listFiles();
+        for (File file : filenames) {
+            String dwldFileName = file.getName();
+            if (dwldFileName.startsWith(fileName)) {
+                String[] fileTokens = dwldFileName.split("-");
+                String extToken = fileTokens[fileTokens.length - 1];
+                String[] dTokens = extToken.split("\\.");
+                String fileDate = dTokens[0];
+                SimpleDateFormat df = new SimpleDateFormat(dateTimeFormat);
+                df.setLenient(false);
+                try {
+                    Date fileDownloadedDate =  df.parse(fileDate);
+                    Date currentDate = new Date();
+                    int numDays = Integer.parseInt(days);
+                    double age = Math.ceil((currentDate.getTime() - fileDownloadedDate.getTime()) / MILLIS_IN_A_DAY);
+                    assertTrue(age <= numDays,
+                            "File " + dwldFileName + " is " + age + " days old, should be no more than " + numDays);
+                } catch (ParseException e) {
+                    fail("Could not parse filename: " + dwldFileName + " for date format [ " + fileDate + " ]");
+                }
+            } else {
+                fail("filename: " + fileName + "not found in downloaded file [ " + dwldFileName + " ]");
+            }
+        }
     }
 
     private long getCsvItemCount(final File input) {
