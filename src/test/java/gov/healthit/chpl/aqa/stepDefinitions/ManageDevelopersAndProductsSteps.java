@@ -114,21 +114,6 @@ public class ManageDevelopersAndProductsSteps extends Base {
     }
 
     /**
-     * Assert upload success message.
-     * @throws Exception if screenshot can't be taken
-     */
-    @Then("^I see upload successful message$")
-    public void testUploadSuccessText() throws Exception {
-        String successText = DpManagementPage.uploadSuccessfulText(getDriver()).getText();
-        try {
-            assertTrue(successText.contains("was uploaded successfully"));
-        } catch (AssertionError ae) {
-            Hooks.takeScreenshot();
-            throw (ae);
-        }
-    }
-
-    /**
      * Navigate to Confirm Pending Products page.
      */
     @When("^I go to Confirm Pending Products Page$")
@@ -158,21 +143,6 @@ public class ManageDevelopersAndProductsSteps extends Base {
             Hooks.takeScreenshot(this.chplProductNumber);
             assertTrue(false, "in confirm:" + e.getMessage());
         }
-    }
-
-    /**
-     * Verify warning on inspect screen.
-     */
-    @Then("^I see warnings for duplicate macra measures in G1 and G2$")
-    public void verifyWarningOnInspect() {
-
-        String warning = DpManagementPage.warningErrorTextOnInspect(getDriver()).getText();
-        assertTrue(warning
-        .contains("Certification 170.315 (a)(1) contains duplicate G1 Macra Measure: 'EH/CAH Stage 3'. The duplicates have been removed"),
-        "no warnings were found");
-        assertTrue(warning
-        .contains("Certification 170.315 (a)(1) contains duplicate G2 Macra Measure: 'EH/CAH Stage 3'. The duplicates have been removed"),
-        "no warnings were found");
     }
 
     /**
