@@ -63,4 +63,5 @@ Scenario Outline: Verify Functionality Tested field displays correct edition and
     | 15.04.04.2087.Acui.02.00.1.180409 | 170.315 (a)(8) | Ambulatory: 170.315(a)(8)(i) Over multiple encounters|
     | 14.04.04.2916.Smar.61.01.0.170411 | 170.314 (a)(6) | Ambulatory setting: 170.314(a)(6)(i) Over multiple encounters|
     | 14.04.04.2916.Smar.61.01.0.170411 | 170.314 (a)(7) | Ambulatory setting: 170.314(a)(7)(i) Over multiple encounters|
+    |15.02.02.1112.A062.01.00.1.180320| 170.315 (b)(5) ||
     

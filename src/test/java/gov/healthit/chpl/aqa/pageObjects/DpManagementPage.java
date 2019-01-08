@@ -362,4 +362,13 @@ public final class DpManagementPage {
         return driver.findElement(By.xpath("//html/body/div[1]/div/div/div/div[3]/div/div/div/ul"));
    }
 
+    /**
+     * Returns reject product button on Inspect screen.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement rejectButtonOnInspect(final WebDriver driver) {
+        return driver.findElement(By.id("inspect-reject"));
+    }
+
 }

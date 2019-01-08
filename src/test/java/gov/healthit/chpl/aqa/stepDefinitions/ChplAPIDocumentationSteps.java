@@ -1,7 +1,5 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
-import static org.testng.Assert.assertTrue;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,7 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ChplAPIPage;
 
@@ -56,13 +53,4 @@ public class ChplAPIDocumentationSteps extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
-    /**
-     * Assert that text is updated.
-     * @param imptext expected text
-     */
-    @Then("^endpoint details should show updated text \"([^\"]*)\"$")
-    public void verifyUpdatedTextInCertifiedProductEndpointDetails(final String imptext) {
-        String impNotes = ChplAPIPage.certifiedProductsImplementationNotes(getDriver()).getText();
-        assertTrue(impNotes.contains(imptext), "Expect " + imptext + " to be found in " + impNotes);
-    }
 }
