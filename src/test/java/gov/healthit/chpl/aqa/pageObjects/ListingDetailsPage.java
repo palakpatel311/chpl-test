@@ -15,13 +15,9 @@ public final class ListingDetailsPage extends BasePage {
 
     private ListingDetailsPage() {}
 
-    /**
-     * Returns element that holds Accessibility Standard Process Text.
-     * @param driver WebDriver
-     * @return Text element
-     */
-    public static WebElement accessibilityStandardText(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"panel-certification-criteria\"]/div[54]/div/div/div/table/tbody/tr[3]/td[2]/ul/li[1]"));
+    public static WebElement accessibilityStandardByCriteriaText(final WebDriver driver, final String criteria) {
+        String xpath = "//*[@id=\"criteria_" + criteria + "_details_row_Accessibility_Standard\"]/td[2]/ul/li";
+        return driver.findElement(By.xpath(xpath));
     }
 
     /**
