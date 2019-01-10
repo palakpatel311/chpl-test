@@ -39,6 +39,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     |Certification 170.314 (a)(1) contains duplicate Additional Software: CP Source 'CHP-022218'. The duplicates have been removed.|Additional Software|
     |Certification 170.314 (a)(1) contains duplicate Test Data: Version '1'. The duplicates have been removed.|Test Data|
     |Certification 170.314 (a)(1) contains duplicate Test Procedure: Version '1'. The duplicates have been removed.|Test Procedure|
+    |Certification 170.314 (a)(1) contains duplicate Test Standard: Number 'Edge Protocols'. The duplicates have been removed.|Test Standard|
     |Certification 170.314 (a)(4) contains duplicate Test Functionality: Number '(a)(4)(iii)'. The duplicates have been removed.|Test Functionality|
     |Certification 170.314 (b)(1) contains duplicate Test Tool: Name 'Transport Testing Tool', Version '181'. The duplicates have been removed.|Test Tool|
     |Listing contains duplicate QMS Standard: 'ISO 9001. The duplicates have been removed.|QMS Standard|

@@ -4,6 +4,7 @@ Feature: Verify data in criteria details
   Test tool field displays correct values as per the update.
   OCD-2445- Update missing values in database for 2014 c1 Test tool and 2015 a7 Privacy and Security field
   OCD-746, OCD-1424, OCD-2532- Restrict Functionality Tested values by edition, criteria and display correct description
+  OCD-2637- Verify backend update for Test Functionality on select listings
 
   Scenario Outline: Verify Test Tool field displays correct values in applicable criteria details
     Given I am on listing details page of listing with ID "<CHPL_ID>"
@@ -84,4 +85,5 @@ Scenario Outline: Verify Functionality Tested field displays correct edition and
     | 15.04.04.1221.Firs.18.03.1.180727 | 170.315 (b)(2) | None |
     | 15.04.04.2996.Char.12.01.1.180416 |170.315 (a)(13) | None |
     | 15.07.04.2804.Inte.SP.01.1.181113 | 170.315 (a)(13)| None |
+    
                   
