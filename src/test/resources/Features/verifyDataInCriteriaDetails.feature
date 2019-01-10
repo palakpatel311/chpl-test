@@ -85,5 +85,4 @@ Scenario Outline: Verify Functionality Tested field displays correct edition and
     | 15.04.04.1221.Firs.18.03.1.180727 | 170.315 (b)(2) | None |
     | 15.04.04.2996.Char.12.01.1.180416 |170.315 (a)(13) | None |
     | 15.07.04.2804.Inte.SP.01.1.181113 | 170.315 (a)(13)| None |
-    
-                  
+                          
