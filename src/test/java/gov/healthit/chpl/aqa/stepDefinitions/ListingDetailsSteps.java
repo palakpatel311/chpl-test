@@ -29,13 +29,9 @@ public class ListingDetailsSteps extends Base {
         super();
     }
 
-    /**
-     * Assert that the Accessibility Standard equals the passed in value.
-     * @param accessibilityText expected text
-     */
-    @Then("^Accessibility Standard should display \"([^\"]*)\"$")
-    public void accessibilityStandardShouldDisplayUpdatedOtherWCAG(final String accessibilityText) {
-        String actualString = ListingDetailsPage.accessibilityStandardText(getDriver()).getText();
+    @Then("^Accessibility Standard for criteria \"([^\"]*)\" should display \"([^\"]*)\"$")
+    public void accessibilityStandardForCriteriaShouldDisplayUpdatedOtherWCAG(final String criteria, final String accessibilityText) {
+        String actualString = ListingDetailsPage.accessibilityStandardByCriteriaText(getDriver(), criteria).getText();
         assertEquals(actualString, accessibilityText);
     }
 
