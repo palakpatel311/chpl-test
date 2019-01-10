@@ -14,7 +14,7 @@ import cucumber.api.junit.Cucumber;
 features = "src/test/resources/Features",
 format = { "json:target/cucumber.json", "html:target/site/cucumber-pretty"},
 plugin = {"pretty", "html:target/cucumber-html-report"},
-glue = "gov.healthit.chpl.aqa.stepDefinitions",
+glue = {"gov.healthit.chpl.aqa.stepDefinitions", "gov.healthit.chpl.aqa.asserts"},
 tags = {},
 monochrome = false
 )
