@@ -164,4 +164,24 @@ public final class SearchPage {
         return element;
     }
 
+    public static WebElement downloadsearchResultsButton(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//button[@id='dropdown-download-button']"));
+        return element;
+    }
+
+    public static WebElement download50ResultButton(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//button[@class='btn btn-ai btn-link ng-binding ng-scope']"));
+        return element;
+    }
+
+    public static WebElement searchResultPerPage(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//select[@id='pageSizeTop']"));
+        return element;
+    }
+
+    public static WebElement searchResultText(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//span[@class='ng-binding ng-scope']"));
+        return element;
+    }
+
 }
