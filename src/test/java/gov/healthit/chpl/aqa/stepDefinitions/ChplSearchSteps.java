@@ -191,7 +191,7 @@ public class ChplSearchSteps extends Base {
         wait.until(ExpectedConditions.visibilityOf(BasePage.tableContentElement(getDriver())));
         WebElement link = SearchPage.download50ResultButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
-        checkCompleteFileDownload("search-results");
+        checkCompleteFileDownload();
     }
 
     /**
@@ -243,13 +243,20 @@ public class ChplSearchSteps extends Base {
      * Change the count of search results per page.
      * @param count expected count of search results per page
      */
-    @When("^I search \"([^\"]*)\" results per page and I try to download the file$")
-    public void selectSearchResultsPerPage(final String count) {
+    @And("^I scroll down to select \"([^\"]*)\" results per page for results display$")
+    public void scrollDownToSelectResultsPerPage(final String count) {
         SearchPage.browseButton(getDriver()).click();
         WebElement searchResultPerPageDropDown = SearchPage.searchResultPerPage(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", searchResultPerPageDropDown);
         Select sel = new Select(searchResultPerPageDropDown);
         sel.selectByVisibleText(count);
+    }
+
+    /**
+     * Click Download Results button in search filters.
+     */
+    @When("^I click Download Results button in search filters to download the search results$")
+    public void clickDownloadResultsButtonInSearchFilters() {
         WebElement downloadButton = SearchPage.downloadsearchResultsButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", downloadButton);
     }
@@ -258,7 +265,7 @@ public class ChplSearchSteps extends Base {
      * Asserts that expected text is correct.
      * @param text expected Please reduce results to less than 50 to download them
      */
-    @Then("^I see the text as \"([^\"]*)\"$")
+    @Then("^I see that download for >50 count is not allowed and alert \"([^\"]*)\" is displayed$")
     public void resultText(final String text) {
         WebElement link = SearchPage.searchResultText(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);

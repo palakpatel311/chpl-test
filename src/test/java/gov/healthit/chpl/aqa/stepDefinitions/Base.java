@@ -97,14 +97,13 @@ public class Base {
 
     /**
      * Checks if the file contains all the data and is downloaded completely or not.
-     * @param fileName expected downloaded file name
      * @throws FileNotFoundException if the expected file not found
      */
-    public void checkCompleteFileDownload(final String fileName) throws FileNotFoundException {
-        boolean completeFileDwnld = true;
+    public void checkCompleteFileDownload() throws FileNotFoundException {
+        boolean download = false;
         int retryCount = 0;
         Long size = new Long(-1);
-        while (completeFileDwnld && retryCount <= MAX_RETRYCOUNT) {
+        while (!download && retryCount <= MAX_RETRYCOUNT) {
             try {
                 File[] files = Hooks.getDownloadDirectory().listFiles();
                 for (File file : files) {
@@ -112,7 +111,7 @@ public class Base {
                     if (size < downloadFileSize) {
                         size = downloadFileSize;
                     } else {
-                        completeFileDwnld = false;
+                        download = true;
                         break;
                     }
                     Thread.sleep(SLEEP_TIME);
@@ -122,8 +121,8 @@ public class Base {
                 e.printStackTrace();
             }
         }
-        if (completeFileDwnld) {
-            throw new FileNotFoundException("File: " + fileName + " not downloaded completely");
+        if (!download) {
+            throw new FileNotFoundException("File not downloaded completely");
         }
     }
 

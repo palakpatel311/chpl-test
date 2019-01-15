@@ -170,7 +170,7 @@ public final class SearchPage {
     }
 
     public static WebElement download50ResultButton(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//button[@class='btn btn-ai btn-link ng-binding ng-scope']"));
+        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[6]/ul/ai-results-download/li[13]/button"));
         return element;
     }
 
@@ -180,7 +180,7 @@ public final class SearchPage {
     }
 
     public static WebElement searchResultText(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//span[@class='ng-binding ng-scope']"));
+        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[6]/ul/ai-results-download/li[13]/span"));
         return element;
     }
 

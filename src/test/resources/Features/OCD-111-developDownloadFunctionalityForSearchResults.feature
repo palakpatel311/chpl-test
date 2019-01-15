@@ -16,9 +16,10 @@ Scenario Outline: Verify whether search results file is downloaded and displays 
 
 Scenario Outline: Verify whether correct error message is displayed if more than 50 results per page is selected 
     Given I am on CHPL search page
-    When I search "<count>" results per page and I try to download the file
-    Then I see the text as "Please reduce results to less than 50 to download them"
+    And I scroll down to select "<count>" results per page for results display
+    When I click Download Results button in search filters to download the search results
+    Then I see that download for >50 count is not allowed and alert "<text>" is displayed
     Examples:
-      |count|
-      |100  |
-      |250  |
+      |count|text|
+      |100  |Please reduce results to less than 50 to download them|
+      |250  |Please reduce results to less than 50 to download them|
