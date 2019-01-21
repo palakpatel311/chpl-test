@@ -191,7 +191,7 @@ public class ChplSearchSteps extends Base {
         wait.until(ExpectedConditions.visibilityOf(BasePage.tableContentElement(getDriver())));
         WebElement link = SearchPage.download50ResultButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
-        checkCompleteFileDownload();
+        checkCompleteFileDownload("search-results", ".csv");
     }
 
     /**
