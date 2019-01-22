@@ -45,3 +45,13 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     |Listing contains duplicate QMS Standard: 'ISO 9001. The duplicates have been removed.|QMS Standard|
     |Listing contains duplicate Testing Lab: 'SLI Compliance'. The duplicates have been removed.|Testing Lab|
     
+  Scenario Outline: Verify listing upload fails for files that have too long (>20 chars.) Test Task IDs and Participant IDs    
+    Given I'm logged in as an ACB
+    And I am on Upload Certified Products page
+    When I upload a 2015 listing with long ID in "<Field>" 
+    Then I see upload failure with appropriate error message "<FailureError>" to indicate failure due to long ID
+  Examples:
+    |Field|FailureError|
+    |Test Task ID|You have exceeded the max length, 20 characters, for the Task Identifier with ID TestTaskIdisinvalidbecauseit'stoolong010101010101.|
+    |Participant ID|You have exceeded the max length, 20 characters, for the Participant Identifier ID ParticipantIdisinvalidbecauseit'stoolong01010101010101.|
+    

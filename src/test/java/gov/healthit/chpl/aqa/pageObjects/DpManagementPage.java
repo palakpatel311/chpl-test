@@ -371,4 +371,10 @@ public final class DpManagementPage {
         return driver.findElement(By.id("inspect-reject"));
     }
 
+    /**
+     * Returns error text on upload failure message.
+     */
+    public static WebElement uploadFailureErrorMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[1]/div"));
+    }
 }

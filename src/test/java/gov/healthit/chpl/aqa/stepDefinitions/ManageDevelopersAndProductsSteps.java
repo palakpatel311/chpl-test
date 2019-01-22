@@ -7,7 +7,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +26,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import cucumber.api.cli.Main;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -183,6 +187,20 @@ public class ManageDevelopersAndProductsSteps extends Base {
             Hooks.takeScreenshot(this.chplProductNumber);
             assertTrue(false, "in confirm:" + e.getMessage());
         }
+    }
+
+    /**
+     * Upload a listing with long Test Task IDs and Participant IDs.
+     * @throws URISyntaxException
+     * @param fieldinUploadFile is a field in upload file that has invalid input
+     */
+    @When("^I upload a 2015 listing with long ID in \"([^\"]*)\"$")
+    public void uploadListingWithLongTestTaskIDsParticipantIDs(final String fieldinUploadFile) throws URISyntaxException {
+        URL resource = Main.class.getResource("/2015_Test_SLI_longIDs.csv");
+        String absolutePath = Paths.get(resource.toURI()).toString();
+
+        DpManagementPage.chooseFileButton(getDriver()).sendKeys(absolutePath);
+        DpManagementPage.uploadFileButton(getDriver()).click();
     }
 
     /**
