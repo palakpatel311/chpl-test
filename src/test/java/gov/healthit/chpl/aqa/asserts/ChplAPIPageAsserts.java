@@ -3,10 +3,17 @@ package gov.healthit.chpl.aqa.asserts;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.io.FileReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -14,10 +21,12 @@ import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ChplAPIPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 
+
 /**
  * Class ChplAPIPageAsserts definition.
  */
 public class ChplAPIPageAsserts extends Base {
+    private JSONArray apiImplNoteList;
 
     /**
      * Assert that text is updated.
@@ -64,4 +73,46 @@ public class ChplAPIPageAsserts extends Base {
         assertEquals(actualText, text);
         assertEquals(actualURL, urlLink);
     }
+
+    /**
+     * Assert that implementation notes for the endpoint link is updated.
+     * @throws Exception if File not found
+     */
+    @Then("^API endpoints should show updated implementation notes$")
+    public void apiEndpointsImplementationNotesDisplaysUpdatedText() throws Exception {
+        JSONParser jsonParser = new JSONParser();
+        Boolean failedCase = false;
+        Path resourceDirectory = Paths.get("src", "test", "resources", "implementationNotes.json");
+        FileReader reader = new FileReader(resourceDirectory.toString());
+        Object notesObj = jsonParser.parse(reader);
+        apiImplNoteList = (JSONArray) notesObj;
+        for (Object object : apiImplNoteList) {
+            failedCase = false;
+            JSONObject noteObject = (JSONObject) object;
+            JSONArray apiimplnotesArray  = (JSONArray) noteObject.get("apiimplnote");
+            for (Object endPointLink:apiimplnotesArray) {
+                JSONArray endPointLinkArray = (JSONArray) ((JSONObject) endPointLink).get("endPointLink");
+                String controller = (String) ((JSONObject) endPointLink).get("controllerName");
+                WebElement cLink = ChplAPIPage.controllerLink(getDriver(), (String) ((JSONObject) endPointLink).get("controllerName"));
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", cLink);
+                for (Object links:endPointLinkArray) {
+                    String endPoint = (String) (((JSONObject) links).get("link"));
+                    WebElement epLink = ChplAPIPage.endpointLink(getDriver(), endPoint);
+                    ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", epLink);
+                    String implNote = (String) ((JSONObject) links).get("implementationNote");
+                    String actImpNotes = ChplAPIPage.certifiedProductsImplementationNotes(getDriver()).getText();
+                    try {
+                        assertTrue(actImpNotes.contains(implNote), "Expected [ " + implNote + " ]not found for:[" + controller + "] where endpoint is:[" + endPointLink + "]");
+                    } catch (AssertionError ex) {
+                        System.out.println(ex.getMessage());
+                        failedCase = true;
+                    }
+                }
+            }
+            if (failedCase) {
+                throw new AssertionError("Scenario failed cases:-");
+            }
+        }
+    }
 }
+
