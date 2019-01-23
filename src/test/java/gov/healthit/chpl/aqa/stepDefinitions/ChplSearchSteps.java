@@ -20,7 +20,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gov.healthit.chpl.aqa.pageObjects.BasePage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
 
@@ -172,12 +171,15 @@ public class ChplSearchSteps extends Base {
 
     /**
      * Click on download search-results button that displays data categories to include.
+     * @param searchResultsChplID expected CHPL ID on search results page
      */
-    @When("^I click Download Search Results button$")
-    public void clickOnDownloadSearchResultsButton() {
+    @When("^I wait for \"([^\"]*)\" to load in the webpage and I click Download Search Results button$")
+    public void clickOnDownloadSearchResultsButton(final String searchResultsChplID) {
         SearchPage.browseButton(getDriver()).click();
         WebElement link = SearchPage.downloadsearchResultsButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(SearchPage.loadChplID(getDriver(), searchResultsChplID)));
     }
 
     /**
@@ -186,9 +188,6 @@ public class ChplSearchSteps extends Base {
      */
     @And("^I click download 50 Results button$")
     public void clickDownload50ResultsButton() throws Throwable {
-        Thread.sleep(SLEEP_TIME);
-        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(BasePage.tableContentElement(getDriver())));
         WebElement link = SearchPage.download50ResultButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         checkCompleteFileDownload("search-results", ".csv");

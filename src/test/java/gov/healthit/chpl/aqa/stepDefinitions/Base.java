@@ -2,8 +2,6 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -98,7 +96,8 @@ public class Base {
     }
 
     /**
-     * Checks if the file contains all the data and is downloaded completely or not.
+     * Checks if the recent downloaded file is downloaded completely.
+     * file name starts with name of the file and ends with extension.
      * @param fileName is the name of file
      * @param extension of the file
      * @throws FileNotFoundException if the expected file not found
@@ -108,35 +107,31 @@ public class Base {
         int retryCount = 0;
         Long size = new Long(-1);
         try {
-            Thread.sleep(SLEEP_TIME);
             File[] files = Hooks.getDownloadDirectory().listFiles();
-            List<File> fileFilterList = new ArrayList<File>();
             File recentModifiedFile = null;
-            Long lastModifiedTime = new Long(-1);
-            Thread.sleep(SLEEP_TIME);
             for (int i = 0; i < files.length; i++) {
+                download = false;
+                retryCount = 0;
+                while (!download && retryCount <= MAX_RETRYCOUNT) {
+                    Long downloadFileSize = files[i].length();
+                    if (size < downloadFileSize) {
+                        size = downloadFileSize;
+                    } else {
+                        download = true;
+                        break;
+                    }
+                    retryCount++;
+                    Thread.sleep(SLEEP_TIME);
+                }
                 if (files[i].getName().startsWith(fileName) && files[i].getName().endsWith(extension)) {
-                    fileFilterList.add(files[i]);
+                    if (recentModifiedFile == null) {
+                        recentModifiedFile = files[i];
+                    } else {
+                        if (recentModifiedFile.lastModified() <= files[i].lastModified()) {
+                            recentModifiedFile = files[i];
+                        }
+                    }
                 }
-            }
-            recentModifiedFile = fileFilterList.get(0);
-            lastModifiedTime = recentModifiedFile.lastModified();
-            for (File file : fileFilterList) {
-                Long tempModifiedTime = file.lastModified();
-                if (lastModifiedTime <= tempModifiedTime) {
-                    lastModifiedTime = tempModifiedTime;
-                    recentModifiedFile = file;
-                }
-            }
-            while (!download && retryCount <= MAX_RETRYCOUNT) {
-                Long downloadFileSize = recentModifiedFile.length();
-                if (size < downloadFileSize) {
-                    size = downloadFileSize;
-                } else {
-                    download = true;
-                    break;
-                }
-                retryCount++;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,7 +140,6 @@ public class Base {
             throw new FileNotFoundException("File not downloaded completely");
         }
     }
-
 
     /**
      * Navigate to a specific environment.

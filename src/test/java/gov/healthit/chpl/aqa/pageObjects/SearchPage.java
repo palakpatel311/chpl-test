@@ -184,4 +184,8 @@ public final class SearchPage {
         return element;
     }
 
+    public static WebElement loadChplID(final WebDriver driver, final String chplID) {
+        return driver.findElement(By.xpath("//td[contains(text(),'" + chplID + "')]"));
+    }
+
 }
