@@ -3,9 +3,8 @@ package gov.healthit.chpl.aqa.asserts;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.io.File;
 import java.io.FileReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +26,7 @@ import gov.healthit.chpl.aqa.stepDefinitions.Base;
  */
 public class ChplAPIPageAsserts extends Base {
     private JSONArray apiImplNoteList;
+    private final String  jsonFile = "implementationNotes.json";
 
     /**
      * Assert that text is updated.
@@ -82,8 +82,8 @@ public class ChplAPIPageAsserts extends Base {
     public void apiEndpointsImplementationNotesDisplaysUpdatedText() throws Exception {
         JSONParser jsonParser = new JSONParser();
         Boolean failedCase = false;
-        Path resourceDirectory = Paths.get("src", "test", "resources", "implementationNotes.json");
-        FileReader reader = new FileReader(resourceDirectory.toString());
+        File file = new File(getClass().getClassLoader().getResource(jsonFile).getFile());
+        FileReader reader = new FileReader(file.getPath());
         Object notesObj = jsonParser.parse(reader);
         apiImplNoteList = (JSONArray) notesObj;
         for (Object object : apiImplNoteList) {
