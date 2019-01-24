@@ -5,7 +5,8 @@ Feature: OCD-111 Develop export/download functionality for search results
 Scenario Outline: Verify whether search results file is downloaded and displays correct information 
     Given I am on CHPL search page
     And the download directory is empty 
-    When I wait for "<CHPL ID>" to load in the webpage and I click Download Search Results button
+    And "<CHPL ID>" is in the search results
+    When I click Download Search Results button
     And I click download 50 Results button
     Then the file is downloaded and contains selected filter options as "Edition,Developer,Product,Version,Certification Date,CHPL ID,Status,Details" where CHPL ID is "<CHPL ID>"
     Examples:

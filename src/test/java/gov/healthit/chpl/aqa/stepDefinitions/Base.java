@@ -17,6 +17,7 @@ public class Base {
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
     private static final int MAX_RETRYCOUNT = 8;
+    private static final int COUNT = 3;
     protected static final int SLEEP_TIME = 5000;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     /** Default constructor. */
@@ -103,40 +104,25 @@ public class Base {
      * @throws FileNotFoundException if the expected file not found
      */
     public void checkCompleteFileDownload(final String fileName, final String extension) throws FileNotFoundException {
-        boolean download = false;
+        boolean foundFile = false;
         int retryCount = 0;
-        Long size = new Long(-1);
         try {
-            File[] files = Hooks.getDownloadDirectory().listFiles();
-            File recentModifiedFile = null;
-            for (int i = 0; i < files.length; i++) {
-                download = false;
-                retryCount = 0;
-                while (!download && retryCount <= MAX_RETRYCOUNT) {
-                    Long downloadFileSize = files[i].length();
-                    if (size < downloadFileSize) {
-                        size = downloadFileSize;
-                    } else {
-                        download = true;
+            while (!foundFile && retryCount <= MAX_RETRYCOUNT) {
+                File[] files = Hooks.getDownloadDirectory().listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    Long currentTime = System.currentTimeMillis();
+                    if ((files[i].getName().startsWith(fileName) && files[i].getName().endsWith(extension)) && ((currentTime - files[i].lastModified()) < SLEEP_TIME * COUNT)) {
+                        foundFile = true;
                         break;
                     }
-                    retryCount++;
-                    Thread.sleep(SLEEP_TIME);
                 }
-                if (files[i].getName().startsWith(fileName) && files[i].getName().endsWith(extension)) {
-                    if (recentModifiedFile == null) {
-                        recentModifiedFile = files[i];
-                    } else {
-                        if (recentModifiedFile.lastModified() <= files[i].lastModified()) {
-                            recentModifiedFile = files[i];
-                        }
-                    }
-                }
+                retryCount++;
+                Thread.sleep(SLEEP_TIME);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (!download) {
+        if (!foundFile) {
             throw new FileNotFoundException("File not downloaded completely");
         }
     }

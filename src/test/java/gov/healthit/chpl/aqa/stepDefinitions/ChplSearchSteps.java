@@ -170,16 +170,23 @@ public class ChplSearchSteps extends Base {
     }
 
     /**
-     * Click on download search-results button that displays data categories to include.
+     * CHPL Id displayed on search results page.
      * @param searchResultsChplID expected CHPL ID on search results page
      */
-    @When("^I wait for \"([^\"]*)\" to load in the webpage and I click Download Search Results button$")
-    public void clickOnDownloadSearchResultsButton(final String searchResultsChplID) {
+    @And("^\"([^\"]*)\" is in the search results$")
+    public void chplIDIsInSearchResults(final String searchResultsChplID) {
         SearchPage.browseButton(getDriver()).click();
-        WebElement link = SearchPage.downloadsearchResultsButton(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(SearchPage.loadChplID(getDriver(), searchResultsChplID)));
+    }
+
+    /**
+     * Click on download search-results button that displays data categories to include.
+     */
+    @When("^I click Download Search Results button$")
+    public void clickOnDownloadSearchResultsButton() {
+        WebElement link = SearchPage.downloadsearchResultsButton(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
     /**
