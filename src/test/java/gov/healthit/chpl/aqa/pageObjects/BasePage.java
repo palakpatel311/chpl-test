@@ -39,4 +39,8 @@ public class BasePage {
     public static WebElement contactUsURL(final WebDriver driver) {
         return driver.findElement(By.xpath("//a[contains(text(),'Contact Us')]"));
     }
+
+    public static WebElement tableContentElement(final WebDriver driver) {
+        return driver.findElement(By.xpath("//table[@class='table search-table table-striped table-responsive']"));
+    }
 }
