@@ -51,11 +51,11 @@
             "controllerName":"activity-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC may set the 'showDeleted' flag to true and see activity for all certification bodies including that have been deleted. ROLE_ACB can see their own information.",
+                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC see activity for all certification bodies including that have been deleted. ROLE_ACB can see their own information.",
                   "link":"activityForACBsUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC may set the 'showDeleted' flag to true. ROLE_ACB can see their own information.",
+                  "implementationNote":"ROLE_ACB can see their own information.",
                   "link":"activityForACBByIdUsingGET"
                },
                {  
@@ -67,11 +67,11 @@
                   "link":"activityForApiKeysUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC may set the 'showDeleted' flag to true and see activity for all certification bodies including that have been deleted. ROLE_ATL can see their own information.",
+                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC see activity for all certification bodies including that have been deleted. ROLE_ATL can see their own information.",
                   "link":"activityforATLsUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC may set the 'showDeleted' flag to true. ROLE_ATL can see their own information.",
+                  "implementationNote":"ROLE_ATL can see their own information.",
                   "link":"activityForATLByIdUsingGET"
                },
                {  
@@ -83,19 +83,19 @@
                   "link":"activityForPendingCertifiedProductByIdUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"activityByUserUsingGET_1"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"activityByUserUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_ONC_STAFF (of ROLE_ONC_STAFF), ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), and ROLE_ATL (of their own)",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), and ROLE_ATL (of their own)",
                   "link":"activityForUsersUsingGET_1"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_ONC_STAFF (of ROLE_ONC_STAFF), ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), and ROLE_ATL (of their own)",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), and ROLE_ATL (of their own)",
                   "link":"activityForUsersUsingGET"
                }
             ]
@@ -108,11 +108,11 @@
                   "link":"getAnnouncementsUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"createUsingPOST"
                },
                {  
-                  "implementationNote":"Only ROLE_ADMIN and ROLE_ONC can retrieve future scheduled announcements and private announcements.  ROLE_ONC_STAFF, ROLE_ACB, ROLE_ATL, and ROLE_CMS_STAFF can retrieve private announcements.  All users can retrieve public announcements.",
+                  "implementationNote":"Only ROLE_ADMIN and ROLE_ONC can retrieve future scheduled announcements and private announcements. ROLE_ACB, ROLE_ATL, and ROLE_CMS_STAFF can retrieve private announcements.  All users can retrieve public announcements.",
                   "link":"getAnnouncementByIdUsingGET"
                },
                {  
@@ -129,15 +129,15 @@
             "controllerName":"api-key-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"listKeysUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"listActivityUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"listActivityByKeyUsingGET"
                },
                {  
@@ -166,7 +166,7 @@
                   "link":"updateAcbUsingPUT"
                },
                {  
-                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC, ROLE_ONC_STAFF or have administrative or read authority on the specified ACB",
+                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC or have administrative or read authority on the specified ACB",
                   "link":"getUsersUsingGET"
                },
                {  
@@ -183,7 +183,7 @@
             "controllerName":"developer-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_ONC_STAFF, and ROLE_ACB can see deleted developers.  Everyone else can only see active developers.",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC and ROLE_ACB can see deleted developers.  Everyone else can only see active developers.",
                   "link":"getDevelopersUsingGET"
                },
                {  
@@ -298,7 +298,7 @@
             "controllerName":"testing-lab-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN or ROLE_ONC to see deleted ATLs (if 'showDeleted' to true)",
+                  "implementationNote":"ROLE_ADMIN or ROLE_ONC to see deleted ATLs",
                   "link":"getAtlsUsingGET"
                },
                {  
@@ -327,7 +327,7 @@
             "controllerName":"user-management-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN and ROLE_ONC can see all users.  ROLE_ACB, ROLE_ATL, ROLE_CMS_STAFF, and ROLE_ONC_STAFF can see their self.",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC can see all users.  ROLE_ACB, ROLE_ATL, ROLE_CMS_STAFF can see their self.",
                   "link":"getUsersUsingGET_2"
                },
                {  
