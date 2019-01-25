@@ -102,7 +102,7 @@ public class ChplAPIPageAsserts extends Base {
                     String implNote = (String) ((JSONObject) links).get("implementationNote");
                     String actImpNotes = ChplAPIPage.certifiedProductsImplementationNotes(getDriver()).getText();
                     try {
-                        assertTrue(actImpNotes.contains(implNote), "Expected [ " + implNote + " ]not found for:[" + controller + "] where endpoint is:[" + endPointLink + "]");
+                        assertTrue(actImpNotes.contains(implNote), "Expected [ " + implNote + " ]not found for:[" + controller + "] where endpoint is:[" + endPoint + "]");
                     } catch (AssertionError ex) {
                         System.out.println(ex.getMessage());
                         failedCase = true;

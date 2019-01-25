@@ -33,11 +33,7 @@
                   "link":"uploadUsingPOST"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN or user uploading the file must have ROLE_ACB and administrative authority on the ACB(s) specified in the file",
-                  "link":"uploadUsingPOST"
-               },
-               {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and have administrative authority on the ACB that certified the product",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and have administrative authority on the ACB that certified the product",
                   "link":"updateCertifiedProductUsingPUT"
                }
             ]
@@ -55,11 +51,11 @@
             "controllerName":"activity-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC_ADMIN may set the 'showDeleted' flag to true and see activity for all certification bodies including that have been deleted. ROLE_ACB can see their own information.",
+                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC may set the 'showDeleted' flag to true and see activity for all certification bodies including that have been deleted. ROLE_ACB can see their own information.",
                   "link":"activityForACBsUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC_ADMIN may set the 'showDeleted' flag to true. ROLE_ACB can see their own information.",
+                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC may set the 'showDeleted' flag to true. ROLE_ACB can see their own information.",
                   "link":"activityForACBByIdUsingGET"
                },
                {  
@@ -79,27 +75,27 @@
                   "link":"activityForATLByIdUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, and ROLE_ACB (specific to own ACB)",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, and ROLE_ACB (specific to own ACB)",
                   "link":"activityForPendingCertifiedProductsUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, and ROLE_ACB (specific to own ACB)",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, and ROLE_ACB (specific to own ACB)",
                   "link":"activityForPendingCertifiedProductByIdUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
                   "link":"activityByUserUsingGET_1"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
                   "link":"activityByUserUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, ROLE_ONC_STAFF (of ROLE_ONC_STAFF), ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), and ROLE_ATL (of their own)",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_ONC_STAFF (of ROLE_ONC_STAFF), ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), and ROLE_ATL (of their own)",
                   "link":"activityForUsersUsingGET_1"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, ROLE_ONC_STAFF (of ROLE_ONC_STAFF), ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), and ROLE_ATL (of their own)",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_ONC_STAFF (of ROLE_ONC_STAFF), ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), and ROLE_ATL (of their own)",
                   "link":"activityForUsersUsingGET"
                }
             ]
@@ -112,15 +108,19 @@
                   "link":"getAnnouncementsUsingGET"
                },
                {  
-                  "implementationNote":"Only ROLE_ADMIN and ROLE_ONC_ADMIN can retrieve future scheduled announcements and private announcements.  ROLE_ONC_STAFF, ROLE_ACB, ROLE_ATL, and ROLE_CMS_STAFF can retrieve private announcements.  All users can retrieve public announcements.",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
+                  "link":"createUsingPOST"
+               },
+               {  
+                  "implementationNote":"Only ROLE_ADMIN and ROLE_ONC can retrieve future scheduled announcements and private announcements.  ROLE_ONC_STAFF, ROLE_ACB, ROLE_ATL, and ROLE_CMS_STAFF can retrieve private announcements.  All users can retrieve public announcements.",
                   "link":"getAnnouncementByIdUsingGET"
                },
                {  
-                  "implementationNote":"Only ROLE_ADMIN and ROLE_ONC_ADMIN are able to update announcements",
+                  "implementationNote":"Only ROLE_ADMIN and ROLE_ONC are able to update announcements",
                   "link":"updateAnnouncementUsingPUT"
                },
                {  
-                  "implementationNote":"Only ROLE_ADMIN and ROLE_ONC_ADMIN are able to update announcements",
+                  "implementationNote":"Only ROLE_ADMIN and ROLE_ONC are able to update announcements",
                   "link":"deleteAnnouncementUsingDELETE"
                }
             ]
@@ -129,19 +129,19 @@
             "controllerName":"api-key-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
                   "link":"listKeysUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
                   "link":"listActivityUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ONC_STAFF",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ONC_STAFF",
                   "link":"listActivityByKeyUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN and ROLE_ONC_ADMIN",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC",
                   "link":"revokeUsingDELETE"
                }
             ]
@@ -150,27 +150,27 @@
             "controllerName":"certification-body-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"Everyone can see all active.  ROLE_ADMIN and ROLE_ONC_ADMIN can see deleted as well",
+                  "implementationNote":"Everyone can see all active.  ROLE_ADMIN and ROLE_ONC can see deleted as well",
                   "link":"getAcbsUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN and ROLE_ONC_ADMIN",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC",
                   "link":"createAcbUsingPOST"
                },
                {  
-                  "implementationNote":"Must either have ROLE_ADMIN, ROLE_ONC_ADMIN, or have ROLE_ACB for the ACB with the provided ID",
+                  "implementationNote":"Must either have ROLE_ADMIN, ROLE_ONC, or have ROLE_ACB for the ACB with the provided ID",
                   "link":"getAcbByIdUsingGET"
                },
                {  
-                  "implementationNote":"Must either have ROLE_ADMIN, ROLE_ONC_ADMIN or have ROLE_ACB to update an existing ACB",
+                  "implementationNote":"Must either have ROLE_ADMIN, ROLE_ONC or have ROLE_ACB to update an existing ACB",
                   "link":"updateAcbUsingPUT"
                },
                {  
-                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC_ADMIN, ROLE_ONC_STAFF or have administrative or read authority on the specified ACB",
+                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC, ROLE_ONC_STAFF or have administrative or read authority on the specified ACB",
                   "link":"getUsersUsingGET"
                },
                {  
-                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and have administrative authority on the specified ACB, and 'ADMIN',  'READ' or 'DELETE' in as the 'authority' field",
+                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and have administrative authority on the specified ACB, and 'ADMIN',  'READ' or 'DELETE' in as the 'authority' field",
                   "link":"createAcbUsingPOST"
                },
                {  
@@ -183,11 +183,11 @@
             "controllerName":"developer-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, ROLE_ONC_STAFF, and ROLE_ACB can see deleted developers.  Everyone else can only see active developers.",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_ONC_STAFF, and ROLE_ACB can see deleted developers.  Everyone else can only see active developers.",
                   "link":"getDevelopersUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ACB",
                   "link":"updateDeveloperUsingPUT"
                }
             ]
@@ -196,7 +196,11 @@
             "controllerName":"product-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB",
+                  "implementationNote":"Must have ROLE_ADMIN to merge or ROLE_ACB and have administrative authority on the specified ACB to do all actions except merge",
+                  "link":"updateProductUsingPUT"
+               },
+               {  
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ACB",
                   "link":"splitProductUsingPOST"
                }
             ]
@@ -214,11 +218,11 @@
             "controllerName":"scheduler-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and have administrative authority on the specified ACB",
+                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and have administrative authority on the specified ACB",
                   "link":"getAllJobsUsingGET_1"
                },
                {  
-                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and have administrative authority on the specified ACB",
+                  "implementationNote":"Must have ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and have administrative authority on the specified ACB",
                   "link":"getAllTriggersUsingGET"
                },
                {  
@@ -239,7 +243,7 @@
             "controllerName":"search-view-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN or ROLE_ONC_ADMIN",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"updateFuzzyChoicesForSearchingUsingPUT"
                }
             ]
@@ -248,7 +252,7 @@
             "controllerName":"job-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"getAllJobsUsingGET"
                }
             ]
@@ -269,27 +273,23 @@
                   "link":"confirmPendingSurveillanceUsingPOST"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN or ROLE_ACB and have administrative authority on the specified ACB for each pending surveillance is required",
-                  "link":"rejectPendingSurveillanceUsingDELETE"
-               },
-               {  
-                  "implementationNote":"User uploading the file must have either ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and administrative authority on the ACB(s) responsible for the product(s) in the file",
+                  "implementationNote":"User uploading the file must have either ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and administrative authority on the ACB(s) responsible for the product(s) in the file",
                   "link":"uploadUsingPOST_1"
                },
                {  
-                  "implementationNote":"User uploading the file must have either ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and associated with the certified product is required",
+                  "implementationNote":"User uploading the file must have either ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and associated with the certified product is required",
                   "link":"updateSurveillanceUsingPUT"
                },
                {  
-                  "implementationNote":"Must have ROLE_ACB and administrative authority on the ACB associated with the certified product is required",
+                  "implementationNote":"ROLE_ADMIN or ROLE_ACB and have administrative authority on the specified ACB for each pending surveillance is required",
                   "link":"deleteSurveillanceUsingDELETE"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and administrative authority on the associated ACB",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and administrative authority on the associated ACB",
                   "link":"deleteNonconformityDocumentFromSurveillanceUsingDELETE"
                },
                {  
-                  "implementationNote":"User uploading the file must have either ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and administrative authority on the associated ACB",
+                  "implementationNote":"User uploading the file must have either ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and administrative authority on the associated ACB",
                   "link":"uploadNonconformityDocumentUsingPOST"
                }
             ]
@@ -298,31 +298,27 @@
             "controllerName":"testing-lab-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN or ROLE_ONC_ADMIN to see deleted ATLs (if 'showDeleted' to true)",
+                  "implementationNote":"ROLE_ADMIN or ROLE_ONC to see deleted ATLs (if 'showDeleted' to true)",
                   "link":"getAtlsUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN or ROLE_ONC_ADMIN to create a new testing lab",
+                  "implementationNote":"ROLE_ADMIN or ROLE_ONC to create a new testing lab",
                   "link":"createAtlUsingPOST"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN or have either read oradministrative authority on the testing lab with the ID specified",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC or have either read oradministrative authority on the testing lab with the ID specified",
                   "link":"getAtlByIdUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ATL and have administrative authority on the testing lab whose data is being updated",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ATL and have administrative authority on the testing lab whose data is being updated",
                   "link":"updateAtlUsingPUT"
                },
                {  
-                  "implementationNote":"User uploading the file must have either ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ACB and administrative authority on the ACB(s) responsible for the product(s) in the file",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ATL and have administrative authority on the specified ATL",
                   "link":"uploadUsingPOST_1"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, ROLE_ONC_STAFF, or have administrative or read authority on the specified ATL",
-                  "link":"getUsersUsingGET_1"
-               },
-               {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC_ADMIN, or ROLE_ATL and have administrative authority on the specified ATL",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ATL and have administrative authority on the specified ATL",
                   "link":"deleteUserFromAtlUsingDELETE"
                }
             ]
@@ -331,23 +327,23 @@
             "controllerName":"user-management-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_ADMIN and ONC_ROLE_ADMIN can see all users.  ROLE_ACB, ROLE_ATL, ROLE_CMS_STAFF, and ROLE_ONC_STAFF can see their self.",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC can see all users.  ROLE_ACB, ROLE_ATL, ROLE_CMS_STAFF, and ROLE_ONC_STAFF can see their self.",
                   "link":"getUsersUsingGET_2"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN and ONC_ROLE_ADMIN can invite users to any organization.  ROLE_ACB and ROLE_ATL can add users to their own organization.",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC can invite users to any organization.  ROLE_ACB and ROLE_ATL can add users to their own organization.",
                   "link":"inviteUserUsingPOST"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN and ONC_ROLE_ADMIN",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC",
                   "link":"deleteUserUsingDELETE"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN and ONC_ROLE_ADMIN",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC",
                   "link":"authorizeUserUsingPOST"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN and ONC_ROLE_ADMIN",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC",
                   "link":"grantUserRoleUsingPOST"
                },
                {  
