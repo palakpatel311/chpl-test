@@ -302,7 +302,7 @@
                   "link":"createAtlUsingPOST"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC or have either read oradministrative authority on the testing lab with the ID specified",
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC or have either read or administrative authority on the testing lab with the ID specified",
                   "link":"getAtlByIdUsingGET"
                },
                {  
