@@ -150,7 +150,7 @@
             "controllerName":"certification-body-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"Everyone can see all active.  ROLE_ADMIN and ROLE_ONC can see deleted as well",
+                  "implementationNote":"Everyone can see all active.",
                   "link":"getAcbsUsingGET"
                },
                {  
@@ -297,10 +297,6 @@
          {  
             "controllerName":"testing-lab-controller",
             "endPointLink":[  
-               {  
-                  "implementationNote":"ROLE_ADMIN or ROLE_ONC to see deleted ATLs",
-                  "link":"getAtlsUsingGET"
-               },
                {  
                   "implementationNote":"ROLE_ADMIN or ROLE_ONC to create a new testing lab",
                   "link":"createAtlUsingPOST"
