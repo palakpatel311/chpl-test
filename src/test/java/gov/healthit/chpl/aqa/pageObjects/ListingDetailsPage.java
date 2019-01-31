@@ -30,15 +30,6 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
-     * Returns Targeted User data from additional Info panel.
-     * @param driver WebDriver
-     * @return the text element
-     */
-    public static WebElement targetedUser(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[2]/ul/li"));
-    }
-
-    /**
      * Returns the element that holds associated criteria number for a Measure Name in Successfully Tested G1/G2 Measures section .
      * @param driver WebDriver
      * @param mName is measure Name
@@ -189,6 +180,15 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
+     * Returns Meaningful Use Users data.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement meaningfulUseUsers(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[3]/p"));
+    }
+
+    /**
      * Get the Privacy and Security Framework value for a given criteria.
      * @param driver WebDriver
      * @param number certification criteria
@@ -325,6 +325,15 @@ public final class ListingDetailsPage extends BasePage {
      */
     public static WebElement surveillanceActivitiesAccordion(final WebDriver driver) {
         return driver.findElement(By.id("details-surveillance-activities"));
+    }
+
+    /**
+     * Returns Targeted User data from additional Info panel.
+     * @param driver WebDriver
+     * @return the text element
+     */
+    public static WebElement targetedUser(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[2]/ul/li"));
     }
 
     /**
