@@ -30,6 +30,15 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
+     * Returns Targeted User data from additional Info panel.
+     * @param driver WebDriver
+     * @return the text element
+     */
+    public static WebElement targetedUser(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[2]/ul/li"));
+    }
+
+    /**
      * Returns the element that holds associated criteria number for a Measure Name in Successfully Tested G1/G2 Measures section .
      * @param driver WebDriver
      * @param mName is measure Name
@@ -217,6 +226,15 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
+     * Returns CHPL Product number.
+     * @param driver WebDriver
+     * @return CHPL Product number element
+     */
+    public static WebElement productNumber(final WebDriver driver) {
+        return driver.findElement(By.xpath("//p[contains(text(),'CHPL Product Number:')]"));
+    }
+
+    /**
      * Returns element that holds QMS Standard text.
      * @param driver WebDriver
      * @param number certification criteria
@@ -363,14 +381,5 @@ public final class ListingDetailsPage extends BasePage {
      */
     public static WebElement ucdUrl(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/a"));
-    }
-
-    /**
-     * Returns CHPL Product number.
-     * @param driver WebDriver
-     * @return CHPL Product number element
-     */
-    public static WebElement productNumber(final WebDriver driver) {
-        return driver.findElement(By.xpath("//p[contains(text(),'CHPL Product Number:')]"));
     }
 }
