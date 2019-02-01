@@ -310,6 +310,15 @@ public class ManageDevelopersAndProductsSteps extends Base {
     }
 
     /**
+     * Load listing's edit page.
+     */
+    @When("^I am on Product management page of uploaded listing$")
+    public void loadProductManagementPage() {
+        getDriver().get(getUrl() + "#/admin/dpManagement/manage/" + this.chplProductNumber);
+        getWait().until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver())));
+    }
+
+    /**
      * Open Edit form.
      */
     @And("^I open listing edit page$")
