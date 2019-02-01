@@ -185,7 +185,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return text element
      */
     public static WebElement meaningfulUseUsers(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[3]/p"));
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-estimated-number-of-meaningful-use-users\"]/p"));
     }
 
     /**
@@ -333,7 +333,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return the text element
      */
     public static WebElement targetedUser(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[2]/ul/li"));
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-developer-identified-targeted-user\"]/ul/li"));
     }
 
     /**
@@ -362,7 +362,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return the value of URL element
      */
     public static WebElement testResultsSummaryUrl(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[1]/a"));
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-test-results-summary\"]/a"));
     }
 
     /**
