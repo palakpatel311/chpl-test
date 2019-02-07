@@ -71,7 +71,7 @@ public class LoginSteps {
     }
 
     /**
-     * Log the user in as an ACB.
+     * Log the user in as an Admin.
      */
     @Given("^I'm logged in as an Admin$")
     public void logInAsAdmin() {
