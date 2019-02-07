@@ -21,6 +21,8 @@ public class LoginSteps {
     private String url = System.getProperty("url");
     private String username = System.getProperty("username");
     private String password = System.getProperty("password");
+    private String adminUsername = System.getProperty("adminUsername");
+    private String adminPassword = System.getProperty("adminPassword");
 
     /**
      * Constructor creates new driver.
@@ -36,6 +38,12 @@ public class LoginSteps {
         }
         if (StringUtils.isEmpty(password)) {
             throw new IllegalArgumentException("Missing value for password!");
+        }
+        if (StringUtils.isEmpty(adminUsername)) {
+            throw new IllegalArgumentException("Missing value for admin username!");
+        }
+        if (StringUtils.isEmpty(adminPassword)) {
+            throw new IllegalArgumentException("Missing value for admin password!");
         }
     }
 
@@ -54,10 +62,26 @@ public class LoginSteps {
 
     /**
      * Verify login attempt was successful.
+     * @param role as ACB or Admin
      */
-    @Then("^I should be logged in to CHPL as ACB Admin$")
-    public void verifyLoginWasSuccessful() {
+    @Then("^I should be logged in to CHPL as \"([^\"]*)\"$")
+    public void verifyLoginWasSuccessful(final String role) {
         String actualString = LoginPage.welcomeText(driver).getText();
         assertTrue(actualString.contains("Welcome"));
     }
+
+    /**
+     * Log the user in as an ACB.
+     */
+    @Given("^I'm logged in as an Admin$")
+    public void logInAsAdmin() {
+        driver.get(url + "#/admin/dpManagement");
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(LoginPage.username(driver)));
+        LoginPage.username(driver).sendKeys(adminUsername);
+        LoginPage.password(driver).sendKeys(adminPassword);
+        LoginPage.loginButton(driver).click();
+    }
+
 }
+
