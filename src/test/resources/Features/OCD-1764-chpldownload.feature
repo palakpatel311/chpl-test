@@ -1,3 +1,4 @@
+@Regression
 Feature: OCD-1764 - Chpl data files are downloadable and have respective definition files
   To test download files functionality of CHPL application
 
