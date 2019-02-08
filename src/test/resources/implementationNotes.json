@@ -51,7 +51,7 @@
                   "link":"activityForACBsUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN AND ROLE_ONC may see activity for all certification bodies. ROLE_ACB can see their own information.",
+                  "implementationNote":"ROLE_ADMIN and ROLE_ONC may see activity for all certification bodies. ROLE_ACB can see their own information.",
                   "link":"activityForACBByIdUsingGET"
                },
                {  
