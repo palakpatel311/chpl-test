@@ -10,3 +10,8 @@ Feature: OCD-1764 - Chpl data files are downloadable and have respective definit
     Given I am on download the CHPL resources page on "DEV"
     When user selects a file in download file box
     Then definition file shows based on download file selection
+
+  Scenario: Admin user sees eight download files
+    Given I'm logged in as "ROLE_ADMIN"
+    When I am on download the CHPL resources page on "DEV"
+    Then user sees "8" download files
