@@ -123,6 +123,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @When("^I go to Confirm Pending Products Page$")
     public void loadConfirmPendingProductsPage() {
         DpManagementPage.confirmPendingProductsLink(getDriver()).click();
+        getWait().until(ExpectedConditions.jsReturnsValue("return document.readyState==\"complete\";"));
         getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
     }
 
