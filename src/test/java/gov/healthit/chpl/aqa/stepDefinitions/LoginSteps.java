@@ -72,6 +72,8 @@ public class LoginSteps extends Base {
         } else if (role.equalsIgnoreCase("ROLE_ACB")) {
             username = roleAcbUsername;
             password = roleAcbPassword;
+        } else {
+        throw new IllegalArgumentException("Incorrect role found: " + role);
         }
         getDriver().get(getUrl() + "#/admin/dpManagement");
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
