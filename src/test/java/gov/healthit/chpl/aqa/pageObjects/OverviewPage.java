@@ -42,4 +42,9 @@ public final class OverviewPage {
         element = driver.findElement(By.id("acbAtlTable"));
         return element;
     }
+
+    public static WebElement pageContent(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[2]"));
+        return element;
+    }
 }
