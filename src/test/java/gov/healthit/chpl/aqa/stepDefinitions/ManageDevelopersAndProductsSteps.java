@@ -123,6 +123,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @When("^I go to Confirm Pending Products Page$")
     public void loadConfirmPendingProductsPage() {
         DpManagementPage.confirmPendingProductsLink(getDriver()).click();
+        getWait().until(ExpectedConditions.jsReturnsValue("return document.readyState==\"complete\";"));
         getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
     }
 
@@ -307,6 +308,15 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
         this.chplProductNumber = inputChplId.substring(0, CHPL_PRODUCT_NUMBER_PREFIX) + newPid + "." + newVid + ".00.1.180707";
         return this.chplProductNumber;
+    }
+
+    /**
+     * Load listing's edit page.
+     */
+    @When("^I am on Product management page of uploaded listing$")
+    public void loadProductManagementPage() {
+        getDriver().get(getUrl() + "#/admin/dpManagement/manage/" + this.chplProductNumber);
+        getWait().until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver())));
     }
 
     /**

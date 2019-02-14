@@ -1,5 +1,6 @@
 @Regression
 Feature: OCD-1970 - Addition / modification of available G1/G2 values
+         OCD-2672 - Confirm listing with G1G2 Macra Measures in unattested criteria, save phantom data.
 
 Scenario Outline: Mapping legacy values for G1/G2
     Given I am on listing details page of listing with ID "<DB_ID>"
@@ -34,3 +35,21 @@ Scenario Outline: Mapping legacy values for G1/G2
     |8878|170.315 (g)(8)|G2|View, Download, or Transmit (VDT): Eligible Provider|Required Test 4: Stage 2 Objective 8 Measure 2|
     |9482|170.315 (g)(8)|G2|Provider to Patient Exchange (formerly Patient Electronic Access): Eligible Hospital/Critical Access Hospital|Required Test 2: Stage 3 Objective 5 Measure 1|
     |9482|170.315 (g)(9)|G2|Provider to Patient Exchange (formerly Patient Electronic Access): Eligible Hospital/Critical Access Hospital|Required Test 2: Stage 3 Objective 5 Measure 1|
+    
+Scenario Outline: Upload sample listing for 2015 edition
+    Given I'm logged in as an ACB
+    And I am on Upload Certified Products page
+    When I upload a "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
+    Then I see upload successful message
+    When I go to Confirm Pending Products Page
+    And I open inspect form to inspect listing details
+    And I confirm "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
+    Then I see that listing was uploaded successfully to CHPL and listing details load as expected for uploaded "2015" listing  
+    When I am on Product management page of uploaded listing
+    And I open details for criteria "170.315 (a)(2)"
+    Then Measure Successfully Tested for "<gOption>" should display "<Measure_Name>" for "<CRITERIA>"
+    Examples:
+    |gOption|Measure_Name|CRITERIA|
+    |G1|Computerized Provider Order - Laboratory: Eligible Provider|170.315 (a)(2)|
+    |G2|Computerized Provider Order - Laboratory: Eligible Provider|170.315 (a)(2)|
+    

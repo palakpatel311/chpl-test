@@ -75,6 +75,7 @@ public class ListingDetailsSteps extends Base {
     public void iLookAtAdditionalInformation() {
         WebElement link = ListingDetailsPage.additionalInfoAccordion(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.meaningfulUseUsers(getDriver())));
     }
 
     /**

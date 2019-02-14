@@ -13,7 +13,7 @@ Scenario Outline: Verify newly added CQMs in listing details
     |8490|CMS645: Bone density evaluation for patients with prostate cancer and receiving androgen deprivation therapy|
     
     Scenario Outline: Verify newly added CQM versions
-    Given I'm logged in as an ACB
+    Given I'm logged in as "ROLE_ACB"
     And I navigate to Manage Developers and Products page listing details section of listing with ID "8511"
     And I open listing edit page
     When I look at CQM details  

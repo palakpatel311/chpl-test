@@ -28,4 +28,20 @@ public class DpmanagementInspectListingPageAsserts extends Base {
         WebElement button = DpManagementPage.yesOnConfirm(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
     }
+
+    /**
+     * Verify warnings on inspect screen.
+     * @param warning is expected warning message
+     * @param field is field for which warning message is expected
+     */
+    @Then("^I see \"([^\"]*)\" for bad value in Test Task \"([^\"]*)\"$")
+    public void verifyWarningsForTestTasksOnInspect(final String warning, final String field) {
+
+        String warningMessage = DpManagementPage.warningErrorTextOnInspect(getDriver()).getText();
+
+        assertTrue(warningMessage.contains(warning), "no warnings were found for"  + field);
+        DpManagementPage.rejectButtonOnInspect(getDriver()).click();
+        WebElement button = DpManagementPage.yesOnConfirm(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+    }
 }
