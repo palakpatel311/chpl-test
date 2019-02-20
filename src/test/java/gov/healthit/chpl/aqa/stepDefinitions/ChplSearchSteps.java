@@ -1,9 +1,6 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 import static org.testng.Assert.assertTrue;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,19 +14,12 @@ import gov.healthit.chpl.aqa.pageObjects.SearchPage;
 /**
  * Class ChplSearchSteps definition.
  */
-public class ChplSearchSteps {
-    private WebDriver driver;
-    private static final int TIMEOUT = 30;
-    private String url = System.getProperty("url");
+public class ChplSearchSteps extends Base {
 
     /**
      * Constructor creates new driver.
      */
     public ChplSearchSteps() {
-        driver = Hooks.getDriver();
-        if (StringUtils.isEmpty(url)) {
-            url = "http://localhost:3000/";
-           }
     }
 
     /**
@@ -37,9 +27,9 @@ public class ChplSearchSteps {
      */
     @Given("^I am on CHPL search page$")
     public void iAamOnCHPLSearchPage() {
-        driver.get(url);
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(driver))));
+        getDriver().get(getUrl());
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(getDriver()))));
     }
 
     /**
@@ -48,8 +38,8 @@ public class ChplSearchSteps {
      */
     @When("^I search for a listing with CHPL ID \"(.*)\"$")
     public void searchForCHPLID(final String chplId) {
-        SearchPage.searchField(driver).sendKeys(chplId);
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        SearchPage.searchField(getDriver()).sendKeys(chplId);
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), '" + chplId + "')]")));
     }
 
@@ -59,9 +49,9 @@ public class ChplSearchSteps {
      */
     @When("^I search for a missing listing with CHPL ID \"(.*)\"$")
     public void searchForMissingCHPLID(final String chplId) {
-        SearchPage.searchField(driver).sendKeys(chplId);
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(SearchPage.resultsSection(driver)));
+        SearchPage.searchField(getDriver()).sendKeys(chplId);
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(SearchPage.resultsSection(getDriver())));
     }
 
     /**
@@ -69,8 +59,8 @@ public class ChplSearchSteps {
      */
     @And("^I look at Certification Status options$")
     public void viewCertStatusFilterOptions() {
-        SearchPage.browseButton(driver).click();
-        SearchPage.certStatusFiltersButton(driver).click();
+        SearchPage.browseButton(getDriver()).click();
+        SearchPage.certStatusFiltersButton(getDriver()).click();
     }
 
     /**
@@ -79,8 +69,8 @@ public class ChplSearchSteps {
      */
     @And("^I apply \"([^\"]*)\" filter$")
     public void selectFilterOption(final String filterOption) {
-        SearchPage.filterOption(driver, filterOption).click();
-        SearchPage.certStatusFiltersButton(driver).click();
+        SearchPage.filterOption(getDriver(), filterOption).click();
+        SearchPage.certStatusFiltersButton(getDriver()).click();
     }
 
     /**
@@ -88,25 +78,8 @@ public class ChplSearchSteps {
      */
     @When("^I look at ACB filter options selected for default search$")
     public void viewAcbFilterOptions() {
-        SearchPage.browseButton(driver).click();
-        SearchPage.moreFilter(driver).click();
-    }
-
-    /**
-     * Assert filter option checkbox is checked.
-     * @param selectfilter is filter option selected
-     */
-    @Then("^I see that \"([^\"]*)\" checkbox is checked$")
-    public void verifySLIOptionChecked(final String selectfilter) {
-        assertTrue(SearchPage.filterOption(driver, selectfilter).isSelected());
-    }
-
-    /**
-     * Assert message when no results found.
-     */
-    @Then("^the search page shows 'No results found' message$")
-    public void verifyMessage() {
-        assertTrue(SearchPage.noResultsFound(driver).getText().contains("No results found"));
+        SearchPage.browseButton(getDriver()).click();
+        SearchPage.moreFilter(getDriver()).click();
     }
 
     /**
@@ -116,23 +89,13 @@ public class ChplSearchSteps {
      */
     @Given("^I am on listing details page of listing with CHPL ID \"(.*)\"$")
     public void iAmOnListingDetailsPageOfListingWithCHPLID(final String chplId) {
-        driver.get(url + "#/search");
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(driver))));
-        SearchPage.searchField(driver).sendKeys(chplId);
-        wait.until(ExpectedConditions.textToBePresentInElement(SearchPage.resultCount(driver), "1 - 1 of 1 Result"));
-        SearchPage.detailsLink(driver).click();
-        wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(driver)));
-    }
-
-    /**
-     * Asserts that expected listing is returned in result.
-     * @param chplId id for listing to expect in search results
-     */
-    @Then("^I should see listing \"([^\"]*)\" in CHPL search results$")
-    public void searchResultsShowSliListing(final String chplId) {
-        String actualText = SearchPage.searchResultsChplId(driver).getText();
-        assertTrue(actualText.contains(chplId), "Expect " + chplId + " to be found in " + actualText);
+        getDriver().get(getUrl() + "#/search");
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(getDriver()))));
+        SearchPage.searchField(getDriver()).sendKeys(chplId);
+        wait.until(ExpectedConditions.textToBePresentInElement(SearchPage.resultCount(getDriver()), "1 - 1 of 1 Result"));
+        SearchPage.detailsLink(getDriver()).click();
+        wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(getDriver())));
     }
 
     /**
@@ -141,20 +104,8 @@ public class ChplSearchSteps {
      */
     @Then("^the certification status of the listing shows as \"([^\"]*)\"$")
     public void searchResultsShowNewStatus(final String status) {
-        String currentStatus = SearchPage.resultsStatus(driver).getAttribute("uib-tooltip");
+        String currentStatus = SearchPage.resultsStatus(getDriver()).getAttribute("uib-tooltip");
         assertTrue(currentStatus.contains(status), "Expect " + status + " status found as " + currentStatus);
-    }
-
-    /**
-     * Asserts that given listing shows in search results.
-     * @param chplId of listing to expect in search results
-     */
-    @Then("^the only listing with CHPL ID \"([^\"]*)\" appears in search results$")
-    public void searchResultsShowListing(final String chplId) {
-        String listing = SearchPage.searchResultsChplId(driver).getText();
-        assertTrue(listing.contains(chplId), "Expect " + chplId + " found as " + listing);
-        String itemcount = SearchPage.resultCount(driver).getText();
-        assertTrue(itemcount.contains("1 - 1 of 1 Result"), "Expect" + itemcount + " count found as " + itemcount);
     }
 
     /**
@@ -162,9 +113,9 @@ public class ChplSearchSteps {
      */
     @And("^I select all status on Certification Status filter$")
     public void selectAllCertStatusFilters() {
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(SearchPage.certStatusFiltersButton(driver)));
-        SearchPage.certStatusFiltersButton(driver).click();
-        SearchPage.selectAllStatus(driver).click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(SearchPage.certStatusFiltersButton(getDriver())));
+        SearchPage.certStatusFiltersButton(getDriver()).click();
+        SearchPage.selectAllStatus(getDriver()).click();
     }
 }
