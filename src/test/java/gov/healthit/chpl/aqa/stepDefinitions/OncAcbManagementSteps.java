@@ -16,26 +16,26 @@ public class OncAcbManagementSteps extends Base {
     /**
      * Get user to ONC ACB Management  page.
      */
-    @When("^I navigate to ONC ACB Management page$")
+    @And("^I navigate to ONC ACB Management page$")
     public void navigateToONCACBManagementPage() {
         WebElement link = OncAcbManagementPage.oncACBManagementLink(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
     /**
-     * Navigate to ONC ACB Listing.
+     * Access ONC ACB details page.
      * @param listingName is the name of ONC ACB listing
      */
-    @And("^I click on \"([^\"]*)\"$")
+    @And("^I access \"([^\"]*)\" ACB details$")
     public void iClickOnONCACBListing(final String listingName) {
         WebElement link =  OncAcbManagementPage.oncACBName(getDriver(), listingName);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
     /**
-     * Edit ONC ACB Listing.
+     * Open the ACB edit form.
      */
-    @And("^I edit an ACB$")
+    @And("^I open the ACB edit form$")
     public void editACB() {
         WebElement link = OncAcbManagementPage.editONCACB(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
@@ -45,20 +45,12 @@ public class OncAcbManagementSteps extends Base {
      * Retire the ACB on a specific date.
      * @param date set the retirement date
      */
-    @And("^I mark it as retired on \"([^\"]*)\"$")
+    @When("^I mark it as retired on \"([^\"]*)\"$")
     public void markRetired(final String date) {
         OncAcbManagementPage.markRetirementStatus(getDriver()).click();
         WebElement retirementDate = getDriver().findElement(By.id("retirement-date"));
         retirementDate.sendKeys(date);
         OncAcbManagementPage.saveONCACB(getDriver()).click();
     }
-
-    /**
-     * Unretire an existing retired ACB.
-     */
-    @And("^I unretire an existing retired ACB$")
-    public void iUnretireExisitngRetiredACB() {
-        OncAcbManagementPage.markRetirementStatus(getDriver()).click();
-        OncAcbManagementPage.saveONCACB(getDriver()).click();
-    }
 }
+
