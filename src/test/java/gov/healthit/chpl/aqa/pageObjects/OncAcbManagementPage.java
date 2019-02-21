@@ -15,7 +15,7 @@ public final class OncAcbManagementPage extends BasePage {
     }
 
     public static WebElement oncACBName(final WebDriver driver, final String oncAcbName) {
-        return driver.findElement(By.xpath(" //a[contains(text(),'" + oncAcbName + "')]"));
+        return driver.findElement(By.xpath("//a[contains(text(),'" + oncAcbName + "')]"));
     }
 
     public static WebElement editONCACB(final WebDriver driver) {
@@ -31,7 +31,7 @@ public final class OncAcbManagementPage extends BasePage {
     }
 
     public static WebElement saveONCACB(final WebDriver driver) {
-        return driver.findElement(By.xpath("\r\n" + "/html/body/div[1]/div/div/div/div[3]/button[1]"));
+        return driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[3]/button[1]"));
     }
 
     public static WebElement retirementStatus(final WebDriver driver, final String retirementStatus) {
@@ -44,6 +44,30 @@ public final class OncAcbManagementPage extends BasePage {
 
     public static WebElement errorMessage(final WebDriver driver) {
         return driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[3]/p"));
+    }
+
+    public static WebElement addressFirstLine(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='address-line-1']"));
+    }
+
+    public static WebElement addressCity(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='address-city']"));
+    }
+
+    public static WebElement addressState(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='address-state']"));
+    }
+
+    public static WebElement addressZipCode(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='address-zipcode']"));
+    }
+
+    public static WebElement addressCountry(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='address-country']"));
+    }
+
+    public static WebElement fieldWebsite(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='acb-website']"));
     }
 }
 

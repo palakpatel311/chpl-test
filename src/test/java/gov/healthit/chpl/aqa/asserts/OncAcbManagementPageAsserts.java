@@ -2,10 +2,6 @@ package gov.healthit.chpl.aqa.asserts;
 
 import static org.testng.Assert.assertEquals;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.OncAcbManagementPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
@@ -34,11 +30,6 @@ public class OncAcbManagementPageAsserts extends Base {
     public void retiredStatus(final String retirementStatus) {
         String actualRetirementStatus = OncAcbManagementPage.retirementStatus(getDriver(), retirementStatus).getText();
         assertEquals((actualRetirementStatus.split(":")[1]).trim(), retirementStatus);
-        WebElement link = OncAcbManagementPage.editONCACB(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
-        OncAcbManagementPage.markRetirementStatus(getDriver()).click();
-        OncAcbManagementPage.saveONCACB(getDriver()).click();
-        getWait().until(ExpectedConditions.visibilityOf(OncAcbManagementPage.retirementStatus(getDriver(), retirementStatus)));
     }
 
 }

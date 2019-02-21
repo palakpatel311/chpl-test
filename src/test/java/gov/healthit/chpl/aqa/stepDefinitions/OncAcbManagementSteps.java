@@ -52,5 +52,26 @@ public class OncAcbManagementSteps extends Base {
         retirementDate.sendKeys(date);
         OncAcbManagementPage.saveONCACB(getDriver()).click();
     }
+
+    /**
+     * Unretire an existing retired ACB.
+     */
+    @When("^I unretire an existing retired ACB$")
+    public void iUnretireExisitngRetiredACB() {
+        OncAcbManagementPage.markRetirementStatus(getDriver()).click();
+        OncAcbManagementPage.addressFirstLine(getDriver()).clear();
+        OncAcbManagementPage.addressFirstLine(getDriver()).sendKeys("Test");
+        OncAcbManagementPage.addressCity(getDriver()).clear();
+        OncAcbManagementPage.addressCity(getDriver()).sendKeys("Test");
+        OncAcbManagementPage.addressState(getDriver()).clear();
+        OncAcbManagementPage.addressState(getDriver()).sendKeys("Test");
+        OncAcbManagementPage.addressZipCode(getDriver()).clear();
+        OncAcbManagementPage.addressZipCode(getDriver()).sendKeys("111");
+        OncAcbManagementPage.addressCountry(getDriver()).clear();
+        OncAcbManagementPage.addressCountry(getDriver()).sendKeys("Test");
+        OncAcbManagementPage.fieldWebsite(getDriver()).clear();
+        OncAcbManagementPage.fieldWebsite(getDriver()).sendKeys("http://www.example.com");
+        OncAcbManagementPage.saveONCACB(getDriver()).click();
+    }
 }
 
