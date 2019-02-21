@@ -163,4 +163,8 @@ public final class SearchPage {
         element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[1]/ul/st-list-multiple/ul/li[1]/a[1]"));
         return element;
     }
+
+    public static WebElement viewONCACBList(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[5]/ul/li[4]/a"));
+    }
 }
