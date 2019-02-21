@@ -4,9 +4,10 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
          OCD-2558-Verify listing upload with duplicate macra measure value shows warning on inspect and confirm succeeds
          OCD-2593-Verify warnings for duplicate values in criteria detail fields in upload template
          OCD-2635-Show better error message when user uploads Test Tasks with IDs that are too long
-         OCD-2640-Verify warning for bad data in Targeted User field     
+         OCD-2640-Verify warning for bad data in Targeted User field
+         OCD-2697-Handle bad characters on upload in number fields    
   Scenario Outline: Verify warnings for duplicate input values in applicable fields on upload-inspect for 2015 listings
-    Given I'm logged in as an ACB
+    Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
     When I upload a "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
     Then I see upload successful message
@@ -27,10 +28,10 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     |Listing contains duplicate QMS Standard: 'Home Grown, Criteria: All criteria tested'. The duplicates have been removed.|QMS Standard|
     |Listing contains duplicate Targeted User: 'Mental Health'. The duplicates have been removed.|Targeted User|
     |Listing contains duplicate Testing Lab: 'SLI Compliance'. The duplicates have been removed.|Testing Lab|
-    |You have exceeded the max length, 300 characters, for the Targeted User Test for targeted users bad data greater than 300 chars - Order specific medication and then change the order based on the information provided. Test for targeted users bad data greater than 300 chars - Order specific medication and then change the order based on the information provided . Order specific medication and then change the order based on the information provided, which has been deleted.|Targeted User|
-    
+    |You have exceeded the max length, 300 characters, for the Targeted User Test for targeted users bad data greater than 300 chars - Order specific medication and then change the order based on the information provided. Test for targeted users bad data greater than 300 chars - Order specific medication and then change the order based on the information provided . Order specific medication and then change the order based on the information provided, which has been deleted.|Targeted User| 
+  
   Scenario Outline: Verify warnings for duplicate input values in applicable fields on upload-inspect for 2014 listings
-    Given I'm logged in as an ACB
+    Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
     When I upload a "2014" listing with CHPL ID "14.05.05.1447.SL14.v1.00.1.180707"
     Then I see upload successful message
@@ -49,7 +50,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     |Listing contains duplicate Testing Lab: 'SLI Compliance'. The duplicates have been removed.|Testing Lab|
     
   Scenario Outline: Verify listing upload fails for files that have too long (>20 chars.) Test Task IDs and Participant IDs    
-    Given I'm logged in as an ACB
+    Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
     When I upload a 2015 listing with long ID in "<Field>" 
     Then I see upload failure with appropriate error message "<FailureError>" to indicate failure due to long ID
@@ -57,4 +58,18 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     |Field|FailureError|
     |Test Task ID|You have exceeded the max length, 20 characters, for the Task Identifier with ID TestTaskIdisinvalidbecauseit'stoolong010101010101.|
     |Participant ID|You have exceeded the max length, 20 characters, for the Participant Identifier ID ParticipantIdisinvalidbecauseit'stoolong01010101010101.|
-    
+ 
+ Scenario Outline: Verify warnings for duplicate input values in applicable fields on upload-inspect for 2015 listings
+    Given I'm logged in as "ROLE_ACB"
+    And I am on Upload Certified Products page
+    When I upload a "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
+    Then I see upload successful message
+    When I go to Confirm Pending Products Page
+    And I open inspect form to inspect listing details
+    Then I see "<warning>" for bad value in Test Task "<field>"
+    Examples:
+    |warning|field|
+    |An unrecognized character was found in Test Task A1.3 Task Errors Standard Deviation value. The value must be only a numeric value. You can correct it within the field itself on the Edit Certified Product screen or modify it in the csv file and upload again.|Task Errors Standard Deviation|
+    |An unrecognized character was found in Test Task A1.3 Task Rating Standard Deviation value. The value must be only a numeric value. You can correct it within the field itself on the Edit Certified Product screen or modify it in the csv file and upload again.|Task Rating Standard Deviation|
+    |An unrecognized character was found in Test Task A1.3 Task Errors value. The value must be only a numeric value. You can correct it within the field itself on the Edit Certified Product screen or modify it in the csv file and upload again.|Task Errors value|
+       

@@ -180,6 +180,15 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
+     * Returns Meaningful Use Users data.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement meaningfulUseUsers(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-estimated-number-of-meaningful-use-users\"]/p"));
+    }
+
+    /**
      * Get the Privacy and Security Framework value for a given criteria.
      * @param driver WebDriver
      * @param number certification criteria
@@ -214,6 +223,15 @@ public final class ListingDetailsPage extends BasePage {
      */
     public static WebElement productHistoryText(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"product-history-modal\"]/div[2]/span"));
+    }
+
+    /**
+     * Returns CHPL Product number.
+     * @param driver WebDriver
+     * @return CHPL Product number element
+     */
+    public static WebElement productNumber(final WebDriver driver) {
+        return driver.findElement(By.xpath("//p[contains(text(),'CHPL Product Number:')]"));
     }
 
     /**
@@ -310,6 +328,15 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
+     * Returns Targeted User data from additional Info panel.
+     * @param driver WebDriver
+     * @return the text element
+     */
+    public static WebElement targetedUser(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-developer-identified-targeted-user\"]/ul/li"));
+    }
+
+    /**
      * Get the Test Procedure value for a given criteria.
      * @param driver WebDriver
      * @param number certification criteria
@@ -335,7 +362,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return the value of URL element
      */
     public static WebElement testResultsSummaryUrl(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information\"]/span[1]/a"));
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-test-results-summary\"]/a"));
     }
 
     /**
@@ -363,14 +390,5 @@ public final class ListingDetailsPage extends BasePage {
      */
     public static WebElement ucdUrl(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/a"));
-    }
-
-    /**
-     * Returns CHPL Product number.
-     * @param driver WebDriver
-     * @return CHPL Product number element
-     */
-    public static WebElement productNumber(final WebDriver driver) {
-        return driver.findElement(By.xpath("//p[contains(text(),'CHPL Product Number:')]"));
     }
 }

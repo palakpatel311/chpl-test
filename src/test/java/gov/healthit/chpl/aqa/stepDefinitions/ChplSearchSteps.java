@@ -1,7 +1,9 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
+import static org.junit.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
@@ -15,7 +17,7 @@ import gov.healthit.chpl.aqa.pageObjects.SearchPage;
  * Class ChplSearchSteps definition.
  */
 public class ChplSearchSteps extends Base {
-
+  
     /**
      * Constructor creates new driver.
      */

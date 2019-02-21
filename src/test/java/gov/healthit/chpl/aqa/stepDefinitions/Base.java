@@ -17,7 +17,8 @@ public class Base {
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
     private static final int MAX_RETRYCOUNT = 8;
-    private static final int SLEEP_TIME = 5000;
+    private static final int LAST_MODIFIED_WINDOW_MILLIS = 15000;
+    protected static final int SLEEP_TIME = 5000;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     /** Default constructor. */
     public Base() {
@@ -92,6 +93,39 @@ public class Base {
         }
         if (!fileFound) {
             throw new FileNotFoundException("File: " + fileName + " not downloaded");
+        }
+    }
+
+    /**
+     * Checks if the recent downloaded file is downloaded completely.
+     * file name starts with name of the file and ends with extension.
+     * @param fileName is the name of file
+     * @param ext expected extension of the file
+     * @throws FileNotFoundException if the expected file not found
+     */
+    public void checkCompleteFileDownload(final String fileName, final String ext) throws FileNotFoundException {
+        boolean foundFile = false;
+        int retryCount = 0;
+        try {
+            while (!foundFile && retryCount <= MAX_RETRYCOUNT) {
+                File[] files = Hooks.getDownloadDirectory().listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    Long currentTime = System.currentTimeMillis();
+                    if ((files[i].getName().startsWith(fileName) && files[i].getName().endsWith(ext)) && ((currentTime - files[i].lastModified()) < LAST_MODIFIED_WINDOW_MILLIS)) {
+                        foundFile = true;
+                        break;
+                    }
+                }
+                if (!foundFile) {
+                    retryCount++;
+                    Thread.sleep(SLEEP_TIME);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (!foundFile) {
+            throw new FileNotFoundException("File not downloaded completely");
         }
     }
 
