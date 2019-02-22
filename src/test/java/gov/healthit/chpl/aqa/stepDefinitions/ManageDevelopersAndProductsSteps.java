@@ -352,8 +352,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      * @throws URISyntaxException
      * @param fieldinUploadFile is a field in upload file that has bad input
      */
-    @When("^I upload a 2015 listing with bad input in \"([^\"]*)\"$")
-    public void uploadListingWithBadInputsInTestTaskParticipantFields(final String fieldinUploadFile) throws URISyntaxException {
+    @When("^I upload a 2015 listing with CHPL ID \"([^\"]*)\" that has bad input in \"([^\"]*)\"$")
+    public void uploadListingWithBadInputsInTestTaskParticipantFields(final String chplId, final String fieldinUploadFile) throws URISyntaxException {
         URL resource = Main.class.getResource("/2015_Test_SLI_BadInputs.csv");
         String absolutePath = Paths.get(resource.toURI()).toString();
 
@@ -364,8 +364,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
     /**
      * Inspect listing details for bad data input to verify errors.
      */
-    @And("^I inspect listing details for listing with bad inputs$")
-    public void inspectListingDetails() {
-        DpManagementPage.inspectButtonForBadDataListing(getDriver()).click();
+    @And("^I inspect listing details for listing with CHPL ID \"([^\"]*)\"$")
+    public void inspectListingDetails(final String chplId) {
+        DpManagementPage.inspectButtonForBadDataListing(getDriver(), chplId).click();
     }
 }

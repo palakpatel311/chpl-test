@@ -62,28 +62,29 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
  Scenario Outline: Verify errors for bad input values in Test Task fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
-    When I upload a 2015 listing with bad input in "<field>"
+    When I upload a 2015 listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707" that has bad input in "<Field>"
     Then I see upload successful message
     When I go to Confirm Pending Products Page
-    And I inspect listing details for listing with bad inputs
+    And I inspect listing details for listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707"
     Then I see error: "<error>" for bad value in "<field>"
     Examples:
     |error|field|
     |An unrecognized character was found in Test Participant "ID06" "Professional Experience Months" "88�". The value must be only a numeric value. You can correct it within the field itself on the Edit Certified Product screen or modify it in the csv file and upload again.|Professional Experience Months|
     |An unrecognized character was found in Test Task "A1.3" "Task Errors Standard Deviation" "9.75�". The value must be only a numeric value. You can correct it within the field itself on the Edit Certified Product screen or modify it in the csv file and upload again.|Task Errors Standard Deviation|
     |An unrecognized character was found in Test Task "A1.3" "Task Rating Standard Deviation" "1.00�". The value must be only a numeric value. You can correct it within the field itself on the Edit Certified Product screen or modify it in the csv file and upload again.|Task Rating Standard Deviation|
-    |An unrecognized character was found in Test Task "A1.3" "Task Errors" "9.75�". The value must be only a numeric value. You can correct it within the field itself on the Edit Certified Product screen or modify it in the csv file and upload again.|Task Errors value|
+    |An unrecognized character was found in Test Task "A1.3" "Task Errors" "9.75�". The value must be only a numeric value. You can correct it within the field itself on the Edit Certified Product screen or modify it in the csv file and upload again.|Task Errors value|    
     
     Scenario Outline: Verify warnings for bad input values in Test task and Participant fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
-    When I upload a 2015 listing with bad input in "<Field>"
+    When I upload a 2015 listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707" that has bad input in "<Field>"
     Then I see upload successful message
     When I go to Confirm Pending Products Page
-    And I inspect listing details for listing with bad inputs
+    And I inspect listing details for listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707"
     Then I see warning "<warning>" for non-integer numeric number in "<field>"
     Examples:
     |warning|field|
     |A non-integer numeric number was found in Test Participant "ID01" "Computer Experience Months" "250.75". The number has been rounded to "251".|Computer Experience Months|
     |A non-integer numeric number was found in Test Task "A1.1" "Task Path Deviation Observed" "9.75". The number has been rounded to "10".|Task Path Deviation Observed|
+    |A non-integer numeric number was found in Test Task "A1.1" "Task Time Average" "90.2". The number has been rounded to "90".|Task Time Average|
     

@@ -194,8 +194,8 @@ public final class DpManagementPage {
     /**
      * Returns Inspect button link for bad data listing from pending listings table.
      */
-    public static WebElement inspectButtonForBadDataListing(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"pending-listing-inspect-15.05.05.1447.BDIN.v1.00.1.180707\"]"));
+    public static WebElement inspectButtonForBadDataListing(final WebDriver driver, final String chplId) {
+        return driver.findElement(By.xpath("//*[@id=\"pending-listing-inspect-" + chplId + "\"]"));
     }
 
     /**
