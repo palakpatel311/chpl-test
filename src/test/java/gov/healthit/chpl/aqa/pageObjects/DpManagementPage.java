@@ -191,7 +191,14 @@ public final class DpManagementPage {
         return driver.findElement(By.linkText("Upload Products & Surveillance"));
     }
 
-   /**
+    /**
+     * Returns Inspect button link for bad data listing from pending listings table.
+     */
+    public static WebElement inspectButtonForBadDataListing(final WebDriver driver, final String chplId) {
+        return driver.findElement(By.xpath("//*[@id=\"pending-listing-inspect-" + chplId + "\"]"));
+    }
+
+    /**
      * Returns element holding main content.
      * @param driver WebDriver
      * @return element holding main content
@@ -318,6 +325,15 @@ public final class DpManagementPage {
     }
 
     /**
+     * Returns element that holds error text.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement errorTextOnInspect(final WebDriver driver) {
+        return driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[3]/div/div/div[1]"));
+   }
+
+    /**
      * Returns product Id in CHPL ID on inspect form.
      * @param driver WebDriver
      * @return text element
@@ -358,8 +374,8 @@ public final class DpManagementPage {
      * @param driver WebDriver
      * @return text element
      */
-    public static WebElement warningErrorTextOnInspect(final WebDriver driver) {
-        return driver.findElement(By.xpath("//html/body/div[1]/div/div/div/div[3]/div/div/div/ul"));
+    public static WebElement warningTextOnInspect(final WebDriver driver) {
+        return driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[3]/div/div"));
    }
 
     /**
