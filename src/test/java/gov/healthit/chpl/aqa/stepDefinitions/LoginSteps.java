@@ -72,7 +72,7 @@ public class LoginSteps extends Base {
         } else if (role.equalsIgnoreCase("ROLE_ACB")) {
             username = roleAcbUsername;
             password = roleAcbPassword;
-        } 
+        }
         getDriver().get(getUrl() + "#/admin/dpManagement");
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(LoginPage.username(getDriver())));
