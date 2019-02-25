@@ -16,20 +16,20 @@ Feature: OCD-2023: Monitor that download files on CHPL download resources page a
     Examples: 
       | env  | edition | type | days | size | units | items |
       | DEV  |    2011 | xml  |   92 |  148 | MB    |  3885 |
-      | DEV  |    2014 | xml  |    1 |  450 | MB    |  5190 |
-      | DEV  |    2014 | csv  |    1 | 2900 | KB    |  5190 |
-      | DEV  |    2015 | xml  |    1 |  150 | MB    |   590 |
-      | DEV  |    2015 | csv  |    1 |  350 | KB    |   590 |
+      | DEV  |    2014 | xml  |    1 |  470 | MB    |  5250 |
+      | DEV  |    2014 | csv  |    1 | 2900 | KB    |  5250 |
+      | DEV  |    2015 | xml  |    1 |  180 | MB    |   710 |
+      | DEV  |    2015 | csv  |    1 |  420 | KB    |   710 |
       | STG  |    2011 | xml  |   92 |  148 | MB    |  3885 |
-      | STG  |    2014 | xml  |    1 |  450 | MB    |  5190 |
-      | STG  |    2014 | csv  |    1 | 2900 | KB    |  5190 |
-      | STG  |    2015 | xml  |    1 |  150 | MB    |   590 |
-      | STG  |    2015 | csv  |    1 |  350 | KB    |   590 |
+      | STG  |    2014 | xml  |    1 |  470 | MB    |  5250 |
+      | STG  |    2014 | csv  |    1 | 2900 | KB    |  5250 |
+      | STG  |    2015 | xml  |    1 |  180 | MB    |   710 |
+      | STG  |    2015 | csv  |    1 |  420 | KB    |   710 |
       | PROD |    2011 | xml  |   92 |  148 | MB    |  3885 |
-      | PROD |    2014 | xml  |    1 |  450 | MB    |  5190 |
-      | PROD |    2014 | csv  |    1 | 2900 | KB    |  5190 |
-      | PROD |    2015 | xml  |    1 |  150 | MB    |   590 |
-      | PROD |    2015 | csv  |    1 |  350 | KB    |   590 |
+      | PROD |    2014 | xml  |    1 |  470 | MB    |  5250 |
+      | PROD |    2014 | csv  |    1 | 2900 | KB    |  5250 |
+      | PROD |    2015 | xml  |    1 |  180 | MB    |   710 |
+      | PROD |    2015 | csv  |    1 |  420 | KB    |   710 |
 
   Scenario Outline: 
     At any given time, when downloaded, file name ends with Date and time format 
