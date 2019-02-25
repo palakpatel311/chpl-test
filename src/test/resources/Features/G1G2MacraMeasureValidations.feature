@@ -55,6 +55,6 @@ Scenario Outline: Upload sample listing for 2015 edition
     Then Measure Successfully Tested for "<gOption>" should display "<Measure_Name>" for "<CRITERIA>"
     Examples:
     |gOption|Measure_Name|CRITERIA|
-    |G1|Computerized Provider Order - Laboratory: Eligible Provider|170.315 (a)(2)|
-    |G2|Computerized Provider Order - Laboratory: Eligible Provider|170.315 (a)(2)|
+    |G1|Computerized Provider Order - Laboratory: Eligible Professional|170.315 (a)(2)|
+    |G2|Computerized Provider Order - Laboratory: Eligible Professional|170.315 (a)(2)|
     
