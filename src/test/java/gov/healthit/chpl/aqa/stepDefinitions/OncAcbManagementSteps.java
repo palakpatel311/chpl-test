@@ -75,20 +75,13 @@ public class OncAcbManagementSteps extends Base {
     }
 
     /**
-     * Edit ACB to new ACB name.
+     * Edit ACB details to edit ACB name to new name and edit it back to original ACB name.
      */
-    @When("^I edit ACB name to new ACB name \"([^\"]*)\" and save$")
-    public void editAcbNameToNewName(final String editedAcbName) {
+    @When("^I edit ACB name to be \"([^\"]*)\" and edit it back to \"([^\"]*)\"$")
+    public void editAcbName() {
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).clear();
-        OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).sendKeys(editedAcbName);
+        OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).sendKeys("ICSA Labs-test");
         OncAcbManagementPage.saveONCACB(getDriver()).click();
-    }
-
-    /**
-     * Edit ACB to edit back to original ACB name.
-     */
-    @When("^I edit ACB name to be \"([^\"]*)\" and save$")
-    public void editAcbNameBackToOrinial(final String acbName) {
         WebElement link = OncAcbManagementPage.editONCACB(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).clear();
