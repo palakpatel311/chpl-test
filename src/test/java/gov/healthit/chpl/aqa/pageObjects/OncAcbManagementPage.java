@@ -69,5 +69,9 @@ public final class OncAcbManagementPage extends BasePage {
     public static WebElement fieldWebsite(final WebDriver driver) {
         return driver.findElement(By.xpath("//input[@id='acb-website']"));
     }
+
+    public static WebElement oncACBNameOnEditForm(final WebDriver driver) {
+        return driver.findElement(By.id("acb-name"));
+    }
 }
 
