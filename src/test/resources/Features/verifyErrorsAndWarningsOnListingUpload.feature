@@ -62,7 +62,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
  Scenario Outline: Verify errors for bad input values in Test Task fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
-    When I upload a 2015 listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707" that has bad input in "<Field>"
+    When I upload a 2015 listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707" that has bad input in "<field>"
     Then I see upload successful message
     When I go to Confirm Pending Products Page
     And I inspect listing details for listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707"
@@ -77,7 +77,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     Scenario Outline: Verify warnings for bad input values in Test task and Participant fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
-    When I upload a 2015 listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707" that has bad input in "<Field>"
+    When I upload a 2015 listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707" that has bad input in "<field>"
     Then I see upload successful message
     When I go to Confirm Pending Products Page
     And I inspect listing details for listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707"

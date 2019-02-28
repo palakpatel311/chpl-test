@@ -16,10 +16,10 @@ Feature: OCD-1763 - Overview page tests
       | Body    | Name           |
       | ONC-ACB | Drummond Group |
       | ONC-ACB | ICSA Labs      |
-      | ONC-ACB | InfoGard       |
+      | ONC-ACB | UL LLC         |
       | ONC-ATL | Drummond Group |
       | ONC-ATL | ICSA Labs      |
-      | ONC-ATL | InfoGard       |
+      | ONC-ATL | UL LLC         |
       | ONC-ATL | SLI Compliance |
 
   Scenario Outline: Verify text update on Overview page
