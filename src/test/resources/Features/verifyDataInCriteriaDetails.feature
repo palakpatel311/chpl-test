@@ -5,6 +5,7 @@ Feature: Verify data in criteria details
   OCD-2445- Update missing values in database for 2014 c1 Test tool and 2015 a7 Privacy and Security field
   OCD-746, OCD-1424, OCD-2532- Restrict Functionality Tested values by edition, criteria and display correct description
   OCD-2637- Verify backend update for Test Functionality on select listings
+  OCD-2562- Add two new Test Tools
 
   Scenario Outline: Verify Test Tool field displays correct values in applicable criteria details
     Given I am on listing details page of listing with ID "<CHPL_ID>"
@@ -33,6 +34,7 @@ Feature: Verify data in criteria details
       | 14.07.07.2934.CHA2.01.01.1.161109 | 170.314 (c)(1) | Cypress                                                      | 2.4.1             |
       | 14.07.07.1459.AXA1.03.02.1.170912 | 170.314 (c)(1) | Cypress                                                      | 2.4.1             |
       | 14.07.04.1221.Heal.7I.01.1.180625 | 170.314 (c)(1) | Cypress                                                      | 2.2.0             |
+      | 15.04.04.2113.Rhap.64.01.0.180918 | 170.315 (f)(6) | CDC's NHSN CDA Validator                                     | 1.0               |
       
 Scenario Outline: Verify Privacy and security Framework field displays correct values in applicable criteria details
     Given I am on listing details page of listing with ID "<CHPL_ID>"
@@ -85,4 +87,17 @@ Scenario Outline: Verify Functionality Tested field displays correct edition and
     | 15.04.04.1221.Firs.18.03.1.180727 | 170.315 (b)(2) | None |
     | 15.04.04.2996.Char.12.01.1.180416 |170.315 (a)(13) | None |
     | 15.07.04.2804.Inte.SP.01.1.181113 | 170.315 (a)(13)| None |
-                          
+    
+    Scenario: Upload sample listing for 2015 edition
+    Given I'm logged in as "ROLE_ACB"
+    And I am on Upload Certified Products page
+    When I upload a "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
+    Then I see upload successful message
+    When I go to Confirm Pending Products Page
+    And I open inspect form to inspect listing details
+    And I confirm "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
+    And I see that listing was uploaded successfully to CHPL and listing details load as expected for uploaded "2015" listing
+    When I open details for criteria "170.315 (f)(7)"
+    Then Test Tool should display "Tool: NHCS IG Release 1.2 Validator" and "2" for criteria "170.315 (f)(7)"
+    And Test Tool should display "Tool: NHCS IG Release 1 Validator" and "2" for criteria "170.315 (f)(7)"
+               
