@@ -190,13 +190,13 @@ public class ManageDevelopersAndProductsSteps extends Base {
     }
 
     /**
-     * Upload a listing with long Test Task IDs and Participant IDs.
+     * Upload a listing with invalid inputs in specific fields.
      * @throws URISyntaxException
      * @param fieldinUploadFile is a field in upload file that has invalid input
      */
-    @When("^I upload a 2015 listing with long ID in \"([^\"]*)\"$")
+    @When("^I upload a 2015 listing with invalid input in \"([^\"]*)\"$")
     public void uploadListingWithLongTestTaskIDsParticipantIDs(final String fieldinUploadFile) throws URISyntaxException {
-        URL resource = Main.class.getResource("/2015_Test_SLI_longIDs.csv");
+        URL resource = Main.class.getResource("/2015_Test_SLI_longIDsInvCertDate.csv");
         String absolutePath = Paths.get(resource.toURI()).toString();
 
         DpManagementPage.chooseFileButton(getDriver()).sendKeys(absolutePath);

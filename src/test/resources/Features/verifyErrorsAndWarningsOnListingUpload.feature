@@ -6,7 +6,9 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
          OCD-2635-Show better error message when user uploads Test Tasks with IDs that are too long
          OCD-2640-Verify warning for bad data in Targeted User field
          OCD-2697-Handle bad characters on upload in number fields
-         OCD-2562-Retire a Test Tool   
+         OCD-2562-Retire a Test Tool
+         OCD-2559-Handle invalid certificaion date in upload file
+            
   Scenario Outline: Verify warnings for duplicate input values in applicable fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
@@ -50,15 +52,16 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     |Listing contains duplicate QMS Standard: 'ISO 9001. The duplicates have been removed.|QMS Standard|
     |Listing contains duplicate Testing Lab: 'SLI Compliance'. The duplicates have been removed.|Testing Lab|
     
-  Scenario Outline: Verify listing upload fails for files that have too long (>20 chars.) Test Task IDs and Participant IDs    
+  Scenario Outline: Verify listing upload fails for files that have invalid inputs in specific fields    
     Given I'm logged in as "ROLE_ACB"
     And I am on Upload Certified Products page
-    When I upload a 2015 listing with long ID in "<Field>" 
-    Then I see upload failure with appropriate error message "<FailureError>" to indicate failure due to long ID
+    When I upload a 2015 listing with invalid input in "<Field>" 
+    Then I see upload failure with appropriate error message "<FailureError>" to indicate failure due to invalid data
   Examples:
     |Field|FailureError|
     |Test Task ID|You have exceeded the max length, 20 characters, for the Task Identifier with ID TestTaskIdisinvalidbecauseit'stoolong010101010101.|
     |Participant ID|You have exceeded the max length, 20 characters, for the Participant Identifier ID ParticipantIdisinvalidbecauseit'stoolong01010101010101.|
+    |Certification date|Certification date <Date> is not in the format yyyymmdd.|
  
  Scenario Outline: Verify errors for bad input values in Test Task fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"

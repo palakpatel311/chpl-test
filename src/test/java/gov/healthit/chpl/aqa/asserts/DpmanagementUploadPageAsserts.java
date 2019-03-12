@@ -30,7 +30,7 @@ public class DpmanagementUploadPageAsserts extends Base {
      * Assert errors in upload failure message.
      * @param errorMessage expected error message for upload failure
      */
-    @Then("^I see upload failure with appropriate error message \"([^\"]*)\" to indicate failure due to long ID$")
+    @Then("^I see upload failure with appropriate error message \"([^\"]*)\" to indicate failure due to invalid data$")
     public void verifyLongTestTaskIdAndParticipantIdErrorsOnUpload(final String errorMessage) {
         String actualString = DpManagementPage.uploadFailureErrorMessage(getDriver()).getText();
         assertTrue(actualString.contains(errorMessage), "Expect \"" + errorMessage + "\" to be found in \"" + actualString + "\"");
