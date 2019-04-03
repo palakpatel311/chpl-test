@@ -21,29 +21,6 @@ public class LoginSteps extends Base {
     private String roleOncPassword = System.getProperty("roleOncPassword");
     private String roleAcbUsername = System.getProperty("roleAcbUsername");
     private String roleAcbPassword = System.getProperty("roleAcbPassword");
-    /**
-     * Constructor creates new driver.
-     */
-    public LoginSteps() {
-        if (StringUtils.isEmpty(roleAdminUsername)) {
-            throw new IllegalArgumentException("Missing value for roleAdminUsername!");
-        }
-        if (StringUtils.isEmpty(roleAdminPassword)) {
-            throw new IllegalArgumentException("Missing value for roleAdminPassword!");
-        }
-        if (StringUtils.isEmpty(roleOncUsername)) {
-            throw new IllegalArgumentException("Missing value for roleOncUsername!");
-        }
-        if (StringUtils.isEmpty(roleOncPassword)) {
-            throw new IllegalArgumentException("Missing value for roleOncPassword!");
-        }
-        if (StringUtils.isEmpty(roleAcbUsername)) {
-            throw new IllegalArgumentException("Missing value for roleAcbUsername!");
-        }
-        if (StringUtils.isEmpty(roleAcbPassword)) {
-            throw new IllegalArgumentException("Missing value for roleAcbPassword!");
-        }
-    }
 
     /**
      * Verify login attempt was successful.
@@ -64,12 +41,30 @@ public class LoginSteps extends Base {
         String username = null;
         String password = null;
         if (role.equalsIgnoreCase("ROLE_ADMIN")) {
+            if (StringUtils.isEmpty(roleAdminUsername)) {
+                throw new IllegalArgumentException("Missing value for roleAdminUsername!");
+            }
+            if (StringUtils.isEmpty(roleAdminPassword)) {
+                throw new IllegalArgumentException("Missing value for roleAdminPassword!");
+            }
             username = roleAdminUsername;
             password = roleAdminPassword;
         } else if (role.equalsIgnoreCase("ROLE_ONC")) {
+            if (StringUtils.isEmpty(roleOncUsername)) {
+                throw new IllegalArgumentException("Missing value for roleOncUsername!");
+            }
+            if (StringUtils.isEmpty(roleOncPassword)) {
+                throw new IllegalArgumentException("Missing value for roleOncPassword!");
+            }
             username = roleOncUsername;
             password = roleOncPassword;
         } else if (role.equalsIgnoreCase("ROLE_ACB")) {
+            if (StringUtils.isEmpty(roleAcbUsername)) {
+                throw new IllegalArgumentException("Missing value for roleAcbUsername!");
+            }
+            if (StringUtils.isEmpty(roleAcbPassword)) {
+                throw new IllegalArgumentException("Missing value for roleAcbPassword!");
+            }
             username = roleAcbUsername;
             password = roleAcbPassword;
         }
