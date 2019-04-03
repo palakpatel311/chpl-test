@@ -27,7 +27,7 @@ public class ChplAPIDocumentationSteps extends Base {
      */
     @Given("^I am on CHPL API page$")
     public void userLoadsAPIPage() {
-        getDriver().get(getUrl() + "#/resources/chpl_api");
+        getDriver().get(getUrl() + "#/resources/chpl-api");
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(ChplAPIPage.mainContent(getDriver())));
     }
