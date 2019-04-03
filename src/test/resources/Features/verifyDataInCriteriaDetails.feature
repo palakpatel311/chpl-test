@@ -34,7 +34,7 @@ Feature: Verify data in criteria details
       | 14.07.07.2934.CHA2.01.01.1.161109 | 170.314 (c)(1) | Cypress                                                      | 2.4.1             |
       | 14.07.07.1459.AXA1.03.02.1.170912 | 170.314 (c)(1) | Cypress                                                      | 2.4.1             |
       | 14.07.04.1221.Heal.7I.01.1.180625 | 170.314 (c)(1) | Cypress                                                      | 2.2.0             |
-      | 15.04.04.2113.Rhap.64.00.0.180918 | 170.315 (f)(6) | CDC's NHSN CDA Validator                                     | 1.0               |
+      | 15.04.04.3043.Rhap.64.00.0.180918 | 170.315 (f)(6) | CDC's NHSN CDA Validator                                     | 1.0               |
       
 Scenario Outline: Verify Privacy and security Framework field displays correct values in applicable criteria details
     Given I am on listing details page of listing with ID "<CHPL_ID>"
