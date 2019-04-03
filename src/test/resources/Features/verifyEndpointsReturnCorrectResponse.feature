@@ -18,5 +18,5 @@ Feature: Verify endpoints return correct response
     And I navigate to ONC ACB Management page
     And I access "ICSA Labs" ACB details
     And I open the ACB edit form
-    And I edit ACB name to be "ICSA Labs-test" and edit it back to "ICSA Labs"    
+    And I edit ACB name to be "ICSA Labs-test" and edit it back to "ICSA Labs"
     Then the system-status endpoint returns status "OK" for all caches are populated status

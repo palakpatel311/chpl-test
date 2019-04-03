@@ -68,13 +68,17 @@ public class LoginSteps extends Base {
             username = roleAcbUsername;
             password = roleAcbPassword;
         }
-        getDriver().get(getUrl() + "#/admin/dpManagement");
+        getDriver().get(getUrl() + "#/search");
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        //pop up the login/out section
+        wait.until(ExpectedConditions.visibilityOf(LoginPage.loginLogoutPopUp(getDriver())));
+        LoginPage.loginLogoutPopUp(getDriver()).click();
+        //when it's popped up we can see the username
         wait.until(ExpectedConditions.visibilityOf(LoginPage.username(getDriver())));
         LoginPage.username(getDriver()).sendKeys(username);
         LoginPage.password(getDriver()).sendKeys(password);
         LoginPage.loginButton(getDriver()).click();
-        getWait().until(ExpectedConditions.visibilityOf(LoginPage.welcomeText(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(LoginPage.logoutButton(getDriver())));
     }
 }
 
