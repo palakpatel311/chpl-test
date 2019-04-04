@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
  */
 public class LoginPage {
 
-    private WebDriver driver;
     private static WebElement element = null;
 
     /**
