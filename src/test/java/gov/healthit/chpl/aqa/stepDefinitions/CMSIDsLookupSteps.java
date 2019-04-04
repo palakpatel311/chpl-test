@@ -28,7 +28,7 @@ public class CMSIDsLookupSteps extends Base {
      */
     @Given("^I am on the CMS ID Reverse Lookup page$")
     public void iAmOnTheCmsIdReverseLookupPage() {
-        getDriver().get(getUrl() + "#/resources/cms_lookup");
+        getDriver().get(getUrl() + "#/resources/cms-lookup");
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(CMSidReverseLookupPage.mainContent(getDriver())));
     }
