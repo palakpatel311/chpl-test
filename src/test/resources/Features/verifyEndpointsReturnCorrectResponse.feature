@@ -10,13 +10,13 @@ Feature: Verify endpoints return correct response
       | DB_ID | CHPL_ID                           |
       |  8252 | 15.04.04.2945.Ligh.21.00.1.161229 |
 
-  Scenario: Verify cache_status endpoint returns status of "okay" for "all caches are populated"
-    Then the cache_status endpoint returns status "OK" for all caches are populated status
+  Scenario: Verify system-status endpoint returns status of "okay" for "all caches are populated"
+    Then the system-status endpoint returns status "OK" for all caches are populated status
     
   Scenario: Verify cache is re-initialized after an activity
     Given I'm logged in as "ROLE_ADMIN"
     And I navigate to ONC ACB Management page
     And I access "ICSA Labs" ACB details
     And I open the ACB edit form
-    And I edit ACB name to be "ICSA Labs-test" and edit it back to "ICSA Labs"    
-    Then the cache_status endpoint returns status "OK" for all caches are populated status
+    And I edit ACB name to be "ICSA Labs-test" and edit it back to "ICSA Labs"
+    Then the system-status endpoint returns status "OK" for all caches are populated status
