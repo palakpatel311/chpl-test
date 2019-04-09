@@ -375,8 +375,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      * @throws URISyntaxException
      * @param inputChplId is a CHPL ID of a listing for which surveillance is uploaded
      */
-    @When("^I upload a surveillance activity for listing with CHPL ID \"([^\"]*)\"$")
-    public void uploadSurveillance(final String inputChplId) throws URISyntaxException {
+    @When("^I upload a surveillance activity for listing with CHPL ID 15.05.05.2760.ISCD.01.00.1.181101$")
+    public void uploadSurveillance() throws URISyntaxException {
         URL resource = Main.class.getResource("/SurveillanceUpload_SLI.csv");
         String absolutePath = Paths.get(resource.toURI()).toString();
 
@@ -426,10 +426,6 @@ public class ManageDevelopersAndProductsSteps extends Base {
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
             .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
 
-            getDriver().get(getUrl() + "/#/product/" + survChplId);
-            getWait()
-            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(getDriver())));
         } catch (Exception e) {
             Hooks.takeScreenshot(survChplId);
             assertTrue(false, "in confirm:" + e.getMessage());

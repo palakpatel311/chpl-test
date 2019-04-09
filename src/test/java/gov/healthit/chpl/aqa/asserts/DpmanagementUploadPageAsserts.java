@@ -2,9 +2,6 @@ package gov.healthit.chpl.aqa.asserts;
 
 import static org.testng.Assert.assertTrue;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
@@ -58,10 +55,9 @@ public class DpmanagementUploadPageAsserts extends Base {
     /**
      * Load listing details to verify surveillance was uploaded successfully.
      */
-    @Then("^I see that surveillance was uploaded successfully to CHPL and listing details show surveillance activity$")
+    @Then("^I see that surveillance was uploaded successfully for listing with CHPL ID 15.05.05.2760.ISCD.01.00.1.181101 and listing details show surveillance activity$")
     public void verifySurveillanceConfirmWasSuccessful() {
-        WebElement accordion = ListingDetailsPage.surveillanceActivitiesAccordion(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", accordion);
+        getDriver().get(getUrl() + "/#/listing/9713/surveillance");
 
         String surveillanceText = ListingDetailsPage.surveillanceActivitiesPanel(getDriver()).getText();
 
