@@ -21,6 +21,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -97,7 +98,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
     /**
      * Navigate to Upload Certified Products page.
      */
-    @And("^I am on Upload Certified Products page$")
+    @And("^I am on Upload Products & Surveillance page$")
     public void loadUploadCertifiedProductsPage() {
         DpManagementPage.dpManagementLink(getDriver()).click();
         DpManagementPage.dpManagementUploadProductsSurveillance(getDriver()).click();
@@ -367,5 +368,71 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @And("^I inspect listing details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectListingDetails(final String chplId) {
         DpManagementPage.inspectButtonForBadDataListing(getDriver(), chplId).click();
+    }
+
+    /**
+     * Upload a surveillance.
+     * @throws URISyntaxException
+     * @param inputChplId is a CHPL ID of a listing for which surveillance is uploaded
+     */
+    @When("^I upload a surveillance activity for listing with CHPL ID \"([^\"]*)\"$")
+    public void uploadSurveillance(final String inputChplId) throws URISyntaxException {
+        URL resource = Main.class.getResource("/SurveillanceUpload_SLI.csv");
+        String absolutePath = Paths.get(resource.toURI()).toString();
+
+        DpManagementPage.chooseFileForSurveillanceUploadButton(getDriver()).sendKeys(absolutePath);
+        DpManagementPage.uploadSurveillanceFileButton(getDriver()).click();
+    }
+
+    /**
+     * Navigate to Confirm Pending Surveillance Activities page.
+     */
+    @When("^I go to Confirm Pending Surveillance Activities Page$")
+    public void loadConfirmPendingSurveillanceActivitiesPage() {
+        DpManagementPage.confirmPendingSurveillanceActivitiesLink(getDriver()).click();
+        getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingSurveillanceTable(getDriver())));
+    }
+
+    /**
+     * Inspect Surveillance details.
+     */
+    @And("^I inspect surveillance activity details for listing with CHPL ID \"([^\"]*)\"$")
+    public void inspectSurveillanceDetails(final String chplId) {
+        List<WebElement> columVal =  getDriver().findElements(By.xpath("//*[@id=\"pending-surveillance-table\"]/tbody/tr[1]/td[1]/a"));
+
+        for (int i = 0; i < columVal.size(); i++) {
+            if (columVal.get(i).getText().equals(chplId)) {
+
+                WebElement button = DpManagementPage.inspectButtonForPendingSurveillanceActivity(getDriver());
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+                }
+            }
+        }
+
+    /**
+     * Confirm uploaded surveillance activity.
+     * @param survChplId is chpl id of listing for surveillance activity
+     * @throws Exception if there is an exception
+     */
+    @And("^I confirm surveillance activity for listing with CHPL ID \"([^\"]*)\"$")
+    public void confirmUploadedSurveillanceActivity(final String survChplId) throws Exception {
+        try {
+            DpManagementPage.surveillanceConfirmButtonOnInspect(getDriver()).click();
+
+            WebElement button = DpManagementPage.yesOnConfirm(getDriver());
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+
+            getDriver().get(getUrl() + "/#/product/" + survChplId);
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(ListingDetailsPage.mainContent(getDriver())));
+        } catch (Exception e) {
+            Hooks.takeScreenshot(survChplId);
+            assertTrue(false, "in confirm:" + e.getMessage());
+        }
     }
 }

@@ -2,8 +2,12 @@ package gov.healthit.chpl.aqa.asserts;
 
 import static org.testng.Assert.assertTrue;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
+import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 import gov.healthit.chpl.aqa.stepDefinitions.Hooks;
 
@@ -27,6 +31,21 @@ public class DpmanagementUploadPageAsserts extends Base {
     }
 
     /**
+     * Assert upload success message for surveillance upload.
+     * @throws Exception if screenshot can't be taken
+     */
+    @Then("^I see upload successful message for surveillance upload$")
+    public void testUploadSuccessTextForSurveillanceUpload() throws Exception {
+        String successText = DpManagementPage.uploadSuccessfulTextSurveillanceUpload(getDriver()).getText();
+        try {
+            assertTrue(successText.contains("was uploaded successfully"));
+        } catch (AssertionError ae) {
+            Hooks.takeScreenshot();
+            throw (ae);
+        }
+    }
+
+    /**
      * Assert errors in upload failure message.
      * @param errorMessage expected error message for upload failure
      */
@@ -36,4 +55,16 @@ public class DpmanagementUploadPageAsserts extends Base {
         assertTrue(actualString.contains(errorMessage), "Expect \"" + errorMessage + "\" to be found in \"" + actualString + "\"");
     }
 
+    /**
+     * Load listing details to verify surveillance was uploaded successfully.
+     */
+    @Then("^I see that surveillance was uploaded successfully to CHPL and listing details show surveillance activity$")
+    public void verifySurveillanceConfirmWasSuccessful() {
+        WebElement accordion = ListingDetailsPage.surveillanceActivitiesAccordion(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", accordion);
+
+        String surveillanceText = ListingDetailsPage.surveillanceActivitiesPanel(getDriver()).getText();
+
+        assertTrue(surveillanceText.contains("Open Surveillance, Began Sep 20, 2017: 1 Open and 2 Closed Non-Conformities Were Found"));
+    }
 }

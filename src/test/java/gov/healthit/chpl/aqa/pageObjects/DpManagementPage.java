@@ -56,6 +56,15 @@ public final class DpManagementPage {
     }
 
     /**
+     * Returns Confirm Pending Surveillance Activities link.
+     * @param driver WebDriver
+     * @return link element
+     */
+    public static WebElement confirmPendingSurveillanceActivitiesLink(final WebDriver driver) {
+        return driver.findElement(By.id("admin-nav.dpManagement.confirmSurveillance"));
+    }
+
+    /**
      * Find inspect button for uploaded listing to confirm.
      * @param driver WebDriver
      * @param testChplId is chpl id of listing to confirm
@@ -199,6 +208,13 @@ public final class DpManagementPage {
     }
 
     /**
+     * Returns Inspect button link for surveillance activity from pending surveillance table.
+     */
+    public static WebElement inspectButtonForPendingSurveillanceActivity(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[contains(@id,'pending-surveillance-inspect-')]"));
+    }
+
+    /**
      * Returns element holding main content.
      * @param driver WebDriver
      * @return element holding main content
@@ -223,6 +239,15 @@ public final class DpManagementPage {
      */
     public static WebElement pendingListingsTable(final WebDriver driver) {
         return driver.findElement(By.id("pending-listings-table"));
+    }
+
+    /**
+     * Returns Pending Surveillance table in Confirm Pending Surveillance section.
+     * @param driver WebDriver
+     * @return table element
+     */
+    public static WebElement pendingSurveillanceTable(final WebDriver driver) {
+        return driver.findElement(By.id("pending-surveillance-table"));
     }
 
     /**
@@ -286,6 +311,15 @@ public final class DpManagementPage {
      */
     public static WebElement uploadSuccessfulText(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[1]/div"));
+    }
+
+    /**
+     * Returns element that holds text message displayed after successful listing upload.
+     * @param driver WebDriver
+     * @return text element
+     */
+    public static WebElement uploadSuccessfulTextSurveillanceUpload(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[2]/div"));
     }
 
     /**
@@ -358,6 +392,15 @@ public final class DpManagementPage {
      */
     public static WebElement saveCpOnInspect(final WebDriver driver) {
         return driver.findElement(By.id("edit-save"));
+    }
+
+    /**
+     * Returns 'confirm' button on surveillance Inspect screen.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement surveillanceConfirmButtonOnInspect(final WebDriver driver) {
+        return driver.findElement(By.xpath("/html/body/div[1]/div/div/ai-surveillance-inspect/div/div[3]/button[2]"));
     }
 
     /**

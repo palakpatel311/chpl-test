@@ -11,7 +11,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
             
   Scenario Outline: Verify warnings for duplicate input values in applicable fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"
-    And I am on Upload Certified Products page
+    And I am on Upload Products & Surveillance page
     When I upload a "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
     Then I see upload successful message
     When I go to Confirm Pending Products Page
@@ -35,7 +35,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
   
   Scenario Outline: Verify warnings for duplicate input values in applicable fields on upload-inspect for 2014 listings
     Given I'm logged in as "ROLE_ACB"
-    And I am on Upload Certified Products page
+    And I am on Upload Products & Surveillance page
     When I upload a "2014" listing with CHPL ID "14.05.05.1447.SL14.v1.00.1.180707"
     Then I see upload successful message
     When I go to Confirm Pending Products Page
@@ -54,7 +54,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     
   Scenario Outline: Verify listing upload fails for files that have invalid inputs in specific fields    
     Given I'm logged in as "ROLE_ACB"
-    And I am on Upload Certified Products page
+    And I am on Upload Products & Surveillance page
     When I upload a 2015 listing with invalid input in "<Field>" 
     Then I see upload failure with appropriate error message "<FailureError>" to indicate failure due to invalid data
   Examples:
@@ -65,7 +65,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
  
  Scenario Outline: Verify errors for bad input values in Test Task fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"
-    And I am on Upload Certified Products page
+    And I am on Upload Products & Surveillance page
     When I upload a 2015 listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707" that has bad input in "<field>"
     Then I see upload successful message
     When I go to Confirm Pending Products Page
@@ -81,7 +81,7 @@ Feature: Verify expected errors and warnings display on inspect screen after lit
     
     Scenario Outline: Verify warnings for bad input values in Test task and Participant fields on upload-inspect for 2015 listings
     Given I'm logged in as "ROLE_ACB"
-    And I am on Upload Certified Products page
+    And I am on Upload Products & Surveillance page
     When I upload a 2015 listing with CHPL ID "15.05.05.1447.BDIN.v1.00.1.180707" that has bad input in "<field>"
     Then I see upload successful message
     When I go to Confirm Pending Products Page

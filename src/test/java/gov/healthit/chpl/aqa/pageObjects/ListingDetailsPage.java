@@ -328,6 +328,15 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
+     * Returns surveillance Activity Panel on listing details page.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement surveillanceActivitiesPanel(final WebDriver driver) {
+        return driver.findElement(By.id("panel-surveillance-activities"));
+    }
+
+    /**
      * Returns Targeted User data from additional Info panel.
      * @param driver WebDriver
      * @return the text element
