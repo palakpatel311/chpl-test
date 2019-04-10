@@ -11,6 +11,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,7 +23,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -375,9 +376,9 @@ public class ManageDevelopersAndProductsSteps extends Base {
      * @throws URISyntaxException
      * @param inputChplId is a CHPL ID of a listing for which surveillance is uploaded
      */
-    @When("^I upload a surveillance activity for listing with CHPL ID 15.05.05.2760.ISCD.01.00.1.181101$")
-    public void uploadSurveillance() throws URISyntaxException {
-        URL resource = Main.class.getResource("/SurveillanceUpload_SLI.csv");
+    @When("^I upload the \"(.*)\" surveillance activity$")
+    public void uploadSurveillance(final String filename) throws URISyntaxException {
+        URL resource = Main.class.getResource("/" + filename);
         String absolutePath = Paths.get(resource.toURI()).toString();
 
         DpManagementPage.chooseFileForSurveillanceUploadButton(getDriver()).sendKeys(absolutePath);
@@ -398,15 +399,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @And("^I inspect surveillance activity details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectSurveillanceDetails(final String chplId) {
-        List<WebElement> columVal =  getDriver().findElements(By.xpath("//*[@id=\"pending-surveillance-table\"]/tbody/tr[1]/td[1]/a"));
-
-        for (int i = 0; i < columVal.size(); i++) {
-            if (columVal.get(i).getText().equals(chplId)) {
-
-                WebElement button = DpManagementPage.inspectButtonForPendingSurveillanceActivity(getDriver());
-                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
-                }
-            }
+        DpManagementPage.inspectButtonForPendingSurveillanceActivity(getDriver(), chplId).click();
         }
 
     /**
@@ -417,6 +410,18 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @And("^I confirm surveillance activity for listing with CHPL ID \"([^\"]*)\"$")
     public void confirmUploadedSurveillanceActivity(final String survChplId) throws Exception {
         try {
+            DpManagementPage.surveillanceEditButtonOnInspect(getDriver()).click();
+            getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceStartDateOnInspect(getDriver())));
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate newDate = LocalDate.now();
+
+            DpManagementPage.surveillanceStartDateOnInspect(getDriver()).clear();
+
+            DpManagementPage.surveillanceStartDateOnInspect(getDriver()).sendKeys(dtf.format(newDate));
+
+            DpManagementPage.surveillanceSaveButtonOnInspect(getDriver()).click();
+
             DpManagementPage.surveillanceConfirmButtonOnInspect(getDriver()).click();
 
             WebElement button = DpManagementPage.yesOnConfirm(getDriver());

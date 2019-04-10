@@ -210,8 +210,8 @@ public final class DpManagementPage {
     /**
      * Returns Inspect button link for surveillance activity from pending surveillance table.
      */
-    public static WebElement inspectButtonForPendingSurveillanceActivity(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[contains(@id,'pending-surveillance-inspect-')]"));
+    public static WebElement inspectButtonForPendingSurveillanceActivity(final WebDriver driver, final String chplId) {
+        return driver.findElement(By.id("pending-surveillance-inspect-" + chplId));
     }
 
     /**
@@ -392,6 +392,33 @@ public final class DpManagementPage {
      */
     public static WebElement saveCpOnInspect(final WebDriver driver) {
         return driver.findElement(By.id("edit-save"));
+    }
+
+    /**
+     * Returns 'edit' button on surveillance Inspect screen.
+     * @param driver WebDriver
+     * @return button element
+     */
+    public static WebElement surveillanceEditButtonOnInspect(final WebDriver driver) {
+        return driver.findElement(By.xpath("/html/body/div[1]/div/div/ai-surveillance-inspect/div/div[2]/div[2]/div/button"));
+    }
+
+    /**
+     * Returns 'Start Date' input field on surveillance Inspect screen.
+     * @param driver WebDriver
+     * @return input element
+     */
+    public static WebElement surveillanceStartDateOnInspect(final WebDriver driver) {
+        return driver.findElement(By.id("start-date"));
+    }
+
+    /**
+     * Returns 'Start Date' input field on surveillance Inspect screen.
+     * @param driver WebDriver
+     * @return input element
+     */
+    public static WebElement surveillanceSaveButtonOnInspect(final WebDriver driver) {
+        return driver.findElement(By.xpath("/html/body/div[1]/div/div/ai-surveillance-edit/div/div[3]/button[1]/i"));
     }
 
     /**

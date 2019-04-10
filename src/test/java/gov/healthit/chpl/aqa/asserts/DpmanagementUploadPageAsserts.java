@@ -2,6 +2,9 @@ package gov.healthit.chpl.aqa.asserts;
 
 import static org.testng.Assert.assertTrue;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
@@ -60,7 +63,9 @@ public class DpmanagementUploadPageAsserts extends Base {
         getDriver().get(getUrl() + "/#/listing/9713/surveillance");
 
         String surveillanceText = ListingDetailsPage.surveillanceActivitiesPanel(getDriver()).getText();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd" + ", " + "yyyy");
+        LocalDate newDate = LocalDate.now();
 
-        assertTrue(surveillanceText.contains("Open Surveillance, Began Sep 20, 2017: 1 Open and 2 Closed Non-Conformities Were Found"));
+        assertTrue(surveillanceText.contains("Open Surveillance, Began " + dtf.format(newDate) + ": 1 Open and 2 Closed Non-Conformities Were Found"));
     }
 }
