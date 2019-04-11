@@ -11,6 +11,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -97,7 +99,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
     /**
      * Navigate to Upload Certified Products page.
      */
-    @And("^I am on Upload Certified Products page$")
+    @And("^I am on Upload Products & Surveillance page$")
     public void loadUploadCertifiedProductsPage() {
         DpManagementPage.dpManagementLink(getDriver()).click();
         DpManagementPage.dpManagementUploadProductsSurveillance(getDriver()).click();
@@ -367,5 +369,71 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @And("^I inspect listing details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectListingDetails(final String chplId) {
         DpManagementPage.inspectButtonForBadDataListing(getDriver(), chplId).click();
+    }
+
+    /**
+     * Upload a surveillance.
+     * @throws URISyntaxException
+     * @param inputChplId is a CHPL ID of a listing for which surveillance is uploaded
+     */
+    @When("^I upload the \"(.*)\" surveillance activity$")
+    public void uploadSurveillance(final String filename) throws URISyntaxException {
+        URL resource = Main.class.getResource("/" + filename);
+        String absolutePath = Paths.get(resource.toURI()).toString();
+
+        DpManagementPage.chooseFileForSurveillanceUploadButton(getDriver()).sendKeys(absolutePath);
+        DpManagementPage.uploadSurveillanceFileButton(getDriver()).click();
+    }
+
+    /**
+     * Navigate to Confirm Pending Surveillance Activities page.
+     */
+    @When("^I go to Confirm Pending Surveillance Activities Page$")
+    public void loadConfirmPendingSurveillanceActivitiesPage() {
+        DpManagementPage.confirmPendingSurveillanceActivitiesLink(getDriver()).click();
+        getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingSurveillanceTable(getDriver())));
+    }
+
+    /**
+     * Inspect Surveillance details.
+     */
+    @And("^I inspect surveillance activity details for listing with CHPL ID \"([^\"]*)\"$")
+    public void inspectSurveillanceDetails(final String chplId) {
+        DpManagementPage.inspectButtonForPendingSurveillanceActivity(getDriver(), chplId).click();
+        }
+
+    /**
+     * Confirm uploaded surveillance activity.
+     * @param survChplId is chpl id of listing for surveillance activity
+     * @throws Exception if there is an exception
+     */
+    @And("^I confirm surveillance activity for listing with CHPL ID \"([^\"]*)\"$")
+    public void confirmUploadedSurveillanceActivity(final String survChplId) throws Exception {
+        try {
+            DpManagementPage.surveillanceEditButtonOnInspect(getDriver()).click();
+            getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceStartDateOnInspect(getDriver())));
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate newDate = LocalDate.now();
+
+            DpManagementPage.surveillanceStartDateOnInspect(getDriver()).clear();
+
+            DpManagementPage.surveillanceStartDateOnInspect(getDriver()).sendKeys(dtf.format(newDate));
+
+            DpManagementPage.surveillanceSaveButtonOnInspect(getDriver()).click();
+
+            DpManagementPage.surveillanceConfirmButtonOnInspect(getDriver()).click();
+
+            WebElement button = DpManagementPage.yesOnConfirm(getDriver());
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+
+            getWait()
+            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+
+        } catch (Exception e) {
+            Hooks.takeScreenshot(survChplId);
+            assertTrue(false, "in confirm:" + e.getMessage());
+        }
     }
 }
