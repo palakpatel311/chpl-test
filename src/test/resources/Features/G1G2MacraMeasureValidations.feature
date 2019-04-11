@@ -43,7 +43,7 @@ Scenario Outline: Mapping legacy values for G1/G2
     
 Scenario Outline: Upload sample listing for 2015 edition
     Given I'm logged in as "ROLE_ACB"
-    And I am on Upload Certified Products page
+    And I am on Upload Products & Surveillance page
     When I upload a "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
     Then I see upload successful message
     When I go to Confirm Pending Products Page
