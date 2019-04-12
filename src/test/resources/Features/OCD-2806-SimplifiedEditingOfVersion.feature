@@ -4,8 +4,8 @@ Feature: OCD-2806 Simplified Editing of Version
 
 Scenario Outline: User logs in as ROLE and sees edit version link exists on new developer page
     Given I'm logged in as "<ROLE>"
-    When I navigate to edit version page of developer "1816" and product "1742" of listing "5085"
-    Then I see edit link to edit the version of "5085"
+    When I navigate to the version edit page for version "5085" of product "1742" of developer "1816"
+    Then I see edit link for version "5085"
     Examples:
       |ROLE       |
       |ROLE_ACB   |
@@ -14,8 +14,8 @@ Scenario Outline: User logs in as ROLE and sees edit version link exists on new 
 
 Scenario Outline: User logs in as ROLE and sees merge version link exists on new developer page
     Given I'm logged in as "<ROLE>"
-    When I navigate to edit version page of developer "1816" and product "1742" of listing "5085"
-    Then I see merge link to merge the version of "5085"
+    When I navigate to the version edit page for version "5085" of product "1742" of developer "1816"
+    Then I see merge link for version "5085"
     Examples:
       |ROLE       |
       |ROLE_ADMIN |
@@ -23,11 +23,11 @@ Scenario Outline: User logs in as ROLE and sees merge version link exists on new
 
 Scenario Outline: User logs in as ROLE and edits a version
     Given I'm logged in as "<ROLE>"
-    When I navigate to edit version page of developer "1816" and product "1742" of listing "<Product Version Number>"
-    And I edit the version of "<Product Version Number>"
-    Then I see the version is recorded and updated on View Version page of "<Product Version Number>"
+    When I navigate to the version edit page for version "<version id>" of product "<product id>" of developer "<developer id>"
+    And I edit for version "<version id>"
+    Then I see the version is recorded and updated on View Version page of "<version id>"
     Examples:
-      |ROLE       |Product Version Number|
-      |ROLE_ACB   |6118                  |
-      |ROLE_ADMIN |2018                  |
-      |ROLE_ONC   |6118                  |
+      |ROLE       |version id|product id|developer id|
+      |ROLE_ACB   |6118      |1742      |1816        |
+      |ROLE_ADMIN |2018      |1742      |1816        |
+      |ROLE_ONC   |6118      |1742      |1816        |

@@ -13,27 +13,27 @@ import gov.healthit.chpl.aqa.pageObjects.ViewVersionPage;
 public class ViewVersionSteps extends Base {
     /**
      * Get user to the View Version Page.
-     * @param productVersionNumber is used to navigate to the view version page of that product
+     * @param versionId is used to navigate to the view version page of that product
      * @param developerId is Developer ID
      * @param productId is Product ID
      **/
 
-    @Given("^I navigate to edit version page of developer \"([^\"]*)\" and product \"([^\"]*)\" of listing \"([^\"]*)\"$")
-    public void editVersionPage(final String developerId, final String productId, final String productVersionNumber) {
-        getDriver().get(getUrl() + "#/organizations/developers/" + developerId + "/products/" + productId + "/versions/" + productVersionNumber);
+    @Given("^I navigate to the version edit page for version \"([^\"]*)\" of product \"([^\"]*)\" of developer \"([^\"]*)\"$")
+    public void editVersionPage(final String versionId, final String productId, final String developerId) {
+        getDriver().get(getUrl() + "#/organizations/developers/" + developerId + "/products/" + productId + "/versions/" + versionId);
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(ViewVersionPage.viewVersionPageTitle(getDriver())));
     }
 
     /**
      * Edit the version of a product.
-     * @param productVersionNumber is the product version number passed in page objects
+     * @param versionId is the product version id passed in page objects
      **/
-    @And("^I edit the version of \"(.*)\"$")
-    public void editVersion(final String productVersionNumber) {
-        ViewVersionPage.editVersionLink(getDriver(), productVersionNumber).click();
+    @And("^I edit for version \"(.*)\"$")
+    public void editVersion(final String versionId) {
+        ViewVersionPage.editVersionLink(getDriver(), versionId).click();
         ViewVersionPage.editVersionField(getDriver()).clear();
         ViewVersionPage.editVersionField(getDriver()).sendKeys(getCurrentDate());
-        ViewVersionPage.editVersionSaveButton(getDriver(), productVersionNumber).click();
+        ViewVersionPage.editVersionSaveButton(getDriver(), versionId).click();
     }
 }
