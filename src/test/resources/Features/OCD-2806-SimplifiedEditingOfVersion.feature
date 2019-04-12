@@ -4,7 +4,7 @@ Feature: OCD-2806 Simplified Editing of Version
 
 Scenario Outline: User logs in as ROLE and sees edit version link exists on new developer page
     Given I'm logged in as "<ROLE>"
-    When I navigate to edit version page of listing "5085"
+    When I navigate to edit version page of developer "1816" and product "1742" of listing "5085"
     Then I see edit link to edit the version of "5085"
     Examples:
       |ROLE       |
@@ -14,7 +14,7 @@ Scenario Outline: User logs in as ROLE and sees edit version link exists on new 
 
 Scenario Outline: User logs in as ROLE and sees merge version link exists on new developer page
     Given I'm logged in as "<ROLE>"
-    When I navigate to edit version page of listing "5085"
+    When I navigate to edit version page of developer "1816" and product "1742" of listing "5085"
     Then I see merge link to merge the version of "5085"
     Examples:
       |ROLE       |
@@ -23,7 +23,7 @@ Scenario Outline: User logs in as ROLE and sees merge version link exists on new
 
 Scenario Outline: User logs in as ROLE and edits a version
     Given I'm logged in as "<ROLE>"
-    And I navigate to edit version page of listing "<Product Version Number>"
+    When I navigate to edit version page of developer "1816" and product "1742" of listing "<Product Version Number>"
     And I edit the version of "<Product Version Number>"
     Then I see the version is recorded and updated on View Version page of "<Product Version Number>"
     Examples:

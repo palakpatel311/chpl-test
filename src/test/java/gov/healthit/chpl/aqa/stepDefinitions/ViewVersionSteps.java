@@ -14,11 +14,13 @@ public class ViewVersionSteps extends Base {
     /**
      * Get user to the View Version Page.
      * @param productVersionNumber is used to navigate to the view version page of that product
+     * @param developerId is Developer ID
+     * @param productId is Product ID
      **/
 
-    @Given("^I navigate to edit version page of listing \"(.*)\"$")
-    public void editVersionPage(final String productVersionNumber) {
-        getDriver().get(getUrl() + "#/organizations/developers/1816/products/1742/versions/" + productVersionNumber);
+    @Given("^I navigate to edit version page of developer \"([^\"]*)\" and product \"([^\"]*)\" of listing \"([^\"]*)\"$")
+    public void editVersionPage(final String developerId, final String productId, final String productVersionNumber) {
+        getDriver().get(getUrl() + "#/organizations/developers/" + developerId + "/products/" + productId + "/versions/" + productVersionNumber);
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(ViewVersionPage.viewVersionPageTitle(getDriver())));
     }
@@ -35,4 +37,3 @@ public class ViewVersionSteps extends Base {
         ViewVersionPage.editVersionSaveButton(getDriver(), productVersionNumber).click();
     }
 }
-
