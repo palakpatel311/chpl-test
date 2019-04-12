@@ -76,6 +76,8 @@ public class OncAcbManagementSteps extends Base {
 
     /**
      * Edit ACB details to edit ACB name to new name and edit it back to original ACB name.
+     * @param newName is new ACB name
+     * @param oldName is original ACB name
      */
     @When("^I edit ACB name to be \"([^\"]*)\" and edit it back to \"([^\"]*)\"$")
     public void editAcbName(final String newName, final String oldName) {

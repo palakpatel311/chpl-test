@@ -32,6 +32,7 @@ public class ListingDetailsAsserts extends Base {
     /**
      * Asserts for correct data in Accessibility Standard field.
      * @param accessibilityText expected text
+     * @param criteria is criteria for which accessibilityText is being verified
      */
     @Then("^Accessibility Standard for criteria \"([^\"]*)\" should display \"([^\"]*)\"$")
     public void accessibilityStandardForCriteriaShouldDisplayUpdatedOtherWCAG(final String criteria, final String accessibilityText) {

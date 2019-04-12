@@ -193,7 +193,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
     /**
      * Upload a listing with invalid inputs in specific fields.
-     * @throws URISyntaxException
+     * @throws URISyntaxException if there is an exception
      * @param fieldinUploadFile is a field in upload file that has invalid input
      */
     @When("^I upload a 2015 listing with invalid input in \"([^\"]*)\"$")
@@ -351,7 +351,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
     /**
      * Upload a listing with special characters in Test Task and Participant fields.
-     * @throws URISyntaxException
+     * @throws URISyntaxException if there is an exception
+     * @param chplId is chpl id of listing to upload
      * @param fieldinUploadFile is a field in upload file that has bad input
      */
     @When("^I upload a 2015 listing with CHPL ID \"([^\"]*)\" that has bad input in \"([^\"]*)\"$")
@@ -365,6 +366,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
     /**
      * Inspect listing details for bad data input to verify errors.
+     * @param chplId is chpl id of listing to inspect
      */
     @And("^I inspect listing details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectListingDetails(final String chplId) {
@@ -373,8 +375,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
     /**
      * Upload a surveillance.
-     * @throws URISyntaxException
-     * @param inputChplId is a CHPL ID of a listing for which surveillance is uploaded
+     * @throws URISyntaxException if there is an exception
+     * @param filename is filename of upload file
      */
     @When("^I upload the \"(.*)\" surveillance activity$")
     public void uploadSurveillance(final String filename) throws URISyntaxException {
@@ -396,6 +398,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
     /**
      * Inspect Surveillance details.
+     * @param chplId is chpl id of listing to inspect surveillance activity details
      */
     @And("^I inspect surveillance activity details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectSurveillanceDetails(final String chplId) {
