@@ -2,6 +2,9 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -148,4 +151,16 @@ public class Base {
         }
         return envUrl;
     }
+
+    /**
+     * Get Current Date.
+     * @return date in MM/dd/yyyy format
+     */
+    public String getCurrentDate() {
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
+        String dateFormatted = dateFormat.format(date);
+        return dateFormatted;
+    }
 }
+
