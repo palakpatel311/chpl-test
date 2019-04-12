@@ -202,6 +202,9 @@ public final class DpManagementPage {
 
     /**
      * Returns Inspect button link for bad data listing from pending listings table.
+     * @param driver WebDriver
+     * @param chplId is chpl id of listing with bad data input
+     * @return inspect button element for a listing with given chpl id
      */
     public static WebElement inspectButtonForBadDataListing(final WebDriver driver, final String chplId) {
         return driver.findElement(By.xpath("//*[@id=\"pending-listing-inspect-" + chplId + "\"]"));
@@ -209,6 +212,9 @@ public final class DpManagementPage {
 
     /**
      * Returns Inspect button link for surveillance activity from pending surveillance table.
+     * @param driver WebDriver
+     * @param chplId is chpl id of listing for which surveillance activity is to be inspected
+     * @return inspect button element for a listing with given chpl id
      */
     public static WebElement inspectButtonForPendingSurveillanceActivity(final WebDriver driver, final String chplId) {
         return driver.findElement(By.id("pending-surveillance-inspect-" + chplId));
@@ -459,6 +465,8 @@ public final class DpManagementPage {
 
     /**
      * Returns error text on upload failure message.
+     * @param driver WebDriver
+     * @return button element
      */
     public static WebElement uploadFailureErrorMessage(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[1]/div"));
