@@ -63,5 +63,4 @@ public class ChplSearchPageAsserts extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         assertTrue(!(SearchPage.filterOption(getDriver(), selectfilter).isSelected()));
     }
-    
 }
