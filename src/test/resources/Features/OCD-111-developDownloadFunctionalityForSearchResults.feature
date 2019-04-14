@@ -24,3 +24,4 @@ Scenario Outline: Verify whether correct error message is displayed if more than
       |count|text|
       |100  |Please reduce results to less than 50 to download them|
       |250  |Please reduce results to less than 50 to download them|
+      
