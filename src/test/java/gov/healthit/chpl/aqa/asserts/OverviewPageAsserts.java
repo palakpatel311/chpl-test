@@ -64,7 +64,7 @@ public class OverviewPageAsserts extends Base {
      * @param linkText text of link
      * @headerNumber is header locator
      */
-    @When("^the link should point to correct url \"([^\"]*)\" for respective section of \"([^\"]*)\" and header \"([^\"]*)\" on the page$")
+    @Then("^the link should point to correct url \"([^\"]*)\" for respective section of \"([^\"]*)\" and header \"([^\"]*)\" on the page$")
     public void urlForNavLinksOnOverviewPage(final String url, final String linkText, final String headerNumber) {
       String currentURL = getDriver().getCurrentUrl();
       assertEquals(currentURL, url);
