@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.OverviewPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 
@@ -55,5 +56,19 @@ public class OverviewPageAsserts extends Base {
     public void updatedContentShowsAsExpected(final String expectedText) {
         String actualText = OverviewPage.pageContent(getDriver()).getText();
         assertTrue(actualText.contains(expectedText), " not found on Overview page : " + actualText);
+    }
+
+    /**
+     * Verify that link points to correct URL.
+     * @param url is URL tied to link text
+     * @param linkText text of link
+     * @headerNumber is header locator
+     */
+    @When("^the link should point to correct url \"([^\"]*)\" for respective section of \"([^\"]*)\" and header \"([^\"]*)\" on the page$")
+    public void urlForNavLinksOnOverviewPage(final String url, final String linkText, final String headerNumber) {
+      String currentURL = getDriver().getCurrentUrl();
+      assertEquals(currentURL, url);
+      getDriver().getPageSource().contains(linkText);
+      assertEquals(true, OverviewPage.headerText(getDriver(), headerNumber).isDisplayed());
     }
 }
