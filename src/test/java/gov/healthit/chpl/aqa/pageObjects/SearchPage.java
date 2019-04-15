@@ -167,4 +167,28 @@ public final class SearchPage {
     public static WebElement viewONCACBList(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[5]/ul/li[4]/a"));
     }
+
+    public static WebElement downloadsearchResultsButton(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//button[@id='dropdown-download-button']"));
+        return element;
+    }
+
+    public static WebElement download50ResultButton(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[6]/ul/ai-results-download/li[13]/button"));
+        return element;
+    }
+
+    public static WebElement searchResultPerPage(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//select[@id='pageSizeTop']"));
+        return element;
+    }
+
+    public static WebElement searchResultText(final WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[@id=\"filters\"]/div[2]/div[6]/ul/ai-results-download/li[13]/span"));
+        return element;
+    }
+
+    public static WebElement loadChplID(final WebDriver driver, final String chplID) {
+        return driver.findElement(By.xpath("//td[contains(text(),'" + chplID + "')]"));
+    }
 }

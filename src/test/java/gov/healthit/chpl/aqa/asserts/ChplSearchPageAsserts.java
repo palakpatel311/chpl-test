@@ -64,4 +64,3 @@ public class ChplSearchPageAsserts extends Base {
         assertTrue(!(SearchPage.filterOption(getDriver(), selectfilter).isSelected()));
     }
 }
-
