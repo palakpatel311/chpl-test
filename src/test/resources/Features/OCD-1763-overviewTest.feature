@@ -1,9 +1,10 @@
 @selenium
 @Regression
-Feature: OCD-1763 - Overview page tests
-  This test checks overview page under CHPL resources and verifies that it displays correct information from Database
+Feature: Overview page tests
+  OCD-1763 - This test checks overview page under CHPL resources and verifies that it displays correct information from Database
   OCD-2673 - Update content of Overview page
   This test checks whether content is updated on the overview page
+  OCD-2840 - Verify navigation links to different sections on Overview page
 
   Scenario: Overview page loads and shows correct title
     Given I'm on Overview page
@@ -30,3 +31,16 @@ Feature: OCD-1763 - Overview page tests
       |The Certified Health IT Product List (CHPL) is a comprehensive and authoritative listing of all certified health information technology that have been successfully tested and certified by the ONC Health IT Certification program.|
       |Please use ONC's Health IT Feedback Form|
       |Alternatively, you may choose to browse all certified products by clicking the 'Browse all' option.|
+      
+  Scenario Outline: Verify navigation links on overview page
+  Given I'm on Overview page
+  When I click "<LinkText>" link from left hand navigation
+  Then the link should point to correct url "<URL>" for respective section of "<LinkText>" and header "<headerNumber>" on the page
+  Examples:
+  |LinkText|URL|headerNumber|
+  |What is the CHPL|https://chpl.ahrqdev.org/#/resources/overview#whatIsTheChpl|1|
+  |Using the CHPL Website|https://chpl.ahrqdev.org/#/resources/overview#usingTheChplWebsite|2|
+  |ONC Certification Program|https://chpl.ahrqdev.org/#/resources/overview#oncCertificationProgram|3|
+  |For EHR Developers|https://chpl.ahrqdev.org/#/resources/overview#forEhrDevelopers|4|
+  |ONC-ACB and ONC-ATL information|https://chpl.ahrqdev.org/#/resources/overview#oncacbAndAtlInformation|5|
+  

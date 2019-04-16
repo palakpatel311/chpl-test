@@ -56,4 +56,18 @@ public class OverviewPageAsserts extends Base {
         String actualText = OverviewPage.pageContent(getDriver()).getText();
         assertTrue(actualText.contains(expectedText), " not found on Overview page : " + actualText);
     }
+
+    /**
+     * Verify that link points to correct URL.
+     * @param url is URL tied to link text
+     * @param linkText text of link
+     * @headerNumber is header locator
+     */
+    @Then("^the link should point to correct url \"([^\"]*)\" for respective section of \"([^\"]*)\" and header \"([^\"]*)\" on the page$")
+    public void urlForNavLinksOnOverviewPage(final String url, final String linkText, final String headerNumber) {
+      String currentURL = getDriver().getCurrentUrl();
+      assertEquals(currentURL, url);
+      getDriver().getPageSource().contains(linkText);
+      assertEquals(true, OverviewPage.headerText(getDriver(), headerNumber).isDisplayed());
+    }
 }
