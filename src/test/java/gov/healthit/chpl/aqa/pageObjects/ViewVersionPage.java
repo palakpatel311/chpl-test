@@ -34,5 +34,13 @@ public final class ViewVersionPage {
     public static WebElement mergeVersionLink(final WebDriver driver, final String versionId) {
         return driver.findElement(By.xpath("//*[@id=\"version-component-merge-" + versionId + "\"]/i"));
     }
+
+    public static WebElement versionsToMergeMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[4]/div[1]"));
+    }
+
+    public static WebElement versionMissingErrorMessage(final WebDriver driver, final String versionId) {
+        return driver.findElement(By.xpath("//*[@id=\"chpl-version-" + versionId + "\"]/span/div/div/div"));
+    }
 }
 

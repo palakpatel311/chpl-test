@@ -36,4 +36,22 @@ public class ViewVersionSteps extends Base {
         ViewVersionPage.editVersionField(getDriver()).sendKeys(getCurrentDate());
         ViewVersionPage.editVersionSaveButton(getDriver(), versionId).click();
     }
+
+    /**
+     * Click merge version link of a product.
+     * @param versionId is the product version id passed in page objects
+     **/
+    @And("^I click merge version link for version \"([^\"]*)\"$")
+    public void iClickMergeVersionLink(final String versionId) {
+        ViewVersionPage.mergeVersionLink(getDriver(), versionId).click();
+    }
+
+    /**
+     * Clear version field.
+     **/
+    @And("^I leave the version field blank$")
+    public void leaveVersionFieldBlank() {
+        ViewVersionPage.editVersionField(getDriver()).clear();
+    }
+
 }

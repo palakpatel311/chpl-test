@@ -31,3 +31,16 @@ Scenario Outline: User logs in as ROLE and edits a version
       |ROLE_ACB   |6118      |1742      |1816        |
       |ROLE_ADMIN |2018      |1742      |1816        |
       |ROLE_ONC   |6118      |1742      |1816        |
+
+Scenario: Verify message is displayed in versions to merge section
+    Given I'm logged in as "ROLE_ONC"
+    When I navigate to the version edit page for version "54" of product "236" of developer "142"
+    And I click merge version link for version "54"
+    Then I see "At least one other Version must be selected to merge" in versions to merge section
+
+Scenario: Verify error message is displayed when the version field is left blank
+    Given I'm logged in as "ROLE_ONC"
+    When I navigate to the version edit page for version "54" of product "236" of developer "142"
+    And I click merge version link for version "54"
+    And I leave the version field blank 
+    Then I see error message "Field is required" for version "54"
