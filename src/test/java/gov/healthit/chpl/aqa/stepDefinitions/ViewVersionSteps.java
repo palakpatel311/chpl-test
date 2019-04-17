@@ -53,6 +53,7 @@ public class ViewVersionSteps extends Base {
     @And("^I set the version field to \"([^\"]*)\"$")
     public void setVersionField(final String value) {
         ViewVersionPage.editVersionField(getDriver()).clear();
+        ViewVersionPage.editVersionField(getDriver()).sendKeys(value);
     }
 
 }
