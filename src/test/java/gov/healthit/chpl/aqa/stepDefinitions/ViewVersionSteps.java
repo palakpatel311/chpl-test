@@ -41,16 +41,17 @@ public class ViewVersionSteps extends Base {
      * Click merge version link of a product.
      * @param versionId is the product version id passed in page objects
      **/
-    @And("^I click merge version link for version \"([^\"]*)\"$")
+    @And("^I click the merge version link for version \"([^\"]*)\"$")
     public void iClickMergeVersionLink(final String versionId) {
         ViewVersionPage.mergeVersionLink(getDriver(), versionId).click();
     }
 
     /**
      * Clear version field.
+     * @param value to be entered
      **/
-    @And("^I leave the version field blank$")
-    public void leaveVersionFieldBlank() {
+    @And("^I set the version field to \"([^\"]*)\"$")
+    public void setVersionField(final String value) {
         ViewVersionPage.editVersionField(getDriver()).clear();
     }
 

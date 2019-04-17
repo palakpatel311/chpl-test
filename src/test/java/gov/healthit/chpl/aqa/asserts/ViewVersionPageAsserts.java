@@ -42,13 +42,13 @@ public class ViewVersionPageAsserts extends Base {
     }
 
     /**
-     * Assert that "At least one other Version must be selected to merge" is displayed in versions to merge section.
-     * @param versionsToMergeMessage is a section in merge versions
+     * Assert that expected text is displayed in versions to merge section.
+     * @param expectedText is "At least one other Version must be selected to merge"
      */
     @Then("^I see \"([^\"]*)\" in versions to merge section$")
-    public void iSeeMessageInVersionsToMergeSection(final String versionsToMergeMessage) {
-        ViewVersionPage.versionsToMergeMessage(getDriver()).isDisplayed();
-        assertTrue(true);
+    public void iSeeMessageInVersionsToMergeSection(final String expectedText) {
+        String actualText = ViewVersionPage.versionsToMergeMessage(getDriver()).getText();
+        assertEquals(expectedText, actualText);
     }
 
     /**
