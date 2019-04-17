@@ -1,14 +1,4 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -18,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.SearchPage;
@@ -72,6 +61,8 @@ public class ChplSearchSteps extends Base {
     public void viewCertStatusFilterOptions() {
         SearchPage.browseButton(getDriver()).click();
         SearchPage.certStatusFiltersButton(getDriver()).click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(SearchPage.certStatusFilterOptions(getDriver())));
     }
 
     /**
@@ -107,16 +98,6 @@ public class ChplSearchSteps extends Base {
         wait.until(ExpectedConditions.textToBePresentInElement(SearchPage.resultCount(getDriver()), "1 - 1 of 1 Result"));
         SearchPage.detailsLink(getDriver()).click();
         wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(getDriver())));
-    }
-
-    /**
-     * Asserts that given listing shows expected status.
-     * @param status of listing to expect in search results
-     */
-    @Then("^the certification status of the listing shows as \"([^\"]*)\"$")
-    public void searchResultsShowNewStatus(final String status) {
-        String currentStatus = SearchPage.resultsStatus(getDriver()).getAttribute("uib-tooltip");
-        assertTrue(currentStatus.contains(status), "Expect " + status + " status found as " + currentStatus);
     }
 
     /**
@@ -162,51 +143,6 @@ public class ChplSearchSteps extends Base {
     }
 
     /**
-     * Read the data from downloaded CSV file.
-     * Asserts that expected filter options and CHPL ID consists in the downloaded search-results.csv file
-     * @param headers expected name of each column header in the CSV file
-     * @param chplId expected CHPL ID
-     * @throws FileNotFoundException if the expected file not found
-     */
-
-    @Then("^the file is downloaded and contains selected filter options as \"([^\"]*)\" where CHPL ID is \"([^\"]*)\"$")
-    public void readDownloadedCSVFile(final String headers, final String chplId) throws FileNotFoundException {
-        String[] headerArray = headers.split(",");
-        List<String> headerList = Arrays.asList(headerArray);
-        List<String> csvHeaderList = new ArrayList<>();
-        File[] files = Hooks.getDownloadDirectory().listFiles();
-        for (File file : files) {
-            Scanner scanner = new Scanner(file);
-            Scanner dataScanner = null;
-            boolean headersChecked = false;
-            boolean foundChpId = false;
-            while (!foundChpId && scanner.hasNextLine()) {
-                dataScanner = new Scanner(scanner.nextLine());
-                dataScanner.useDelimiter(",");
-                while (dataScanner.hasNext()) {
-                    String data = dataScanner.next();
-                    if (headersChecked) {
-                        if (data.equalsIgnoreCase(chplId)) {
-                            foundChpId = true;
-                            break;
-                        }
-                    } else {
-                        csvHeaderList.add(data);
-                    }
-                }
-                if (!headersChecked) {
-                    for (String  header : headerList) {
-                        assertTrue(csvHeaderList.contains(header), "The search option [ " + header + " ] is missing in the CSV file");
-                        headersChecked = true;
-                    }
-                }
-            }
-            assertTrue(foundChpId, "chpl id [ " + chplId + " ] not found");
-            scanner.close();
-        }
-    }
-
-    /**
      * Change the count of search results per page.
      * @param count expected count of search results per page
      */
@@ -226,17 +162,5 @@ public class ChplSearchSteps extends Base {
     public void clickDownloadResultsButtonInSearchFilters() {
         WebElement downloadButton = SearchPage.downloadsearchResultsButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", downloadButton);
-    }
-
-    /**
-     * Asserts that expected text is correct.
-     * @param text expected Please reduce results to less than 50 to download them
-     */
-    @Then("^I see that download for >50 count is not allowed and alert \"([^\"]*)\" is displayed$")
-    public void resultText(final String text) {
-        WebElement link = SearchPage.searchResultText(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);
-        String actualText = SearchPage.searchResultText(getDriver()).getText();
-        assertEquals(actualText, text);
     }
 }
