@@ -40,5 +40,26 @@ public class ViewVersionPageAsserts extends Base {
         ViewVersionPage.mergeVersionLink(getDriver(), versionId).isDisplayed();
         assertTrue(true);
     }
+
+    /**
+     * Assert that expected text is displayed in versions to merge section.
+     * @param expectedText is "At least one other Version must be selected to merge"
+     */
+    @Then("^I see \"([^\"]*)\" in versions to merge section$")
+    public void iSeeMessageInVersionsToMergeSection(final String expectedText) {
+        String actualText = ViewVersionPage.versionsToMergeMessage(getDriver()).getText();
+        assertEquals(expectedText, actualText);
+    }
+
+    /**
+     * Assert that "Field is required" error message is displayed.
+     * @param expectedErrorMessage is the expected error message
+     * @param versionId is the product version id passed in page objects
+     */
+    @Then("^I see error message \"(.*)\" for version \"(.*)\"$")
+    public void iSeeFieldIsRequiredError(final String expectedErrorMessage, final String versionId) {
+        String actualErrorMessage = ViewVersionPage.versionMissingErrorMessage(getDriver(), versionId).getText();
+        assertEquals(actualErrorMessage, expectedErrorMessage);
+    }
 }
 
