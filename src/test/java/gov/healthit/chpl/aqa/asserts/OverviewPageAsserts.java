@@ -68,6 +68,6 @@ public class OverviewPageAsserts extends Base {
       String currentURL = getDriver().getCurrentUrl();
       assertEquals(currentURL, url);
       getDriver().getPageSource().contains(linkText);
-      assertEquals(true, OverviewPage.headerText(getDriver(), headerNumber).isDisplayed());
+      assertTrue(OverviewPage.headerText(getDriver(), headerNumber).isDisplayed());
     }
 }
