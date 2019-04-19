@@ -3,6 +3,8 @@ package gov.healthit.chpl.aqa.asserts;
 import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
+import org.openqa.selenium.JavascriptExecutor;
+
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ViewVersionPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
@@ -59,6 +61,7 @@ public class ViewVersionPageAsserts extends Base {
     @Then("^I see error message \"(.*)\" for version \"(.*)\"$")
     public void iSeeFieldIsRequiredError(final String expectedErrorMessage, final String versionId) {
         String actualErrorMessage = ViewVersionPage.versionMissingErrorMessage(getDriver(), versionId).getText();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0];", actualErrorMessage);
         assertEquals(actualErrorMessage, expectedErrorMessage);
     }
 }
