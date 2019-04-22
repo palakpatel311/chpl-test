@@ -3,6 +3,8 @@ package gov.healthit.chpl.aqa.asserts;
 import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
+import org.openqa.selenium.NoSuchElementException;
+
 import org.openqa.selenium.JavascriptExecutor;
 
 import cucumber.api.java.en.Then;
@@ -20,8 +22,12 @@ public class ViewProductPageAsserts extends Base {
      */
     @Then("^I see product edit link for product \"([^\"]*)\"$")
     public void iSeeProductEditLink(final String productId) {
-        ViewProductPage.editProductLink(getDriver(), productId).isDisplayed();
-        assertTrue(true);
+        try {
+            ViewProductPage.editProductLink(getDriver(), productId).isDisplayed();
+            assertTrue(true);
+        } catch (NoSuchElementException e) {
+            assertTrue("Unable to find edit product link", false);
+        }
     }
 
     /**
@@ -30,8 +36,12 @@ public class ViewProductPageAsserts extends Base {
      */
     @Then("^I see product split link for product \"([^\"]*)\"$")
     public void iSeeProductSplitLink(final String productId) {
-        ViewProductPage.splitProductLink(getDriver(), productId).isDisplayed();
-        assertTrue(true);
+        try {
+            ViewProductPage.splitProductLink(getDriver(), productId).isDisplayed();
+            assertTrue(true);
+        } catch (NoSuchElementException e) {
+            assertTrue("Unable to find split product link", false);
+        }
     }
 
     /**
@@ -40,8 +50,12 @@ public class ViewProductPageAsserts extends Base {
      */
     @Then("^I see product merge link for product \"([^\"]*)\"$")
     public void iSeeProductMergeLink(final String productId) {
+        try {
         ViewProductPage.mergeProductLink(getDriver(), productId).isDisplayed();
         assertTrue(true);
+        } catch (NoSuchElementException e) {
+            assertTrue("Unable to find merge product link", false);
+        }
     }
 
     /**
