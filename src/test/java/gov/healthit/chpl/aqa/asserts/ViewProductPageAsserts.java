@@ -3,9 +3,8 @@ package gov.healthit.chpl.aqa.asserts;
 import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
-import org.openqa.selenium.NoSuchElementException;
-
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ViewProductPage;
