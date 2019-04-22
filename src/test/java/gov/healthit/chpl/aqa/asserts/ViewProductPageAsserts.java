@@ -74,7 +74,7 @@ public class ViewProductPageAsserts extends Base {
     @Then("^I see the edited product information is recorded and updated on View Product page for product \"(.*)\"$")
     public void editedInformationRecordedAndUpdated(final String productId) {
         String actualProductVersion = ViewProductPage.viewProductName(getDriver(), productId).getText();
-        assertEquals(actualProductVersion.trim(), "Product" + "\n" + getCurrentDate());
+        assertEquals(actualProductVersion, "Product" + "\n" + getCurrentDate());
     }
 }
 
