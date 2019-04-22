@@ -1,10 +1,12 @@
 package gov.healthit.chpl.aqa.asserts;
 
-import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ViewProductPage;
@@ -25,7 +27,7 @@ public class ViewProductPageAsserts extends Base {
             ViewProductPage.editProductLink(getDriver(), productId).isDisplayed();
             assertTrue(true);
         } catch (NoSuchElementException e) {
-            assertTrue("Unable to find product edit link", false);
+            fail("Unable to find product edit link");
         }
     }
 
@@ -39,7 +41,7 @@ public class ViewProductPageAsserts extends Base {
             ViewProductPage.splitProductLink(getDriver(), productId).isDisplayed();
             assertTrue(true);
         } catch (NoSuchElementException e) {
-            assertTrue("Unable to find product split link", false);
+            fail("Unable to find product split link");
         }
     }
 
@@ -50,10 +52,9 @@ public class ViewProductPageAsserts extends Base {
     @Then("^I see product merge link for product \"([^\"]*)\"$")
     public void iSeeProductMergeLink(final String productId) {
         try {
-        ViewProductPage.mergeProductLink(getDriver(), productId).isDisplayed();
-        assertTrue(true);
+        assertTrue(ViewProductPage.mergeProductLink(getDriver(), productId).isDisplayed());
         } catch (NoSuchElementException e) {
-            assertTrue("Unable to find product merge link", false);
+            fail("Unable to find product merge link");
         }
     }
 
@@ -74,8 +75,9 @@ public class ViewProductPageAsserts extends Base {
      */
     @Then("^I see the edited product information is recorded and updated on View Product page for product \"(.*)\"$")
     public void editedInformationRecordedAndUpdated(final String productId) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(ViewProductPage.viewProductName(getDriver(), productId)));
         String actualProductVersion = ViewProductPage.viewProductName(getDriver(), productId).getText();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0];", actualProductVersion);
         assertEquals(actualProductVersion, getCurrentDate());
     }
 }
