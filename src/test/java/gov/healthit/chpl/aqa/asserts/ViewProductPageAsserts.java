@@ -5,8 +5,6 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ViewProductPage;
@@ -52,7 +50,7 @@ public class ViewProductPageAsserts extends Base {
     @Then("^I see product merge link for product \"([^\"]*)\"$")
     public void iSeeProductMergeLink(final String productId) {
         try {
-        assertTrue(ViewProductPage.mergeProductLink(getDriver(), productId).isDisplayed());
+            assertTrue(ViewProductPage.mergeProductLink(getDriver(), productId).isDisplayed());
         } catch (NoSuchElementException e) {
             fail("Unable to find product merge link");
         }
@@ -75,10 +73,8 @@ public class ViewProductPageAsserts extends Base {
      */
     @Then("^I see the edited product information is recorded and updated on View Product page for product \"(.*)\"$")
     public void editedInformationRecordedAndUpdated(final String productId) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(ViewProductPage.viewProductName(getDriver(), productId)));
         String actualProductVersion = ViewProductPage.viewProductName(getDriver(), productId).getText();
-        assertEquals(actualProductVersion, getCurrentDate());
+        assertEquals(actualProductVersion.trim(), "Product" + "\n" + getCurrentDate());
     }
 }
 

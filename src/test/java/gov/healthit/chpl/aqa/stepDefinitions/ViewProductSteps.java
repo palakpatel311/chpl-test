@@ -1,5 +1,7 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 import gov.healthit.chpl.aqa.pageObjects.ViewProductPage;
 
 /**
@@ -56,6 +59,7 @@ public class ViewProductSteps extends Base {
         ViewProductPage.productNameField(getDriver()).sendKeys(getCurrentDate());
         WebElement link = ViewProductPage.editProductSaveButton(getDriver(), productId);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
     }
 }
 

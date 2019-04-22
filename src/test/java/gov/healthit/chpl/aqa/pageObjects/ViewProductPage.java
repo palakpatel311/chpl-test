@@ -40,7 +40,7 @@ public final class ViewProductPage {
     }
 
     public static WebElement viewProductName(final WebDriver driver, final String productId) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-product-" + productId + "\"]/span/span[2]/h2"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-product-" + productId + "\"]/span/span[2]"));
     }
 }
 
