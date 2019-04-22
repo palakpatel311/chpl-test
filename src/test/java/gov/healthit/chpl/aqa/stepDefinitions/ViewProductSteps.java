@@ -36,7 +36,7 @@ public class ViewProductSteps extends Base {
     }
 
     /**
-     * Set the product name field to "".
+     * Clear the product name field and enter a value.
      * @param value to be entered
      **/
     @And("^I set the product name field to \"(.*)\"$")
