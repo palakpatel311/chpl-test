@@ -25,7 +25,7 @@ public class ViewProductPageAsserts extends Base {
             ViewProductPage.editProductLink(getDriver(), productId).isDisplayed();
             assertTrue(true);
         } catch (NoSuchElementException e) {
-            assertTrue("Unable to find edit product link", false);
+            assertTrue("Unable to find product edit link", false);
         }
     }
 
@@ -39,7 +39,7 @@ public class ViewProductPageAsserts extends Base {
             ViewProductPage.splitProductLink(getDriver(), productId).isDisplayed();
             assertTrue(true);
         } catch (NoSuchElementException e) {
-            assertTrue("Unable to find split product link", false);
+            assertTrue("Unable to find product split link", false);
         }
     }
 
@@ -53,7 +53,7 @@ public class ViewProductPageAsserts extends Base {
         ViewProductPage.mergeProductLink(getDriver(), productId).isDisplayed();
         assertTrue(true);
         } catch (NoSuchElementException e) {
-            assertTrue("Unable to find merge product link", false);
+            assertTrue("Unable to find product merge link", false);
         }
     }
 
