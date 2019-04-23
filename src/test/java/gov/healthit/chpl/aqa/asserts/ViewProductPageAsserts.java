@@ -22,8 +22,7 @@ public class ViewProductPageAsserts extends Base {
     @Then("^I see product edit link for product \"([^\"]*)\"$")
     public void iSeeProductEditLink(final String productId) {
         try {
-            ViewProductPage.editProductLink(getDriver(), productId).isDisplayed();
-            assertTrue(true);
+            assertTrue(ViewProductPage.editProductLink(getDriver(), productId).isDisplayed());
         } catch (NoSuchElementException e) {
             fail("Unable to find product edit link");
         }
@@ -36,8 +35,7 @@ public class ViewProductPageAsserts extends Base {
     @Then("^I see product split link for product \"([^\"]*)\"$")
     public void iSeeProductSplitLink(final String productId) {
         try {
-            ViewProductPage.splitProductLink(getDriver(), productId).isDisplayed();
-            assertTrue(true);
+            assertTrue(ViewProductPage.splitProductLink(getDriver(), productId).isDisplayed());
         } catch (NoSuchElementException e) {
             fail("Unable to find product split link");
         }
