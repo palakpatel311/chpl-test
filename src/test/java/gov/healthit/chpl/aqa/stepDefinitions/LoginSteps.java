@@ -80,5 +80,66 @@ public class LoginSteps extends Base {
         LoginPage.loginButton(getDriver()).click();
         getWait().until(ExpectedConditions.visibilityOf(LoginPage.logoutButton(getDriver())));
     }
+
+    /**
+     * Log the user in as given ROLE in a given environment.
+     * @param role as ROLE_ADMIN, ROLE_ONC or ROLE_ACB
+     * @param tEnv test environment in which tests will be run
+     */
+    @Given("^I'm logged in as \"([^\"]*)\" on \"([^\"]*)\"$")
+    public void logInAsRoleOnGivenEnv(final String role, final String tEnv) {
+        String username = null;
+        String password = null;
+        String url;
+        if (role.equalsIgnoreCase("ROLE_ADMIN")) {
+            if (StringUtils.isEmpty(roleAdminUsername)) {
+                throw new IllegalArgumentException("Missing value for roleAdminUsername!");
+            }
+            if (StringUtils.isEmpty(roleAdminPassword)) {
+                throw new IllegalArgumentException("Missing value for roleAdminPassword!");
+            }
+            username = roleAdminUsername;
+            password = roleAdminPassword;
+        } else if (role.equalsIgnoreCase("ROLE_ONC")) {
+            if (StringUtils.isEmpty(roleOncUsername)) {
+                throw new IllegalArgumentException("Missing value for roleOncUsername!");
+            }
+            if (StringUtils.isEmpty(roleOncPassword)) {
+                throw new IllegalArgumentException("Missing value for roleOncPassword!");
+            }
+            username = roleOncUsername;
+            password = roleOncPassword;
+        } else if (role.equalsIgnoreCase("ROLE_ACB")) {
+            if (StringUtils.isEmpty(roleAcbUsername)) {
+                throw new IllegalArgumentException("Missing value for roleAcbUsername!");
+            }
+            if (StringUtils.isEmpty(roleAcbPassword)) {
+                throw new IllegalArgumentException("Missing value for roleAcbPassword!");
+            }
+            username = roleAcbUsername;
+            password = roleAcbPassword;
+        }
+        switch (tEnv) {
+        case "DEV": url = "https://chpl.ahrqdev.org";
+        break;
+        case "STG": url = "https://chpl.ahrqstg.org";
+        break;
+        case "PROD": url = "https://chpl.healthit.gov";
+        break;
+        default: url = getUrl();
+        break;
+        }
+        getDriver().get(url + "#/search");
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        //pop up the login/out section
+        wait.until(ExpectedConditions.visibilityOf(LoginPage.loginLogoutPopUp(getDriver())));
+        LoginPage.loginLogoutPopUp(getDriver()).click();
+        //when it's popped up we can see the username
+        wait.until(ExpectedConditions.visibilityOf(LoginPage.username(getDriver())));
+        LoginPage.username(getDriver()).sendKeys(username);
+        LoginPage.password(getDriver()).sendKeys(password);
+        LoginPage.loginButton(getDriver()).click();
+        getWait().until(ExpectedConditions.visibilityOf(LoginPage.logoutButton(getDriver())));
+    }
 }
 
