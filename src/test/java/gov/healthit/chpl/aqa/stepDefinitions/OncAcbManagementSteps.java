@@ -3,6 +3,8 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
@@ -18,17 +20,19 @@ public class OncAcbManagementSteps extends Base {
      */
     @And("^I navigate to ONC ACB Management page$")
     public void navigateToONCACBManagementPage() {
-        WebElement link = OncAcbManagementPage.oncACBManagementLink(getDriver());
+        WebElement link = OncAcbManagementPage.organizationsToggleNavLink(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        WebElement link2 = OncAcbManagementPage.organizationsDropdownLinkToLoadACBManagementPage(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link2);
     }
 
     /**
      * Access ONC ACB details page.
-     * @param listingName is the name of ONC ACB listing
+     * @param acb is the name of ONC ACB
      */
     @And("^I access \"([^\"]*)\" ACB details$")
-    public void iClickOnONCACBListing(final String listingName) {
-        WebElement link =  OncAcbManagementPage.oncACBName(getDriver(), listingName);
+    public void iClickOnONCACBListing(final String acb) {
+        WebElement link =  OncAcbManagementPage.oncACBName(getDriver(), acb);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
@@ -39,6 +43,8 @@ public class OncAcbManagementSteps extends Base {
     public void editACB() {
         WebElement link = OncAcbManagementPage.editONCACB(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(OncAcbManagementPage.markRetirementStatus(getDriver())));
     }
 
     /**
