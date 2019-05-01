@@ -20,10 +20,9 @@ public class OncAcbManagementSteps extends Base {
      */
     @And("^I navigate to ONC ACB Management page$")
     public void navigateToONCACBManagementPage() {
-        WebElement link = OncAcbManagementPage.organizationsToggleNavLink(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
-        WebElement link2 = OncAcbManagementPage.organizationsDropdownLinkToLoadACBManagementPage(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link2);
+        getDriver().get(getUrl() + "#/admin/acbManagement");
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(OncAcbManagementPage.oncACBManagementLink(getDriver())));
     }
 
     /**
@@ -31,7 +30,7 @@ public class OncAcbManagementSteps extends Base {
      * @param acb is the name of ONC ACB
      */
     @And("^I access \"([^\"]*)\" ACB details$")
-    public void iClickOnONCACBListing(final String acb) {
+    public void iClickOnONCACBName(final String acb) {
         WebElement link =  OncAcbManagementPage.oncACBName(getDriver(), acb);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }

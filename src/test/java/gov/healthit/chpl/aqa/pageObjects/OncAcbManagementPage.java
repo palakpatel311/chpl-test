@@ -15,7 +15,7 @@ public final class OncAcbManagementPage extends BasePage {
     }
 
     public static WebElement oncACBName(final WebDriver driver, final String oncAcbName) {
-        return driver.findElement(By.linkText(oncAcbName));
+        return driver.findElement(By.xpath("//a[contains(text(),'" + oncAcbName + "')]"));
     }
 
     public static WebElement editONCACB(final WebDriver driver) {
@@ -77,9 +77,9 @@ public final class OncAcbManagementPage extends BasePage {
     public static WebElement organizationsToggleNavLink(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"organizations-toggle\"]"));
     }
-    
+
     public static WebElement organizationsDropdownLinkToLoadACBManagementPage(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"organizations-dropdown-menu\"]/li[2]/a"));
+        return driver.findElement(By.xpath("//*[@id=\"organizations-dropdown-menu\"]/li[4]/a"));
     }
 }
 
