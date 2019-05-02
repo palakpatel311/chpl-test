@@ -76,7 +76,7 @@ public class ViewDeveloperSteps extends Base {
     }
 
     /**
-     * Click merge developer link of a developer.
+     * Click split developer link of a developer.
      * @param developerId is the developer id passed in page objects
      **/
     @And("^I click the split developer link for developer \"([^\"]*)\"$")
