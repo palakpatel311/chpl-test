@@ -18,7 +18,7 @@ public class ViewDeveloperSteps extends Base {
      * Get user to the View Developer Page.
      * @param developerId is Developer ID
      **/
-    @Given("^I navigate to the developer edit page for developer \"([^\"]*)\"$")
+    @Given("^I navigate to the developer page for developer \"([^\"]*)\"$")
     public void editDeveloperPage(final String developerId) {
         getDriver().get(getUrl() + "#/organizations/developers/" + developerId);
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
@@ -31,9 +31,8 @@ public class ViewDeveloperSteps extends Base {
      **/
     @And("^I edit for developer \"(.*)\"$")
     public void editDeveloper(final String developerId) {
-        ViewDeveloperPage.editDeveloperLink(getDriver(), developerId).click();
-        ViewDeveloperPage.developerNameField(getDriver()).clear();
-        ViewDeveloperPage.developerNameField(getDriver()).sendKeys(getCurrentDate());
+        clickEditLinkOfDeveloper(developerId);
+        setDeveloperNameField(getCurrentDate());
         WebElement link = ViewDeveloperPage.editDeveloperSaveButton(getDriver(), developerId);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
