@@ -75,5 +75,14 @@ public class ViewDeveloperSteps extends Base {
         ViewDeveloperPage.mergeDeveloperLink(getDriver(), developerId).click();
     }
 
+    /**
+     * Click merge developer link of a developer.
+     * @param developerId is the developer id passed in page objects
+     **/
+    @And("^I click the split developer link for developer \"([^\"]*)\"$")
+    public void iSplitDeveloperLink(final String developerId) {
+        ViewDeveloperPage.splitDeveloperLink(getDriver(), developerId).click();
+    }
+
 }
 

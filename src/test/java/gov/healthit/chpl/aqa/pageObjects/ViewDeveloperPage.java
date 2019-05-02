@@ -39,6 +39,10 @@ public final class ViewDeveloperPage {
         return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[2]/div[1]"));
     }
 
+    public static WebElement productsMovingToNewDeveloperMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[2]/div"));
+    }
+
     public static WebElement developerNameMissingErrorMessage(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"chpl-developer\"]/span/div[1]/div/div"));
     }

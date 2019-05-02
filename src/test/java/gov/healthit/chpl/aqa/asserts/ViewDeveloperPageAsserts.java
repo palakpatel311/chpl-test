@@ -98,5 +98,16 @@ public class ViewDeveloperPageAsserts extends Base {
         String actualText = ViewDeveloperPage.developerToMergeMessage(getDriver()).getText();
         assertEquals(expectedText, actualText);
     }
+
+    /**
+     * Assert that expected text is displayed in Products moving to new Developer section.
+     * @param expectedText is "At least one Product must be selected to move"
+     */
+    @Then("^I see \"([^\"]*)\" in products moving to new developer section$")
+    public void iSeeMessageInProductsMovingToNewDeveloperSection(final String expectedText) {
+        String actualText = ViewDeveloperPage.productsMovingToNewDeveloperMessage(getDriver()).getText();
+        assertEquals(actualText, expectedText);
+    }
+
 }
 

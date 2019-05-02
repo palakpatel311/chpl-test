@@ -62,3 +62,10 @@ Scenario: Verify message is displayed in developers to merge section
     And I click the merge developer link for developer "1854"
     Then I see "At least one other Developer must be selected to merge" in developers to merge section
 
+Scenario: Verify message is displayed in products moving to new developer section
+    Given I'm logged in as "ROLE_ADMIN"
+    When I navigate to the developer page for developer "1854"
+    And I click the split developer link for developer "1854"
+    Then I see "At least one Product must be selected to move" in products moving to new developer section
+
+
