@@ -109,5 +109,43 @@ public class ViewDeveloperPageAsserts extends Base {
         assertEquals(actualText, expectedText);
     }
 
+    /**
+     * Assert that developer edit link does not exist on view developer page.
+     * @param developerId is the developer id passed in page objects
+     */
+    @Then("^I do not see developer edit link for developer \"([^\"]*)\"$")
+    public void iDoNotSeeDeveloperEditLink(final String developerId) {
+        try {
+            assertTrue(!ViewDeveloperPage.editDeveloperLink(getDriver(), developerId).isDisplayed());
+        } catch (NoSuchElementException e) {
+            System.out.println("Developer edit link is not available");
+        }
+    }
+
+    /**
+     * Assert that developer split link does not exist on view developer page.
+     * @param developerId is the developer id passed in page objects
+     */
+    @Then("^I do not see developer split link for developer \"([^\"]*)\"$")
+    public void iDoNotSeeDeveloperSplitLink(final String developerId) {
+        try {
+            assertTrue(!ViewDeveloperPage.splitDeveloperLink(getDriver(), developerId).isDisplayed());
+        } catch (NoSuchElementException e) {
+            System.out.println("Developer split link is not available");
+        }
+    }
+
+    /**
+     * Assert that developer merge link does not exist on view developer page.
+     * @param developerId is the developer id passed in page objects
+     */
+    @Then("^I do not see developer merge link for developer \"([^\"]*)\"$")
+    public void iDoNotSeeDeveloperMergeLink(final String developerId) {
+        try {
+            assertTrue(!ViewDeveloperPage.mergeDeveloperLink(getDriver(), developerId).isDisplayed());
+        } catch (NoSuchElementException e) {
+            System.out.println("Developer merge link is not available");
+        }
+    }
 }
 

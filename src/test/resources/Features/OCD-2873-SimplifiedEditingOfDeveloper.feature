@@ -68,4 +68,16 @@ Scenario: Verify message is displayed in products moving to new developer sectio
     And I click the split developer link for developer "1854"
     Then I see "At least one Product must be selected to move" in products moving to new developer section
 
+Scenario: Developer edit option is not avaialble for a user who is not logged in
+    When I navigate to the developer page for developer "1854"
+    Then I do not see developer edit link for developer "1854"
+
+Scenario: Developer split option is not avaialble for a user who is not logged in
+    When I navigate to the developer page for developer "1854"
+    Then I do not see developer split link for developer "1854"
+
+Scenario: Developer merge option is not avaialble for a user who is not logged in
+    When I navigate to the developer page for developer "1854"
+    Then I do not see developer merge link for developer "1854"
+
 
