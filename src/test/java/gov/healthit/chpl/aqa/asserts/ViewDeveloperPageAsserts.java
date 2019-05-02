@@ -61,8 +61,8 @@ public class ViewDeveloperPageAsserts extends Base {
      */
     @Then("^I see the edited developer information is recorded and updated on View Developer page$")
     public void editedDeveloperInformationRecordedAndUpdated() {
-        String actualDeveloperVersion = ViewDeveloperPage.viewDeveloperName(getDriver()).getText();
-        assertEquals((actualDeveloperVersion.split(" ")[0]).trim(), getCurrentDate());
+        String actualDeveloperName = ViewDeveloperPage.viewDeveloperName(getDriver()).getText();
+        assertEquals((actualDeveloperName.split(" ")[0]).trim(), getCurrentDate());
     }
 
     /**
