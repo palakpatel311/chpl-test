@@ -115,11 +115,12 @@ public class ViewDeveloperPageAsserts extends Base {
      */
     @Then("^I do not see developer edit link for developer \"([^\"]*)\"$")
     public void iDoNotSeeDeveloperEditLink(final String developerId) {
+        boolean developerEditLinkFound = false;
         try {
-            assertTrue(!ViewDeveloperPage.editDeveloperLink(getDriver(), developerId).isDisplayed());
+            developerEditLinkFound = ViewDeveloperPage.editDeveloperLink(getDriver(), developerId).isDisplayed();
         } catch (NoSuchElementException e) {
-            System.out.println("Developer edit link is not available");
         }
+        assertTrue(!developerEditLinkFound, "Developer edit link is available");
     }
 
     /**
@@ -128,11 +129,12 @@ public class ViewDeveloperPageAsserts extends Base {
      */
     @Then("^I do not see developer split link for developer \"([^\"]*)\"$")
     public void iDoNotSeeDeveloperSplitLink(final String developerId) {
+        boolean developerSplitLinkFound = false;
         try {
-            assertTrue(!ViewDeveloperPage.splitDeveloperLink(getDriver(), developerId).isDisplayed());
+            developerSplitLinkFound = ViewDeveloperPage.splitDeveloperLink(getDriver(), developerId).isDisplayed();
         } catch (NoSuchElementException e) {
-            System.out.println("Developer split link is not available");
         }
+        assertTrue(!developerSplitLinkFound, "Developer split link is available");
     }
 
     /**
@@ -141,11 +143,12 @@ public class ViewDeveloperPageAsserts extends Base {
      */
     @Then("^I do not see developer merge link for developer \"([^\"]*)\"$")
     public void iDoNotSeeDeveloperMergeLink(final String developerId) {
+        boolean developerMergeLinkFound = false;
         try {
-            assertTrue(!ViewDeveloperPage.mergeDeveloperLink(getDriver(), developerId).isDisplayed());
+            developerMergeLinkFound = ViewDeveloperPage.mergeDeveloperLink(getDriver(), developerId).isDisplayed();
         } catch (NoSuchElementException e) {
-            System.out.println("Developer merge link is not available");
         }
+        assertTrue(!developerMergeLinkFound, "Developer merge link is available");
     }
-}
 
+}
