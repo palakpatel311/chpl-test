@@ -118,9 +118,10 @@ public class ViewDeveloperPageAsserts extends Base {
         boolean developerEditLinkFound = false;
         try {
             developerEditLinkFound = ViewDeveloperPage.editDeveloperLink(getDriver(), developerId).isDisplayed();
+            fail("Found element when shouldn't have");
         } catch (NoSuchElementException e) {
+            assertTrue(!developerEditLinkFound, "Developer edit link is available");
         }
-        assertTrue(!developerEditLinkFound, "Developer edit link is available");
     }
 
     /**
@@ -132,9 +133,10 @@ public class ViewDeveloperPageAsserts extends Base {
         boolean developerSplitLinkFound = false;
         try {
             developerSplitLinkFound = ViewDeveloperPage.splitDeveloperLink(getDriver(), developerId).isDisplayed();
+            fail("Found element when shouldn't have");
         } catch (NoSuchElementException e) {
+            assertTrue(!developerSplitLinkFound, "Developer split link is available");
         }
-        assertTrue(!developerSplitLinkFound, "Developer split link is available");
     }
 
     /**
@@ -146,9 +148,10 @@ public class ViewDeveloperPageAsserts extends Base {
         boolean developerMergeLinkFound = false;
         try {
             developerMergeLinkFound = ViewDeveloperPage.mergeDeveloperLink(getDriver(), developerId).isDisplayed();
+            fail("Found element when shouldn't have");
         } catch (NoSuchElementException e) {
+            assertTrue(!developerMergeLinkFound, "Developer merge link is available");
         }
-        assertTrue(!developerMergeLinkFound, "Developer merge link is available");
     }
 
 }
