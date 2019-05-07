@@ -79,6 +79,9 @@ public class LoginSteps extends Base {
         LoginPage.password(getDriver()).sendKeys(password);
         LoginPage.loginButton(getDriver()).click();
         getWait().until(ExpectedConditions.visibilityOf(LoginPage.logoutButton(getDriver())));
+        //minimize the pop up of login/out section
+        wait.until(ExpectedConditions.visibilityOf(LoginPage.loginLogoutPopUp(getDriver())));
+        LoginPage.loginLogoutPopUp(getDriver()).click();
     }
 
     /**
