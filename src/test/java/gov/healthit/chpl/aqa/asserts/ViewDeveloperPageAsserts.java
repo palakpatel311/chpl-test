@@ -1,5 +1,7 @@
 package gov.healthit.chpl.aqa.asserts;
 
+
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -120,7 +122,7 @@ public class ViewDeveloperPageAsserts extends Base {
             developerEditLinkFound = ViewDeveloperPage.editDeveloperLink(getDriver(), developerId).isDisplayed();
             fail("Found element when shouldn't have");
         } catch (NoSuchElementException e) {
-            assertTrue(!developerEditLinkFound, "Developer edit link is available");
+            assertFalse(developerEditLinkFound, "Developer edit link is available");
         }
     }
 
@@ -135,7 +137,7 @@ public class ViewDeveloperPageAsserts extends Base {
             developerSplitLinkFound = ViewDeveloperPage.splitDeveloperLink(getDriver(), developerId).isDisplayed();
             fail("Found element when shouldn't have");
         } catch (NoSuchElementException e) {
-            assertTrue(!developerSplitLinkFound, "Developer split link is available");
+            assertFalse(developerSplitLinkFound, "Developer split link is available");
         }
     }
 
@@ -150,7 +152,7 @@ public class ViewDeveloperPageAsserts extends Base {
             developerMergeLinkFound = ViewDeveloperPage.mergeDeveloperLink(getDriver(), developerId).isDisplayed();
             fail("Found element when shouldn't have");
         } catch (NoSuchElementException e) {
-            assertTrue(!developerMergeLinkFound, "Developer merge link is available");
+            assertFalse(developerMergeLinkFound, "Developer merge link is available");
         }
     }
 
