@@ -46,11 +46,11 @@ Feature: Overview page tests
   |For EHR Developers|https://chpl.ahrqdev.org/#/resources/overview#forEhrDevelopers|4|
   |ONC-ACB and ONC-ATL information|https://chpl.ahrqdev.org/#/resources/overview#oncacbAndAtlInformation|5|
   
-   Scenario: Verify order of headers on Overview page
+   Scenario: Verify order of headings on Overview page
     Given I'm on Overview page
     Then I should see the sections in the following order: Announcement, What is the CHPL, Recommended Web Browsers, Using the CHPL Website, ONC Certification Program, For EHR Developers, ONC-ACB and ONC-ATL Information
     
-Scenario Outline: Verify navigation link for Recommended Web Browsers link on overview page
+Scenario Outline: Verify navigation link for Recommended Web Browsers section on overview page
   Given I'm on Overview page
   When I click "<LinkText>" link from left hand navigation
   Then the link should point to correct url "<URL>"
