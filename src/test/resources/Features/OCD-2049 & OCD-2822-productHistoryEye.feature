@@ -33,7 +33,7 @@ Scenario Outline: Product history eye shows developer edit activity
     And I see the edited developer information is recorded and updated on View Developer page
     And I am on listing details page of listing with ID "<listing id>"
     And I click the 'Eye'
-    Then I see the product history of developer edit is recorded as "Developer changed from"
+    Then I see the listing history eye shows a "Developer change" on today's date
     Examples:
       |ROLE       |developer id|listing id|
       |ROLE_ADMIN |1675        |4229      |
@@ -46,7 +46,7 @@ Scenario Outline: Product history eye shows developer edit activity
     And I edit for version "<version id>"
     And I am on listing details page of listing with ID "<listing id>"
     And I click the 'Eye'
-    Then I see the product history of version edit is recorded as "Version changed from"
+    Then I see the listing history eye shows a "Version change" on today's date
     Examples:
       |ROLE       |version id|product id|developer id|listing id|
       |ROLE_ACB   |3623      |1057      |1770        |1799      |
@@ -60,7 +60,7 @@ Scenario Outline: Product history eye shows developer edit activity
     And I see the edited product information is recorded and updated on View Product page for product "<product id>"
     And I am on listing details page of listing with ID "<listing id>"
     And I click the 'Eye'
-    Then I see the product history of product edit is recorded as "Product changed from"
+    Then I see the listing history eye shows a "Product change" on today's date
     Examples:
       |ROLE       |product id|developer id|listing id|
       |ROLE_ACB   |1031      |673         |3783      |
