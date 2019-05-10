@@ -1,13 +1,14 @@
 package gov.healthit.chpl.aqa.asserts;
 
-import static org.junit.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
-import java.util.Calendar;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import cucumber.api.java.en.Then;
-import gov.healthit.chpl.aqa.model.ListingHistoryData;
 import gov.healthit.chpl.aqa.pageObjects.ListingHistoryEyePage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 
@@ -16,8 +17,10 @@ import gov.healthit.chpl.aqa.stepDefinitions.Base;
  */
 public class ListingHistoryEyeAsserts extends Base {
 
+    private static final int TIME_DURATION = 60000;
+
     /**
-     * Assert that expected product edit details is displayed on product history eye.
+     * Assert that expected Developer/Product/Version edit details is displayed on listing history eye.
      * @param expectedEditDetails is "Developer/Product/Version change"
      * @throws Exception of type ParseException or InterruptedException
      */
@@ -27,37 +30,31 @@ public class ListingHistoryEyeAsserts extends Base {
         String actualListingHistoryDetails = ListingHistoryEyePage.listingHistoryTable(getDriver()).getText();
         String[] listingHistoryDetails = actualListingHistoryDetails.split("\n");
         int activityCount = 0;
-        ListingHistoryData listingHistoryDataInst = null;
+        List<String> activityDateList = new ArrayList<>();
         String date = null;
-        for (String activity : listingHistoryDetails) {
+        for (String histDetails : listingHistoryDetails) {
             if ((activityCount % 2) == 0) {
-                date = activity;
+                date = histDetails;
             } else {
-                if (activity.startsWith(expectedEditDetails)) {
-                    listingHistoryDataInst = new ListingHistoryData();
-                    listingHistoryDataInst.setDate(date);
-                    listingHistoryDataInst.setActivity(activity);
-                    break;
+                if (histDetails.startsWith(expectedEditDetails)) {
+                    activityDateList.add(date);
                 }
             }
             activityCount++;
         }
-        if (listingHistoryDataInst == null) {
-            assertFalse("No edit activity recorded for today", true);
+        String latestDate = activityDateList.get(0);
+        for (String activityDate : activityDateList) {
+            long time = getFormatedDateTimeZone(activityDate).getTime();
+            if (time > getFormatedDateTimeZone(latestDate).getTime()) {
+                latestDate = activityDate;
+            }
         }
-        Calendar calInstanceExpectedDate = Calendar.getInstance();
-        Calendar calInstanceCurrentDate = Calendar.getInstance();
-        Date actualDate = getFormatedDateTimeZone(listingHistoryDataInst.getDate());
-        Date currentDate = getFormatedDateTimeZone(null);
-        calInstanceExpectedDate.setTime(actualDate);
-        calInstanceCurrentDate.setTime(currentDate);
-        boolean listingHistoryRecorded = false;
-        if ((calInstanceExpectedDate.get(Calendar.YEAR) == calInstanceCurrentDate.get(Calendar.YEAR))
-                && ((calInstanceExpectedDate.get(Calendar.MONTH) + 1) == (calInstanceCurrentDate.get(Calendar.MONTH) + 1))
-                && (calInstanceExpectedDate.get(Calendar.DAY_OF_MONTH) == calInstanceCurrentDate.get(Calendar.DAY_OF_MONTH))) {
-            listingHistoryRecorded = true;
+        if (latestDate == null) {
+            fail("No edit activity recorded for today");
         }
-        assertTrue(listingHistoryRecorded, "Listing history is missing for today's date");
+        Date actualDate = getFormatedDateTimeZone(latestDate);
+        Date currentDate = new Date();
+        assertTrue(((currentDate.getTime() - actualDate.getTime()) < TIME_DURATION), "Listing history is missing for today's date");
     }
 
 }

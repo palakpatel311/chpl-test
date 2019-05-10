@@ -172,14 +172,11 @@ public class Base {
      * @return date
      */
     public Date getFormatedDateTimeZone(final String date) throws ParseException {
-        Date dateInstance;
+        Date dateInstance = null;
+        if (date != null) {
         DateFormat dateFormat = new SimpleDateFormat("MMMM dd,yyyy hh:mm:ss a z");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        if (date == null) {
-            String currentDate = dateFormat.format(new Date());
-            dateInstance = dateFormat.parse(currentDate);
-        } else {
-            dateInstance = dateFormat.parse(date);
+           dateInstance = dateFormat.parse(date);
         }
         return dateInstance;
     }
