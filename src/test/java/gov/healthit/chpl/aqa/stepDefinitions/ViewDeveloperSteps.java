@@ -1,6 +1,7 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -54,6 +55,7 @@ public class ViewDeveloperSteps extends Base {
     public void setDeveloperNameField(final String value) {
         ViewDeveloperPage.developerNameField(getDriver()).clear();
         ViewDeveloperPage.developerNameField(getDriver()).sendKeys(value);
+        ViewDeveloperPage.developerNameField(getDriver()).sendKeys(Keys.TAB);
     }
 
     /**
@@ -64,6 +66,7 @@ public class ViewDeveloperSteps extends Base {
     public void setEmailField(final String value) {
         ViewDeveloperPage.emailField(getDriver()).clear();
         ViewDeveloperPage.emailField(getDriver()).sendKeys(value);
+        ViewDeveloperPage.emailField(getDriver()).sendKeys(Keys.TAB);
     }
 
     /**
