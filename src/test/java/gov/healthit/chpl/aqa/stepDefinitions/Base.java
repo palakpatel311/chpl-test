@@ -3,8 +3,10 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -161,6 +163,22 @@ public class Base {
         Date date = new Date();
         String dateFormatted = dateFormat.format(date);
         return dateFormatted;
+    }
+
+    /**
+     * Get Date with Time Zone.
+     * @param date in MMMM dd,yyyy with time stamp and GMT time zone
+     * @throws ParseException if unable to parse the date
+     * @return date
+     */
+    public Date getFormatedDateTimeZone(final String date) throws ParseException {
+        Date dateInstance = null;
+        if (date != null) {
+        DateFormat dateFormat = new SimpleDateFormat("MMMM dd,yyyy hh:mm:ss a z");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+           dateInstance = dateFormat.parse(date);
+        }
+        return dateInstance;
     }
 }
 
