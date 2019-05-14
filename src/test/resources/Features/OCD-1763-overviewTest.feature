@@ -41,20 +41,21 @@ Feature: Overview page tests
   Examples:
   |LinkText|URL|headerNumber|
   |What is the CHPL|https://chpl.ahrqdev.org/#/resources/overview#whatIsTheChpl|1|
-  |Using the CHPL Website|https://chpl.ahrqdev.org/#/resources/overview#usingTheChplWebsite|2|
-  |ONC Certification Program|https://chpl.ahrqdev.org/#/resources/overview#oncCertificationProgram|3|
-  |For EHR Developers|https://chpl.ahrqdev.org/#/resources/overview#forEhrDevelopers|4|
-  |ONC-ACB and ONC-ATL information|https://chpl.ahrqdev.org/#/resources/overview#oncacbAndAtlInformation|5|
+  |Recommended Web Browsers|https://chpl.ahrqdev.org/#/resources/overview#recommendedWebBrowsers|2|
+  |Using the CHPL Website|https://chpl.ahrqdev.org/#/resources/overview#usingTheChplWebsite|3|
+  |ONC Certification Program|https://chpl.ahrqdev.org/#/resources/overview#oncCertificationProgram|4|
+  |For EHR Developers|https://chpl.ahrqdev.org/#/resources/overview#forEhrDevelopers|5|
+  |ONC-ACB and ONC-ATL information|https://chpl.ahrqdev.org/#/resources/overview#oncacbAndAtlInformation|6|
   
-   Scenario: Verify order of headings on Overview page
+   Scenario Outline: Verify order of headings on Overview page
     Given I'm on Overview page
-    Then I should see the sections in the following order: Announcement, What is the CHPL, Recommended Web Browsers, Using the CHPL Website, ONC Certification Program, For EHR Developers, ONC-ACB and ONC-ATL Information
-    
-Scenario Outline: Verify navigation link for Recommended Web Browsers section on overview page
-  Given I'm on Overview page
-  When I click "<LinkText>" link from left hand navigation
-  Then the link should point to correct url "<URL>"
-  Examples:
-  |LinkText|URL|
-  |Recommended Web Browsers|https://chpl.ahrqdev.org/#/resources/overview#recommendedWebBrowsers|
-  
+    Then heading number "<headingNumber>" on the page is: "<headingText>"
+    Examples:
+    |headingNumber|headingText|
+    |1|What is the CHPL?|
+    |2|Recommended Web Browsers|
+    |3|Using the CHPL Website|
+    |4|ONC Certification Program|
+    |5|For EHR Developers|
+    |6|ONC-ACB and ONC-ATL Information|
+   
