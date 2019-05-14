@@ -70,4 +70,14 @@ public class OverviewPageAsserts extends Base {
       getDriver().getPageSource().contains(linkText);
       assertTrue(OverviewPage.headerText(getDriver(), headerNumber).isDisplayed());
     }
-}
+
+    /**
+     * Asserts that headings are in the correct order on overview page.
+     */
+    @Then("^heading number \"([^\"]*)\" on the page is: \"([^\"]*)\"$")
+    public void verifySectionOrder(final String headingNumber, final String headingText) {
+        String actualText = OverviewPage.headerText(getDriver(), headingNumber).getText();
+        assertTrue(actualText.equals(headingText));
+    }
+
+ }
