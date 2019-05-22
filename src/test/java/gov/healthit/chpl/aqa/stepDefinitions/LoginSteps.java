@@ -3,6 +3,8 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import static org.testng.Assert.assertTrue;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import cucumber.api.java.en.Given;
@@ -77,9 +79,10 @@ public class LoginSteps extends Base {
         LoginPage.password(getDriver()).sendKeys(password);
         LoginPage.loginButton(getDriver()).click();
         getWait().until(ExpectedConditions.visibilityOf(LoginPage.logoutButton(getDriver())));
+        WebElement button = LoginPage.loginLogoutPopUp(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
         //minimize the pop up of login/out section
         getWait().until(ExpectedConditions.visibilityOf(LoginPage.loginLogoutPopUp(getDriver())));
-        LoginPage.loginLogoutPopUp(getDriver()).click();
     }
 
     /**
