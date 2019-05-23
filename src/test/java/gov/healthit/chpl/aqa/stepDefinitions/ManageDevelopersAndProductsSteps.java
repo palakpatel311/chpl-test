@@ -100,10 +100,21 @@ public class ManageDevelopersAndProductsSteps extends Base {
     /**
      * Navigate to Upload Certified Products page.
      */
-    @And("^I am on Upload Products & Surveillance page$")
+    @And("^I am on Upload Listings page$")
     public void loadUploadCertifiedProductsPage() {
-        DpManagementPage.administrationNavLink(getDriver()).click();
+        WebElement button = DpManagementPage.administrationNavLink(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
         DpManagementPage.administrationUploadNavLink(getDriver()).click();
+    }
+
+    /**
+     * Navigate to Upload Certified Products page.
+     */
+    @And("^I am on Upload Surveillance page$")
+    public void loadUploadSurveillancePage() {
+        WebElement button = DpManagementPage.surveillanceNavLink(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+        DpManagementPage.surveillanceUploadNavLink(getDriver()).click();
     }
 
     /**
@@ -125,6 +136,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @When("^I go to Confirm Pending Products Page$")
     public void loadConfirmPendingProductsPage() {
+        WebElement button = DpManagementPage.administrationNavLink(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
         DpManagementPage.confirmPendingProductsLink(getDriver()).click();
         getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingListingsTable(getDriver())));
     }
@@ -384,8 +397,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
         URL resource = Main.class.getResource("/" + filename);
         String absolutePath = Paths.get(resource.toURI()).toString();
 
-        DpManagementPage.chooseFileForSurveillanceUploadButton(getDriver()).sendKeys(absolutePath);
-        DpManagementPage.uploadSurveillanceFileButton(getDriver()).click();
+        DpManagementPage.chooseFileButton(getDriver()).sendKeys(absolutePath);
+        DpManagementPage.uploadFileButtonForSurveillance(getDriver()).click();
     }
 
     /**
@@ -393,6 +406,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @When("^I go to Confirm Pending Surveillance Activities Page$")
     public void loadConfirmPendingSurveillanceActivitiesPage() {
+        WebElement button = DpManagementPage.surveillanceNavLink(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
         DpManagementPage.confirmPendingSurveillanceActivitiesLink(getDriver()).click();
         getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingSurveillanceTable(getDriver())));
     }

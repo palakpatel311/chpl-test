@@ -16,6 +16,14 @@ public final class DpManagementPage {
     }
 
     public static WebElement administrationUploadNavLink(final WebDriver driver) {
+        return driver.findElement(By.linkText("Upload Listings"));
+    }
+
+    public static WebElement surveillanceNavLink(final WebDriver driver) {
+        return driver.findElement(By.id("surveillance-toggle"));
+    }
+
+    public static WebElement surveillanceUploadNavLink(final WebDriver driver) {
         return driver.findElement(By.linkText("Upload"));
     }
 
@@ -25,16 +33,7 @@ public final class DpManagementPage {
      * @return button element
      */
     public static WebElement chooseFileButton(final WebDriver driver) {
-        return driver.findElement(By.id("listing-file-upload"));
-    }
-
-    /**
-     * Returns choose file button for bulk surveillance upload.
-     * @param driver WebDriver
-     * @return button element
-     */
-    public static WebElement chooseFileForSurveillanceUploadButton(final WebDriver driver) {
-        return driver.findElement(By.id("surveillance-file-upload"));
+        return driver.findElement(By.id("ngf-upload-button"));
     }
 
     /**
@@ -54,13 +53,14 @@ public final class DpManagementPage {
     public static WebElement surveillanceSearchSingleResultTable(final WebDriver driver) {
         return driver.findElement(By.id("surveillance-search-single-result"));
     }
+
     /**
      * Returns Confirm Pending Products link.
      * @param driver WebDriver
      * @return link element
      */
     public static WebElement confirmPendingProductsLink(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"admin-nav.dpManagement.confirm\"]/a"));
+        return driver.findElement(By.linkText("Confirm Listings"));
     }
 
     /**
@@ -69,7 +69,7 @@ public final class DpManagementPage {
      * @return link element
      */
     public static WebElement confirmPendingSurveillanceActivitiesLink(final WebDriver driver) {
-        return driver.findElement(By.id("admin-nav.dpManagement.confirmSurveillance"));
+        return driver.findElement(By.linkText("Confirm"));
     }
 
     /**
@@ -306,16 +306,11 @@ public final class DpManagementPage {
      * @return button element
      */
     public static WebElement uploadFileButton(final WebDriver driver) {
-        return driver.findElement(By.id("listing-file-confirm-0"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/ui-view/chpl-upload-listings/div/form/div/div[4]/button[1]"));
     }
 
-    /**
-     * Returns upload surveillance file button element for bulk surveillance upload.
-     * @param driver WebDriver
-     * @return button element
-     */
-    public static WebElement uploadSurveillanceFileButton(final WebDriver driver) {
-        return driver.findElement(By.id("surveillance-file-confirm-0"));
+    public static WebElement uploadFileButtonForSurveillance(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload-surveillances/div/form/div/div[4]/button[1]"));
     }
 
     /**
@@ -324,7 +319,7 @@ public final class DpManagementPage {
      * @return text element
      */
     public static WebElement uploadSuccessfulText(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[1]/div"));
+        return driver.findElement(By.xpath("/html/body/ai-compare-widget/div[2]/chpl-administration/div/span/div[2]/div/ui-view/ui-view/chpl-upload-listings/div/div"));
     }
 
     /**
@@ -333,7 +328,7 @@ public final class DpManagementPage {
      * @return text element
      */
     public static WebElement uploadSuccessfulTextSurveillanceUpload(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div/div[2]/div"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload-surveillances/div/div"));
     }
 
     /**
