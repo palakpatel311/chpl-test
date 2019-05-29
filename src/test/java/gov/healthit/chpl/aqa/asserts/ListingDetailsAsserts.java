@@ -386,5 +386,25 @@ public class ListingDetailsAsserts extends Base {
         String actualOncAcbCertificationId = ListingDetailsPage.viewOncAcbCertificationIdListingPage(getDriver()).getText();
         assertTrue(actualOncAcbCertificationId.contains(getCurrentDate()));
     }
+
+    /**
+     * Assert that Improper format error message is displayed for invalid Mandatory Disclosures URL filed.
+     * @param expectedErrorMessage is Improper format
+     */
+    @Then("^I see \"([^\"]*)\" error message for Mandatory Disclosures URL filed$")
+    public void iSeeImproperFormatErrorMessageForUrlField(final String expectedErrorMessage) {
+        String actualErrorMessage = ListingDetailsPage.urlFieldErrorMessage(getDriver()).getText();
+        assertTrue(actualErrorMessage.contains(expectedErrorMessage));
+    }
+
+    /**
+     * Assert that error message is displayed for invalid Report File Location.
+     * @param expectedErrorMessage is not a valid URL.
+     */
+    @Then("^I see \"([^\"]*)\" error message for Report File Location$")
+    public void iSeeErrorMessageForReportFileLocation(final String expectedErrorMessage) {
+        String actualErrorMessage = ListingDetailsPage.reportFileLocationErrorMessage(getDriver()).getText();
+        assertTrue(actualErrorMessage.endsWith(expectedErrorMessage));
+    }
 }
 

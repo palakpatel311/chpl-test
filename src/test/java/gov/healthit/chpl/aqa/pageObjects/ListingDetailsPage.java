@@ -420,4 +420,21 @@ public final class ListingDetailsPage extends BasePage {
     public static WebElement viewOncAcbCertificationIdListingPage(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[1]/div[1]/div[1]/p[2]"));
     }
+
+    public static WebElement editMandatoryDisclosureURLField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='cp-transparency-att-url']"));
+    }
+
+    public static WebElement urlFieldErrorMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/div[9]/div"));
+    }
+
+    public static WebElement reportFileLocationField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='cp-report-file-loc']"));
+    }
+
+    public static WebElement reportFileLocationErrorMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/div[18]/ul/li"));
+    }
 }
+

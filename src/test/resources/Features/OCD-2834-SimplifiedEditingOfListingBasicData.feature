@@ -24,3 +24,17 @@ Scenario Outline: User logs in as ROLE and edits a listing
       |ROLE_ADMIN |1799      |
       |ROLE_ONC   |5737      |
 
+Scenario: User logs in as ROLE and edits a listing
+    Given I'm logged in as "ROLE_ONC"
+    When I am on listing details page of listing with ID "5737"
+    And I click on edit certified product link
+    And I set the Mandatory Disclosures URL filed to "www.example.com"
+    Then I see "Improper format" error message for Mandatory Disclosures URL filed 
+
+Scenario: User logs in as ROLE and edits a listing
+    Given I'm logged in as "ROLE_ONC"
+    When I am on listing details page of listing with ID "3384"
+    And I click on edit certified product link
+    And I set the Report File Location filed
+    Then I see "not a valid URL." error message for Report File Location
+

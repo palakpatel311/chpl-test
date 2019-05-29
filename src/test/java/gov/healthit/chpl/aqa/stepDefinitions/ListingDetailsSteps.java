@@ -105,4 +105,25 @@ public class ListingDetailsSteps extends Base {
         ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys(Keys.TAB);
         ListingDetailsPage.editCPSaveButton(getDriver()).click();
     }
+
+    /**
+     * Clear the Mandatory Disclosures URL field and enter a value.
+     * @param url is www.example.com
+     */
+    @And("^I set the Mandatory Disclosures URL filed to \"([^\"]*)\"$")
+    public void iSetMandatoryDisclosuresURLField(final String url) {
+        ListingDetailsPage.editMandatoryDisclosureURLField(getDriver()).clear();
+        ListingDetailsPage.editMandatoryDisclosureURLField(getDriver()).sendKeys(url);
+    }
+
+    /**
+     * Clear the Report File Location field and enter a value.
+     */
+    @And("^I set the Report File Location filed$")
+    public void iSetReportFileLocationField() {
+        ListingDetailsPage.reportFileLocationField(getDriver()).clear();
+        ListingDetailsPage.reportFileLocationField(getDriver()).sendKeys("https://" + getCurrentDate() + ".pdf");
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys("test");
+        ListingDetailsPage.editCPSaveButton(getDriver()).click();
+    }
 }
