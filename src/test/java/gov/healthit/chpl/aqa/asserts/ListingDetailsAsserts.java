@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import cucumber.api.java.en.Then;
-import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
+import gov.healthit.chpl.aqa.pageObjects.BasePage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 import gov.healthit.chpl.aqa.stepDefinitions.Hooks;
@@ -383,7 +383,7 @@ public class ListingDetailsAsserts extends Base {
      */
     @Then("^I see ONC ACB Certification ID is updated on Listing Details Page$")
     public void iSeeONCACBCertificationIDIsUpdatedOnListingDetailsPage() {
-        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(BasePage.updateSuccessfulToastContainer(getDriver())));
         String actualOncAcbCertificationId = ListingDetailsPage.viewOncAcbCertificationIdListingPage(getDriver()).getText();
         assertTrue(actualOncAcbCertificationId.contains(getCurrentDate()));
     }

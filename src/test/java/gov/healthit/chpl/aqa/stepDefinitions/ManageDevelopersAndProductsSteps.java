@@ -33,6 +33,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gov.healthit.chpl.aqa.pageObjects.BasePage;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.ManageDevelopersAndProductsPage;
@@ -180,7 +181,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+            .until(ExpectedConditions.visibilityOf(BasePage.updateSuccessfulToastContainer(getDriver())));
 
             getDriver().get(getUrl() + "/#/product/" + this.chplProductNumber);
             getWait()
@@ -433,7 +434,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+            .until(ExpectedConditions.visibilityOf(BasePage.updateSuccessfulToastContainer(getDriver())));
 
         } catch (Exception e) {
             Hooks.takeScreenshot(survChplId);
