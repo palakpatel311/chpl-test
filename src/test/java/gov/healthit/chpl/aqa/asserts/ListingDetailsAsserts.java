@@ -4,12 +4,14 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import cucumber.api.java.en.Then;
+import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 import gov.healthit.chpl.aqa.stepDefinitions.Hooks;
@@ -368,4 +370,22 @@ public class ListingDetailsAsserts extends Base {
         assertTrue(productNumber.contains(expectedProductNumber), "Expected product number [ " + expectedProductNumber + " ] but found [ " + productNumber + " ]");
     }
 
+    /**
+     * Assert that edit certified product link exists on listing details page.
+     */
+    @Then("^I see edit link to edit certified product$")
+    public void iSeeEditLinkToEditCertifiedProduct() {
+        assertTrue(ListingDetailsPage.editCPLink(getDriver()).isDisplayed());
+    }
+
+    /**
+     * Assert that ONC ACB Certification ID is correct on listing details page.
+     */
+    @Then("^I see ONC ACB Certification ID is updated on Listing Details Page$")
+    public void iSeeONCACBCertificationIDIsUpdatedOnListingDetailsPage() {
+        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+        String actualOncAcbCertificationId = ListingDetailsPage.viewOncAcbCertificationIdListingPage(getDriver()).getText();
+        assertTrue(actualOncAcbCertificationId.contains(getCurrentDate()));
+    }
 }
+

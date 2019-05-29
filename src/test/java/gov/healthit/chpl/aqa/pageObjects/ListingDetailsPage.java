@@ -400,4 +400,24 @@ public final class ListingDetailsPage extends BasePage {
     public static WebElement ucdUrl(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[1]/a"));
     }
+
+    public static WebElement editCPLink(final WebDriver driver) {
+        return driver.findElement(By.xpath("//button[contains(text(),'Edit Certified Product')]"));
+    }
+
+    public static WebElement editAcbCertificationId(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='cp-acb-cert-id']"));
+    }
+
+    public static WebElement reasonForChangeField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='reason-for-change']"));
+    }
+
+    public static WebElement editCPSaveButton(final WebDriver driver) {
+        return driver.findElement(By.xpath("//button[@id='edit-save']"));
+    }
+
+    public static WebElement viewOncAcbCertificationIdListingPage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[1]/div[1]/div[1]/p[2]"));
+    }
 }

@@ -1,9 +1,11 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
@@ -81,5 +83,26 @@ public class ListingDetailsSteps extends Base {
         ListingDetailsPage.viewAllCertificationCriteriaCQMs(getDriver()).click();
         WebElement link = ListingDetailsPage.cqmAccordion(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+    }
+
+    /**
+     * Open edit certified product link form.
+     */
+    @And("^I click on edit certified product link$")
+    public void iClickOnEditCertifiedProductLink() {
+        WebElement link = ListingDetailsPage.editCPLink(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+    }
+
+    /**
+     * Clear the ACB Certification field and enter a value.
+     */
+    @And("^I set the ACB certification field$")
+    public void iSetACBCertificationField() {
+        ListingDetailsPage.editAcbCertificationId(getDriver()).clear();
+        ListingDetailsPage.editAcbCertificationId(getDriver()).sendKeys(getCurrentDate());
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys("test");
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys(Keys.TAB);
+        ListingDetailsPage.editCPSaveButton(getDriver()).click();
     }
 }
