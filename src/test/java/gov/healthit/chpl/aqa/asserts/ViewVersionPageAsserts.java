@@ -67,5 +67,24 @@ public class ViewVersionPageAsserts extends Base {
         String actualErrorMessage = ViewVersionPage.versionMissingErrorMessage(getDriver(), versionId).getText();
         assertEquals(actualErrorMessage, expectedErrorMessage);
     }
+
+    /**
+     * Assert that split version link exists on view version page.
+     * @param versionId is the version id passed in page objects
+     */
+    @Then("^I see split link for version \"(.*)\"$")
+    public void iSeeSplitLinkToSplitTheVersion(final String versionId) {
+        assertTrue(ViewVersionPage.splitVersionLink(getDriver(), versionId).isDisplayed());
+    }
+
+    /**
+     * Assert that expected text is displayed in listings moving to new version section.
+     * @param expectedText is "At least one Listing must be selected to move"
+     */
+    @Then("^I see \"([^\"]*)\" in listings moving to new version section$")
+    public void iSeeMessageInListingsMovingToNewVersionSection(final String expectedText) {
+        String actualText = ViewVersionPage.listingsMovingToNewVersionMessage(getDriver()).getText();
+        assertEquals(expectedText, actualText);
+    }
 }
 
