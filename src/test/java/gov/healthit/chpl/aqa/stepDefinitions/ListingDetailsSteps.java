@@ -1,9 +1,11 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
@@ -81,5 +83,47 @@ public class ListingDetailsSteps extends Base {
         ListingDetailsPage.viewAllCertificationCriteriaCQMs(getDriver()).click();
         WebElement link = ListingDetailsPage.cqmAccordion(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+    }
+
+    /**
+     * Open edit certified product link form.
+     */
+    @And("^I click on edit certified product link$")
+    public void iClickOnEditCertifiedProductLink() {
+        WebElement link = ListingDetailsPage.editCPLink(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+    }
+
+    /**
+     * Clear the ACB Certification field and enter a value.
+     */
+    @And("^I set the ACB certification field$")
+    public void iSetACBCertificationField() {
+        ListingDetailsPage.editAcbCertificationId(getDriver()).clear();
+        ListingDetailsPage.editAcbCertificationId(getDriver()).sendKeys(getCurrentDate());
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys("test");
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys(Keys.TAB);
+        ListingDetailsPage.editCPSaveButton(getDriver()).click();
+    }
+
+    /**
+     * Clear the Mandatory Disclosures URL field and enter a value.
+     * @param url is www.example.com
+     */
+    @And("^I set the Mandatory Disclosures URL filed to \"([^\"]*)\"$")
+    public void iSetMandatoryDisclosuresURLField(final String url) {
+        ListingDetailsPage.editMandatoryDisclosureURLField(getDriver()).clear();
+        ListingDetailsPage.editMandatoryDisclosureURLField(getDriver()).sendKeys(url);
+    }
+
+    /**
+     * Clear the Report File Location field and enter a value.
+     */
+    @And("^I set the Report File Location filed$")
+    public void iSetReportFileLocationField() {
+        ListingDetailsPage.reportFileLocationField(getDriver()).clear();
+        ListingDetailsPage.reportFileLocationField(getDriver()).sendKeys("https://" + getCurrentDate() + ".pdf");
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys("test");
+        ListingDetailsPage.editCPSaveButton(getDriver()).click();
     }
 }

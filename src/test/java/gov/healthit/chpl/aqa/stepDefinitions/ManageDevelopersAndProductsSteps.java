@@ -193,7 +193,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+            .until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.updateSuccessfulToastContainer(getDriver())));
 
             getDriver().get(getUrl() + "/#/product/" + this.chplProductNumber);
             getWait()
@@ -448,7 +448,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
 
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(DpManagementPage.updateSuccessfulToastContainer(getDriver())));
+            .until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.updateSuccessfulToastContainer(getDriver())));
 
         } catch (Exception e) {
             Hooks.takeScreenshot(survChplId);

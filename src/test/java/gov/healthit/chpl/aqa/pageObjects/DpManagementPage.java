@@ -292,15 +292,6 @@ public final class DpManagementPage {
     }
 
     /**
-     * Returns element that holds post upload success text.
-     * @param driver WebDriver
-     * @return text element
-     */
-    public static WebElement updateSuccessfulToastContainer(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"toast-container\"]"));
-    }
-
-    /**
      * Returns upload listing file button element.
      * @param driver WebDriver
      * @return button element

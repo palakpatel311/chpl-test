@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Class ViewVersionPage definition.
  */
-public final class ViewVersionPage {
+public final class ViewVersionPage extends BasePage {
     private ViewVersionPage() {
     }
 

@@ -43,4 +43,9 @@ public class BasePage {
     public static WebElement tableContentElement(final WebDriver driver) {
         return driver.findElement(By.xpath("//table[@class='table search-table table-striped table-responsive']"));
     }
+
+    public static WebElement updateSuccessfulToastContainer(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"toast-container\"]"));
+    }
+
 }

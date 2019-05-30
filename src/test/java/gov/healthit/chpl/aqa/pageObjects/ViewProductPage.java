@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Class ViewProductPage definition.
  */
-public final class ViewProductPage {
+public final class ViewProductPage extends BasePage {
     private ViewProductPage() {
     }
 
