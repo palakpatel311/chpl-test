@@ -58,4 +58,12 @@ public class ViewVersionSteps extends Base {
         ViewVersionPage.editVersionField(getDriver()).sendKeys(Keys.TAB);
     }
 
+    /**
+     * Click Split link of a version.
+     * @param versionId is the version id passed in page objects
+     **/
+    @And("^I click the split version link for version \"(.*)\"$")
+    public void clickSplitVersionLink(final String versionId) {
+        ViewVersionPage.splitVersionLink(getDriver(), versionId).click();
+    }
 }

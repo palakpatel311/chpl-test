@@ -45,3 +45,18 @@ Scenario: Verify error message is displayed when the version field is left blank
     And I set the version field to ""
     Then I see error message "Field is required" for version "54"
 
+Scenario Outline: User logs in as ROLE and sees version split link exists on new developer page
+    Given I'm logged in as "<ROLE>"
+    When I navigate to the version edit page for version "49" of product "1482" of developer "934"
+    Then I see split link for version "49"
+    Examples:
+      |ROLE       |
+      |ROLE_ADMIN |
+      |ROLE_ACB   |
+      |ROLE_ONC   |
+
+Scenario: Verify message is displayed in listings moving to new version
+    Given I'm logged in as "ROLE_ADMIN"
+    When I navigate to the version edit page for version "49" of product "1482" of developer "934"
+    And I click the split version link for version "49"
+    Then I see "At least one Listing must be selected to move" in listings moving to new version section
