@@ -23,7 +23,7 @@ Scenario Outline: User logs in as ROLE and sees merge version link exists on new
 
 Scenario Outline: User logs in as ROLE and edits a version
     Given I'm logged in as "<ROLE>"
-    When I navigate to the version edit page for version "<version id>" of product "<product id>" of developer "<developer id>"
+    When I navigate to the version edit page for version "<version id>" of product "<version id>" of developer "<developer id>"
     And I edit for version "<version id>"
     Then I see the version is recorded and updated on View Version page of "<version id>"
     Examples:
@@ -47,13 +47,13 @@ Scenario: Verify error message is displayed when the version field is left blank
 
 Scenario Outline: User logs in as ROLE and sees version split link exists on new developer page
     Given I'm logged in as "<ROLE>"
-    When I navigate to the version edit page for version "49" of product "1482" of developer "934"
-    Then I see split link for version "49"
+    When I navigate to the version edit page for version "<version id>" of product "<product id>" of developer "<developer id>"
+    Then I see split link for version "<version id>"
     Examples:
-      |ROLE       |
-      |ROLE_ADMIN |
-      |ROLE_ACB   |
-      |ROLE_ONC   |
+      |ROLE       |version id|product id|developer id|
+      |ROLE_ADMIN |49        |1482      |934         |
+      |ROLE_ACB   |49        |1482      |934         |
+      |ROLE_ONC   |49        |1482      |934         |
 
 Scenario: Verify message is displayed in listings moving to new version
     Given I'm logged in as "ROLE_ADMIN"
