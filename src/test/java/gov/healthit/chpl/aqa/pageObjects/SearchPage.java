@@ -184,7 +184,7 @@ public final class SearchPage extends BasePage {
     }
 
     /**
-     * Returns text shown on search results dropdown filter for >50 size selection.
+     * Returns text shown on search results dropdown filter for greater than 50 size selection.
      * @param driver WebDriver
      * @return text element
      */
@@ -195,6 +195,7 @@ public final class SearchPage extends BasePage {
     /**
      * Returns text that holds chpl id in search results.
      * @param driver WebDriver
+     * @param chplID is CHPL ID on search results
      * @return text element
      */
     public static WebElement loadChplID(final WebDriver driver, final String chplID) {
