@@ -11,7 +11,7 @@ Scenario Outline: Verify whether search results file is downloaded and displays 
     Then the file is downloaded and contains selected filter options as "Edition,Developer,Product,Version,Certification Date,CHPL ID,Status,Details" where CHPL ID is "<CHPL ID>"
     Examples:
       |CHPL ID   |
-      |CHP-022844|
+      |CHP-028979|
       |CHP-026059|
       |CHP-028979|
 

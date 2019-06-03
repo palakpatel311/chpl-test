@@ -326,14 +326,6 @@
                {  
                   "implementationNote":"ROLE_ADMIN and ROLE_ONC",
                   "link":"authorizeUserUsingPOST"
-               },
-               {  
-                  "implementationNote":"ROLE_ADMIN and ROLE_ONC",
-                  "link":"grantUserRoleUsingPOST"
-               },
-               {  
-                  "implementationNote":"ROLE_ADMIN and ROLE_ONC",
-                  "link":"revokeUserRoleUsingDELETE"
                }
             ]
          }

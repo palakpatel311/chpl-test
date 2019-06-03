@@ -31,8 +31,7 @@ public class OncAcbManagementSteps extends Base {
      */
     @And("^I access \"([^\"]*)\" ACB details$")
     public void iClickOnONCACBName(final String acb) {
-        WebElement link =  OncAcbManagementPage.oncACBName(getDriver(), acb);
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        OncAcbManagementPage.oncACBName(getDriver(), acb).click();
     }
 
     /**

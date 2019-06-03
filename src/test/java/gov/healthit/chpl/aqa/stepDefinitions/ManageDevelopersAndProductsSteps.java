@@ -65,9 +65,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @And("^I navigate to Manage Surveillance Activity section$")
     public void loadManageSurveillanceActivityPage() {
-        DpManagementPage.administrationNavLink(getDriver()).click();
-        DpManagementPage.administrationUploadNavLink(getDriver()).click();
-        DpManagementPage.manageSurveillanceActivityLink(getDriver()).click();
+        getDriver().get(getUrl() + "#/admin/dpManagement/manageSurveillance");
     }
 
     /**
