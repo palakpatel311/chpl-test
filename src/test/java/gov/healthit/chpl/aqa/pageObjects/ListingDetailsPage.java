@@ -101,7 +101,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return the transparency disclosure URL
      */
     public static WebElement disclosureUrl(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"product-information-mandatory-disclosures-url\"]/a"));
+        return driver.findElement(By.xpath("//*[@id=\"listing-information-mandatory-disclosures-url\"]/a"));
     }
 
     /**
