@@ -15,7 +15,7 @@ public final class OncAcbManagementPage extends BasePage {
     }
 
     public static WebElement oncACBName(final WebDriver driver, final String oncAcbName) {
-        return driver.findElement(By.linkText(oncAcbName));
+        return driver.findElement(By.partialLinkText(oncAcbName));
     }
 
     public static WebElement editONCACB(final WebDriver driver) {
