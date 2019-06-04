@@ -301,14 +301,6 @@ public class ListingDetailsAsserts extends Base {
 
     /**
      * Asserts text on product history pop up.
-     */
-    @Then("^I click the 'Eye'$")
-    public void iClickEye() {
-        ListingDetailsPage.productHistoryEye(getDriver()).click();
-    }
-
-    /**
-     * Asserts text on product history pop up.
      * @param historyText is expected text on pop up
      */
     @Then("^the 'Eye' pop-up opens to show Product History \"(.*)\"$")

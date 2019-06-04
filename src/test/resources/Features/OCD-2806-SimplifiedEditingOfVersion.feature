@@ -4,8 +4,8 @@ Feature: OCD-2806 Simplified Editing of Version
 
 Scenario Outline: User logs in as ROLE and sees edit version link exists on new developer page
     Given I'm logged in as "<ROLE>"
-    When I navigate to the version edit page for version "5085" of product "1742" of developer "1816"
-    Then I see edit link for version "5085"
+    When I navigate to the version edit page for version "478" of product "1742" of developer "1816"
+    Then I see edit link for version "478"
     Examples:
       |ROLE       |
       |ROLE_ACB   |
@@ -14,8 +14,8 @@ Scenario Outline: User logs in as ROLE and sees edit version link exists on new 
 
 Scenario Outline: User logs in as ROLE and sees merge version link exists on new developer page
     Given I'm logged in as "<ROLE>"
-    When I navigate to the version edit page for version "5085" of product "1742" of developer "1816"
-    Then I see merge link for version "5085"
+    When I navigate to the version edit page for version "6041" of product "1742" of developer "1816"
+    Then I see merge link for version "6041"
     Examples:
       |ROLE       |
       |ROLE_ADMIN |
@@ -28,9 +28,9 @@ Scenario Outline: User logs in as ROLE and edits a version
     Then I see the version is recorded and updated on View Version page of "<version id>"
     Examples:
       |ROLE       |version id|product id|developer id|
-      |ROLE_ACB   |6118      |1742      |1816        |
-      |ROLE_ADMIN |2018      |1742      |1816        |
-      |ROLE_ONC   |6118      |1742      |1816        |
+      |ROLE_ACB   |6041      |1742      |1816        |
+      |ROLE_ADMIN |7177      |1742      |1816        |
+      |ROLE_ONC   |6042      |1742      |1816        |
 
 Scenario: Verify message is displayed in versions to merge section
     Given I'm logged in as "ROLE_ONC"

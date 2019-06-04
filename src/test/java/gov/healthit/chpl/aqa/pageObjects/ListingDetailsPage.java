@@ -204,7 +204,7 @@ public final class ListingDetailsPage extends BasePage {
      * @return button element
      */
     public static WebElement productHistoryEye(final WebDriver driver) {
-        return driver.findElement(By.id("view-product-history"));
+        return driver.findElement(By.id("view-listing-history"));
     }
 
     /**

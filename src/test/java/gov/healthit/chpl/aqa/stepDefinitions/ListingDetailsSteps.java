@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
@@ -125,5 +126,13 @@ public class ListingDetailsSteps extends Base {
         ListingDetailsPage.reportFileLocationField(getDriver()).sendKeys("https://" + getCurrentDate() + ".pdf");
         ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys("test");
         ListingDetailsPage.editCPSaveButton(getDriver()).click();
+    }
+
+    /**
+     * Click open product history pop up.
+     */
+    @Then("^I click the 'Eye'$")
+    public void iClickEye() {
+        ListingDetailsPage.productHistoryEye(getDriver()).click();
     }
 }
