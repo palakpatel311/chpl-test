@@ -388,10 +388,10 @@ public class ListingDetailsAsserts extends Base {
     }
 
     /**
-     * Assert that Improper format error message is displayed for invalid Mandatory Disclosures URL filed.
+     * Assert that Improper format error message is displayed for invalid Mandatory Disclosures URL field.
      * @param expectedErrorMessage is Improper format
      */
-    @Then("^I see \"([^\"]*)\" error message for Mandatory Disclosures URL filed$")
+    @Then("^I see \"([^\"]*)\" error message for Mandatory Disclosures URL field$")
     public void iSeeImproperFormatErrorMessageForUrlField(final String expectedErrorMessage) {
         String actualErrorMessage = ListingDetailsPage.urlFieldErrorMessage(getDriver()).getText();
         assertTrue(actualErrorMessage.contains(expectedErrorMessage));
