@@ -380,10 +380,10 @@ public class ListingDetailsAsserts extends Base {
     }
 
     /**
-     * Assert that Improper format error message is displayed for invalid Mandatory Disclosures URL filed.
+     * Assert that Improper format error message is displayed for invalid Mandatory Disclosures URL field.
      * @param expectedErrorMessage is Improper format
      */
-    @Then("^I see \"([^\"]*)\" error message for Mandatory Disclosures URL filed$")
+    @Then("^I see \"([^\"]*)\" error message for Mandatory Disclosures URL field$")
     public void iSeeImproperFormatErrorMessageForUrlField(final String expectedErrorMessage) {
         String actualErrorMessage = ListingDetailsPage.urlFieldErrorMessage(getDriver()).getText();
         assertTrue(actualErrorMessage.contains(expectedErrorMessage));
@@ -397,6 +397,56 @@ public class ListingDetailsAsserts extends Base {
     public void iSeeErrorMessageForReportFileLocation(final String expectedErrorMessage) {
         String actualErrorMessage = ListingDetailsPage.reportFileLocationErrorMessage(getDriver()).getText();
         assertTrue(actualErrorMessage.endsWith(expectedErrorMessage));
+    }
+
+    /**
+     * Assert that "Field is required" error message is displayed for Certification date.
+     * @param expectedErrorMessage is Field is required
+     */
+    @Then("^I see error message \"(.*)\" for Certification date$")
+    public void iSeeErrorMessageForCertificationDate(final String expectedErrorMessage) {
+        String actualErrorMessage = ListingDetailsPage.certificationDateErrorMessage(getDriver()).getText();
+        assertEquals(actualErrorMessage, expectedErrorMessage);
+    }
+
+    /**
+     * Assert that error message is correct.
+     * @param expectedErrorMessage is passed in scenario example
+     */
+    @Then("^I see error message \"(.*)\" for CHPL Product Number$")
+    public void iSeeErrorMessageForCHPLProductNumber(final String expectedErrorMessage) {
+        String actualErrorMessage = ListingDetailsPage.chplProductErrorMessage(getDriver()).getText();
+        assertEquals(actualErrorMessage, expectedErrorMessage);
+    }
+
+    /**
+     * Assert that Certification status message is correct.
+     * @param expectedCertificationStatusMessage is passed in scenario example
+     */
+    @Then("^I see the \"(.*)\"$")
+    public void iSeeCertificationStatusMessage(final String expectedCertificationStatusMessage) {
+        String actualCertificationStatusMessage = ListingDetailsPage.certificationStatusMessage(getDriver()).getText();
+        assertEquals(actualCertificationStatusMessage, expectedCertificationStatusMessage);
+    }
+
+    /**
+     * Assert that Other ACB value is correct and recorded.
+     */
+    @Then("^I see Other ACB is updated on listing details page under Additional Information section$")
+    public void iSeeOtherACBIsUpdated() {
+        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(ListingDetailsPage.updateSuccessfulToastContainer(getDriver())));
+        String actualValue = ListingDetailsPage.otherACBListingDetails(getDriver()).getText();
+        assertTrue(actualValue.contains(getCurrentDate()));
+    }
+
+    /**
+     * Assert that Relied Upon Software value is correct and recorded.
+     */
+    @Then("^I see Relied Upon Software is updated on listing details page$")
+    public void iSeeReliedUponSoftwareIsUpdated() {
+        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(ListingDetailsPage.updateSuccessfulToastContainer(getDriver())));
+        String actualValue = ListingDetailsPage.reliedUponSoftwareFieldListingDetails(getDriver()).getText();
+        assertTrue(actualValue.contains(getCurrentDate()));
     }
 }
 
