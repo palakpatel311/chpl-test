@@ -35,7 +35,7 @@ Scenario: User logs in as ROLE and edits a listing
     Given I'm logged in as "ROLE_ONC"
     When I am on listing details page of listing with ID "3384"
     And I click on edit certified product link
-    And I set the Report File Location filed
+    And I set the Report File Location field
     Then I see "not a valid URL." error message for Report File Location
 
 Scenario: Verify error message is displayed when the Certification Date field is left blank

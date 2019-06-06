@@ -119,7 +119,7 @@ public class ListingDetailsSteps extends Base {
     /**
      * Clear the Report File Location field and enter a value.
      */
-    @And("^I set the Report File Location filed$")
+    @And("^I set the Report File Location field$")
     public void iSetReportFileLocationField() {
         ListingDetailsPage.reportFileLocationField(getDriver()).clear();
         ListingDetailsPage.reportFileLocationField(getDriver()).sendKeys("https://" + getCurrentDate() + ".pdf");
