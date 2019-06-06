@@ -61,7 +61,7 @@ public class OverviewPageAsserts extends Base {
      * Verify that link points to correct URL.
      * @param url is URL tied to link text
      * @param linkText text of link
-     * @headerNumber is header locator
+     * @param headerNumber is header locator
      */
     @Then("^the link should point to correct url \"([^\"]*)\" for respective section of \"([^\"]*)\" and header \"([^\"]*)\" on the page$")
     public void urlForNavLinksOnOverviewPage(final String url, final String linkText, final String headerNumber) {
@@ -73,6 +73,8 @@ public class OverviewPageAsserts extends Base {
 
     /**
      * Asserts that headings are in the correct order on overview page.
+     * @param headingNumber is heading order on page
+     * @param headingText is the heading to look for
      */
     @Then("^heading number \"([^\"]*)\" on the page is: \"([^\"]*)\"$")
     public void verifySectionOrder(final String headingNumber, final String headingText) {
