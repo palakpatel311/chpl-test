@@ -436,5 +436,65 @@ public final class ListingDetailsPage extends BasePage {
     public static WebElement reportFileLocationErrorMessage(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/div[18]/ul/li"));
     }
+
+    public static WebElement certificationDateField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='cp-cert-date']"));
+    }
+
+    public static WebElement addtionalInformationSection(final WebDriver driver) {
+        return driver.findElement(By.xpath("//a[@id='details-additional-information']"));
+    }
+
+    public static WebElement certificationDateErrorMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/div[5]/div[2]"));
+    }
+
+    public static WebElement productCodeField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='id-prod']"));
+    }
+
+    public static WebElement versionCodeField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='id-ver']"));
+    }
+
+    public static WebElement icsField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='id-ics']"));
+    }
+
+    public static WebElement chplProductErrorMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/div[1]/div[2]"));
+    }
+
+    public static WebElement addCertificationStatus(final WebDriver driver) {
+        return driver.findElement(By.xpath("//tr[1]//td[4]//button[1]"));
+    }
+
+    public static WebElement selectCertificationStatus(final WebDriver driver, final String certificationStatus) {
+        return driver.findElement(By.xpath("//select[@name='certificationStatus0']//option[contains(text()," + certificationStatus + ")]"));
+    }
+
+    public static WebElement clickCertificationStatus(final WebDriver driver) {
+        return driver.findElement(By.xpath("//select[@name='certificationStatus0']"));
+    }
+
+    public static WebElement certificationStatusMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/table[1]/tbody/tr[2]/td[1]/div/div"));
+    }
+
+    public static WebElement otherACBField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='cp-other-acb']"));
+    }
+
+    public static WebElement otherACBListingDetails(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-other-acb\"]/p"));
+    }
+
+    public static WebElement reliedUponSoftwareField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='cp-additional-software']"));
+    }
+
+    public static WebElement reliedUponSoftwareFieldListingDetails(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-information-relied-upon-software\"]/p"));
+    }
 }
 
