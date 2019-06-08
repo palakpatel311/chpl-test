@@ -48,4 +48,7 @@ public class BasePage {
         return driver.findElement(By.xpath("//*[@id=\"toast-container\"]"));
     }
 
+    public static WebElement showNavigationLink(final WebDriver driver) {
+        return driver.findElement(By.xpath("/html/body/ai-compare-widget/header/nav/div[1]/button"));
+    }
 }
