@@ -1,9 +1,10 @@
+@surveillanceUpload
 @Regression
 Feature: OCD-2797 - Verify surveillance upload/confirm workflow is functional
 
   Scenario: Upload and confirm surveillance activity
     Given I'm logged in as "ROLE_ACB"
-    And I am on Upload Products & Surveillance page
+    And I am on Upload Surveillance page
     When I upload the "SurveillanceUpload_SLI.csv" surveillance activity
     Then I see upload successful message for surveillance upload
     When I go to Confirm Pending Surveillance Activities Page

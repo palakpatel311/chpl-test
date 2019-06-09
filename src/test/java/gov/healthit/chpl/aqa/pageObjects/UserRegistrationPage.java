@@ -18,7 +18,7 @@ public final class UserRegistrationPage {
      * @return button link
      */
     public static WebElement createNewAccount(final WebDriver driver) {
-        element = driver.findElement(By.xpath("//button[@class='btn btn-link']"));
+        element = driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div[2]/div/p[2]/button"));
         return element;
     }
 
