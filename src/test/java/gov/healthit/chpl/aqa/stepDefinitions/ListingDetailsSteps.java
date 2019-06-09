@@ -114,7 +114,7 @@ public class ListingDetailsSteps extends Base {
     public void iSetMandatoryDisclosuresURLField(final String url) {
         ListingDetailsPage.editMandatoryDisclosureURLField(getDriver()).clear();
         ListingDetailsPage.editMandatoryDisclosureURLField(getDriver()).sendKeys(url);
-        ListingDetailsPage.editMandatoryDisclosureURLField(getDriver()).sendKeys(Keys.RETURN);
+        ListingDetailsPage.editMandatoryDisclosureURLField(getDriver()).sendKeys(Keys.TAB);
     }
 
     /**
