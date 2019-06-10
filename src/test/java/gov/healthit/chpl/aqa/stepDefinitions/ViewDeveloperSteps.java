@@ -21,6 +21,7 @@ public class ViewDeveloperSteps extends Base {
      **/
     @Given("^I navigate to the developer page for developer \"([^\"]*)\"$")
     public void editDeveloperPage(final String developerId) {
+        getDriver().get(getUrl());
         getDriver().get(getUrl() + "#/organizations/developers/" + developerId);
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(ViewDeveloperPage.viewDeveloperPageTitle(getDriver())));
