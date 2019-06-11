@@ -496,5 +496,37 @@ public final class ListingDetailsPage extends BasePage {
     public static WebElement reliedUponSoftwareFieldListingDetails(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"listing-information-relied-upon-software\"]/p"));
     }
+
+    public static WebElement icsCheckbox(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='cp-ics']"));
+    }
+
+    public static WebElement icsErrorMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/div[8]/div/div[2]"));
+    }
+
+    public static WebElement editICSSourceField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='new-ics-parent-other']"));
+    }
+
+    public static WebElement addICSSource(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/div[8]/div/div[1]/div[2]/div/div/button"));
+    }
+
+    public static WebElement icsCodeErrorMessage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"listing-edit-\"]/div[16]/ul/li"));
+    }
+
+    public static WebElement qmsModificationField(final WebDriver driver) {
+        return driver.findElement(By.xpath("//input[@id='qms-modification-1261']"));
+    }
+
+    public static WebElement qmsDetailsListingDetailsPage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"criteria_170.315 (g)(4)_details_row_Quality_Management_System\"]"));
+    }
+
+    public static WebElement viewQMSDetailsListingDetailsPage(final WebDriver driver) {
+        return driver.findElement(By.xpath("//button[@id='criteria_170.315 (g)(4)_details_link']"));
+    }
 }
 

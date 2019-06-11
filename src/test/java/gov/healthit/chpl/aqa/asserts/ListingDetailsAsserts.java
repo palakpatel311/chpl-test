@@ -448,5 +448,34 @@ public class ListingDetailsAsserts extends Base {
         String actualValue = ListingDetailsPage.reliedUponSoftwareFieldListingDetails(getDriver()).getText();
         assertTrue(actualValue.contains(getCurrentDate()));
     }
+
+    /**
+     * Assert that error message is correct.
+     * @param expectedICSErrorMessage is passed in scenario
+     */
+    @Then("^I see \"(.*)\" for ICS$")
+    public void iSeeErrorMessageForICS(final String expectedICSErrorMessage) {
+        String actualICSErrorMessage = ListingDetailsPage.icsErrorMessage(getDriver()).getText();
+        assertEquals(actualICSErrorMessage, expectedICSErrorMessage);
+    }
+
+    /**
+     * Assert that error message is correct.
+     * @param expectedICSCodeErrorMessage is passed in scenario
+     */
+    @Then("^I see \"(.*)\" for ICS code$")
+    public void iSeeErrorMessageForICSCode(final String expectedICSCodeErrorMessage) {
+        String actualICSCodeErrorMessage = ListingDetailsPage.icsCodeErrorMessage(getDriver()).getText();
+        assertTrue(actualICSCodeErrorMessage.contains(expectedICSCodeErrorMessage));
+    }
+
+    /**
+     * Assert that QMS Details are correct.
+     */
+    @Then("^I see QMS details are updated on listing details page$")
+    public void iSeeQMSDetailsUpdated() {
+        String actualICSCodeErrorMessage = ListingDetailsPage.qmsDetailsListingDetailsPage(getDriver()).getText();
+        assertTrue(actualICSCodeErrorMessage.contains(getCurrentDate()));
+    }
 }
 
