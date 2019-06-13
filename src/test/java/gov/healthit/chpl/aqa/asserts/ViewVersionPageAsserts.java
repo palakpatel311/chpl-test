@@ -3,8 +3,6 @@ package gov.healthit.chpl.aqa.asserts;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,7 +20,6 @@ public class ViewVersionPageAsserts extends Base {
      */
     @Then("^I see the version is recorded and updated on View Version page of \"(.*)\"$")
     public void versionIsUpdatedOnViewVersionPage(final String versionId) {
-        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(ViewVersionPage.updateSuccessfulToastContainer(getDriver())));
         String actualProductVersion = ViewVersionPage.viewSavedVersion(getDriver(), versionId).getText();
         assertTrue(actualProductVersion.contains(getCurrentDate()));
     }
