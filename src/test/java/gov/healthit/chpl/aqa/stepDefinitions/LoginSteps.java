@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.LoginPage;
+import gov.healthit.chpl.aqa.pageObjects.SearchPage;
 
 /**
  * Class LoginSteps definition.
@@ -71,7 +72,9 @@ public class LoginSteps extends Base {
         }
         getDriver().get(getUrl() + "#/search");
         //pop up the login/out section
+        getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(getDriver()))));
         getWait().until(ExpectedConditions.visibilityOf(LoginPage.loginLogoutPopUp(getDriver())));
+        getWait().until(ExpectedConditions.elementToBeClickable(LoginPage.loginLogoutPopUp(getDriver())));
         LoginPage.loginLogoutPopUp(getDriver()).click();
         //when it's popped up we can see the username
         getWait().until(ExpectedConditions.visibilityOf(LoginPage.username(getDriver())));
@@ -81,8 +84,6 @@ public class LoginSteps extends Base {
         getWait().until(ExpectedConditions.visibilityOf(LoginPage.logoutButton(getDriver())));
         WebElement button = LoginPage.loginLogoutPopUp(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
-        //minimize the pop up of login/out section
-        getWait().until(ExpectedConditions.visibilityOf(LoginPage.loginLogoutPopUp(getDriver())));
     }
 
     /**

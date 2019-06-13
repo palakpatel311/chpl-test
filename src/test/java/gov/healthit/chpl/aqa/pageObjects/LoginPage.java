@@ -56,6 +56,12 @@ public final class LoginPage extends BasePage {
         element = driver.findElement(By.xpath("//*[@id=\"login-toggle\"]"));
         return element;
     }
+
+    public static WebElement adminLoginDropdown(final WebDriver driver) {
+        element = driver.findElement(By.id("admin"));
+        return element;
+    }
+
     /**
      * Returns logout button on admin login pop up.
      * @param driver WebDriver
