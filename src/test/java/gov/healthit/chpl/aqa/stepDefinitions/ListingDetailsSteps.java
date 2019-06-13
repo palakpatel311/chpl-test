@@ -223,4 +223,50 @@ public class ListingDetailsSteps extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", link);
         ListingDetailsPage.editCPSaveButton(getDriver()).click();
     }
+
+    /**
+     * Check the Inherited Certification Status checkbox.
+     **/
+    @And("^I check the Inheritied Certification Status checkbox$")
+    public void checkICSCheckbox() {
+        WebElement link = ListingDetailsPage.icsCheckbox(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true); window.scrollBy(0, -100);", link);
+        ListingDetailsPage.icsCheckbox(getDriver()).click();
+    }
+
+    /**
+     * Add a source to the Inheritied Certificaiton Status.
+     **/
+    @And("^I add a source to the Inheritied Certification Status$")
+    public void addSourceToICS() {
+        ListingDetailsPage.editICSSourceField(getDriver()).clear();
+        ListingDetailsPage.editICSSourceField(getDriver()).sendKeys("15.04.04.1447.Beac.AU.03.1.181213");
+        ListingDetailsPage.addICSSource(getDriver()).click();
+        WebElement link = ListingDetailsPage.editCPSaveButton(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", link);
+        ListingDetailsPage.editCPSaveButton(getDriver()).click();
+    }
+
+    /**
+     * Clear QMS Modification field and enter a value.
+     **/
+    @And("^I set QMS Modification field$")
+    public void setQMSModificationField() {
+        ListingDetailsPage.qmsModificationField(getDriver()).clear();
+        ListingDetailsPage.qmsModificationField(getDriver()).sendKeys(getCurrentDate());
+        WebElement link = ListingDetailsPage.editCPSaveButton(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", link);
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys("test");
+        ListingDetailsPage.editCPSaveButton(getDriver()).click();
+    }
+
+    /**
+     * Select and add QMS Standard from the drop-down list.
+     **/
+    @And("^I view QMS details on listing details page$")
+    public void viewQMSDetilsOnListingDetailsPage() {
+        WebElement link = ListingDetailsPage.viewQMSDetailsListingDetailsPage(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true); window.scrollBy(0, -100);", link);
+        ListingDetailsPage.viewQMSDetailsListingDetailsPage(getDriver()).click();
+    }
 }

@@ -137,4 +137,27 @@ Scenario: Verify editing Relied Upon Software field is saved and recorded on lis
     And I click on edit certified product link
     And I set the Relied Upon Software Field
     Then I see Relied Upon Software is updated on listing details page
-    
+
+Scenario: Verify error message is displayed for 2015 listing when ICS checkbox is checked and no source is added
+    Given I'm logged in as "ROLE_ADMIN"
+    When I am on listing details page of listing with ID "9400"
+    And I click on edit certified product link
+    And I check the Inheritied Certification Status checkbox
+    Then I see "Listing is marked as having Inherited Certification Status but does not have references to the Listing(s) it inherited from" for ICS
+
+Scenario: Verify error message is displayed when ICS checkbox is checked and source is added but ICS code is not updated in the CHPL Product Number
+    Given I'm logged in as "ROLE_ADMIN"
+    When I am on listing details page of listing with ID "9400"
+    And I click on edit certified product link
+    And I check the Inheritied Certification Status checkbox
+    And I add a source to the Inheritied Certification Status
+    Then I see "ICS Code must be exactly one more than highest ICS code of all of this Listing's ICS parents" for ICS code
+
+Scenario: Verify editing QMS Standard is saved and recorded on listing details page under Quality Management System
+    Given I'm logged in as "ROLE_ADMIN"
+    When I am on listing details page of listing with ID "9400"
+    And I click on edit certified product link
+    And I set QMS Modification field
+    And I view QMS details on listing details page
+    Then I see QMS details are updated on listing details page
+
