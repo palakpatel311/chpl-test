@@ -51,4 +51,8 @@ public class BasePage {
     public static WebElement showNavigationLink(final WebDriver driver) {
         return driver.findElement(By.xpath("/html/body/ai-compare-widget/header/nav/div[1]/button"));
     }
+
+    public static WebElement headerNav(final WebDriver driver) {
+        return driver.findElement(By.xpath("/html/body/ai-compare-widget/header/nav[1]"));
+    }
 }
