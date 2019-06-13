@@ -39,6 +39,10 @@ public final class ViewProductPage extends BasePage {
         return driver.findElement(By.xpath("//*[@id=\"product-component-save-" + productId + "\"]"));
     }
 
+    public static WebElement lastModifiedDateOnProductEdit(final WebDriver driver, final String productId) {
+        return driver.findElement(By.xpath("//*[@id=\"chpl-product-" + productId + "\"]/span/span[2]/em"));
+    }
+
     public static WebElement viewProductName(final WebDriver driver, final String productId) {
         return driver.findElement(By.xpath("//*[@id=\"chpl-product-" + productId + "\"]/span/span[2]"));
     }
