@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
@@ -65,9 +64,9 @@ public class DpmanagementUploadPageAsserts extends Base {
     public void verifySurveillanceConfirmWasSuccessful() {
         getDriver().get(getUrl() + "/#/listing/9713/surveillance");
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.surveillanceActivitiesAccordion(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.surveillanceActivitiesAccordion(getDriver())));
 
+        getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.surveillanceActivitiesPanel(getDriver())));
         String surveillanceText = ListingDetailsPage.surveillanceActivitiesPanel(getDriver()).getText();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd" + ", " + "yyyy");
         LocalDate newDate = LocalDate.now();
