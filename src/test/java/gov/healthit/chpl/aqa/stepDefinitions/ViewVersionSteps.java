@@ -35,7 +35,10 @@ public class ViewVersionSteps extends Base {
         ViewVersionPage.editVersionLink(getDriver(), versionId).click();
         ViewVersionPage.editVersionField(getDriver()).clear();
         ViewVersionPage.editVersionField(getDriver()).sendKeys(getCurrentDate());
+        getWait().until(ExpectedConditions.elementToBeClickable(ViewVersionPage.editVersionSaveButton(getDriver(), versionId)));
         ViewVersionPage.editVersionSaveButton(getDriver(), versionId).click();
+        getWait().until(ExpectedConditions.visibilityOf(ViewVersionPage.lastModifiedDateOnVersionEdit(getDriver(), versionId)));
+        getWait().until(ExpectedConditions.visibilityOf(ViewVersionPage.viewSavedVersion(getDriver(), versionId)));
     }
 
     /**

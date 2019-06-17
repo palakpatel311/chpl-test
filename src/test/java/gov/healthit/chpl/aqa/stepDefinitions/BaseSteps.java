@@ -1,13 +1,12 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.BasePage;
+import gov.healthit.chpl.aqa.pageObjects.SearchPage;
 /**
  * Class BaseSteps definition.
  */
@@ -17,9 +16,12 @@ public class BaseSteps extends Base {
      */
     @When("^I click CHPL Resources Top Navigation Link$")
     public void iclickCHPLResourcesTopNavigationLink() {
-        WebDriver driver =  getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(BasePage.chplResourcesDropdown(driver))).click();
+        getWait().until(ExpectedConditions.elementToBeClickable(BasePage.showNavigationLink(getDriver())));
+        BasePage.showNavigationLink(getDriver()).click();
+        getWait().until(ExpectedConditions.visibilityOf(BasePage.chplResourcesDropdown(getDriver())));
+        getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(getDriver()))));
+        getWait().until(ExpectedConditions.elementToBeClickable(BasePage.chplResourcesDropdown(getDriver())));
+        BasePage.chplResourcesDropdown(getDriver()).click();
     }
 
     /**
