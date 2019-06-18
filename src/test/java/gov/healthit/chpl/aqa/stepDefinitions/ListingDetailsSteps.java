@@ -269,4 +269,12 @@ public class ListingDetailsSteps extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true); window.scrollBy(0, -100);", link);
         ListingDetailsPage.viewQMSDetailsListingDetailsPage(getDriver()).click();
     }
+
+    /**
+     * Asserts text on product history pop up.
+     */
+    @When("^I click the 'Eye'$")
+    public void iClickEye() {
+        ListingDetailsPage.productHistoryEye(getDriver()).click();
+    }
 }

@@ -66,5 +66,3 @@ Scenario Outline: Product history eye shows developer edit activity
       |ROLE_ACB   |1031      |673         |3783      |
       |ROLE_ADMIN |145       |1675        |4229      |
       |ROLE_ONC   |2102      |1298        |5737      |
-
-
