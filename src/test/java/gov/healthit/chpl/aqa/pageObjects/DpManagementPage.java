@@ -301,7 +301,7 @@ public final class DpManagementPage {
     }
 
     public static WebElement uploadFileButtonForSurveillance(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload-surveillances/div/form/div/div[4]/button[1]"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload-surveillance/div/form/div/div[4]/button[1]"));
     }
 
     /**
@@ -319,7 +319,7 @@ public final class DpManagementPage {
      * @return text element
      */
     public static WebElement uploadSuccessfulTextSurveillanceUpload(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload-surveillances/div/div"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload-surveillance/div/div"));
     }
 
     /**

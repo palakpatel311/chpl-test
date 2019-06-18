@@ -396,6 +396,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
         String absolutePath = Paths.get(resource.toURI()).toString();
 
         DpManagementPage.chooseFileButton(getDriver()).sendKeys(absolutePath);
+        getWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.uploadFileButtonForSurveillance(getDriver())));
         DpManagementPage.uploadFileButtonForSurveillance(getDriver()).click();
     }
 
