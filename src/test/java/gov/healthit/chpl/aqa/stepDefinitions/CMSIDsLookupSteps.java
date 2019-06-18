@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gov.healthit.chpl.aqa.pageObjects.BasePage;
 import gov.healthit.chpl.aqa.pageObjects.CMSidReverseLookupPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 
@@ -57,7 +56,6 @@ public class CMSIDsLookupSteps extends Base {
             wait.until(ExpectedConditions.visibilityOf(ListingDetailsPage.listingName(getDriver())));
             ListingDetailsPage.cmsWidgetButton(getDriver(), id).click();
         }
-        BasePage.showNavigationLink(getDriver()).click();
     }
 
     /**
