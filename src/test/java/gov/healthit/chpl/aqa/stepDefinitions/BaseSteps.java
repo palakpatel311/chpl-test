@@ -16,8 +16,6 @@ public class BaseSteps extends Base {
      */
     @When("^I click CHPL Resources Top Navigation Link$")
     public void iclickCHPLResourcesTopNavigationLink() {
-        getWait().until(ExpectedConditions.elementToBeClickable(BasePage.showNavigationLink(getDriver())));
-        BasePage.showNavigationLink(getDriver()).click();
         getWait().until(ExpectedConditions.visibilityOf(BasePage.chplResourcesDropdown(getDriver())));
         getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(SearchPage.pendingMask(getDriver()))));
         getWait().until(ExpectedConditions.elementToBeClickable(BasePage.chplResourcesDropdown(getDriver())));
