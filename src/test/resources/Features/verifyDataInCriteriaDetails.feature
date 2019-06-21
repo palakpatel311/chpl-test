@@ -43,7 +43,7 @@ Scenario Outline: Verify Privacy and security Framework field displays correct v
     Then Privacy and security Framework should display "<PrivacySecurity>" for criteria "<CRITERIA>"
     Examples:
       | CHPL_ID                           | CRITERIA       | PrivacySecurity |
-      | 15.04.04.1039.Acum.08.00.1.171231 | 170.315 (a)(7) |  Approach 1     |
+      | 9225 | 170.315 (a)(7) |  Approach 1     |
       | 15.04.04.1146.eChi.18.01.1.180403 | 170.315 (a)(7) |  Approach 1     |
       | 15.04.04.1306.Free.05.00.1.171223 | 170.315 (a)(7) |  Approach 1     |
       | 15.04.04.1467.Exsc.06.00.0.180305 | 170.315 (a)(7) |  Approach 1     |
@@ -61,33 +61,33 @@ Scenario Outline: Verify Functionality Tested field displays correct edition and
     When I open details for criteria "<CRITERIA>"
     Then Functionality Tested should display "<Functionality_Tested>" for criteria "<CRITERIA>"
     Examples:
-    | CHPL_ID                           | CRITERIA       | Functionality_Tested |
-    | 15.04.04.2087.Acui.02.00.1.180409 | 170.315 (a)(4) | Alternative: 170.315(a)(4)(ii)(B)(1) To a specific set of identified users|  
-    | 15.04.04.2087.Acui.02.00.1.180409 | 170.315 (a)(7) | Ambulatory: 170.315(a)(7)(i) Over multiple encounters|
-    | 15.04.04.2087.Acui.02.00.1.180409 | 170.315 (a)(8) | Ambulatory: 170.315(a)(8)(i) Over multiple encounters|
-    | 14.04.04.2916.Smar.61.01.0.170411 | 170.314 (a)(6) | Ambulatory setting: 170.314(a)(6)(i) Over multiple encounters|
-    | 14.04.04.2916.Smar.61.01.0.170411 | 170.314 (a)(7) | Ambulatory setting: 170.314(a)(7)(i) Over multiple encounters|
-    | 15.02.02.1112.A062.01.00.1.180320 | 170.315 (b)(5) | Ambulatory: 170.315(b)(5)(i)(E) The reason for referral|
-    | 15.02.02.1112.A062.01.00.1.180320 | 170.315 (b)(5) | Alternative: 170.315(b)(5)(ii)(A)(5)(i) Be notified of the errors produced|
-    | 15.02.02.1112.A062.01.00.1.180320 | 170.315 (g)(6) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
-    | 15.02.02.1112.A062.01.00.1.180320 | 170.315 (g)(8) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
-    | 15.02.02.2614.A053.01.00.1.180123 | 170.315 (b)(5) | Alternative: 170.315(b)(5)(ii)(A)(5)(i) Be notified of the errors produced|
-    | 15.02.02.2898.A042.01.00.1.170929 | 170.315 (b)(5) | Ambulatory: 170.315(b)(5)(i)(E) The reason for referral|
-    | 15.02.02.1112.A062.01.00.1.180320 | 170.315 (g)(9) | Optional: CCDS: 170.102(13)(ii)(C) The patient’s BMI percentile|
-    | 15.02.02.1112.A062.01.00.1.180320 | 170.315 (g)(9) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
-    | 15.02.02.2614.A053.01.00.1.180123 | 170.315 (g)(6) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
-    | 15.02.02.2614.A053.01.00.1.180123 | 170.315 (g)(8) | Optional: CCDS: 170.102(13)(ii)(C) The patient’s BMI percentile|
-    | 15.04.04.1039.Acum.08.00.1.171231 | 170.315 (a)(13)| None |
-    | 15.04.04.1144.AntW.71.01.1.171219 | 170.315 (a)(13)| None |
-    | 15.04.04.1183.Thri.20.02.1.180331 | 170.315 (b)(2) | None |
-    | 15.04.04.1183.Thri.PR.02.1.180331 | 170.315 (b)(2) | None |
-    | 15.04.04.1200.HIEB.15.00.1.171127 | 170.315 (a)(13)| None |
-    | 15.04.04.1206.Amaz.10.00.1.180608 | 170.315 (b)(2) | None |
-    | 15.04.04.1206.Amaz.10.01.1.180801 | 170.315 (b)(2) | None |
-    | 15.04.04.1221.Firs.15.03.1.180727 | 170.315 (b)(2) | None |
-    | 15.04.04.1221.Firs.18.03.1.180727 | 170.315 (b)(2) | None |
-    | 15.04.04.2996.Char.12.01.1.180416 |170.315 (a)(13) | None |
-    | 15.07.04.2804.Inte.SP.01.1.181113 | 170.315 (a)(13)| None |
+    | CHPL_ID| CRITERIA       | Functionality_Tested |
+    | 9608   | 170.315 (a)(4) | Alternative: 170.315(a)(4)(ii)(B)(1) To a specific set of identified users|  
+    | 9608   | 170.315 (a)(7) | Ambulatory: 170.315(a)(7)(i) Over multiple encounters|
+    | 9608   | 170.315 (a)(8) | Ambulatory: 170.315(a)(8)(i) Over multiple encounters|
+    | 8490   | 170.314 (a)(6) | Ambulatory setting: 170.314(a)(6)(i) Over multiple encounters|
+    | 8490   | 170.314 (a)(7) | Ambulatory setting: 170.314(a)(7)(i) Over multiple encounters|
+    | 9318   | 170.315 (b)(5) | Ambulatory: 170.315(b)(5)(i)(E) The reason for referral|
+    | 9318   | 170.315 (b)(5) | Alternative: 170.315(b)(5)(ii)(A)(5)(i) Be notified of the errors produced|
+    | 9318   | 170.315 (g)(6) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
+    | 9318   | 170.315 (g)(8) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
+    | 9187   | 170.315 (b)(5) | Alternative: 170.315(b)(5)(ii)(A)(5)(i) Be notified of the errors produced|
+    | 8851   | 170.315 (b)(5) | Ambulatory: 170.315(b)(5)(i)(E) The reason for referral|
+    | 9318   | 170.315 (g)(9) | Optional: CCDS: 170.102(13)(ii)(C) The patient’s BMI percentile|
+    | 9318   | 170.315 (g)(9) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
+    | 9187   | 170.315 (g)(6) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
+    | 9187   | 170.315 (g)(8) | Optional: CCDS: 170.102(13)(ii)(C) The patient’s BMI percentile|
+    | 9225   | 170.315 (a)(13)| None |
+    | 9098   | 170.315 (a)(13)| None |
+    | 9339   | 170.315 (b)(2) | None |
+    | 9340   | 170.315 (b)(2) | None |
+    | 8976   | 170.315 (a)(13)| None |
+    | 9543   | 170.315 (b)(2) | None |
+    | 9745   | 170.315 (b)(2) | None |
+    | 9569   | 170.315 (b)(2) | None |
+    | 9570   | 170.315 (b)(2) | None |
+    | 9555   |170.315 (a)(13) | None |
+    | 9739   | 170.315 (a)(13)| None |
     
     Scenario: Upload sample listing for 2015 edition
     Given I'm logged in as "ROLE_ACB"
