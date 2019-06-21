@@ -42,19 +42,19 @@ Scenario Outline: Verify Privacy and security Framework field displays correct v
     When I open details for criteria "<CRITERIA>"
     Then Privacy and security Framework should display "<PrivacySecurity>" for criteria "<CRITERIA>"
     Examples:
-      | CHPL_ID                           | CRITERIA       | PrivacySecurity |
-      | 9225 | 170.315 (a)(7) |  Approach 1     |
-      | 15.04.04.1146.eChi.18.01.1.180403 | 170.315 (a)(7) |  Approach 1     |
-      | 15.04.04.1306.Free.05.00.1.171223 | 170.315 (a)(7) |  Approach 1     |
-      | 15.04.04.1467.Exsc.06.00.0.180305 | 170.315 (a)(7) |  Approach 1     |
-      | 15.04.04.1889.MedC.03.00.0.171212 | 170.315 (a)(7) |  Approach 1     |
-      | 15.04.04.2891.Para.14.01.1.180403 | 170.315 (a)(7) |  Approach 1     |
-      | 15.07.07.1447.EP03.01.01.1.161014 | 170.315 (a)(7) |  Approach 2     |
-      | 15.07.07.1447.EP03.01.01.1.161014 | 170.315 (a)(7) |  Approach 2     |
-      | 15.07.07.1447.EP04.01.00.1.160720 | 170.315 (a)(7) |  Approach 2     |
-      | 15.07.07.1447.EP04.02.04.1.170403 | 170.315 (a)(7) |  Approach 2     |
-      | 15.07.07.1456.TH02.01.00.1.170203 | 170.315 (a)(7) |  Approach 2     |
-      | 15.02.02.2669.A067.01.00.1.180411 | 170.315 (a)(7) |  Approach 1     |
+      | CHPL_ID| CRITERIA       | PrivacySecurity |
+      | 9225   | 170.315 (a)(7) |  Approach 1     |
+      | 9371   | 170.315 (a)(7) |  Approach 1     |
+      | 9080   | 170.315 (a)(7) |  Approach 1     |
+      | 9328   | 170.315 (a)(7) |  Approach 1     |
+      | 9183   | 170.315 (a)(7) |  Approach 1     |
+      | 9401   | 170.315 (a)(7) |  Approach 1     |
+      | 8117   | 170.315 (a)(7) |  Approach 2     |
+      | 8117   | 170.315 (a)(7) |  Approach 2     |
+      | 7971   | 170.315 (a)(7) |  Approach 2     |
+      | 8501   | 170.315 (a)(7) |  Approach 2     |
+      | 8338   | 170.315 (a)(7) |  Approach 2     |
+      | 9367   | 170.315 (a)(7) |  Approach 1     |
       
 Scenario Outline: Verify Functionality Tested field displays correct edition and criteria specific values in applicable criteria details 
     Given I am on listing details page of listing with ID "<CHPL_ID>"
