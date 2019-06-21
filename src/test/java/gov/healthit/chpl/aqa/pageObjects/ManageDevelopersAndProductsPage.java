@@ -42,20 +42,11 @@ import org.openqa.selenium.WebElement;
         }
 
         /**
-         * Returns Edit Certified Product link.
-         * @param driver WebDriver
-         * @return link element
-         */
-        public static WebElement editCertifiedProductLink(final WebDriver driver) {
-            return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div[3]/div[5]/div/div/div/div[1]/span[2]/span/a"));
-        }
-
-        /**
          * Returns element that holds date string.
          * @param driver WebDriver
          * @return date element
          */
         public static WebElement sedEndDateOfTesting(final WebDriver driver) {
-            return driver.findElement(By.xpath("//*[@id=\"main-content\"]/section/div/div[3]/div[5]/div/div/div/div[2]/span"));
+            return driver.findElement(By.xpath("//*[@id=\"panel-sed\"]/div/span/span[4]/p"));
        }
 }

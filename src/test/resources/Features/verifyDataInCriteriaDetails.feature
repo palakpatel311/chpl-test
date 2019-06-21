@@ -1,4 +1,5 @@
 @Regression
+@criteriaDetails
 Feature: Verify data in criteria details
   OCD-1951 - Clean up test tool options. Tests below verify update where some of the Test Tools have been consoliated,
   Test tool field displays correct values as per the update.

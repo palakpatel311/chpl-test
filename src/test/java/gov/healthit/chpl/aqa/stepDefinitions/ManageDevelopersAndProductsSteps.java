@@ -30,7 +30,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import cucumber.api.cli.Main;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
@@ -51,21 +50,11 @@ public class ManageDevelopersAndProductsSteps extends Base {
     }
 
     /**
-     * Loads a listing for given Database ID.
-     * @param id the Database or CHPL ID of a listing to load
-     */
-    @Given("^I navigate to Manage Developers and Products page listing details section of listing with ID \"([^\"]*)\"$")
-    public void loadListingDetailsDpManagementPage(final String id) {
-        getDriver().get(getUrl() + "#/admin/dpManagement/manage/" + id);
-        getWait().until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver())));
-    }
-
-    /**
      * Get user to Manage Surveillance Activity section.
      */
     @And("^I navigate to Manage Surveillance Activity section$")
     public void loadManageSurveillanceActivityPage() {
-        getDriver().get(getUrl() + "#/admin/dpManagement/manageSurveillance");
+        getDriver().get(getUrl() + "#/surveillance/manage");
     }
 
     /**
@@ -223,6 +212,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @Then("^SED End Date of Testing field should display the date \"([^\"]*)\" in listing details section$")
     public void testSedEndDateOfTestingDisplayedInListingDetailsDpmgmt(final String sedEndDate) {
+        WebElement link = ListingDetailsPage.sedAccordion(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         String actualText = ManageDevelopersAndProductsPage.sedEndDateOfTesting(getDriver()).getText();
         assertTrue(actualText.contains(sedEndDate), "Expect " + sedEndDate + " to be found in " + actualText);
     }
@@ -326,10 +317,10 @@ public class ManageDevelopersAndProductsSteps extends Base {
     /**
      * Load listing's edit page.
      */
-    @When("^I am on Product management page of uploaded listing$")
+    @When("^I am on listing details page of uploaded listing$")
     public void loadProductManagementPage() {
-        getDriver().get(getUrl() + "#/admin/dpManagement/manage/" + this.chplProductNumber);
-        getWait().until(ExpectedConditions.visibilityOf(ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver())));
+        getDriver().get(getUrl() + "#/listing/" + this.chplProductNumber);
+        getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.editCPLink(getDriver())));
     }
 
     /**
@@ -337,7 +328,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @And("^I open listing edit page$")
     public void openListingEditPage() {
-        WebElement link = ManageDevelopersAndProductsPage.editCertifiedProductLink(getDriver());
+        WebElement link = ListingDetailsPage.editCPLink(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
