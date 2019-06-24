@@ -14,10 +14,10 @@ Scenario Outline: Verify newly added CQMs in listing details
     
     Scenario Outline: Verify newly added CQM versions
     Given I'm logged in as "ROLE_ACB"
-    And I navigate to Manage Developers and Products page listing details section of listing with ID "8511"
+    When I am on listing details page of listing with ID "8511"
     And I open listing edit page
     When I look at CQM details  
-    Then there should be version "<version>" available for "<CQM>"    
+    Then there should be version "<version>" available for "<CQM>"  
     Examples:
     |version|CQM|
     |v8|CMS2: Preventive Care and Screening: Screening for Clinical Depression and Follow-Up Plan|

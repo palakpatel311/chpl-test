@@ -50,11 +50,10 @@ Scenario Outline: Upload sample listing for 2015 edition
     And I open inspect form to inspect listing details
     And I confirm "2015" listing with CHPL ID "15.05.05.1447.SLI1.v1.00.1.180707"
     Then I see that listing was uploaded successfully to CHPL and listing details load as expected for uploaded "2015" listing  
-    When I am on Product management page of uploaded listing
-    And I open details for criteria "170.315 (a)(2)"
+    And I open details for criteria "170.315 (a)(1)"
     Then Measure Successfully Tested for "<gOption>" should display "<Measure_Name>" for "<CRITERIA>"
     Examples:
     |gOption|Measure_Name|CRITERIA|
-    |G1|Computerized Provider Order - Laboratory: Eligible Professional|170.315 (a)(2)|
-    |G2|Computerized Provider Order - Laboratory: Eligible Professional|170.315 (a)(2)|
+    |G1|Computerized Provider Order Entry - Medications: Eligible Hospital/Critical Access Hospital|170.315 (a)(1)|
+    |G2|Computerized Provider Order Entry - Medications: Eligible Hospital/Critical Access Hospital|170.315 (a)(1)|
     
