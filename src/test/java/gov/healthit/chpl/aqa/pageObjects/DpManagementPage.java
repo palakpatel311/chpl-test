@@ -45,6 +45,10 @@ public final class DpManagementPage {
         return driver.findElement(By.xpath("//*[@id=\"surveillance-search-single-result\"]/tbody/tr[1]/td"));
     }
 
+    public static WebElement manageProductSurveillance(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-surveillance-management/div/div[2]"));
+    }
+
     /**
      * Return the table containing surveillance details for a single Listing.
      * @param driver WebDriver
@@ -279,7 +283,11 @@ public final class DpManagementPage {
      * @return surveillanceSearch element
      */
     public static WebElement surveillanceSearch(final WebDriver driver) {
-        return driver.findElement(By.id("surveillance-search"));
+        return driver.findElement(By.id("generalFilter"));
+    }
+
+    public static WebElement chplIdInSurveillanceSearch(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-surveillance-management/div/div[2]/div/div/div/table/tbody/tr/td[1]/button"));
     }
 
     /**
