@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +23,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -64,24 +63,14 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @When("^I search for \"([^\"]*)\" in Manage Surveillance Activity section$")
     public void searchForChplIdInSurvSearch(final String chplId) throws Exception {
-        final long millisPerSecond = 1000;
-        Date start = new Date();
-        Date end;
-        try {
+
             DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
-            DpManagementPage.survSearchButton(getDriver()).click();
-            start = new Date();
-            getWait()
-            .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(DpManagementPage.surveillanceSearchSingleResultTable(getDriver())));
-            end = new Date();
-            System.out.println("Found table in " + ((end.getTime() - start.getTime()) / millisPerSecond) + " seconds");
-        } catch (NoSuchElementException nsee) {
-            end = new Date();
-            System.out.println("Did not find table in " + ((end.getTime() - start.getTime()) / millisPerSecond) + " seconds");
-            Hooks.takeScreenshot("searchForChplIdInSurvSearch" + chplId);
-            assertTrue(false, "chpl id search: " + nsee.getMessage());
-        }
+            DpManagementPage.surveillanceSearch(getDriver()).sendKeys(Keys.ENTER);
+            getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.chplIdInSurveillanceSearch(getDriver())));
+            getWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.chplIdInSurveillanceSearch(getDriver())));
+            DpManagementPage.chplIdInSurveillanceSearch(getDriver()).click();
+            getWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.manageProductSurveillance(getDriver())));
+
     }
 
     /**
@@ -226,22 +215,6 @@ public class ManageDevelopersAndProductsSteps extends Base {
     public void testSedTestingEndDateDisplayedInSedDetails(final String sedEndDate) {
         String actualText = ListingDetailsPage.sedPanel(getDriver()).getText();
         assertTrue(actualText.contains(sedEndDate), "Expect " + sedEndDate + " to be found in " + actualText);
-    }
-
-    /**
-     * Verify surveillance search results load by validating CHPL ID in results.
-     * @param chplId is chplId to look up
-     * @throws Exception if results did not load and chplId was not found
-     */
-    @Then("^I see the surveillance results for \"([^\"]*)\"$")
-    public void testSurveillanceResultsAsExpected(final String chplId) throws Exception {
-        try {
-            String actualString = DpManagementPage.chplProductNumber(getDriver()).getText();
-            assertTrue(actualString.contains(chplId), "Expect \"" + chplId + "\" to be found in \"" + actualString + "\"");
-        } catch (NoSuchElementException nsee) {
-            Hooks.takeScreenshot(chplId);
-            assertTrue(false, chplId + ": " + nsee.getMessage());
-        }
     }
 
     /**
