@@ -67,7 +67,7 @@ public final class SurveillanceComplaintsPage extends BasePage {
     }
 
     public static WebElement editComplaintButton(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/div/div[3]/table/tbody/tr[1]/td[7]/button[1]/i"));
+        return driver.findElement(By.cssSelector("a[title='Edit Complaint']"));
     }
 
     public static WebElement flagForONCReviewCheckbox(final WebDriver driver) {

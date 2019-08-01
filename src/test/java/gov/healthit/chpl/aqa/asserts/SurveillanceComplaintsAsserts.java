@@ -1,5 +1,6 @@
 package gov.healthit.chpl.aqa.asserts;
 
+import static org.junit.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import java.util.List;
@@ -84,7 +85,7 @@ public class SurveillanceComplaintsAsserts extends Base {
     @Then("^the complaint with ONC-ACB Complaint ID \"([^\"]*)\" should not display in complaints view table$")
     public void verifyComplaintIsDeleted(final String acbComplaintId) {
         getDriver().navigate().refresh();
-        boolean isFound = true;
+        boolean isFound = false;
 
         WebElement table = SurveillanceComplaintsPage.complaintsTable(getDriver());
         List<WebElement> rows = table.findElements(By.xpath("tbody/tr"));
@@ -92,11 +93,11 @@ public class SurveillanceComplaintsAsserts extends Base {
         for (WebElement row : rows) {
             List<WebElement> cols = row.findElements(By.xpath("td"));
             if (cols.get(ACBCOMPLAINTID_COL).getText().equals(acbComplaintId)) {
-                isFound = false;
+                isFound = true;
                 break;
             }
         }
-        assertTrue(isFound, "Text: " + acbComplaintId + " not found");
+        assertFalse(isFound);
     }
 
     @Then("^the listing \"([^\"]*)\" should be associated to the complaint$")

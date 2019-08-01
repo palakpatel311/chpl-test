@@ -49,10 +49,6 @@ public class SurveillanceComplaintsSteps extends Base {
         SurveillanceComplaintsPage.oncComplaintId(getDriver()).sendKeys(oncComplaintId);
         SurveillanceComplaintsPage.complainantType(getDriver()).sendKeys(complainantType);
         SurveillanceComplaintsPage.summary(getDriver()).sendKeys(summary);
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", SurveillanceComplaintsPage.complainantContactedCheckbox(getDriver()));
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", SurveillanceComplaintsPage.developerContactedCheckbox(getDriver()));
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", SurveillanceComplaintsPage.oncATLContactedCheckbox(getDriver()));
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", SurveillanceComplaintsPage.flagForONCReviewCheckbox(getDriver()));
     }
 
     @When("^I click save button$")
