@@ -14,24 +14,24 @@ public final class SurveillanceComplaintsPage extends BasePage {
         return driver.findElement(By.id("actions"));
     }
 
-    public static WebElement addNewComplaintLink(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/div/button"));
+    public static WebElement addNewComplaintButton(final WebDriver driver) {
+        return driver.findElement(By.id("add-new-complaint"));
     }
 
     public static WebElement addComplaintFormTitle(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/h2"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[1]/h2"));
     }
 
     public static WebElement associatedCriteriaValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[12]/div[1]/span"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[13]/div[1]/span/button"));
     }
 
     public static WebElement associatedListingValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[10]/div/span"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[11]/div/span/button"));
     }
 
     public static WebElement associatedSurveillanceValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[11]/div/span"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[12]/div/span/button"));
     }
 
     public static WebElement certifiedProductField(final WebDriver driver) {
@@ -43,7 +43,7 @@ public final class SurveillanceComplaintsPage extends BasePage {
     }
 
     public static WebElement complaintsTable(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table"));
+        return driver.findElement(By.id("complaints-table"));
     }
 
     public static WebElement complainantType(final WebDriver driver) {
@@ -59,7 +59,7 @@ public final class SurveillanceComplaintsPage extends BasePage {
     }
 
     public static WebElement deleteComplaintButton(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[17]/button[3]"));
+        return driver.findElement(By.cssSelector("a[title='Delete Complaint']"));
     }
 
      public static WebElement developerContactedCheckbox(final WebDriver driver) {
@@ -67,7 +67,7 @@ public final class SurveillanceComplaintsPage extends BasePage {
     }
 
     public static WebElement editComplaintButton(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr[63]/td[7]/button"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/div/div[3]/table/tbody/tr[1]/td[7]/button[1]/i"));
     }
 
     public static WebElement flagForONCReviewCheckbox(final WebDriver driver) {
@@ -91,11 +91,11 @@ public final class SurveillanceComplaintsPage extends BasePage {
     }
 
      public static WebElement saveButtonOnNewComplaintForm(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[16]/button[1]/i"));
+        return driver.findElement(By.id("save-complaint"));
     }
 
     public static WebElement saveButtonOnEditComplaintForm(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[17]/button[1]/i"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[18]/button[1]"));
     }
 
     public static WebElement surveillanceField(final WebDriver driver) {

@@ -9,7 +9,7 @@ Feature: Verify complaints can be added
 Scenario Outline: Add a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
-    When I click Add New Complaint link
+    When I click Add New Complaint button
     Then "Add Complaint" form should open to add new complaint
     When I enter complaint data in fields: "<ONC-ACB>" "<Received Date>" "<Closed Date>" "<ONC-ACB Complaint ID>" "<ONC Complaint ID>" "<Complainant Type>" "<Summary>"
     And I click save button
@@ -21,50 +21,54 @@ Examples:
 Scenario: Edit a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
-    When I click Edit complaint for ONC-ACB Complaint ID "ONCACB001"
+    And I click Add New Complaint button
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB003" "ONC001" "Developer" "TBD"
+    And I click save button
+    When I click Edit complaint for ONC-ACB Complaint ID "ONCACB003"
     Then "Edit Complaint" form should open
     When I edit data in ONC Complaint ID field to "TsT0NC-1525"
-    And I click save button on Edit complaint form
+    And I click save button
     Then the edits should save and show "TsT0NC-1525" in complaints view table
     
 Scenario: Delete a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
-    And I click Edit complaint for ONC-ACB Complaint ID "ONCACB001" 
-    And I click delete button to delete selected complaint
+    And I click Add New Complaint button
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB004" "ONC001" "Developer" "TBD"
+    And I click save button
+    And I click delete button to delete complaint with ONC-ACB Complaint ID "ONCACB004"
     When I confirm delete
-    Then the complaint with ONC-ACB Complaint ID "ONCACB001" should not display in complaints view table
+    Then the complaint with ONC-ACB Complaint ID "ONCACB004" should not display in complaints view table
     
 Scenario: Associate a listing to a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
-    And I click Add New Complaint link
+    And I click Add New Complaint button
     And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB002" "ONC001" "Developer" "TBD"
     When I associate listing "15.05.05.2760.ISAD.01.00.0.180412" to the complaint
     And I click save button
     And I click Edit complaint for ONC-ACB Complaint ID "ONCACB002"
     Then the listing "15.05.05.2760.ISAD.01.00.0.180412" should be associated to the complaint
-    And I click delete button to delete selected complaint
+    And I click delete button to delete complaint with ONC-ACB Complaint ID "ONCACB002"
     And I confirm delete
     
 Scenario: Associate a surveillance to a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
-    And I click Add New Complaint link
-    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB003" "ONC001" "Developer" "TBD"
+    And I click Add New Complaint button
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB006" "ONC001" "Developer" "TBD"
     And I associate listing "15.05.05.2760.ISAD.01.00.0.180412" to the complaint
     When I associate surveillance "SURV01 - 15.05.05.2760.ISAD.01.00.0.180412" to the complaint
     And I click save button
-    And I click Edit complaint for ONC-ACB Complaint ID "ONCACB003"
+    And I click Edit complaint for ONC-ACB Complaint ID "ONCACB006"
     Then the surveillance "15.05.05.2760.ISAD.01.00.0.180412 - SURV01" should be associated to the complaint
     
 Scenario: Associate a criteria to a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
-    And I click Edit complaint for ONC-ACB Complaint ID "ONCACB003"
+    And I click Add New Complaint button
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB005" "ONC001" "Developer" "TBD"
     When I associate criteria "170.315 (a)(1)" to the complaint
-    And I click save button on Edit complaint form
-    And I click Edit complaint for ONC-ACB Complaint ID "ONCACB003"
+    And I click save button
+    And I click Edit complaint for ONC-ACB Complaint ID "ONCACB005"
     Then the criteria "170.315 (a)(1)" should be associated to the complaint
-    And I click delete button to delete selected complaint
-    And I confirm delete

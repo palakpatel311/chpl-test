@@ -31,6 +31,7 @@ public class SurveillanceComplaintsAsserts extends Base {
      */
     @Then("^a new complaint with given \"([^\"]*)\" should be added to CHPL$")
     public void verifyComplaintIsAdded(final String acbComplaintId) {
+        getDriver().navigate().refresh();
         boolean isFound = false;
 
         WebElement table = SurveillanceComplaintsPage.complaintsTable(getDriver());
@@ -59,6 +60,7 @@ public class SurveillanceComplaintsAsserts extends Base {
      */
     @Then("^the edits should save and show \"([^\"]*)\" in complaints view table$")
     public void verifyEditsSave(final String oncComplaintID) {
+        getDriver().navigate().refresh();
         boolean isFound = false;
 
         WebElement table = SurveillanceComplaintsPage.complaintsTable(getDriver());
@@ -81,6 +83,7 @@ public class SurveillanceComplaintsAsserts extends Base {
      */
     @Then("^the complaint with ONC-ACB Complaint ID \"([^\"]*)\" should not display in complaints view table$")
     public void verifyComplaintIsDeleted(final String acbComplaintId) {
+        getDriver().navigate().refresh();
         boolean isFound = true;
 
         WebElement table = SurveillanceComplaintsPage.complaintsTable(getDriver());

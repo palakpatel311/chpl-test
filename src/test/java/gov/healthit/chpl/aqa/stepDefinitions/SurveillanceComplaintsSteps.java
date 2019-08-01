@@ -23,9 +23,9 @@ public class SurveillanceComplaintsSteps extends Base {
         getDriver().get(getUrl() + "#/surveillance/complaints");
     }
 
-    @When("^I click Add New Complaint link$")
-    public void clickAddNewComplaintLink() {
-      SurveillanceComplaintsPage.addNewComplaintLink(getDriver()).click();
+    @When("^I click Add New Complaint button$")
+    public void clickAddNewComplaintButton() {
+      SurveillanceComplaintsPage.addNewComplaintButton(getDriver()).click();
     }
 
     /**
@@ -61,15 +61,6 @@ public class SurveillanceComplaintsSteps extends Base {
         getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.complaintsTable(getDriver())));
     }
 
-    @When("^I click save button on Edit complaint form$")
-    public void clickSaveButtononEditComplaint() {
-        WebElement button = SurveillanceComplaintsPage.saveButtonOnEditComplaintForm(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
-        getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.saveButtonOnEditComplaintForm(getDriver())));
-        SurveillanceComplaintsPage.saveButtonOnEditComplaintForm(getDriver()).click();
-        getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.complaintsTable(getDriver())));
-    }
-
     /**
      * Edit a complaint.
      * @param acbComplaintId is a ACB complaint ID of a complaint to be edited
@@ -79,12 +70,12 @@ public class SurveillanceComplaintsSteps extends Base {
         getDriver().navigate().refresh();
         getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.complaintsTable(getDriver())));
 
-        List<WebElement> acbCmomplaintIdValue = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[4]"));
+        List<WebElement> acbComplaintIdValue = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[4]"));
         List<WebElement> allEditButtons = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[7]/button/i"));
 
-        for (int i = 0; i < acbCmomplaintIdValue.size(); i++) {
+        for (int i = 0; i < acbComplaintIdValue.size(); i++) {
 
-            if (acbCmomplaintIdValue.get(i).getText().equals(acbComplaintId)) {
+            if (acbComplaintIdValue.get(i).getText().equals(acbComplaintId)) {
                 ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", allEditButtons.get(i));
                 break;
             }
@@ -97,10 +88,25 @@ public class SurveillanceComplaintsSteps extends Base {
         SurveillanceComplaintsPage.oncComplaintId(getDriver()).sendKeys(oncComplaintId);
     }
 
-    @And("^I click delete button to delete selected complaint$")
-    public void clickDeleteComplaintButton() {
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", SurveillanceComplaintsPage.deleteComplaintButton(getDriver()));
-    }
+    /**
+     * Delete a complaint.
+     * @param acbComplaintId is a ACB complaint ID of a complaint to be deleted
+     */
+    @And("^I click delete button to delete complaint with ONC-ACB Complaint ID \"([^\"]*)\"$")
+    public void clickDeleteComplaintButton(final String acbComplaintId) {
+        getDriver().navigate().refresh();
+        getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.complaintsTable(getDriver())));
+
+        List<WebElement> acbComplaintIdValue = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[4]"));
+        List<WebElement> allEditButtons = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[7]/button[2]"));
+
+        for (int i = 0; i < acbComplaintIdValue.size(); i++) {
+
+            if (acbComplaintIdValue.get(i).getText().equals(acbComplaintId)) {
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", allEditButtons.get(i));
+                break;
+            }
+        }    }
 
     @When("^I confirm delete$")
     public void confirmDelete() {
