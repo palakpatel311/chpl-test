@@ -68,14 +68,20 @@ Scenario Outline: Verify adding announcement is saved and recorded on Announceme
     Given I'm logged in as "<ROLE>"
     When I navigate to the Announcements Management page
     And I add an Announcement
-    And I set the "title" field
+    And I set the "title" field to today's date
     And I set the "announcement-text" field to "Test Announcement feature"
     And I set the "start-date" field to "07/29/2019"
     And I set the "end-date" field to "12/31/2050"
     And I click save button in the Announcement section
     Then I see the Announcement information is saved and recorded on Announcements page
     And I navigate to the Announcements Reports page
-    Then I see the Announcement information is recorded in Announcements Reports
+    Then I see "Created announcement: " activity is recorded in Announcements Reports
+    And I navigate to the Announcements Management page
+    And I edit an existing Announcement
+    And I delete an Announcement
+    And I confirm delete
+    And I navigate to the Announcements Reports page
+    Then I see "Deleted announcement: " activity is recorded in Announcements Reports
     Examples:
       |ROLE       |
       |ROLE_ADMIN |
