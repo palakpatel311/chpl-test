@@ -1,5 +1,8 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -84,7 +87,16 @@ public class AnnouncementsSteps extends Base {
      **/
     @And("^I edit an existing Announcement$")
     public void editExistingAnnouncement() {
-        AnnouncementsPage.editExistingAnnouncement(getDriver()).click();
+        List<WebElement> titleValue = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-announcements/div/div/table/tbody/tr/td[1]"));
+        List<WebElement> allEditButtons = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-announcements/div/div/table/tbody/tr/td[6]/button[1]"));
+
+        for (int i = 0; i < titleValue.size(); i++) {
+
+            if (titleValue.get(i).getText().equals(getCurrentDate())) {
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", allEditButtons.get(i));
+                break;
+            }
+        }
     }
 
     /**
