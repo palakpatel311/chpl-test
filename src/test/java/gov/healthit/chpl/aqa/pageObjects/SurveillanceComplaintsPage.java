@@ -23,15 +23,15 @@ public final class SurveillanceComplaintsPage extends BasePage {
     }
 
     public static WebElement associatedCriteriaValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[13]/div[1]/span/button"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[10]/div[1]/span"));
     }
 
     public static WebElement associatedListingValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[11]/div/span/button"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[12]/div/span"));
     }
 
     public static WebElement associatedSurveillanceValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[12]/div/span/button"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[13]/div/span"));
     }
 
     public static WebElement certifiedProductField(final WebDriver driver) {
