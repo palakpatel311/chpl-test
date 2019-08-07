@@ -46,10 +46,6 @@ public final class AnnouncementsPage extends BasePage {
         return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-reports-announcements/div"));
     }
 
-    public static WebElement editExistingAnnouncement(final WebDriver driver) {
-        return driver.findElement(By.xpath("//tr[2]//td[6]//button[1]"));
-    }
-
     public static WebElement deleteAnnouncement(final WebDriver driver) {
         return driver.findElement(By.xpath("//button[@id='announcement-delete']"));
     }
