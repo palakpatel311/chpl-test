@@ -22,8 +22,8 @@ public final class AnnouncementsPage extends BasePage {
         return driver.findElement(By.xpath("//button[contains(text(),'Add')]"));
     }
 
-    public static WebElement announcementField(final WebDriver driver, final String fieldName) {
-        return driver.findElement(By.xpath("//input[@id='" + fieldName + "']"));
+    public static WebElement announcementFieldInput(final WebDriver driver, final String filedInputId) {
+        return driver.findElement(By.xpath("//input[@id='" + filedInputId + "']"));
     }
 
     public static WebElement errorMessage(final WebDriver driver, final String errorMessage) {

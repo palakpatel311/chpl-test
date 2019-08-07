@@ -37,13 +37,13 @@ public class AnnouncementsSteps extends Base {
     /**
      * Clear the "Title/Announcement-Text/StartDate/EndDate" field and enter a value.
      * @param value to be entered
-     * @param fieldName is the id of the field in the Add Announcements section
+     * @param inputId is the id of the field in the Add Announcements section
      **/
     @And("^I set the \"(.*)\" field to \"(.*)\"$")
-    public void setField(final String fieldName, final String value) {
-        AnnouncementsPage.announcementField(getDriver(), fieldName).clear();
-        AnnouncementsPage.announcementField(getDriver(), fieldName).sendKeys(value);
-        AnnouncementsPage.announcementField(getDriver(), fieldName).sendKeys(Keys.TAB);
+    public void setField(final String inputId, final String value) {
+        AnnouncementsPage.announcementFieldInput(getDriver(), inputId).clear();
+        AnnouncementsPage.announcementFieldInput(getDriver(), inputId).sendKeys(value);
+        AnnouncementsPage.announcementFieldInput(getDriver(), inputId).sendKeys(Keys.TAB);
     }
 
     /**
@@ -71,7 +71,7 @@ public class AnnouncementsSteps extends Base {
      **/
     @And("^I set the \"(.*)\" field to today's date$")
     public void setAnnouncementTitleField(final String fieldName) {
-        AnnouncementsPage.announcementField(getDriver(), fieldName).sendKeys(getCurrentDate());
+        AnnouncementsPage.announcementFieldInput(getDriver(), fieldName).sendKeys(getCurrentDate());
     }
 
     /**

@@ -64,7 +64,7 @@ Scenario Outline: Verify clicking cancel button in the Announcements section nav
       |ROLE_ADMIN |
       |ROLE_ONC   |
 
-Scenario Outline: Verify adding announcement is saved and recorded on Announcements page and Announcements reports page
+Scenario Outline: Verify adding and deleting announcement is saved and recorded on Announcements reports page
     Given I'm logged in as "<ROLE>"
     When I navigate to the Announcements Management page
     And I add an Announcement
