@@ -16,7 +16,7 @@ public final class DpManagementPage {
     }
 
     public static WebElement administrationUploadNavLink(final WebDriver driver) {
-        return driver.findElement(By.linkText("Upload Listings"));
+        return driver.findElement(By.linkText("Upload"));
     }
 
     public static WebElement surveillanceNavLink(final WebDriver driver) {
