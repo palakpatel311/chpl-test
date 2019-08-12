@@ -36,11 +36,11 @@ public final class ViewDeveloperPage {
     }
 
     public static WebElement developerToMergeMessage(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/span/div[2]/div[1]"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/ui-view/chpl-developers/div/div[2]/span/div[2]/div[1]"));
     }
 
     public static WebElement productsMovingToNewDeveloperMessage(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/span/div[2]/div"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/ui-view/chpl-developers/div/div[2]/span/div[2]/div"));
     }
 
     public static WebElement developerNameMissingErrorMessage(final WebDriver driver) {
