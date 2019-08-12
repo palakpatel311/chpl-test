@@ -23,7 +23,6 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -63,14 +62,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @When("^I search for \"([^\"]*)\" in Manage Surveillance Activity section$")
     public void searchForChplIdInSurvSearch(final String chplId) throws Exception {
-
-            DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
-            DpManagementPage.surveillanceSearch(getDriver()).sendKeys(Keys.ENTER);
-            getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.chplIdInSurveillanceSearch(getDriver())));
-            getWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.chplIdInSurveillanceSearch(getDriver())));
-            DpManagementPage.chplIdInSurveillanceSearch(getDriver()).click();
-            getWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.manageProductSurveillance(getDriver())));
-
+        DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
+        Thread.sleep(DEBOUNCE_TIME); // need to wait for smart-table component to recognize text
     }
 
     /**
@@ -125,7 +118,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @And("^I open inspect form to inspect listing details$")
     public void openInspectScreen() throws Exception {
         try {
-        getWait()
+            getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
             .until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
             getWait()
@@ -382,7 +375,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @And("^I inspect surveillance activity details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectSurveillanceDetails(final String chplId) {
         DpManagementPage.inspectButtonForPendingSurveillanceActivity(getDriver(), chplId).click();
-        }
+    }
 
     /**
      * Confirm uploaded surveillance activity.
