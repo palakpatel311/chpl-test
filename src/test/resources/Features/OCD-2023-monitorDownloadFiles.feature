@@ -22,17 +22,17 @@ Feature: Monitor that download files and definition files on CHPL download resou
       | DEV  |    2014 | xml  |    1 |  470 | MB    |  5250 |
       | DEV  |    2014 | csv  |    1 | 2900 | KB    |  5250 |
       | DEV  |    2015 | xml  |    1 |  180 | MB    |   710 |
-      | DEV  |    2015 | csv  |    1 |  420 | KB    |   710 |
+      | DEV  |    2015 | csv  |    1 |  500 | KB    |   710 |
       | STG  |    2011 | xml  |   92 |  148 | MB    |  3885 |
       | STG  |    2014 | xml  |    1 |  470 | MB    |  5250 |
       | STG  |    2014 | csv  |    1 | 2900 | KB    |  5250 |
       | STG  |    2015 | xml  |    1 |  180 | MB    |   710 |
-      | STG  |    2015 | csv  |    1 |  420 | KB    |   710 |
+      | STG  |    2015 | csv  |    1 |  500 | KB    |   710 |
       | PROD |    2011 | xml  |   92 |  148 | MB    |  3885 |
       | PROD |    2014 | xml  |    1 |  470 | MB    |  5250 |
       | PROD |    2014 | csv  |    1 | 2900 | KB    |  5250 |
       | PROD |    2015 | xml  |    1 |  180 | MB    |   710 |
-      | PROD |    2015 | csv  |    1 |  420 | KB    |   710 |
+      | PROD |    2015 | csv  |    1 |  500 | KB    |   710 |
 
   Scenario Outline: 
     At any given time, when downloaded, file name ends with Date and time format 
