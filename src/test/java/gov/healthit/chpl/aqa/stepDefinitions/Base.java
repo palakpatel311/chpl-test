@@ -24,6 +24,7 @@ public class Base {
     private static final int MAX_RETRYCOUNT = 8;
     private static final int LAST_MODIFIED_WINDOW_MILLIS = 15000;
     protected static final int SLEEP_TIME = 5000;
+    protected static final int DEBOUNCE_TIME = 500;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     /** Default constructor. */
     public Base() {

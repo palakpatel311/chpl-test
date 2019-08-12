@@ -45,8 +45,8 @@ public final class DpManagementPage {
         return driver.findElement(By.xpath("//*[@id=\"surveillance-search-single-result\"]/tbody/tr[1]/td"));
     }
 
-    public static WebElement manageProductSurveillance(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-surveillance-management/div/div[2]"));
+    public static WebElement manageSurveillanceTable(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div/div[2]/div/div/div/table"));
     }
 
     /**

@@ -63,14 +63,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      */
     @When("^I search for \"([^\"]*)\" in Manage Surveillance Activity section$")
     public void searchForChplIdInSurvSearch(final String chplId) throws Exception {
-
-            DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
-            DpManagementPage.surveillanceSearch(getDriver()).sendKeys(Keys.ENTER);
-            getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.chplIdInSurveillanceSearch(getDriver())));
-            getWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.chplIdInSurveillanceSearch(getDriver())));
-            DpManagementPage.chplIdInSurveillanceSearch(getDriver()).click();
-            getWait().until(ExpectedConditions.elementToBeClickable(DpManagementPage.manageProductSurveillance(getDriver())));
-
+        DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
+        Thread.sleep(DEBOUNCE_TIME); // need to wait for smart-table component to recognize text
     }
 
     /**
