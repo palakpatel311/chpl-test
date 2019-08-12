@@ -23,7 +23,6 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -119,7 +118,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @And("^I open inspect form to inspect listing details$")
     public void openInspectScreen() throws Exception {
         try {
-        getWait()
+            getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
             .until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
             getWait()
@@ -376,7 +375,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
     @And("^I inspect surveillance activity details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectSurveillanceDetails(final String chplId) {
         DpManagementPage.inspectButtonForPendingSurveillanceActivity(getDriver(), chplId).click();
-        }
+    }
 
     /**
      * Confirm uploaded surveillance activity.
