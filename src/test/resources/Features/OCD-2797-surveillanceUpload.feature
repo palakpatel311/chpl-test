@@ -10,5 +10,5 @@ Feature: OCD-2797 - Verify surveillance upload/confirm workflow is functional
     When I go to Confirm Pending Surveillance Activities Page
     And I inspect surveillance activity details for listing with CHPL ID "15.05.05.2760.ISCD.01.00.1.181101"
     And I confirm surveillance activity for listing with CHPL ID "15.05.05.2760.ISCD.01.00.1.181101"
-    Then I see that surveillance was uploaded successfully for listing with CHPL ID 15.05.05.2760.ISCD.01.00.1.181101 and listing details show surveillance activity
+    Then I see that surveillance was uploaded successfully for listing with CHPL ID "15.05.05.2760.ISCD.01.00.1.181101" and shows in surveillance activities list of the listing
     

@@ -4,12 +4,17 @@ import static org.testng.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import cucumber.api.java.en.Then;
+import gov.healthit.chpl.aqa.pageObjects.BasePage;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
-import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
+import gov.healthit.chpl.aqa.pageObjects.SurveillanceManagePage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 import gov.healthit.chpl.aqa.stepDefinitions.Hooks;
 
@@ -59,12 +64,28 @@ public class DpmanagementUploadPageAsserts extends Base {
 
     /**
      * Load listing details to verify surveillance was uploaded successfully.
+     * @param chplId is CHPL ID input on Surveillance Manage page to load surveillance activity for given listing
      */
-    @Then("^I see that surveillance was uploaded successfully for listing with CHPL ID 15.05.05.2760.ISCD.01.00.1.181101 and listing details show surveillance activity$")
-    public void verifySurveillanceConfirmWasSuccessful() {
-        getDriver().get(getUrl() + "/#/listing/9713/surveillance");
-        //getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.surveillanceActivitiesPanel(getDriver())));
-        String surveillanceText = ListingDetailsPage.surveillanceActivitiesPanel(getDriver()).getText();
+    @Then("^I see that surveillance was uploaded successfully for listing with CHPL ID \"([^\"]*)\" and shows in surveillance activities list of the listing$")
+    public void verifySurveillanceConfirmWasSuccessful(final String chplId) {
+        getDriver().get(getUrl() + "/#/surveillance/manage");
+        SurveillanceManagePage.generalFilterInput(getDriver()).sendKeys(chplId);
+        getWait().until(ExpectedConditions.visibilityOf(BasePage.mainContent(getDriver())));
+        List<WebElement> productName = getDriver().findElements(By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[1]/div[2]/div/div/div/table/tbody/tr/td[3]"));
+        List<WebElement> allChplIdButtons = getDriver().
+                findElements(By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[1]/div[2]/div/div/div/table/tbody/tr/td[1]/button"));
+
+        for (int i = 0; i < productName.size(); i++) {
+
+            if (productName.get(i).getText().equals("Clinical Document Exchange")) {
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", allChplIdButtons.get(i));
+                break;
+            }
+        }
+
+        SurveillanceManagePage.chplIdTab(getDriver()).click();
+        String surveillanceText = SurveillanceManagePage.surveillanceList(getDriver()).getText();
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd" + ", " + "yyyy");
         LocalDate newDate = LocalDate.now();
 
