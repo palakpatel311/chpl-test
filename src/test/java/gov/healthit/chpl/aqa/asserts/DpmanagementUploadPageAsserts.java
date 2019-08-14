@@ -63,7 +63,7 @@ public class DpmanagementUploadPageAsserts extends Base {
     @Then("^I see that surveillance was uploaded successfully for listing with CHPL ID 15.05.05.2760.ISCD.01.00.1.181101 and listing details show surveillance activity$")
     public void verifySurveillanceConfirmWasSuccessful() {
         getDriver().get(getUrl() + "/#/listing/9713/surveillance");
-        getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.surveillanceActivitiesPanel(getDriver())));
+        //getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.surveillanceActivitiesPanel(getDriver())));
         String surveillanceText = ListingDetailsPage.surveillanceActivitiesPanel(getDriver()).getText();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd" + ", " + "yyyy");
         LocalDate newDate = LocalDate.now();
