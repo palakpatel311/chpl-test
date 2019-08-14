@@ -21,17 +21,17 @@ public class AnnouncementsPageAsserts extends Base {
      */
     @Then("^I see \"([^\"]*)\" as the page title for the Announcements management page$")
     public void iSeePageTitle(final String expectedPageTitle) {
-        String actualPageTitle = AnnouncementsPage.annoouncementsPageTitle(getDriver()).getText();
+        String actualPageTitle = AnnouncementsPage.announcementsPageTitle(getDriver()).getText();
         assertEquals(expectedPageTitle, actualPageTitle);
     }
 
     /**
      * Assert that columns are displayed in the Announcements Page.
-     * @param expectedColumnNames are "Title, Announcement, StartDate & EndDate"
+     * @param expectedColumnNames are "Title, Announcement, StartDate and EndDate"
      **/
     @Then("^I see \"([^\"]*)\" columns in the Announcements page$")
     public void seeColumnsInAnnouncementsPage(final String expectedColumnNames) {
-        String actualColumnNames = AnnouncementsPage.annoouncementsColumnName(getDriver()).getText();
+        String actualColumnNames = AnnouncementsPage.announcementsColumnName(getDriver()).getText();
         assertTrue(actualColumnNames.contains(expectedColumnNames));
     }
 

@@ -10,11 +10,11 @@ import org.openqa.selenium.WebElement;
 public final class AnnouncementsPage extends BasePage {
     private AnnouncementsPage() {}
 
-    public static WebElement annoouncementsPageTitle(final WebDriver driver) {
+    public static WebElement announcementsPageTitle(final WebDriver driver) {
         return driver.findElement(By.xpath("//h2[contains(text(),'Announcements')]"));
     }
 
-    public static WebElement annoouncementsColumnName(final WebDriver driver) {
+    public static WebElement announcementsColumnName(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-announcements/div/div"));
     }
 
