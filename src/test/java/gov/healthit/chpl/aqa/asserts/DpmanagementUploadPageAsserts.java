@@ -64,7 +64,7 @@ public class DpmanagementUploadPageAsserts extends Base {
     public void verifySurveillanceConfirmWasSuccessful() {
         getDriver().get(getUrl() + "/#/listing/9713/surveillance");
 
-        getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.surveillanceActivitiesAccordion(getDriver())));
+        getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.certificationCriteriaAccordion(getDriver())));
 
         getWait().until(ExpectedConditions.visibilityOf(ListingDetailsPage.surveillanceActivitiesPanel(getDriver())));
         String surveillanceText = ListingDetailsPage.surveillanceActivitiesPanel(getDriver()).getText();
