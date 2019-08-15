@@ -18,7 +18,7 @@ public class SurveillanceReportSteps extends Base {
      * Get user to the Surveillance Reports Page.
      **/
     @Given("^I navigate to the surveillance reports page$")
-    public void editDeveloperPage() {
+    public void navigateToSurveillanceReportsPage() {
         getDriver().get(getUrl() + "#/surveillance/reporting");
     }
 
@@ -87,7 +87,7 @@ public class SurveillanceReportSteps extends Base {
      * Click save button to save the quarterly surveillance report.
      **/
     @And("I save the quarterly surveillance report$")
-    public void isaveQuarterlySurveillanceReport() {
+    public void iSaveQuarterlySurveillanceReport() {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].scrollIntoView();", SurveillanceReportPage.transparencyDisclosureField(getDriver()));
         SurveillanceReportPage.saveQuarterlyReport(getDriver()).click();
@@ -98,7 +98,7 @@ public class SurveillanceReportSteps extends Base {
      * @param acbNameYearQuarter is the name of ACB, Year and Quarter for which a quarterly surveillance report will be edited
      **/
     @And("I edit a quarterly surveillance report for \"([^\"]*)\"$")
-    public void ieditQuarterlySurveillanceReport(final String acbNameYearQuarter) {
+    public void iEditQuarterlySurveillanceReport(final String acbNameYearQuarter) {
         SurveillanceReportPage.editSurveillanceReport(getDriver(), acbNameYearQuarter).click();
     }
 }
