@@ -1,9 +1,12 @@
 package gov.healthit.chpl.aqa.asserts;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import cucumber.api.java.en.Then;
@@ -91,5 +94,19 @@ public class SurveillanceReportPageAsserts extends Base {
         String actualConfirmationMessage = SurveillanceReportPage.confirmMessage(getDriver()).getText();
         assertTrue(actualConfirmationMessage.contains(expectedConfirmationMessage));
     }
+
+    /**
+     * Assert that page title is not found for the surveillance report page.
+     */
+    @Then("^I do not see the page title for the surveillance report page$")
+    public void iDoNotSeePageTitleForSurveillanceRport() {
+            boolean chplSurveillancePageFound = false;
+            try {
+                chplSurveillancePageFound = SurveillanceReportPage.surveillancePageSubtitle(getDriver()).isDisplayed();
+                fail("Navigated to CHPL Surveillance Reports page when shouldn't have");
+            } catch (NoSuchElementException e) {
+                assertFalse(chplSurveillancePageFound, "Navigation to CHPL Surveillance Reports page is successful");
+            }
+        }
 }
 

@@ -116,3 +116,7 @@ Scenario Outline: User logs in as ROLE - initiates, edits and deletes a quarterl
       |ROLE_ACB   |SLI Compliance   |SLI Compliance-2019-Q4  |Quarterly Report |
       |ROLE_ACB   |UL LLC           |UL LLC-2019-Q4          |Quarterly Report |
 
+Scenario: Surveillance reports is not available to a user who is not logged in 
+    When I navigate to the surveillance reports page
+    Then I do not see the page title for the surveillance report page
+
