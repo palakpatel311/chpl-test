@@ -1,6 +1,6 @@
 @Regression
 Feature: OCD-2916 Basic Surveillance Reporting
-  This test checks whether edit, split and merge developer functionality work as expected
+  This test checks whether quarterly surveillance report can be initiated, edited and deleted
 
 Scenario Outline: User logs in as ROLE and verifies navigation is successful to the Surveillance Report page
     Given I'm logged in as "<ROLE>"
