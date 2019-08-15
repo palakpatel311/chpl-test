@@ -28,9 +28,9 @@ public class SurveillanceReportSteps extends Base {
      **/
     @And("I expand \"([^\"]*)\"$")
     public void iExpandACB(final String acb) {
-        WebElement link = SurveillanceReportPage.expandOncAcbs(getDriver(), acb);
+        WebElement link = SurveillanceReportPage.oncAcbs(getDriver(), acb);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);
-        SurveillanceReportPage.expandOncAcbs(getDriver(), acb).click();
+        SurveillanceReportPage.oncAcbs(getDriver(), acb).click();
     }
 
     /**

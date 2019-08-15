@@ -14,12 +14,8 @@ public final class SurveillanceReportPage extends BasePage {
         return driver.findElement(By.xpath("//h1[contains(text(),'CHPL Surveillance')]"));
     }
 
-    public static WebElement expandOncAcbs(final WebDriver driver, final String acbName) {
+    public static WebElement oncAcbs(final WebDriver driver, final String acbName) {
         return driver.findElement(By.xpath("//div[@id='onc-acb-" + acbName + "']"));
-    }
-
-    public static WebElement availableYearQuarterForAcbs(final WebDriver driver, final String acbName) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/ui-view/div"));
     }
 
     public static WebElement initiateSurveillanceReport(final WebDriver driver, final String acbNameYearQuarter) {

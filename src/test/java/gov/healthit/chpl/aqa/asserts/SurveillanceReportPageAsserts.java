@@ -36,13 +36,8 @@ public class SurveillanceReportPageAsserts extends Base {
      */
     @Then("^I see available reports for \"([^\"]*)\"$")
     public void iSeeReportsAvailableFor(final String expectedACBs) {
-        String actualACBs = SurveillanceReportPage.availableYearQuarterForAcbs(getDriver(), expectedACBs).getText();
-        String[] acbTempArray = actualACBs.split("\n");
-        StringBuffer buff = new StringBuffer();
-        for (String string : acbTempArray) {
-            buff.append(string.trim() + " ");
-        }
-        assertTrue(buff.toString().contains(expectedACBs));
+        String actualACBs = SurveillanceReportPage.oncAcbs(getDriver(), expectedACBs).getText();
+        assertTrue(actualACBs.contains(expectedACBs));
     }
 
     /**
@@ -51,7 +46,7 @@ public class SurveillanceReportPageAsserts extends Base {
      */
     @Then("^I see \"([^\"]*)\" listed for each ACB$")
     public void iSeeYearQuarterForEachACB(final String expectedYearQuarter) {
-        String actualYearQuarter = SurveillanceReportPage.availableYearQuarterForAcbs(getDriver(), expectedYearQuarter).getText();
+        String actualYearQuarter = SurveillanceReportPage.oncAcbs(getDriver(), expectedYearQuarter).getText();
         assertTrue(actualYearQuarter.contains(expectedYearQuarter));
     }
 

@@ -17,8 +17,15 @@ Scenario Outline: User logs in as ROLE and verifies Surveillance reports are ava
     When I navigate to the surveillance reports page
     Then I see available reports for "<ACBs>" 
     Examples:
-      |ROLE         |ACBs                                             |
-      |ROLE_ADMIN   |Drummond Group ICSA Labs SLI Compliance UL LLC   |
+      |ROLE       |ACBs           |
+      |ROLE_ADMIN |Drummond Group |
+      |ROLE_ADMIN |ICSA Labs      |
+      |ROLE_ADMIN |SLI Compliance |
+      |ROLE_ADMIN |UL LLC         |
+      |ROLE_ONC   |Drummond Group |
+      |ROLE_ONC   |ICSA Labs      |
+      |ROLE_ONC   |SLI Compliance |
+      |ROLE_ONC   |UL LLC         |
 
 Scenario Outline: User logs in as ROLE and verifies years and quarters are listed for each ACB
     Given I'm logged in as "<ROLE>"
