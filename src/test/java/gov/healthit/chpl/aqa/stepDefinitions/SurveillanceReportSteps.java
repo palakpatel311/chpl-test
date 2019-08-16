@@ -24,7 +24,7 @@ public class SurveillanceReportSteps extends Base {
 
     /**
      * Expand ACBs.
-     * @param acb - Drummond Group, ICSA Labs, SLI Compliance & UL LLC
+     * @param acb - Drummond Group, ICSA Labs, SLI Compliance and UL LLC
      **/
     @And("I expand \"([^\"]*)\"$")
     public void iExpandACB(final String acb) {
