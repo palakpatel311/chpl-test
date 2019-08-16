@@ -41,16 +41,6 @@ public class SurveillanceReportPageAsserts extends Base {
     }
 
     /**
-     * Assert that Year-Quarters are displayed for each ACBs.
-     * @param expectedYearQuarter - Year Q1 Q2 Q3 Q4
-     */
-    @Then("^I see \"([^\"]*)\" listed for each ACB$")
-    public void iSeeYearQuarterForEachACB(final String expectedYearQuarter) {
-        String actualYearQuarter = SurveillanceReportPage.oncAcbs(getDriver(), expectedYearQuarter).getText();
-        assertTrue(actualYearQuarter.contains(expectedYearQuarter));
-    }
-
-    /**
      * Assert that page title is correct is for the Quarterly Reports page.
      * @param expectedPageTitle is Quarterly Report
      */
@@ -103,5 +93,18 @@ public class SurveillanceReportPageAsserts extends Base {
                 assertFalse(chplSurveillancePageFound, "Navigation to CHPL Surveillance Reports page is successful");
             }
         }
+
+    /**
+     * Assert that button name is correct on Available reports page.
+     * @param expectedButtonName - Initiate
+     * @param acbYearQuarter - name of the ACB, Year and Quarter
+     */
+    @Then("^I see the label of Q# button is changed to \"([^\"]*)\" for \"([^\"]*)\"$")
+    public void iSeeLabelOfQuarterButton(final String expectedButtonName, final String acbYearQuarter) {
+        WebElement link = SurveillanceReportPage.initiateButton(getDriver(), acbYearQuarter);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);
+        String actualButtonName = SurveillanceReportPage.initiateButton(getDriver(), acbYearQuarter).getText();
+        assertTrue(actualButtonName.contains(expectedButtonName));
+    }
 }
 

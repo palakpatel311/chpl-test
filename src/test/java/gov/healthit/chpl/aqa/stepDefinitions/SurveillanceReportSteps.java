@@ -39,6 +39,8 @@ public class SurveillanceReportSteps extends Base {
      **/
     @And("I initate a quarterly surveillance report for \"([^\"]*)\"$")
     public void iInitiateQuarterlySurveillanceReportForACB(final String acbNameYearQuarter) {
+        WebElement link = SurveillanceReportPage.initiateSurveillanceReport(getDriver(), acbNameYearQuarter);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);
         SurveillanceReportPage.initiateSurveillanceReport(getDriver(), acbNameYearQuarter).click();
     }
 

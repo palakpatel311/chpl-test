@@ -65,5 +65,10 @@ public final class SurveillanceReportPage extends BasePage {
     public static WebElement surveillancePageSubtitle(final WebDriver driver) {
         return driver.findElement(By.xpath("//h2[contains(text(),'Available reports')]"));
     }
+
+    public static WebElement initiateButton(final WebDriver driver, final String acbNameYearQuarter) {
+        return driver.findElement(By.xpath("//button[@id='initiate-" + acbNameYearQuarter + "']"));
+    }
+
 }
 
