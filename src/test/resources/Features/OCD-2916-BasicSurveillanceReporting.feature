@@ -47,6 +47,6 @@ Scenario Outline: User logs in as ROLE - initiates, edits and deletes a quarterl
       |ROLE_ADMIN |UL LLC           |UL LLC-2019-Q4          |Quarterly Report |UL LLC Quarterly Surveillance Reporting        |Are you sure you wish to initiate quarterly surveillance reporting for quarter Q4 of year 2019? |Are you sure you wish to delete this Quarterly Surveillance Report?|
 
 Scenario: Surveillance reports is not available to a user who is not logged in 
-    When I navigate to the surveillance reports page
+    When I navigate to the surveillance reports page as anonymous user
     Then I do not see the page title for the surveillance report page
 

@@ -103,5 +103,13 @@ public class SurveillanceReportSteps extends Base {
     public void iEditQuarterlySurveillanceReport(final String acbNameYearQuarter) {
         SurveillanceReportPage.editSurveillanceReport(getDriver(), acbNameYearQuarter).click();
     }
+
+    /**
+     * Get anonymous user to the Surveillance Reports Page.
+     **/
+    @Given("^I navigate to the surveillance reports page as anonymous user$")
+    public void navigateToSurveillanceReportsPageAsAnonymousUser() {
+        getDriver().get(getUrl() + "#/surveillance/reporting");
+    }
 }
 
