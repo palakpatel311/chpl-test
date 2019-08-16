@@ -32,6 +32,15 @@ public final class DpManagementPage {
      * @param driver WebDriver
      * @return button element
      */
+    public static WebElement chooseFileButtonListingUpload(final WebDriver driver) {
+        return driver.findElement(By.xpath("(//input[@id='ngf-upload-button'])[2]"));
+    }
+
+    /**
+     * Returns choose file button for new surveillance upload.
+     * @param driver WebDriver
+     * @return button element
+     */
     public static WebElement chooseFileButton(final WebDriver driver) {
         return driver.findElement(By.id("ngf-upload-button"));
     }
@@ -304,8 +313,8 @@ public final class DpManagementPage {
      * @param driver WebDriver
      * @return button element
      */
-    public static WebElement uploadFileButton(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/ui-view/chpl-upload-listings/div/form/div/div[4]/button[1]"));
+    public static WebElement uploadFileButtonListingUpload(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload/div/div/chpl-upload-listings/div/div[2]/form/div/div[4]/button[1]"));
     }
 
     public static WebElement uploadFileButtonForSurveillance(final WebDriver driver) {
@@ -318,7 +327,7 @@ public final class DpManagementPage {
      * @return text element
      */
     public static WebElement uploadSuccessfulText(final WebDriver driver) {
-        return driver.findElement(By.xpath("/html/body/ai-compare-widget/div[2]/chpl-administration/div/span/div[2]/div/ui-view/ui-view/chpl-upload-listings/div/div"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload/div/div/chpl-upload-listings/div/div[2]/div"));
     }
 
     /**

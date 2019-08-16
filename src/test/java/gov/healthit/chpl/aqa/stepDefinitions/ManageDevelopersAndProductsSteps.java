@@ -96,8 +96,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
         List<CSVRecord> listing = getUploadFile(edition);
         String filename = writeTempFile(listing, inputChplId);
         System.out.println("Sending filename: " + filename);
-        DpManagementPage.chooseFileButton(getDriver()).sendKeys(filename);
-        DpManagementPage.uploadFileButton(getDriver()).click();
+        DpManagementPage.chooseFileButtonListingUpload(getDriver()).sendKeys(filename);
+        DpManagementPage.uploadFileButtonListingUpload(getDriver()).click();
     }
 
     /**
@@ -185,7 +185,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
         String absolutePath = Paths.get(resource.toURI()).toString();
 
         DpManagementPage.chooseFileButton(getDriver()).sendKeys(absolutePath);
-        DpManagementPage.uploadFileButton(getDriver()).click();
+        DpManagementPage.uploadFileButtonListingUpload(getDriver()).click();
     }
 
     /**
@@ -330,7 +330,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
         String absolutePath = Paths.get(resource.toURI()).toString();
 
         DpManagementPage.chooseFileButton(getDriver()).sendKeys(absolutePath);
-        DpManagementPage.uploadFileButton(getDriver()).click();
+        DpManagementPage.uploadFileButtonListingUpload(getDriver()).click();
     }
 
     /**
