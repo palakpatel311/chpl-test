@@ -480,6 +480,6 @@ public final class DpManagementPage {
      * @return button element
      */
     public static WebElement uploadFailureErrorMessage(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/ui-view/chpl-upload-listings/div/div/ul"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-upload/div/div/chpl-upload-listings/div/div[2]/div/ul"));
     }
 }
