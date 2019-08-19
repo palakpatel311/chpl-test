@@ -184,7 +184,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
         URL resource = Main.class.getResource("/2015_Test_SLI_longIDsInvCertDate.csv");
         String absolutePath = Paths.get(resource.toURI()).toString();
 
-        DpManagementPage.chooseFileButton(getDriver()).sendKeys(absolutePath);
+        DpManagementPage.chooseFileButtonListingUpload(getDriver()).sendKeys(absolutePath);
         DpManagementPage.uploadFileButtonListingUpload(getDriver()).click();
     }
 
@@ -329,7 +329,7 @@ public class ManageDevelopersAndProductsSteps extends Base {
         URL resource = Main.class.getResource("/2015_Test_SLI_BadInputs.csv");
         String absolutePath = Paths.get(resource.toURI()).toString();
 
-        DpManagementPage.chooseFileButton(getDriver()).sendKeys(absolutePath);
+        DpManagementPage.chooseFileButtonListingUpload(getDriver()).sendKeys(absolutePath);
         DpManagementPage.uploadFileButtonListingUpload(getDriver()).click();
     }
 

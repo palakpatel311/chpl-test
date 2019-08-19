@@ -32,7 +32,7 @@ public class SurveillanceReportPageAsserts extends Base {
 
     /**
      * Assert that ACBs are expected to be displayed under available reports.
-     * @param expectedACBs are Drummond Group, ICSA Labs, SLI Compliance & UL LLC
+     * @param expectedACBs are Drummond Group, ICSA Labs, SLI Compliance and UL LLC
      */
     @Then("^I see available reports for \"([^\"]*)\"$")
     public void iSeeReportsAvailableFor(final String expectedACBs) {
