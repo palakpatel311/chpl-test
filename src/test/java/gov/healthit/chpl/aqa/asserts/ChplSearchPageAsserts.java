@@ -201,8 +201,6 @@ public class ChplSearchPageAsserts extends Base {
      */
     @Then("^I see \"([^\"]*)\" as the menu navigation text for Complaints Reporting$")
     public void iSeeComplaintsReportingMenuNavigationText(final String expectedMenuNavigationText) {
-        WebElement link = SearchPage.complaintsReporting(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);
         String actualMenuNavigationText = SearchPage.complaintsReporting(getDriver()).getText();
         assertTrue(actualMenuNavigationText.contains(expectedMenuNavigationText));
     }
