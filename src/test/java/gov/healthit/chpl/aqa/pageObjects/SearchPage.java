@@ -210,4 +210,12 @@ public final class SearchPage extends BasePage {
     public static WebElement certStatusFilterOptions(final WebDriver driver) {
         return driver.findElement(By.cssSelector("#filters > div.col-sm-8 > div.btn-group.dropdown.open > ul"));
     }
+
+    public static WebElement surveillanceDropdown(final WebDriver driver) {
+        return driver.findElement(By.xpath("//button[@id='surveillance-toggle']"));
+    }
+
+    public static WebElement complaintsReporting(final WebDriver driver) {
+        return driver.findElement(By.xpath("//*[@id=\"surveillance-dropdown-menu\"]/li[4]/a"));
+    }
 }
