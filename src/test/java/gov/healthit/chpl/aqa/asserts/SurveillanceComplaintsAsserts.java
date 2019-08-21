@@ -117,4 +117,10 @@ public class SurveillanceComplaintsAsserts extends Base {
         String actualValue = SurveillanceComplaintsPage.associatedCriteriaValue(getDriver()).getText();
         assertTrue(actualValue.contains(criteria), "Expect " + criteria + " to be found in " + actualValue);
     }
+
+    @Then("^I see \"([^\"]*)\" as the page title on Complaints Reporitng page$")
+    public void iSeeComplaintsReportingPageTitle(final String expectedPageTitle) {
+        assertTrue(getDriver().getTitle().contains(expectedPageTitle));
+    }
+
 }

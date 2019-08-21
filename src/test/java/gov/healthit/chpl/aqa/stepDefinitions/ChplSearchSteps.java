@@ -163,4 +163,22 @@ public class ChplSearchSteps extends Base {
         WebElement downloadButton = SearchPage.downloadsearchResultsButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", downloadButton);
     }
+
+    /**
+     * Click Surveillance drop-down.
+     */
+    @When("^I click the Surveillance drop-down$")
+    public void clickSurveillanceDropDown() {
+        WebElement surveillanceDropdownButton = SearchPage.surveillanceDropdown(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", surveillanceDropdownButton);
+    }
+
+    /**
+     * Click Complaints Reporting in Surveillance drop-down.
+     */
+    @When("^I click Complaints Reporting$")
+    public void clickComplaintsReporting() {
+        WebElement complaintsReporting = SearchPage.complaintsReporting(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", complaintsReporting);
+    }
 }

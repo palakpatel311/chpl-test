@@ -194,4 +194,14 @@ public class ChplSearchPageAsserts extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         assertTrue(!(SearchPage.filterOption(getDriver(), certStatusFilterOption).isSelected()));
     }
+
+    /**
+     * Assert that complaints reporting menu navigation text is correct in Surveillance drop-down.
+     * @param expectedMenuNavigationText - Complaints Reporting
+     */
+    @Then("^I see \"([^\"]*)\" as the menu navigation text for Complaints Reporting$")
+    public void iSeeComplaintsReportingMenuNavigationText(final String expectedMenuNavigationText) {
+        String actualMenuNavigationText = SearchPage.complaintsReporting(getDriver()).getText();
+        assertTrue(actualMenuNavigationText.contains(expectedMenuNavigationText));
+    }
 }
