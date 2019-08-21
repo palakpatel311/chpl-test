@@ -6,7 +6,6 @@ import static org.testng.Assert.assertTrue;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import cucumber.api.java.en.Then;
@@ -121,8 +120,6 @@ public class SurveillanceComplaintsAsserts extends Base {
 
     @Then("^I see \"([^\"]*)\" as the page title on Complaints Reporitng page$")
     public void iSeeComplaintsReportingPageTitle(final String expectedPageTitle) {
-        WebElement link = SurveillanceComplaintsPage.complaintsReportingPageTitle(getDriver(), expectedPageTitle);
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);
         String actualPageTitle = SurveillanceComplaintsPage.complaintsReportingPageTitle(getDriver(), expectedPageTitle).getText();
         assertTrue(actualPageTitle.contains(expectedPageTitle));
     }
