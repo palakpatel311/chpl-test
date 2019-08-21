@@ -216,6 +216,6 @@ public final class SearchPage extends BasePage {
     }
 
     public static WebElement complaintsReporting(final WebDriver driver) {
-        return driver.findElement(By.xpath("//a[contains(text(),'Complaints Reporting')]"));
+        return driver.findElement(By.xpath("//ul[@id='surveillance-dropdown-menu']//a[contains(text(),'Complaints Reporting')]"));
     }
 }
