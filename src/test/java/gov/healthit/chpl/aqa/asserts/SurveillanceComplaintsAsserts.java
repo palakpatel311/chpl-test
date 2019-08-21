@@ -120,8 +120,7 @@ public class SurveillanceComplaintsAsserts extends Base {
 
     @Then("^I see \"([^\"]*)\" as the page title on Complaints Reporitng page$")
     public void iSeeComplaintsReportingPageTitle(final String expectedPageTitle) {
-        String actualPageTitle = SurveillanceComplaintsPage.complaintsReportingPageTitle(getDriver(), expectedPageTitle).getText();
-        assertTrue(actualPageTitle.contains(expectedPageTitle));
+        assertTrue(getDriver().getTitle().contains(expectedPageTitle));
     }
 
 }

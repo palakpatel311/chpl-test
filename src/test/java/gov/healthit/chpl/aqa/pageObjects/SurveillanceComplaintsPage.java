@@ -114,8 +114,4 @@ public final class SurveillanceComplaintsPage extends BasePage {
         return driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/button[1]"));
     }
 
-    public static WebElement complaintsReportingPageTitle(final WebDriver driver, final String pageTitle) {
-        return driver.findElement(By.xpath("//h2[contains(text(),'" + pageTitle + "')]"));
-    }
-
 }
