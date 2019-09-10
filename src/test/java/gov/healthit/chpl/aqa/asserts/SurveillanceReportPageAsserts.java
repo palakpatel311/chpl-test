@@ -1,6 +1,5 @@
 package gov.healthit.chpl.aqa.asserts;
 
-import static org.junit.Assert.assertEquals;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
