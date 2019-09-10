@@ -102,9 +102,9 @@ public class SurveillanceReportPageAsserts extends Base {
      */
     @Then("^I see the label of Q# button is changed to \"([^\"]*)\" for \"([^\"]*)\"$")
     public void iSeeLabelOfQuarterButton(final String expectedButtonName, final String acbYearQuarter) {
-        WebElement link = SurveillanceReportPage.initiateButton(getDriver(), acbYearQuarter);
+        WebElement link = SurveillanceReportPage.initiateSurveillanceReport(getDriver(), acbYearQuarter);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);
-        String actualButtonName = SurveillanceReportPage.initiateButton(getDriver(), acbYearQuarter).getText();
+        String actualButtonName = SurveillanceReportPage.initiateSurveillanceReport(getDriver(), acbYearQuarter).getText();
         assertTrue(actualButtonName.contains(expectedButtonName));
     }
 

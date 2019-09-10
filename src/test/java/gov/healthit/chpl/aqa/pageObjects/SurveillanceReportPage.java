@@ -23,19 +23,15 @@ public final class SurveillanceReportPage extends BasePage {
     }
 
     public static WebElement editSurveillanceReport(final WebDriver driver, final String acbNameYearQuarter) {
-        return driver.findElement(By.xpath("//button[@id='act-" + acbNameYearQuarter + "']"));
+        return driver.findElement(By.id("act-" + acbNameYearQuarter));
     }
 
     public static WebElement groundsForInitiatingInput(final WebDriver driver) {
         return driver.findElement(By.id("grounds-for-initiating"));
     }
 
-    public static WebElement initiateButton(final WebDriver driver, final String acbNameYearQuarter) {
-        return driver.findElement(By.xpath("//button[@id='initiate-" + acbNameYearQuarter + "']"));
-    }
-
     public static WebElement initiateSurveillanceReport(final WebDriver driver, final String acbNameYearQuarter) {
-        return driver.findElement(By.xpath("//button[@id='initiate-" + acbNameYearQuarter + "']"));
+        return driver.findElement(By.id("initiate-" + acbNameYearQuarter));
     }
 
     public static WebElement listingsWithRelevantSurveillanceAccordion(final WebDriver driver) {
@@ -43,11 +39,11 @@ public final class SurveillanceReportPage extends BasePage {
     }
 
     public static WebElement oncAcbs(final WebDriver driver, final String acbName) {
-        return driver.findElement(By.xpath("//div[@id='onc-acb-" + acbName + "']"));
+        return driver.findElement(By.id("onc-acb-" + acbName));
     }
 
     public static WebElement quarterlyReportFieldInput(final WebDriver driver, final String fieldInputId) {
-        return driver.findElement(By.xpath("//textarea[@id='" + fieldInputId + "']"));
+        return driver.findElement(By.id(fieldInputId));
     }
 
     public static WebElement quarterlySurveillanceReportingSubtitle(final WebDriver driver, final String subTitle) {
@@ -59,7 +55,7 @@ public final class SurveillanceReportPage extends BasePage {
     }
 
     public static WebElement saveQuarterlyReport(final WebDriver driver) {
-        return driver.findElement(By.xpath("//button[@id='quarterly-surveillance-save']"));
+        return driver.findElement(By.id("quarterly-surveillance-save"));
     }
 
     public static WebElement saveSurveillanceDataButton(final WebDriver driver) {
@@ -119,7 +115,7 @@ public final class SurveillanceReportPage extends BasePage {
     }
 
     public static WebElement transparencyDisclosureField(final WebDriver driver) {
-        return driver.findElement(By.xpath("//textarea[@id='transparency-disclosure']"));
+        return driver.findElement(By.id("transparency-disclosure"));
     }
 
     public static WebElement viewListingSurveillanceDataButton(final WebDriver driver, final String chplId) {
