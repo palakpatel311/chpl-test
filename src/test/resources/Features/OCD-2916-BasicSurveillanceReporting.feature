@@ -50,3 +50,22 @@ Scenario: Surveillance reports is not available to a user who is not logged in
     When I navigate to the surveillance reports page as anonymous user
     Then I do not see the page title for the surveillance report page
 
+Scenario Outline: Verify that surveillance data can be entered and is saved in a quarterly report, delete report after verification
+    Given I'm logged in as "<ROLE>"
+    When I navigate to the surveillance reports page
+    And I expand "<ACB>"
+    And I initate a quarterly surveillance report for "<ACB-Year-Quarter>"
+    Then I see "<Initiate Confirmation Message>" on clicking initiate
+    And I confirm initiaing a quarterly surveillance report
+    And I click open Listings with relevant surveillance accordion
+    And I click View listing surveillance data button for CHPL ID "15.02.02.1703.A057.01.00.1.180301"
+    And I click Edit surveillance data button for Surveillance Id "SURV01"
+    And I enter surveillance data in fields on form: "<Outcome of Surveillance>" "<Surveillance Process Type>" "Grounds For Initiating Surveillance" "Potential Causes of Non-Conformities or Suspected Non-Conformities" "Additional Costs Evaluation" "Limitations Evaluation" "Verification of Completed CAP"
+    When I click Save Surveillance Data button
+    Then I see that all entered data was saved for Surveillance Id "SURV01"
+    When I delete the quarterly surveillance report
+    Then I see "<Delete Confirmation Message>" on clicking delete
+    And I confirm deleting a quarterly surveillance report
+    Examples:
+    |ROLE       |ACB              |ACB-Year-Quarter        |Initiate Confirmation Message                                                                   |Outcome of Surveillance|Surveillance Process Type|Delete Confirmation Message                                        |
+    |ROLE_ADMIN |UL LLC           |UL LLC-2019-Q1          |Are you sure you wish to initiate quarterly surveillance reporting for quarter Q1 of year 2019? |No non-conformity|Correspondence with Complainant/Developer|Are you sure you wish to delete this Quarterly Surveillance Report?|

@@ -1,10 +1,12 @@
 package gov.healthit.chpl.aqa.asserts;
 
+import static org.junit.Assert.assertEquals;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -106,5 +108,28 @@ public class SurveillanceReportPageAsserts extends Base {
         String actualButtonName = SurveillanceReportPage.initiateButton(getDriver(), acbYearQuarter).getText();
         assertTrue(actualButtonName.contains(expectedButtonName));
     }
-}
 
+    /**
+     * Assert that added surveillance data was saved.
+     * @param friendlySurvId is ID of surveillance to which data was added
+     */
+    @Then("^I see that all entered data was saved for Surveillance Id \"([^\"]*)\"$")
+    public void verifyThatSurveillanceDataIsSavedInReport(final String friendlySurvId) {
+
+        /* Workaround to resolve Stale Element Reference Exception-
+         * reload the element after form update so it's attached to DOM: https://www.seleniumhq.org/exceptions/stale_element_reference.jsp*/
+        getDriver().get(getUrl() + "#/surveillance/reporting");
+        SurveillanceReportPage.editSurveillanceReport(getDriver(), "UL LLC-2019-Q1").click();
+        WebElement button = SurveillanceReportPage.listingsWithRelevantSurveillanceAccordion(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+        SurveillanceReportPage.viewListingSurveillanceDataButton(getDriver(), "15.02.02.1703.A057.01.00.1.180301").click();
+
+        WebElement editButton =  getDriver().findElement(By.id("edit-surveillance-data-SURV01"));
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", editButton);
+
+        String groundsForInitiatingSurv = SurveillanceReportPage.surveillanceCompletedCapVerification(getDriver()).getAttribute("value");
+        assertEquals((groundsForInitiatingSurv.split(" ")[0]).trim(), getCurrentDate());
+
+    }
+}

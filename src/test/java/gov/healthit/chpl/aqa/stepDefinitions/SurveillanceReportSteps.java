@@ -111,5 +111,43 @@ public class SurveillanceReportSteps extends Base {
     public void navigateToSurveillanceReportsPageAsAnonymousUser() {
         getDriver().get(getUrl() + "#/surveillance/reporting");
     }
-}
 
+    @And("^I click open Listings with relevant surveillance accordion$")
+    public void openListingsWithRelevantSurveillanceAccordion() {
+        WebElement button = SurveillanceReportPage.listingsWithRelevantSurveillanceAccordion(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+    }
+
+    @And("^I click View listing surveillance data button for CHPL ID \"([^\"]*)\"$")
+    public void clickViewListingSurveillanceDataButton(final String chplID) {
+        SurveillanceReportPage.viewListingSurveillanceDataButton(getDriver(), chplID).click();
+    }
+
+    @And("^I click Edit surveillance data button for Surveillance Id \"([^\"]*)\"$")
+    public void clickEditSurveillanceDataButton(final String friendlySurvId) {
+        SurveillanceReportPage.editSurveillanceDataButton(getDriver(), friendlySurvId).click();
+    }
+
+    @And("^I enter surveillance data in fields on form: \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+    public void enterSurveillanceData(final String outcome, final String processType, final String grounds,
+            final String causes, final String additionalCosts, final String limitationsEvaluation,
+            final String completedCapVerification) {
+        getDriver().manage().window().maximize();
+        SurveillanceReportPage.surveillanceOutcomeDropdown(getDriver()).sendKeys(outcome);
+        SurveillanceReportPage.surveillanceProcessTypeDropdown(getDriver()).sendKeys(processType);
+        SurveillanceReportPage.groundsForInitiatingInput(getDriver()).sendKeys(getCurrentDate());
+        SurveillanceReportPage.surveillancePotentialCauses(getDriver()).sendKeys(getCurrentDate());
+        SurveillanceReportPage.surveillanceadditionalCostEvaluation(getDriver()).sendKeys(getCurrentDate());
+        SurveillanceReportPage.surveillanceLimitationsEvaluation(getDriver()).sendKeys(getCurrentDate());
+        SurveillanceReportPage.surveillanceCompletedCapVerification(getDriver()).sendKeys(getCurrentDate());
+    }
+
+    @When("^I click Save Surveillance Data button$")
+    public void clickSaveSurveillanceDataButton() {
+        WebElement button =  SurveillanceReportPage.saveSurveillanceDataButton(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+    }
+
+}
