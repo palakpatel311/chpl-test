@@ -129,10 +129,8 @@ public class SurveillanceReportSteps extends Base {
         SurveillanceReportPage.editSurveillanceDataButton(getDriver(), friendlySurvId).click();
     }
 
-    @And("^I enter surveillance data in fields on form: \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-    public void enterSurveillanceData(final String outcome, final String processType, final String grounds,
-            final String causes, final String additionalCosts, final String limitationsEvaluation,
-            final String completedCapVerification) {
+    @And("^I enter surveillance data in fields on form: \"([^\"]*)\" \"([^\"]*)\"$")
+    public void enterSurveillanceData(final String outcome, final String processType) {
         getDriver().manage().window().maximize();
         SurveillanceReportPage.surveillanceOutcomeDropdown(getDriver()).sendKeys(outcome);
         SurveillanceReportPage.surveillanceProcessTypeDropdown(getDriver()).sendKeys(processType);

@@ -60,7 +60,7 @@ Scenario Outline: Verify that surveillance data can be entered and is saved in a
     And I click open Listings with relevant surveillance accordion
     And I click View listing surveillance data button for CHPL ID "15.02.02.1703.A057.01.00.1.180301"
     And I click Edit surveillance data button for Surveillance Id "SURV01"
-    And I enter surveillance data in fields on form: "<Outcome of Surveillance>" "<Surveillance Process Type>" "Grounds For Initiating Surveillance" "Potential Causes of Non-Conformities or Suspected Non-Conformities" "Additional Costs Evaluation" "Limitations Evaluation" "Verification of Completed CAP"
+    And I enter surveillance data in fields on form: "<Outcome of Surveillance>" "<Surveillance Process Type>"
     When I click Save Surveillance Data button
     Then I see that all entered data was saved for Surveillance Id "SURV01"
     When I delete the quarterly surveillance report
