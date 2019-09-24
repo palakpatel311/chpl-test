@@ -328,6 +328,27 @@
                   "link":"authorizeUserUsingPOST"
                }
             ]
+         },
+         {  
+            "controllerName":"change-request-controller",
+            "endPointLink":[  
+               {  
+                  "implementationNote":"ROLE_DEVELOPER can get change requests where they have administrative authority based on the developer.",
+                  "link":"getAllChangeRequestsUsingGET"
+               },
+               {  
+                  "implementationNote":"ROLE_DEVELOPER can create change requests where they have administrative authority based on the developer.",
+                  "link":"createChangeRequestUsingPOST"
+               },
+               {  
+                  "implementationNote":"ROLE_DEVELOPER can get change requests where they have administrative authority based on the developer.",
+                  "link":"getChangeRequestUsingGET"
+               },
+               {  
+                  "implementationNote":"ROLE_DEVELOPER can update change requests where they have administrative authority based on the developer.",
+                  "link":"updateChangeRequestUsingPUT"
+               }
+            ]
          }
       ]
    }
