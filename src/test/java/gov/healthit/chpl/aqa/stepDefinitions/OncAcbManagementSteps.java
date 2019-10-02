@@ -1,6 +1,5 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,9 +19,9 @@ public class OncAcbManagementSteps extends Base {
      */
     @And("^I navigate to ONC ACB Management page$")
     public void navigateToONCACBManagementPage() {
-        getDriver().get(getUrl() + "#/admin/acbManagement");
+        getDriver().get(getUrl() + "#/organizations/onc-acbs");
         WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(OncAcbManagementPage.oncACBManagementLink(getDriver())));
+        wait.until(ExpectedConditions.visibilityOf(OncAcbManagementPage.oncACBManagementPageTitle(getDriver())));
     }
 
     /**
@@ -52,8 +51,8 @@ public class OncAcbManagementSteps extends Base {
     @When("^I mark it as retired on \"([^\"]*)\"$")
     public void markRetired(final String date) {
         OncAcbManagementPage.markRetirementStatus(getDriver()).click();
-        WebElement retirementDate = getDriver().findElement(By.id("retirement-date"));
-        retirementDate.sendKeys(date);
+        OncAcbManagementPage.retirementDate(getDriver()).clear();
+        OncAcbManagementPage.retirementDate(getDriver()).sendKeys(date);
         OncAcbManagementPage.saveONCACB(getDriver()).click();
     }
 
@@ -61,7 +60,7 @@ public class OncAcbManagementSteps extends Base {
      * Unretire an existing retired ACB.
      */
     @When("^I unretire an existing retired ACB$")
-    public void iUnretireExisitngRetiredACB() {
+    public void iUnretireExistingRetiredACB() {
         OncAcbManagementPage.markRetirementStatus(getDriver()).click();
         OncAcbManagementPage.addressFirstLine(getDriver()).clear();
         OncAcbManagementPage.addressFirstLine(getDriver()).sendKeys("Test");
