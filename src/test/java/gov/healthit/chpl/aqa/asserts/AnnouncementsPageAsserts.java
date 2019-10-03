@@ -3,6 +3,10 @@ package gov.healthit.chpl.aqa.asserts;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -51,9 +55,15 @@ public class AnnouncementsPageAsserts extends Base {
     @Then("^I see the Announcement information is saved and recorded on Announcements page$")
     public void announcementInfoRecordedOnAnnouncementsPage() {
         WebDriverWait wait = new WebDriverWait(getDriver(), LONG_TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(AnnouncementsPage.savedAnnouncementInformatoin(getDriver())));
-        String actualAnnouncementInformation = AnnouncementsPage.savedAnnouncementInformatoin(getDriver()).getText();
-        assertTrue((actualAnnouncementInformation.contains(getCurrentDate())));
+        Boolean announcementFound = false;
+        wait.until(ExpectedConditions.visibilityOfAllElements(AnnouncementsPage.allAnnouncements(getDriver())));
+        List<WebElement> rows = AnnouncementsPage.allAnnouncements(getDriver());
+        for (WebElement row : rows) {
+            if (row.findElement(By.xpath("//td[1]")).getText().equals(getCurrentDate())) {
+                announcementFound = true;
+            }
+        }
+        assertTrue(announcementFound, ("Announcement " + getCurrentDate() + " not found"));
     }
 
     /**

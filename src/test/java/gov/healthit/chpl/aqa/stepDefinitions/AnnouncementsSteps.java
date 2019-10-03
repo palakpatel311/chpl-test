@@ -87,13 +87,11 @@ public class AnnouncementsSteps extends Base {
      **/
     @And("^I edit an existing Announcement$")
     public void editExistingAnnouncement() {
-        List<WebElement> titleValue = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-announcements/div/div/table/tbody/tr/td[1]"));
-        List<WebElement> allEditButtons = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/ui-view/chpl-announcements/div/div/table/tbody/tr/td[6]/button[1]"));
+        List<WebElement> allAnnouncements = AnnouncementsPage.allAnnouncements(getDriver());
 
-        for (int i = 0; i < titleValue.size(); i++) {
-
-            if (titleValue.get(i).getText().equals(getCurrentDate())) {
-                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", allEditButtons.get(i));
+        for (WebElement row : allAnnouncements) {
+            if (row.findElement(By.xpath("//td[1]")).getText().equals(getCurrentDate())) {
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", row.findElement(By.xpath("//td[6]/button[1]")));
                 break;
             }
         }
@@ -108,6 +106,4 @@ public class AnnouncementsSteps extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", link);
         AnnouncementsPage.deleteAnnouncement(getDriver()).click();
     }
-
 }
-
