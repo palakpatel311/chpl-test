@@ -51,15 +51,16 @@ public class AnnouncementsPageAsserts extends Base {
 
     /**
      * Assert that Announcement information is recorded on Announcements page.
+     * @param role the user role
      */
-    @Then("^I see the Announcement information is saved and recorded on Announcements page$")
-    public void announcementInfoRecordedOnAnnouncementsPage() {
+    @Then("^I see the Announcement information is saved and recorded on Announcements page with \"(.*)\"$")
+    public void announcementInfoRecordedOnAnnouncementsPage(final String role) {
         WebDriverWait wait = new WebDriverWait(getDriver(), LONG_TIMEOUT);
         Boolean announcementFound = false;
         wait.until(ExpectedConditions.visibilityOfAllElements(AnnouncementsPage.allAnnouncements(getDriver())));
         List<WebElement> rows = AnnouncementsPage.allAnnouncements(getDriver());
         for (WebElement row : rows) {
-            if (row.findElement(By.xpath("//td[1]")).getText().equals(getCurrentDate())) {
+            if (row.findElement(By.xpath(".//td[1]")).getText().equals(getCurrentDate() + "-" + role)) {
                 announcementFound = true;
             }
         }
