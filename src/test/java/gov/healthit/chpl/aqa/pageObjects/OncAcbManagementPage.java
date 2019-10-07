@@ -1,5 +1,7 @@
 package gov.healthit.chpl.aqa.pageObjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +17,13 @@ public final class OncAcbManagementPage extends BasePage {
     }
 
     public static WebElement oncACBName(final WebDriver driver, final String oncAcbName) {
-        return driver.findElement(By.partialLinkText(oncAcbName));
+        List<WebElement> navItems = driver.findElements(By.xpath("//*[@id='main-content']/div/div/ui-view/chpl-onc-organizations/div[2]/div/div"));
+        for (WebElement item : navItems) {
+            if (item.findElement(By.xpath(".//button")).getText().equalsIgnoreCase(oncAcbName)) {
+                return item.findElement(By.xpath(".//button"));
+            }
+        }
+        return null;
     }
 
     public static WebElement editONCACB(final WebDriver driver) {
@@ -35,11 +43,12 @@ public final class OncAcbManagementPage extends BasePage {
     }
 
     public static WebElement retirementStatus(final WebDriver driver, final String retirementStatus) {
-        return driver.findElement(By.xpath("//span[contains(text(),'Retired: " + retirementStatus + "')]"));
+        WebElement status = driver.findElement(By.xpath("//p[contains(text(),'Retired: ')]"));
+        return status.findElement(By.xpath(".//strong"));
     }
 
     public static WebElement retirementDateIs(final WebDriver driver, final String retirementDate) {
-        return driver.findElement(By.xpath("//span[contains(text(),'Retirement Date:" + retirementDate + "')]"));
+        return driver.findElement(By.xpath("//strong[contains(text(),'Yes, effective " + retirementDate + "')]"));
     }
 
     public static WebElement errorMessage(final WebDriver driver) {
@@ -47,23 +56,23 @@ public final class OncAcbManagementPage extends BasePage {
     }
 
     public static WebElement addressFirstLine(final WebDriver driver) {
-        return driver.findElement(By.id("address-line-1"));
+        return driver.findElement(By.id("line1"));
     }
 
     public static WebElement addressCity(final WebDriver driver) {
-        return driver.findElement(By.id("address-city"));
+        return driver.findElement(By.id("city"));
     }
 
     public static WebElement addressState(final WebDriver driver) {
-        return driver.findElement(By.id("address-state"));
+        return driver.findElement(By.id("state"));
     }
 
     public static WebElement addressZipCode(final WebDriver driver) {
-        return driver.findElement(By.id("address-zipcode"));
+        return driver.findElement(By.id("zipcode"));
     }
 
     public static WebElement addressCountry(final WebDriver driver) {
-        return driver.findElement(By.id("address-country"));
+        return driver.findElement(By.id("country"));
     }
 
     public static WebElement fieldWebsite(final WebDriver driver) {

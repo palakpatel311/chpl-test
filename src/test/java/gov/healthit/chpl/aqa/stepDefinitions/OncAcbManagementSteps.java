@@ -53,7 +53,8 @@ public class OncAcbManagementSteps extends Base {
         OncAcbManagementPage.markRetirementStatus(getDriver()).click();
         OncAcbManagementPage.retirementDate(getDriver()).clear();
         OncAcbManagementPage.retirementDate(getDriver()).sendKeys(date);
-        OncAcbManagementPage.saveONCACB(getDriver()).click();
+        WebElement link = OncAcbManagementPage.saveONCACB(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
     /**
@@ -74,7 +75,8 @@ public class OncAcbManagementSteps extends Base {
         OncAcbManagementPage.addressCountry(getDriver()).sendKeys("Test");
         OncAcbManagementPage.fieldWebsite(getDriver()).clear();
         OncAcbManagementPage.fieldWebsite(getDriver()).sendKeys("http://www.example.com");
-        OncAcbManagementPage.saveONCACB(getDriver()).click();
+        WebElement link = OncAcbManagementPage.saveONCACB(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
     /**
@@ -91,6 +93,7 @@ public class OncAcbManagementSteps extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).clear();
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).sendKeys(oldName);
-        OncAcbManagementPage.saveONCACB(getDriver()).click();
+        link = OncAcbManagementPage.saveONCACB(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 }
