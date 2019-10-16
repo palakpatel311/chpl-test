@@ -255,7 +255,111 @@
                {  
                   "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"updateFuzzyChoicesForSearchingUsingPUT"
-               }
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getAccessibilityStandardsUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getAgeRangesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getCertBodyNamesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getEditionNamesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getCertificationStatusesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getClassificationNamesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getDeveloperNamesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getEducationTypesUsingGET"
+               },
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN or ROLE_ONC",
+                  "link":"getFuzzyChoicesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getMacraMeasuresUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getPracticeTypeNamesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getProductNamesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getQmsStandardsUsingGET"
+               },
+               {  
+                  "implementationNote":"This returns all of the other /data/{something} results in one single response.",
+                  "link":"getSearchOptionsUsingGET"
+               },
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN, ROLE_ONC, or ROLE_ACB.",
+                  "link":"getSurveillanceOutcomesUsingGET"
+               },
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN, ROLE_ONC, or ROLE_ACB.",
+                  "link":"getSurveillanceProcessTypesUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getTargetedUsersUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getTestDataUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getTestFunctionalityUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getTestProceduresUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getTestStandardsUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getTestToolsUsingGET"
+               },
+               {  
+                  "implementationNote":"This is useful for knowing what values one might possibly search for.",
+                  "link":"getUcdProcessesUsingGET"
+               },
+               {  
+                  "implementationNote":"Once per day, the entire certified product listing is written out to XML files on the CHPL servers, one for each certification edition. This method allows any user to download that XML file. It is formatted in such a way that users may import it into Microsoft Excel or any other XML tool of their choosing. To download any one of the XML files, append ‘&edition=year’ to the end of the query string (e.g., &edition=2015). A separate query is required to download each of the XML files.",
+                  "link":"downloadUsingGET"
+               },
+               {  
+                  "implementationNote":"If paging parameters are not specified, the first 20 records are returned by default. All parameters are optional. Any parameter that can accept multiple things (i.e. certificationStatuses) expects a comma-delimited list of those things (i.e. certificationStatuses = Active,Suspended). Date parameters are required to be in the format yyyy-MM-dd.",
+                  "link":"searchGetUsingGET"
+               },
+               {  
+                  "implementationNote":"Search the CHPL by specifycing multiple fields of the data to search. If paging fields are not specified, the first 20 records are returned by default.",
+                  "link":"searchPostUsingPOST"
+               },
             ]
          },
          {  
