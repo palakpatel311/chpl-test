@@ -105,7 +105,107 @@
                {  
                   "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), or ROLE_ATL (of their own).",
                   "link":"activityForUsersUsingGET"
-               }
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results. Security Restrictions: ROLE_ADMIN and ROLE_ONC may see activity for all certification bodies. ROLE_ACB can see activity for their own ACBs.",
+                  "link":"metadataForAcbsUsingGET"
+               },
+               {  
+                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, ROLE_CMS_STAFF (of ROLE_CMS_STAFF Users), ROLE_ACB (of their own), or ROLE_ATL (of their own).",
+                  "link":"activityForUsersUsingGET"
+               },
+               {  
+                  "implementationNote":"A start and end date may optionally be provided to limit activity results.",
+                  "link":"metadataForAcbByIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.Security Restrictions: Anonymous users are only allowed to see activity for public announcements. All other roles can see private and public announcements.",
+                  "link":"metadataForAnnouncementsUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.Security Restrictions: ROLE_ADMIN and ROLE_ONC may see activity for all annual reports. ROLE_ACB can see activity for their own ACBs.",
+                  "link":"metadataForAnnualReportsUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results. Security Restrictions: ROLE_ADMIN and ROLE_ONC may see activity for all testing labs. ROLE_ATL can see activity for their own ATLs.",
+                  "link":"metadataForAtlsUsingGET"
+               },
+               {  
+                  "implementationNote":"A start and end date may optionally be provided to limit activity results.",
+                  "link":"metadataForAtlByIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.Security Restrictions: ROLE_ADMIN and ROLE_ONC may see activity for all chan ge requests. ROLE_ACB can see activity for change requests they are associated with.",
+                  "link":"metadataForChangeRequestsUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.Security Restrictions: ROLE_ADMIN and ROLE_ONC may see activity for all complaints. ROLE_ACB can see activity for their own ACBs.",
+                  "link":"metadataForComplaintsUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.",
+                  "link":"metadataForCorrectiveActionPlansUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.",
+                  "link":"metadataForDevelopersUsingGET"
+               },
+               {  
+                  "implementationNote":"A start or end date may optionally be provided to limit activity results.",
+                  "link":"metadataForDeveloperByIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.",
+                  "link":"metadataForListingsUsingGET"
+               },
+               {  
+                  "implementationNote":"{chplPrefix}-{identifier} represents a valid CHPL Product Number. A valid call to this service would look like activity/certified_products/CHP-999999. A start and end date may optionally be provided to limit activity results.",
+                  "link":"metadataForListingByChplProductNumberUsingGET"
+               },
+               {  
+                  "implementationNote":"A start and end date may optionally be provided to limit activity results.",
+                  "link":"metadataForListingByIdUsingGET"
+               },
+               {  
+                  "implementationNote":"{year}.{testingLab}.{certBody}.{vendorCode}.{productCode}.{versionCode}.{icsCode}.{addlSoftwareCode}.{certDateCode} represents a valid CHPL Product Number. A valid call to this service would look like activity/certified_products/YY.99.99.9999.XXXX.99.99.9.YYMMDD. A start and end date may optionally be provided to limit activity results.",
+                  "link":"metadataForListingByChplProductNumberUsingGET_1"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.",
+                  "link":"metadataForPendingListingsUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.",
+                  "link":"metadataForPendingSurveillancesUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.",
+                  "link":"metadataForProductsUsingGET"
+               },
+               {  
+                  "implementationNote":"A start or end date may optionally be provided to limit activity results.",
+                  "link":"metadataForProductByIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.Security Restrictions: ROLE_ADMIN and ROLE_ONC may see activity for all quarterly reports. ROLE_ACB can see activity for their own ACBs.",
+                  "link":"metadataForQuarterlyReportsUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.",
+                  "link":"metadataForUsersUsingGET"
+               },
+               {  
+                  "implementationNote":"Users must specify 'start' and 'end' parameters to restrict the date range of the results.",
+                  "link":"metadataForVersionsUsingGET"
+               },
+               {  
+                  "implementationNote":"A start or end date may optionally be provided to limit activity results.",
+                  "link":"metadataForVersionByIdUsingGET"
+               },
+               {  
+                  "implementationNote":"A start or end date may optionally be provided to limit activity results.",
+                  "link":"metadataForVersionByIdUsingGET"
+               },
             ]
          },
          {  
@@ -357,7 +457,7 @@
                   "link":"searchGetUsingGET"
                },
                {  
-                  "implementationNote":"Search the CHPL by specifycing multiple fields of the data to search. If paging fields are not specified, the first 20 records are returned by default.",
+                  "implementationNote":"Search the CHPL by specifying multiple fields of the data to search. If paging fields are not specified, the first 20 records are returned by default.",
                   "link":"searchPostUsingPOST"
                },
             ]
