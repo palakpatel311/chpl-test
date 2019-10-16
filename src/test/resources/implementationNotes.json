@@ -604,6 +604,14 @@
                {  
                   "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ATL and have administrative authority on the specified ATL",
                   "link":"deleteUserFromAtlUsingDELETE"
+               },
+               {  
+                  "implementationNote":"Setting the 'editable' parameter to true will return all ATLs that the logged in user has edit permissions on. Security Restrictions: When 'editable' is 'true' ROLE_ADMIN or ROLE_ONC can see all ATLs. ROLE_ATL can see their own ATL. When 'editable' is 'false' all users can see all ATLs.",
+                  "link":"getAtlsUsingGET"
+               },
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN, ROLE_ONC, or have administrative or read authority on the specified ATL.",
+                  "link":"getUsersUsingGET_2"
                }
             ]
          },
