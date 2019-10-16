@@ -291,9 +291,22 @@
                   "link":"getDevelopersUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ACB",
+                  "implementationNote":"This method serves two purposes: to update a single developer's information and to merge two developers into one. A user of this service should pass in a single developerId to update just that developer. If multiple developer IDs are passed in, the service performs a merge meaning that a new developer is created with all of the information provided (name, address, etc.) and all of the products previously assigned to the developerId's specified are reassigned to the newly created developer. The old developers are then deleted. Security Restrictions: ROLE_ADMIN, ROLE_ONC, or ROLE_ACB",
                   "link":"updateDeveloperUsingPUT"
-               }
+               },
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN, ROLE_ONC, or ROLE_ACB",
+                  "link":"splitDeveloperUsingPOST"
+               },
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN, ROLE_ONC, ROLE_ACB, or have administrative authority on the specified developer.",
+                  "link":"getUsersUsingGET_1"
+               },
+               {  
+                  "implementationNote":"The logged in user must have ROLE_ADMIN, ROLE_ONC, ROLE_ACB, or ROLE_DEVELOPER and have administrative authority on the specified developer. The user specified in the request will have all authorities removed that are associated with the specified developer.",
+                  "link":"deleteUserFromDeveloperUsingDELETE"
+               },
+               
             ]
          },
          {  
