@@ -38,9 +38,21 @@
             "controllerName":"authentication-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"Specifically, the Authorization header must have a value of 'Bearer token-that-gets-returned'.",
+                  "implementationNote":"Call this method to authenticate a user. The value returned is that user's token which must be passed on all subsequent requests in the Authorization header. Specifically, the Authorization header must have a value of 'Bearer token-that-gets-returned'.",
                   "link":"authenticateJSONUsingPOST"
-               }
+               },
+               {  
+                  "implementationNote":"Change a user's expired password as long as the old password passed in matches what is stored in the database.",
+                  "link":"changeExpiredPasswordUsingPOST"
+               },
+               {  
+                  "implementationNote":"Change the logged in user's password as long as the old password passed in matches what is stored in the database.",
+                  "link":"changePasswordUsingPOST"
+               },
+               {  
+                  "implementationNote":"Reset the users password.",
+                  "link":"resetPasswordUsingPOST_1"
+               },
             ]
          },
          {  
