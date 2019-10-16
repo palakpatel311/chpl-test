@@ -346,6 +346,15 @@
             ]
          },
          {  
+            "controllerName":"meaningful-use-controller",
+            "endPointLink":[  
+               {  
+                  "implementationNote":"Accepts a CSV file with chpl_product_number and num_meaningful_use_users to update the number of meaningful use users for each CHPL Product Number. The user uploading the file must have ROLE_ADMIN, ROLE_ONC.",
+                  "link":"uploadMeaningfulUseUsersUsingPOST"
+               }
+            ]
+         },
+         {  
             "controllerName":"scheduler-controller",
             "endPointLink":[  
                {  
