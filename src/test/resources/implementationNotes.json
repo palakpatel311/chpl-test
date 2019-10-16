@@ -615,6 +615,35 @@
                }
             ]
          },
+         {  
+            "controllerName":"certification-id-controller",
+            "endPointLink":[  
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN, ROLE_ONC, or ROLE_CMS_STAFF",
+                  "link":"getAllUsingGET"
+               },
+               {  
+                  "implementationNote":"Retrieves a CMS EHR Certification ID for a collection of products or creates a new one if one does not already exist. Returns a list of basic product information, Criteria and CQM calculations, and the associated CMS EHR Certification ID if one exists.",
+                  "link":"createCertificationIdUsingPOST"
+               },
+               {  
+                  "implementationNote":"Retrieves a CMS EHR Certification ID for a collection of products. Returns a list of basic product information, Criteria and CQM calculations, and the associated CMS EHR Certification ID if one exists.",
+                  "link":"searchCertificationIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Returns true or false for each EHR Certification ID specified.",
+                  "link":"verifyCertificationIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Returns a boolean value for each EHR Certification ID specified.",
+                  "link":"verifyCertificationIdUsingPOST"
+               },
+               {  
+                  "implementationNote":"Retrieves detailed information about a specific EHR Certification ID including the list of products that make it up. This method can be used when verfying a small number ofCertification Ids, where the length of the URL, plus the list of IDs, is less than themaximum length URL that your client can handle.",
+                  "link":"getCertificationIdUsingGET"
+               }
+            ]
+         },
           {  
             "controllerName":"chpl-file-controller",
             "endPointLink":[  
