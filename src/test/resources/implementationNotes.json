@@ -715,7 +715,7 @@
             "controllerName":"change-request-controller",
             "endPointLink":[  
                {  
-                  "implementationNote":"ROLE_DEVELOPER can get change requests where they have administrative authority based on the developer.",
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN & ROLE_ONC can get all change requests. ROLE_ACB can get change requests for developers where they manage at least one certified product for the developer. ROLE_DEVELOPER can get change requests where they have administrative authority based on the developer.",
                   "link":"getAllChangeRequestsUsingGET"
                },
                {  
@@ -723,11 +723,11 @@
                   "link":"createChangeRequestUsingPOST"
                },
                {  
-                  "implementationNote":"ROLE_DEVELOPER can get change requests where they have administrative authority based on the developer.",
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN & ROLE_ONC can get all change requests. ROLE_ACB can get change requests for developers where they manage at least one certified product for the developer. ROLE_DEVELOPER can get change requests where they have administrative authority based on the developer.",
                   "link":"getChangeRequestUsingGET"
                },
                {  
-                  "implementationNote":"ROLE_DEVELOPER can update change requests where they have administrative authority based on the developer.",
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN & ROLE_ONC can update all chnage requests. ROLE_ACB can update change requests for developers where they manage at least one certified product for the developer. ROLE_DEVELOPER can update change requests where they have administrative authority based on the developer.",
                   "link":"updateChangeRequestUsingPUT"
                }
             ]
