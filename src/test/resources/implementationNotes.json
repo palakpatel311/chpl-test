@@ -332,8 +332,16 @@
             "controllerName":"product-version-controller",
             "endPointLink":[  
                {  
+                  "implementationNote":"List all versions associated with a specific product.",
+                  "link":"getVersionsByProductUsingGET"
+               },
+               {  
                   "implementationNote":"Must have ROLE_ADMIN to merge or ROLE_ACB and have administrative authority on the specified ACB to do all actions except merge",
                   "link":"updateVersionUsingPUT"
+               },
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN, ROLE_ONC, or ROLE_ACB",
+                  "link":"splitVersionUsingPOST"
                }
             ]
          },
