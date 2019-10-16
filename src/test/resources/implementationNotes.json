@@ -669,16 +669,28 @@
                   "link":"getUsersUsingGET_3"
                },
                {  
+                  "implementationNote":"When a new user accepts their invitation to the CHPL they have to provide an email address. They then receive an email prompting them to confirm that this email address is valid. Confirming the email address must be done via this request before the user will be allowed to log in with the credentials they selected. The correct order to call invitation requests is the following: 1) /invite 2) /create or /authorize 3) /confirm",
+                  "link":"confirmUserUsingPOST"
+               },
+               {  
+                  "implementationNote":"An individual who has been invited to the CHPL has a special user key in their invitation email. That user key along with all the information needed to create a new user's account can be passed in here. The account is created but cannot be used until that user confirms that their email address is valid. The correct order to call invitation requests is the following: 1) /invite 2) /create or /authorize 3) /confirm",
+                  "link":"createUserUsingPOST"
+               },
+               {  
+                  "implementationNote":"Security Restrictions: ROLE_ADMIN or ROLE_ONC",
+                  "link":"deleteUserUsingDELETE"
+               },
+               {  
                   "implementationNote":"ROLE_ADMIN and ROLE_ONC can invite users to any organization. ROLE_ACB and ROLE_ATL can add users to their own organization.",
                   "link":"inviteUserUsingPOST"
                },
                {  
                   "implementationNote":"ROLE_ADMIN and ROLE_ONC",
-                  "link":"deleteUserUsingDELETE"
+                  "link":"authorizeUserUsingPOST"
                },
                {  
-                  "implementationNote":"ROLE_ADMIN and ROLE_ONC",
-                  "link":"authorizeUserUsingPOST"
+                  "implementationNote":"The logged in user must either be the user in the parameters, have ROLE_ADMIN, or have ROLE_ACB.",
+                  "link":"getUserUsingGET"
                }
             ]
          },
