@@ -129,6 +129,10 @@
                   "link":"listKeysUsingGET"
                },
                {  
+                  "implementationNote":"Anyone wishing to access the methods listed in this API must have an API key. This service will auto-generate a key and send it to the supplied email address. It must be included in subsequent API calls via either a header with the name 'API-Key' or as a URL parameter named 'api_key'.",
+                  "link":"registerUsingPOST"
+               },
+               {  
                   "implementationNote":"ROLE_ADMIN, ROLE_ONC",
                   "link":"listActivityUsingGET"
                },
