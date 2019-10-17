@@ -17,8 +17,16 @@
                   "link":"getPendingCertifiedProductByIdUsingGET"
                },
                {  
+                  "implementationNote":"Pending listings are created via CSV file upload and are left in the 'pending' state until validated and confirmed. Security Restrictions: ROLE_ADMIN, ROLE_ACB and have administrative authority on the ACB that uploaded the product.",
+                  "link":"getPendingCertifiedProductMetadataUsingGET"
+               },
+               {  
                   "implementationNote":"ROLE_ADMIN or have ROLE_ACB and administrative authority on the ACB for each pending certified product is required",
                   "link":"rejectPendingCertifiedProductUsingDELETE"
+               },
+               {  
+                  "implementationNote":"Download a specific file that is generated overnight.",
+                  "link":"streamSEDDetailsDocumentContentsUsingGET"
                },
                {  
                   "implementationNote":"ROLE_ADMIN or have ROLE_ACB and administrative authority on the ACB for each pending certified product is required",
@@ -29,9 +37,65 @@
                   "link":"uploadUsingPOST"
                },
                {  
+                  "implementationNote":"Returns basic information in the CHPL related to the specified certified product. The results will not include the CQM results and certification results.",
+                  "link":"getCertifiedProductByIdBasicUsingGET"
+               },
+               {  
                   "implementationNote":"ROLE_ADMIN, ROLE_ONC, or ROLE_ACB and have administrative authority on the ACB that certified the product",
                   "link":"updateCertifiedProductUsingPUT"
-               }
+               },
+               {  
+                  "implementationNote":"Returns all of the certification results in the CHPL related to the specified certified product.",
+                  "link":"getCertificationResultssByCertifiedProductIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Returns all of the CQM results in the CHPL related to the specified certified product.",
+                  "link":"getCqmsByCertifiedProductIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Returns all information in the CHPL related to the specified certified product.",
+                  "link":"getCertifiedProductByIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Returns all member of the family tree connected to the specified certified product.",
+                  "link":"getIcsFamilyTreeByIdUsingGET"
+               },
+               {  
+                  "implementationNote":"Returns basic information in the CHPL related to the specified certified product. The results will not include the CQM results and certification results. {chplPrefix}-{identifier} represents a valid legacy CHPL Product Number. A valid call to this service would look like /certified_products/CHP-999999.",
+                  "link":"getCertifiedProductByChplProductNumberBasic2UsingGET"
+               },
+               {  
+                  "implementationNote":"Returns all of the CQM results in the CHPL related to the specified certified product. {chplPrefix}-{identifier} represents a valid legacy CHPL Product Number. A valid call to this service would look like /certified_products/CHP-999999/cqm_results.",
+                  "link":"getCqmsByCertifiedProductIdUsingGET_1"
+               },
+               {  
+                  "implementationNote":"Returns all information in the CHPL related to the specified certified product. {chplPrefix}-{identifier} represents a valid legacy CHPL Product Number. A valid call to this service would look like /certified_products/CHP-999999.",
+                  "link":"getCertifiedProductByChplProductNumber2UsingGET"
+               },
+               {  
+                  "implementationNote":"{chplPrefix}-{identifier} represents a valid legacy CHPL Product Number. A valid call to this service would look like /certified_products/CHP-999999/ics_relationships.",
+                  "link":"getIcsFamilyTreeByChplProductNumberUsingGET"
+               },
+               {  
+                  "implementationNote":"Returns basic information in the CHPL related to the specified certified product. The results will not include the CQM results and certification results. {year}.{testingLab}.{certBody}.{vendorCode}.{productCode}.{versionCode}.{icsCode}.{addlSoftwareCode}.{certDateCode} represents a valid CHPL Product Number. A valid call to this service would look like /certified_products/YY.99.99.9999.XXXX.99.99.9.YYMMDD.",
+                  "link":"getCertifiedProductByChplProductNumberBasicUsingGET"
+               },
+               {  
+                  "implementationNote":"Returns all of the certification results in the CHPL related to the specified certified product. {year}.{testingLab}.{certBody}.{vendorCode}.{productCode}.{versionCode}.{icsCode}.{addlSoftwareCode}.{certDateCode} represents a valid CHPL Product Number. A valid call to this service would look like /certified_products/YY.99.99.9999.XXXX.99.99.9.YYMMDD/certification_results.",
+                  "link":"getCertificationResultssByCertifiedProductIdUsingGET_2"
+               },
+               {  
+                  "implementationNote":"Returns all of the CQM results in the CHPL related to the specified certified product. {year}.{testingLab}.{certBody}.{vendorCode}.{productCode}.{versionCode}.{icsCode}.{addlSoftwareCode}.{certDateCode} represents a valid CHPL Product Number. A valid call to this service would look like /certified_products/YY.99.99.9999.XXXX.99.99.9.YYMMDD/cqm_results.",
+                  "link":"getCqmsByCertifiedProductIdUsingGET_2"
+               },
+               {  
+                  "implementationNote":"Returns all information in the CHPL related to the specified certified product. {year}.{testingLab}.{certBody}.{vendorCode}.{productCode}.{versionCode}.{icsCode}.{addlSoftwareCode}.{certDateCode} represents a valid CHPL Product Number. A valid call to this service would look like /certified_products/YY.99.99.9999.XXXX.99.99.9.YYMMDD/details",
+                  "link":"getCertifiedProductByChplProductNumberUsingGET"
+               },
+               {  
+                  "implementationNote":"{year}.{testingLab}.{certBody}.{vendorCode}.{productCode}.{versionCode}.{icsCode}.{addlSoftwareCode}.{certDateCode} represents a valid CHPL Product Number. A valid call to this service would look like /certified_products/YY.99.99.9999.XXXX.99.99.9.YYMMDD/ics_relationships.",
+                  "link":"getIcsFamilyTreeByChplProductNumberUsingGET_1"
+               },
             ]
          },
          {  
