@@ -16,15 +16,15 @@ public final class ViewDeveloperPage {
     }
 
     public static WebElement editDeveloperLink(final WebDriver driver, final String developerId) {
-        return driver.findElement(By.xpath("//*[@id=\"developer-component-edit-" + developerId + "\"]/i"));
+        return driver.findElement(By.xpath("//*[@id=\"developer-component-edit\"]/i"));
     }
 
     public static WebElement splitDeveloperLink(final WebDriver driver, final String developerId) {
-        return driver.findElement(By.xpath("//*[@id=\"developer-component-split-" + developerId + "\"]/i"));
+        return driver.findElement(By.xpath("//*[@id=\"developer-component-split\"]/i"));
     }
 
     public static WebElement mergeDeveloperLink(final WebDriver driver, final String developerId) {
-        return driver.findElement(By.xpath("//*[@id=\"developer-component-merge-" + developerId + "\"]/i"));
+        return driver.findElement(By.xpath("//*[@id=\"developer-component-merge\"]/i"));
     }
 
     public static WebElement developerNameField(final WebDriver driver) {
