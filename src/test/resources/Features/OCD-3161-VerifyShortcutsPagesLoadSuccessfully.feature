@@ -1,5 +1,5 @@
 @Regression
-Feature: Navigation to Shortcuts Pages is successful and displays correct page title
+Feature: OCD-3161 Navigation to Shortcuts Pages is successful and displays correct page title
 
 Scenario: Verify navigation to API Documentation page is successful and displays correct page title
     Given I am on API Documetation page
