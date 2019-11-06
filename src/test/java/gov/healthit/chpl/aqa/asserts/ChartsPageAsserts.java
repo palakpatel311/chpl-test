@@ -37,4 +37,10 @@ public class ChartsPageAsserts extends Base {
         String actualString = ChartsPage.chartsInfoText(getDriver()).getText();
         assertTrue(actualString.contains(chartsText), "Expect " + chartsText + " to be found in " + actualString);
     }
+
+    @Then("^I see \"([^\"]*)\" as the page title for the CHPL Charts page$")
+    public void iSeePageTitleForChartsPage(final String expectedPageTitle) {
+        String actualPageTitle = ChartsPage.chartsPageTitle(getDriver(), expectedPageTitle).getText();
+        assertEquals(expectedPageTitle, actualPageTitle);
+    }
 }
