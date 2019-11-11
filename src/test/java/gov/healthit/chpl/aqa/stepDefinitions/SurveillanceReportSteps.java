@@ -47,7 +47,7 @@ public class SurveillanceReportSteps extends Base {
     /**
      * Click yes to confirm initiating a quarterly surveillance report.
      **/
-    @When("^I confirm initiaing a quarterly surveillance report$")
+    @When("^I confirm initiating a quarterly surveillance report$")
     public void confirmInitiatingQuarterlySurveillanceReport() {
         WebElement button = SurveillanceReportPage.yesToConfirm(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);

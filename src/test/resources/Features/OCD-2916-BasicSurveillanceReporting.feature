@@ -24,7 +24,7 @@ Scenario Outline: User logs in as ROLE - initiates, edits and deletes a quarterl
     And I expand "<ACB>"
     And I initate a quarterly surveillance report for "<ACB-Year-Quarter>"
     Then I see "<Initiate Confirmation Message>" on clicking initiate
-    And I confirm initiaing a quarterly surveillance report
+    And I confirm initiating a quarterly surveillance report
     Then I see "<Page Title>" for the quarterly surveillance report page
     And "<Subtitle>" for the quarterly surveillance report
     And I set "surveillance-activities" field to "Test surveillance-activities"
@@ -56,7 +56,7 @@ Scenario Outline: Verify that surveillance data can be entered and is saved in a
     And I expand "<ACB>"
     And I initate a quarterly surveillance report for "<ACB-Year-Quarter>"
     Then I see "<Initiate Confirmation Message>" on clicking initiate
-    And I confirm initiaing a quarterly surveillance report
+    And I confirm initiating a quarterly surveillance report
     And I click open Listings with relevant surveillance accordion
     And I click View listing surveillance data button for CHPL ID "15.02.02.1703.A057.01.00.1.180301"
     And I click Edit surveillance data button for Surveillance Id "SURV01"
@@ -68,4 +68,4 @@ Scenario Outline: Verify that surveillance data can be entered and is saved in a
     And I confirm deleting a quarterly surveillance report
     Examples:
     |ROLE       |ACB              |ACB-Year-Quarter        |Initiate Confirmation Message                                                                   |Outcome of Surveillance|Surveillance Process Type|Delete Confirmation Message                                        |
-    |ROLE_ADMIN |UL LLC           |UL LLC-2019-Q1          |Are you sure you wish to initiate quarterly surveillance reporting for quarter Q1 of year 2019? |No non-conformity|Correspondence with Complainant/Developer|Are you sure you wish to delete this Quarterly Surveillance Report?|
+    |ROLE_ADMIN |UL LLC           |UL LLC-2020-Q1          |Are you sure you wish to initiate quarterly surveillance reporting for quarter Q1 of year 2019? |No non-conformity|Correspondence with Complainant/Developer|Are you sure you wish to delete this Quarterly Surveillance Report?|
