@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import gov.healthit.chpl.aqa.pageObjects.BasePage;
 import gov.healthit.chpl.aqa.pageObjects.CollectionsPages;
 
 /**
@@ -49,10 +48,4 @@ public class CollectionsPagesSteps extends Base {
         super.checkIfFileIsDownloaded(fileName);
     }
 
-    @Given("^I navigate to \"([^\"]*)\" page$")
-    public void userLoadsCollectionsPage(final String pageName) {
-        getDriver().get(getUrl() + "/#/collections/" + pageName);
-        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(BasePage.mainContent(getDriver())));
-    }
 }
