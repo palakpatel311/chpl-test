@@ -1,9 +1,10 @@
 @Regression
 Feature: OCD-3161 Navigation to Shortcuts Pages is successful and displays correct page title
 
-Scenario Outline: Verify navigation to Collections page is successful and displays correct page title
-    Given I am on CHPL search page
-    When I navigate to "<Collections>" page
+Scenario Outline: Verify navigation to Charts page is successful and displays correct page title
+    Given I'm on Overview page
+    And I click Shortcuts top navigation link
+    When I open "<Collections>" page
     Then I see "<Page title>" as the page title for the Collections Page
     Examples:
       |Collections                    |Page title                                |
@@ -15,7 +16,8 @@ Scenario Outline: Verify navigation to Collections page is successful and displa
       |SED Info for 2015 Ed. Products |SED Information for 2015 Edition Products |
 
 Scenario: Verify navigation to Charts page is successful and displays correct page title
-    Given I am on CHPL search page
-    When I navigate to "Charts" page
+    Given I'm on Overview page
+    And I click Shortcuts top navigation link
+    When I open "Charts" page
     Then I see "Charts" as the page title for the CHPL Charts page
 

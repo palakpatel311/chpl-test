@@ -3,6 +3,7 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.BasePage;
@@ -30,5 +31,16 @@ public class BaseSteps extends Base {
     public void pageTitleShouldBe(final String title) {
         String pageTitle = getDriver().getTitle();
         Assert.assertEquals(pageTitle, title);
+    }
+
+    @When("^I click Shortcuts top navigation link$")
+    public void iClickShortcutsTopNavigationLink() {
+        BasePage.shortcutsDropdown(getDriver()).click();
+    }
+
+    @And("^I open \"([^\"]*)\" page$")
+    public void iOpenCollectionsPage(final String collectionsPage) {
+        BasePage.shortcutsCollectionsPage(getDriver(), collectionsPage).click();
+        getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(BasePage.shortcutsCollectionsPage(getDriver(), collectionsPage))));
     }
 }

@@ -59,4 +59,12 @@ public class BasePage {
     public static WebElement pageTitle(final WebDriver driver, final String pageTitle) {
         return driver.findElement(By.xpath("//h1[contains(text(),'" + pageTitle + "')]"));
     }
+
+    public static WebElement shortcutsDropdown(final WebDriver driver) {
+        return driver.findElement(By.id("shortcut-toggle"));
+    }
+
+    public static WebElement shortcutsCollectionsPage(final WebDriver driver, final String collectionsPage) {
+        return driver.findElement(By.xpath("//*[@id=\"shortcut-dropdown-menu\"]/li/a[contains(text(),'" + collectionsPage + "')]"));
+    }
 }
