@@ -6,6 +6,7 @@ import static org.testng.Assert.assertTrue;
 import org.openqa.selenium.WebDriver;
 
 import cucumber.api.java.en.Then;
+import gov.healthit.chpl.aqa.pageObjects.BasePage;
 import gov.healthit.chpl.aqa.pageObjects.ChartsPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 
@@ -40,7 +41,7 @@ public class ChartsPageAsserts extends Base {
 
     @Then("^I see \"([^\"]*)\" as the page title for the CHPL Charts page$")
     public void iSeePageTitleForChartsPage(final String expectedPageTitle) {
-        String actualPageTitle = ChartsPage.chartsPageTitle(getDriver(), expectedPageTitle).getText();
+        String actualPageTitle = BasePage.pageTitle(getDriver(), expectedPageTitle).getText();
         assertEquals(expectedPageTitle, actualPageTitle);
     }
 }

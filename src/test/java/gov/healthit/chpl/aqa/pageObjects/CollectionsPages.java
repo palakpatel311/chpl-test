@@ -48,4 +48,8 @@ public final class CollectionsPages {
     public static WebElement sedDetailsFileButton(final WebDriver driver) {
         return driver.findElement(By.xpath("//a[contains(text(),'Download All SED Details')]"));
     }
+
+    public static WebElement collectionsPageTitle(final WebDriver driver) {
+        return driver.findElement(By.xpath("/html/body/ai-compare-widget/div[2]/ui-view/div/div[1]/div/h1/ng-transclude"));
+    }
 }

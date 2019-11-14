@@ -55,4 +55,8 @@ public class BasePage {
     public static WebElement headerNav(final WebDriver driver) {
         return driver.findElement(By.xpath("/html/body/ai-compare-widget/header/nav[1]"));
     }
+
+    public static WebElement pageTitle(final WebDriver driver, final String pageTitle) {
+        return driver.findElement(By.xpath("//h1[contains(text(),'" + pageTitle + "')]"));
+    }
 }
