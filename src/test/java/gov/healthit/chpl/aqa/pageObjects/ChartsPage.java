@@ -23,5 +23,5 @@ public final class ChartsPage extends BasePage {
     public static WebElement chartsInfoText(final WebDriver driver) {
         return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div[1]/div/p"));
     }
-}
 
+}

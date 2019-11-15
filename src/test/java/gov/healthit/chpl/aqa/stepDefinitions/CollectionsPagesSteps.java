@@ -47,5 +47,5 @@ public class CollectionsPagesSteps extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         super.checkIfFileIsDownloaded(fileName);
     }
-}
 
+}

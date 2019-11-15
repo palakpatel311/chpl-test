@@ -1,5 +1,6 @@
 package gov.healthit.chpl.aqa.asserts;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import cucumber.api.java.en.Then;
@@ -29,6 +30,12 @@ public class CollectionsPageAsserts extends Base {
     public void verifyTextOnChartsPage(final String text) {
         String actualString = CollectionsPages.topInfoTextOnCollectionsPages(getDriver()).getText();
         assertTrue(actualString.contains(text), "Expect " + text + " to be found in " + actualString);
+    }
+
+    @Then("^I see \"([^\"]*)\" as the page title for the Collections Page$")
+    public void iSeePageTitleForCollectionsPage(final String expectedPageTitle) {
+        String actualPageTitle = CollectionsPages.collectionsPageTitle(getDriver()).getText();
+        assertEquals(expectedPageTitle, actualPageTitle);
     }
 
 }

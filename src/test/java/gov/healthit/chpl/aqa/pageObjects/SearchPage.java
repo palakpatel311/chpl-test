@@ -218,4 +218,8 @@ public final class SearchPage extends BasePage {
     public static WebElement complaintsReporting(final WebDriver driver) {
         return driver.findElement(By.xpath("//ul[@id='surveillance-dropdown-menu']//a[contains(text(),'Complaints Reporting')]"));
     }
+
+    public static WebElement collectionsPageShortcuts(final WebDriver driver, final String shortcutPageName) {
+        return driver.findElement(By.xpath("//a[@class='btn btn-lg btn-block btn-ai-grey'][contains(text(),'" + shortcutPageName + "')]"));
+    }
 }
