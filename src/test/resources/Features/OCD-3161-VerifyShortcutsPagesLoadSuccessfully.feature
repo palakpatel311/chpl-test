@@ -21,3 +21,5 @@ Scenario: Verify navigation to Charts page is successful and displays correct pa
     When I open "Charts" page
     Then I see "Charts" as the page title for the CHPL Charts page
 
+
+
