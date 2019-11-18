@@ -1,59 +1,60 @@
 @Regression
 Feature: Verify API returns correct status codes for a non-logged in user
-  Scenario Outline: Verify chpl-file-controller endpoints return correct status codes for a non-logged in user
+
+Scenario Outline: Verify chpl-file-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/files/api_documentation            |200        |
       |/files/api_documentation/details    |200        |
 
-  Scenario Outline: Verify surveillance-report-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify surveillance-report-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/surveillance-report/annual         |401        |
       |/surveillance-report/quarterly      |401        |
 
-  Scenario Outline: Verify product-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify product-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/products                           |200        |
  
-   Scenario Outline: Verify scheduler-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify scheduler-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/schedules/jobs                     |401        |
       |/schedules/triggers                 |401        |
 
-   Scenario Outline: Verify collections-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify collections-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/collections/certified_products     |200        |
       |/collections/decertified-developers |200        |
 
-   Scenario Outline: Verify api-key-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify api-key-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/key                                |401        |
       |/key/activity                       |401        |
 
-   Scenario Outline: Verify status-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify status-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/system-status                      |200        |
 
-   Scenario Outline: Verify complaint-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify complaint-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/complaints                         |401        |
 
-   Scenario Outline: Verify search-view-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify search-view-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
@@ -96,63 +97,63 @@ Feature: Verify API returns correct status codes for a non-logged in user
       |/data/ucd_processes                 |200        |
       |/download                           |200        |
 
-   Scenario Outline: Verify certification-body-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify certification-body-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/acbs                               |200        |
 
-   Scenario Outline: Verify developer-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify developer-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/developers                         |200        |
 
-   Scenario Outline: Verify dtesting-lab-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify dtesting-lab-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/atls                               |200        |
 
-   Scenario Outline: Verify certification-id-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify certification-id-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/certification_ids                  |401        |
       |/certification_ids/search           |200        |
 
-   Scenario Outline: Verify user-management-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify user-management-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/users                              |401        |
 
-   Scenario Outline: Verify change-request-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify change-request-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/change-requests                    |401        |
 
-   Scenario Outline: Verify annoucement-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify annoucement-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/announcements                      |200        |
 
-   Scenario Outline: Verify job-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify job-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/announcements                      |200        |
 
-   Scenario Outline: Verify certified-product-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify certified-product-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
       |/certified_products/pending/metadata|401        |
       |/certified_products/sed_details     |200        |
 
-   Scenario Outline: Verify surveillance-controller endpoints return correct status codes for a non-logged in user
+Scenario Outline: Verify surveillance-controller endpoints return correct status codes for a non-logged in user
     Then the "<API>" endpoint returns correct "<Status Code>"
     Examples:
       |API                                 |Status Code|
