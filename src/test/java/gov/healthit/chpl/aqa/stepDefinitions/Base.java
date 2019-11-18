@@ -19,6 +19,7 @@ public class Base {
     private WebDriverWait wait;
     private String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
+    private String apikey = System.getProperty("apikey");
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
     private static final int MAX_RETRYCOUNT = 8;
@@ -70,6 +71,14 @@ public class Base {
 
     public void setWait(final WebDriverWait wait) {
         this.wait = wait;
+    }
+
+    public String getApikey() {
+        return apikey;
+    }
+
+    public void setApikey(final String apikey) {
+        this.apikey = apikey;
     }
 
     /**
