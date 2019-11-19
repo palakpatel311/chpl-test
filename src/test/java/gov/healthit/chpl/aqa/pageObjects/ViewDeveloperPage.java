@@ -52,7 +52,7 @@ public final class ViewDeveloperPage {
     }
 
     public static WebElement editDeveloperSaveButton(final WebDriver driver, final String developerId) {
-        return driver.findElement(By.xpath("//*[@id=\"developer-component-save-" + developerId + "\"]"));
+        return driver.findElement(By.xpath("//*[@id=\"developer-component-save\"]"));
     }
 
     public static WebElement viewDeveloperName(final WebDriver driver) {
