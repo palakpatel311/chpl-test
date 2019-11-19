@@ -6,3 +6,4 @@ Scenario Outline: Verify announcement-controller endpoints return correct status
     Examples:
       |API                                 |Status Code|
       |/announcements                      |200        |
+
