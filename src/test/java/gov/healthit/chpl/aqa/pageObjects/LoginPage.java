@@ -43,10 +43,10 @@ public final class LoginPage extends BasePage {
      * @param driver WebDriver
      * @return returns element that holds welcome text
      */
-    public static WebElement welcomeText(final WebDriver driver) {
-        element = driver.findElement(By.xpath("/html/body/ai-compare-widget/div[2]/div/section/div[1]/div/h1"));
+    public static WebElement loggedinUserName(final WebDriver driver) {
+        element = driver.findElement(By.id("login-toggle"));
         return element;
-    }
+    }s
     /**
      * Returns admin login/logout pop up button.
      * @param driver WebDriver
