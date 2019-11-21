@@ -46,7 +46,7 @@ public final class LoginPage extends BasePage {
     public static WebElement loggedinUserName(final WebDriver driver) {
         element = driver.findElement(By.id("login-toggle"));
         return element;
-    }s
+    }
     /**
      * Returns admin login/logout pop up button.
      * @param driver WebDriver
