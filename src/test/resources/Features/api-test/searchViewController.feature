@@ -22,7 +22,7 @@ Scenario Outline: Verify search-view-controller endpoints return correct status 
       |/data/filter_types                  |200        |
       |/data/fuzzy_choices                 |401        |
       |/data/job_types                     |200        |
-      |/data/macra_measures                |200        |
+      |/data/macra-measures                |200        |       |
       |/data/nonconformity_status_types    |200        |
       |/data/practice_types                |200        |
       |/data/products                      |200        |
