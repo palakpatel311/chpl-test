@@ -17,9 +17,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Base {
     private EventFiringWebDriver driver;
     private WebDriverWait wait;
-    private String url = System.getProperty("url");
+    private static String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
-    private String apikey = System.getProperty("apikey");
+    private static String apikey = System.getProperty("apikey");
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
     private static final int MAX_RETRYCOUNT = 8;
@@ -57,7 +57,7 @@ public class Base {
         this.filePath = filePath;
     }
 
-    public String getUrl() {
+    public static  String getUrl() {
         return url;
     }
 
@@ -73,7 +73,7 @@ public class Base {
         this.wait = wait;
     }
 
-    public String getApikey() {
+    public static  String getApikey() {
         return apikey;
     }
 

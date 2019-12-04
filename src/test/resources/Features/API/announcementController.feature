@@ -1,4 +1,4 @@
-@Regression
+@RegressionAPI
 Feature: Verify announcement-controller endpoints return correct status code
 
 Scenario Outline: Verify announcement-controller endpoints return correct status codes for a non-logged in user
