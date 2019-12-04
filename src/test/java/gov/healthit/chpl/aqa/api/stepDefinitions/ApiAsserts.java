@@ -1,4 +1,4 @@
-package gov.healthit.chpl.aqa.asserts;
+package gov.healthit.chpl.aqa.api.stepDefinitions;
 
 import static io.restassured.RestAssured.given;
 

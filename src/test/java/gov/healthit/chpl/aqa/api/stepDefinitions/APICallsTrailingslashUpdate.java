@@ -1,4 +1,4 @@
-package gov.healthit.chpl.aqa.RESTAssuredTests;
+package gov.healthit.chpl.aqa.api.stepDefinitions;
 
 import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
