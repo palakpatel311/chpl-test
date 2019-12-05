@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.Then;
 import gov.healthit.chpl.aqa.pageObjects.ScheduledJobsPage;
 import gov.healthit.chpl.aqa.stepDefinitions.Base;
 
@@ -27,7 +27,7 @@ public class ScheduledJobsPageAsserts extends Base {
      * @param oncAcbSpecificValue is the expected OncAcbSpecific
      * @param jobTypeValue is the expected JobType
      */
-    @When("^I see types of jobs with \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" and \"([^\"]*)\"$")
+    @Then("^I see types of jobs with \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" and \"([^\"]*)\"$")
     public void scheduledJobsList(final String jobNameValue, final String descriptionValue, final String oncAcbSpecificValue, final String jobTypeValue) {
         boolean jobFound = false;
         WebElement element = ScheduledJobsPage.typesOfSheduledJobs(getDriver());
