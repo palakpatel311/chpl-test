@@ -20,4 +20,4 @@ Scenario: Verify navigation to Charts page is successful and displays correct pa
     And I click Shortcuts top navigation link
     When I open "Charts" page
     Then I see "Charts" as the page title for the CHPL Charts page
-
+    
