@@ -30,11 +30,11 @@ public class ScheduledJobsPageAsserts extends Base {
     @Then("^I see types of jobs with \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" and \"([^\"]*)\"$")
     public void scheduledJobsList(final String jobNameValue, final String descriptionValue, final String oncAcbSpecificValue, final String jobTypeValue) {
         boolean jobFound = false;
-        WebElement element = ScheduledJobsPage.typesOfSheduledJobs(getDriver());
-        List<List<String>> actualValue = tableElements(element);
-        for (List<String> rows : actualValue) {
-            if (rows.get(JOBNAME_COL).contains(jobNameValue) && (rows.get(DESCRIPTION_COL).contains(descriptionValue))
-                    && (rows.get(ONCACBSPECIFIC_COL).contains(oncAcbSpecificValue)) && (rows.get(JOBTYPE_COL).contains(jobTypeValue))) {
+        WebElement tableElement = ScheduledJobsPage.typesOfSheduledJobs(getDriver());
+        List<List<String>> tableRows = getRowListFromTable(tableElement);
+        for (List<String> row : tableRows) {
+            if (row.get(JOBNAME_COL).contains(jobNameValue) && (row.get(DESCRIPTION_COL).contains(descriptionValue))
+                    && (row.get(ONCACBSPECIFIC_COL).contains(oncAcbSpecificValue)) && (row.get(JOBTYPE_COL).contains(jobTypeValue))) {
                 jobFound = true;
             }
             if (jobFound) {
@@ -44,7 +44,7 @@ public class ScheduledJobsPageAsserts extends Base {
         assertTrue(jobFound, "Job not found in the types of jobs list");
     }
 
-    private List<List<String>> tableElements(final WebElement row) {
+    private List<List<String>> getRowListFromTable(final WebElement row) {
         List<List<String>> rowValues = new ArrayList<List<String>>();
         List<WebElement> roWebElements = ScheduledJobsPage.getRowElements(row);
         for (WebElement col : roWebElements) {
@@ -56,5 +56,11 @@ public class ScheduledJobsPageAsserts extends Base {
             rowValues.add(columns);
         }
         return rowValues;
+    }
+
+    @Then("^I do not see \"([^\"]*)\" listed in scheduled jobs page$")
+    public void iDoNotSeeSystemJobs(final String unexpectedJob) {
+        String typesOfJobs = ScheduledJobsPage.typesOfSheduledJobsRoleAcb(getDriver()).getText();
+        assertTrue(!typesOfJobs.contains(unexpectedJob));
     }
 }

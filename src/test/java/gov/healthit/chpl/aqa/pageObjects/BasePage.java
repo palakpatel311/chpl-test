@@ -1,5 +1,7 @@
 package gov.healthit.chpl.aqa.pageObjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,5 +60,15 @@ public class BasePage {
 
     public static WebElement pageTitle(final WebDriver driver, final String pageTitle) {
         return driver.findElement(By.xpath("//h1[contains(text(),'" + pageTitle + "')]"));
+    }
+
+    public static List<WebElement> getRowElements(final WebElement row) {
+        List<WebElement> roWebElements = row.findElements(By.tagName("tr"));
+        return roWebElements;
+    }
+
+    public static List<WebElement> getColElements(final WebElement col) {
+        List<WebElement> colElts = col.findElements(By.tagName("td"));
+        return colElts;
     }
 }

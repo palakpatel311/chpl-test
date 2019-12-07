@@ -38,3 +38,8 @@ Scenario Outline: For ROLE_ADMIN verify whether the correct jobs are listed in s
       |updateListingStatusJob                                |Updates the status for a set of listings                                                                                   |No                 |System Job |
       |urlStatusDataCollector                                |Generates the data for the questionable url report                                                                         |No                 |System Job |
 
+Scenario: For ROLE_ACB verify that System job does not exist in scheduled jobs page
+    Given I'm logged in as "ROLE_ACB"
+    And I'm on Scheduled Jobs page
+    Then I do not see "System job" listed in scheduled jobs page
+

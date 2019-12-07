@@ -1,7 +1,5 @@
 package gov.healthit.chpl.aqa.pageObjects;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,13 +16,8 @@ public final class ScheduledJobsPage extends BasePage {
         return webelement;
     }
 
-    public static List<WebElement> getRowElements(final WebElement row) {
-        List<WebElement> roWebElements = row.findElements(By.tagName("tr"));
-        return roWebElements;
-    }
-
-    public static List<WebElement> getColElements(final WebElement col) {
-        List<WebElement> colElts = col.findElements(By.tagName("td"));
-        return colElts;
+    public static WebElement typesOfSheduledJobsRoleAcb(final WebDriver driver) {
+        WebElement webelement  = driver.findElement(By.xpath("//chpl-jobs-scheduled-jobs[@class='ng-isolate-scope']"));
+        return webelement;
     }
 }
