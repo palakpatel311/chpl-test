@@ -62,13 +62,13 @@ public class BasePage {
         return driver.findElement(By.xpath("//h1[contains(text(),'" + pageTitle + "')]"));
     }
 
-    public static List<WebElement> getRowElements(final WebElement table) {
-        List<WebElement> rows = table.findElements(By.tagName("tr"));
+    public static List<WebElement> getRowElements(final WebElement elements) {
+        List<WebElement> rows = elements.findElements(By.tagName("tr"));
         return rows;
     }
 
-    public static List<WebElement> getColElements(final WebElement table) {
-        List<WebElement> columns = table.findElements(By.tagName("td"));
+    public static List<WebElement> getColElements(final WebElement elements) {
+        List<WebElement> columns = elements.findElements(By.tagName("td"));
         return columns;
     }
 }

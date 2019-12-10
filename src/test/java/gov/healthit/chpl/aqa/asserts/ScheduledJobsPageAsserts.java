@@ -44,11 +44,11 @@ public class ScheduledJobsPageAsserts extends Base {
         assertTrue(jobFound, "Job not found in the types of jobs list");
     }
 
-    private List<List<String>> getElementsWithinRows(final WebElement row) {
+    private List<List<String>> getElementsWithinRows(final WebElement element) {
         List<List<String>> rowValues = new ArrayList<List<String>>();
-        List<WebElement> roWebElements = ScheduledJobsPage.getRowElements(row);
-        for (WebElement col : roWebElements) {
-            List<WebElement> colElts = ScheduledJobsPage.getColElements(col);
+        List<WebElement> roWebElements = ScheduledJobsPage.getRowElements(element);
+        for (WebElement row : roWebElements) {
+            List<WebElement> colElts = ScheduledJobsPage.getColElements(row);
             List<String> columns = new ArrayList<>();
             for (WebElement column : colElts) {
                 columns.add(column.getText());
