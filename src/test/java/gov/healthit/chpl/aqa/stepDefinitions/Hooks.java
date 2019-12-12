@@ -41,8 +41,7 @@ public class Hooks {
     private static final int DELAY = 30;
     private static String screenshotPath;
     private static String downloadPath = System.getProperty("downloadPath");
-    private static String roleAdminUsername = System.getProperty("roleAdminUsername");
-    private static String roleAdminPassword = System.getProperty("roleAdminPassword");
+
     /**
      * Launch ChromeDriver.
      */
@@ -144,30 +143,5 @@ public class Hooks {
         takeScreenshot(hash);
     }
     
-    @Before("@RegressionAPI")
-    public static String getAuth() {
-    	RestAssured.baseURI= Base.getUrl();
-		Response res= given()
-				.header("API-KEY", Base.getApikey())
-				.header("content-type", "application/json")
-				.body("{\r\n" + 
-						"  \"password\": \""+roleAdminPassword+ "\",\r\n" + 
-						"  \"userName\": \""+roleAdminUsername+"\"\r\n" + 
-						"}")
-				.when()
-				.post("rest/auth/authenticate")
-				.then().assertThat().statusCode(200).and().contentType(ContentType.JSON)
-				.extract().response();
-    	JsonPath js= rawToJson(res);
-		String token= js.get("token");
-		String auth= "Bearer "+token;
-		return auth;   					
-        
-    }
-    public static JsonPath rawToJson(Response r)
-	{ 
-		String responseString=r.asString();
-		JsonPath js=new JsonPath(responseString);
-		return js;
-	}
+
 }
