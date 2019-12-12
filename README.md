@@ -65,7 +65,7 @@ If your console does not support color, enable monochrome with:
 
 `mvn test -Dcucumber.options="-m"`
 
-To only run some Features with tags:
+To only run Features with specific tags:
 
 `mvn test -Dcucumber.options="--tags @runThis"`
 
