@@ -1,7 +1,6 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import static io.restassured.RestAssured.given;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
@@ -9,13 +8,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import cucumber.api.java.Before;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -27,7 +23,6 @@ public class Base {
     private WebDriverWait wait;
     private static String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
-    private static String apikey = System.getProperty("apikey");
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
     private static final int MAX_RETRYCOUNT = 8;
@@ -35,8 +30,7 @@ public class Base {
     protected static final int SLEEP_TIME = 5000;
     protected static final int DEBOUNCE_TIME = 500;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static String username;
-    private static String password;
+
     /** Default constructor. */
     public Base() {
         super();
@@ -67,7 +61,7 @@ public class Base {
         this.filePath = filePath;
     }
 
-    public static  String getUrl() {
+    public static String getUrl() {
         return url;
     }
 
@@ -81,14 +75,6 @@ public class Base {
 
     public void setWait(final WebDriverWait wait) {
         this.wait = wait;
-    }
-
-    public static  String getApikey() {
-        return apikey;
-    }
-
-    public void setApikey(final String apikey) {
-        this.apikey = apikey;
     }
 
     /**
@@ -200,42 +186,4 @@ public class Base {
         }
         return dateInstance;
     }
-
-    public static String getAuth(String role) {
-    	switch (role) { 
-        case "ROLE_ADMIN": 
-            username = System.getProperty("roleAdminUsername"); 
-            password= System.getProperty("roleAdminPassword");
-            break; 
-        case "ROLE_ACB": 
-        	username = System.getProperty("roleAcbUsername"); 
-            password= System.getProperty("roleAcbPassword");
-            break; 
-        case "ROLE_ONC": 
-        	username = System.getProperty("roleOncUsername"); 
-            password= System.getProperty("roleOncPassword");
-            break; 
-        default: 
-        	username = System.getProperty("roleAdminUsername"); 
-            password= System.getProperty("roleAdminPassword");
-            break; 
-        } 
-    	RestAssured.baseURI= Base.getUrl();
-		Response res= given()
-				.header("API-KEY", Base.getApikey())
-				.header("content-type", "application/json")
-				.body("{\r\n" + 
-						"  \"password\": \""+password+ "\",\r\n" + 
-						"  \"userName\": \""+username+"\"\r\n" + 
-						"}")
-				.when()
-				.post("rest/auth/authenticate")
-				.then().assertThat().statusCode(200).and().contentType(ContentType.JSON)
-				.extract().response();
-    	JsonPath js= res.jsonPath();
-		String token= js.get("token");
-		String auth= "Bearer "+token;
-		return auth;   					
-    }
 }
-

@@ -1,21 +1,6 @@
 package gov.healthit.chpl.aqa.api.stepDefinitions;
 
 import static io.restassured.RestAssured.given;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import cucumber.api.java.Before;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -33,7 +18,7 @@ public class Base {
         
     }
     
-    public static  String getUrl() {
+    public static String getUrl() {
         return url;
     }
 
@@ -86,4 +71,3 @@ public class Base {
 		return auth;   					
     }
 }
-
