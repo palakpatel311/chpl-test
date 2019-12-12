@@ -26,13 +26,11 @@ public class ComplaintsAsserts {
 	public void extractpostResponseBody() throws Throwable {
 		JsonPath js = response.jsonPath();
 		postComplaintId = js.get("id");
-		System.out.println(postComplaintId);
 	}
 
 	@Then("^I extract ids of all complaints from response body$")
 	public void extractgetResponseBody() throws Throwable {
 		idList = ComplaintsTest.response.jsonPath().getList("results.id");
-		System.out.println(idList.toString());
 	}
 
 	@Then("^I validate posted id exist in ids of all complaints$")
@@ -45,7 +43,6 @@ public class ComplaintsAsserts {
 		JsonPath js = response.jsonPath();
 		String updatedvalue = "ONC-Updated";
 		Assert.assertEquals(js.getString("oncComplaintId"), updatedvalue);
-		System.out.println(response.asString());
 	}
 
 	@Then("^I validate posted id doesnt exist in ids of all complaints$")
