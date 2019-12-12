@@ -9,6 +9,7 @@ Based on Selenium-cucumber: Automation Testing Using Java Automation test framew
 * Selenium Webdriver - Java
 * Cucumber - Gherkin
 * TestNG
+* RestAssured
 
 ## Prerequisites
 * Java
@@ -59,7 +60,7 @@ Options can be used to tweak the functionality of the tests. They're used with t
 
 To run only a single feature file, run the command
 
-`mvn test -Dcucumber.options="src/test/resources/Features/filename.feature"`
+`mvn test -Dcucumber.options="src/test/resources/Features/UI OR API/filename.feature"`
 
 If your console does not support color, enable monochrome with:
 
@@ -76,6 +77,20 @@ To not run some Features by tag:
 All together
 
 `mvn test -Dcucumber.options="-m --tags @runThis --tags ~@ignore"`
+
+To run UI Regression test
+
+`mvn test -Dcucumber.options="-m "--tag @Regression"`
+
+To run API Regression test
+
+`mvn test -Dcucumber.options="-m "--tag @RegressionAPI"`
+
+## Tags information:
+@Regression: for UI regression test
+@RegressionAPI: for API regression test
+
+@Before and @After hooks will only run for @Regression. If there are tags for which you want to run these hooks, add them in hooks.
 
 ## View Reports Reports generated after test run are saved at:
 
