@@ -81,4 +81,3 @@ public class DeveloperDashboardSteps extends Base {
         DeveloperDashboardPage.statusLog(getDriver()).click();
     }
 }
-

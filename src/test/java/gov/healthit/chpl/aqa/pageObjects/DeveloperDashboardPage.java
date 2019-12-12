@@ -87,4 +87,3 @@ public final class DeveloperDashboardPage extends BasePage {
         return driver.findElement(By.xpath("//p[@class='ng-scope']"));
     }
 }
-

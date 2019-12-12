@@ -29,4 +29,3 @@ Scenario: User logs in as ROLE and sees product edit link exists on new develope
     And I click withdraw change request
     Then I see "The submission has been completed successfully. It will be reviewed by an ONC-ACB or ONC. Once the submission has been approved, it will be displayed on the CHPL" message
 
-
