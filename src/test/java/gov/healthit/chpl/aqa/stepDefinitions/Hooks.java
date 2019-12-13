@@ -45,7 +45,7 @@ public class Hooks {
     /**
      * Launch ChromeDriver.
      */
-    @Before("@Regression")
+    @Before("~@RegressionAPI")
     public void openBrowser() {
         /* To run chrome with the developer tools window automatically opened re-able these lines.
          *
@@ -109,7 +109,7 @@ public class Hooks {
     /**
      * Close browser windows and terminate WebDriver session.
      */
-    @After("@Regression")
+    @After("~@RegressionAPI")
     public void afterMethod() {
         driver.quit();
     }

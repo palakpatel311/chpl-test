@@ -90,7 +90,7 @@ To run API Regression test
 @Regression: for UI regression test
 @RegressionAPI: for API regression test
 
-@Before and @After hooks will only run for @Regression. If there are tags for which you want to run these hooks, add them in hooks.
+@Before and @After hooks will be ignoring @RegressionAPI tag.
 
 ## View Reports Reports generated after test run are saved at:
 
