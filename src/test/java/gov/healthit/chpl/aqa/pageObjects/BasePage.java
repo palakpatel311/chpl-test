@@ -1,5 +1,7 @@
 package gov.healthit.chpl.aqa.pageObjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -60,6 +62,15 @@ public class BasePage {
         return driver.findElement(By.xpath("//h1[contains(text(),'" + pageTitle + "')]"));
     }
 
+    public static List<WebElement> getRowElements(final WebElement elements) {
+        List<WebElement> rows = elements.findElements(By.tagName("tr"));
+        return rows;
+    }
+
+    public static List<WebElement> getColElements(final WebElement elements) {
+        List<WebElement> columns = elements.findElements(By.tagName("td"));
+        return columns;
+      
     public static WebElement shortcutsDropdown(final WebDriver driver) {
         return driver.findElement(By.id("shortcut-toggle"));
     }
