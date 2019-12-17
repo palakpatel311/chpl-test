@@ -38,7 +38,6 @@ public class DeveloperDashboardPageAsserts extends Base {
     @Then("^I see the \"([^\"]*)\" section$")
     public void titleTrackingSection(final String expectedTitle) {
         String actualTitle = DeveloperDashboardPage.trackingTitle(getDriver(), expectedTitle).getText();
-        System.out.println(actualTitle);
         assertTrue(actualTitle.contains(expectedTitle));
     }
 
