@@ -2,7 +2,7 @@
 Feature: Change Requests
   This test checks whether change requests functionality work as expected
 
-Scenario: User logs in as ROLE and sees product edit link exists on new developer page
+Scenario: User logs in as ROLE_ADMIN and performs change request actions
     Given I'm logged in as "ROLE_ADMIN"
     When I'm on User Management page
     And I impersonate Role Developer
