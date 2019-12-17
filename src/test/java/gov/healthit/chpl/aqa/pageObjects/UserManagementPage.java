@@ -14,8 +14,4 @@ public final class UserManagementPage extends BasePage {
     public static WebElement impersonateRole(final WebDriver driver, final String impersonateRoleName) {
         return driver.findElement(By.xpath("//span[contains(text(),'" + impersonateRoleName + "')]"));
     }
-
-    public static WebElement impersonateRoleUsername(final WebDriver driver) {
-        return driver.findElement(By.xpath("//button[@id='login-toggle']"));
-    }
 }

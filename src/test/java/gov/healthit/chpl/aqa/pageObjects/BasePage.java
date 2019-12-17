@@ -59,4 +59,8 @@ public class BasePage {
     public static WebElement pageTitle(final WebDriver driver, final String pageTitle) {
         return driver.findElement(By.xpath("//h1[contains(text(),'" + pageTitle + "')]"));
     }
+
+    public static WebElement loggedInRoleUsername(final WebDriver driver) {
+        return driver.findElement(By.xpath("//button[@id='login-toggle']"));
+    }
 }
