@@ -46,7 +46,7 @@
                },
                {
                   "implementationNote":"Returns all of the certification results in the CHPL related to the specified certified product.",
-                  "link":"getCertificationResultssByCertifiedProductIdUsingGET"
+                  "link":"getCertificationResultsByCertifiedProductIdUsingGET"
                },
                {
                   "implementationNote":"Returns all of the CQM results in the CHPL related to the specified certified product.",
@@ -82,7 +82,7 @@
                },
                {
                   "implementationNote":"Returns all of the certification results in the CHPL related to the specified certified product. {year}.{testingLab}.{certBody}.{vendorCode}.{productCode}.{versionCode}.{icsCode}.{addlSoftwareCode}.{certDateCode} represents a valid CHPL Product Number. A valid call to this service would look like /certified_products/YY.99.99.9999.XXXX.99.99.9.YYMMDD/certification_results.",
-                  "link":"getCertificationResultssByCertifiedProductIdUsingGET_2"
+                  "link":"getCertificationResultsByCertifiedProductIdUsingGET_2"
                },
                {
                   "implementationNote":"Returns all of the CQM results in the CHPL related to the specified certified product. {year}.{testingLab}.{certBody}.{vendorCode}.{productCode}.{versionCode}.{icsCode}.{addlSoftwareCode}.{certDateCode} represents a valid CHPL Product Number. A valid call to this service would look like /certified_products/YY.99.99.9999.XXXX.99.99.9.YYMMDD/cqm_results.",
