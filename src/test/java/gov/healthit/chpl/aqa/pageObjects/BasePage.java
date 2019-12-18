@@ -62,6 +62,9 @@ public class BasePage {
         return driver.findElement(By.xpath("//h1[contains(text(),'" + pageTitle + "')]"));
     }
 
+    public static WebElement loggedInRoleUsername(final WebDriver driver) {
+        return driver.findElement(By.xpath("//button[@id='login-toggle']"));
+
     public static List<WebElement> getRowElements(final WebElement elements) {
         List<WebElement> rows = elements.findElements(By.tagName("tr"));
         return rows;
