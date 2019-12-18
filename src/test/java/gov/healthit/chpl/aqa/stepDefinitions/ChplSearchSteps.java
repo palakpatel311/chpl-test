@@ -181,10 +181,4 @@ public class ChplSearchSteps extends Base {
         WebElement complaintsReporting = SearchPage.complaintsReporting(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", complaintsReporting);
     }
-
-    @When("^I navigate to \"([^\"]*)\" page$")
-    public void navigateToCollectionsPage(final String shortcutPageName) {
-        WebElement shortcutsPagebutton = SearchPage.collectionsPageShortcuts(getDriver(), shortcutPageName);
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", shortcutsPagebutton);
-    }
 }

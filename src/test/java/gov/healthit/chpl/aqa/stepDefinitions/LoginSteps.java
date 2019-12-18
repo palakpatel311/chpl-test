@@ -30,7 +30,7 @@ public class LoginSteps extends Base {
      */
     @Then("^I should be logged in to CHPL as \"([^\"]*)\"$")
     public void verifyLoginWasSuccessful(final String name) {
-        String actualString = LoginPage.welcomeText(getDriver()).getText();
+        String actualString = LoginPage.loggedinUserName(getDriver()).getText();
         assertTrue(actualString.contains(name));
     }
 
