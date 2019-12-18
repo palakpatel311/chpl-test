@@ -18,7 +18,7 @@ import gov.healthit.chpl.aqa.stepDefinitions.Base;
 public class SurveillanceComplaintsAsserts extends Base {
     private static final int ACBCOMPLAINTID_COL = 3;
     private static final int ONCCOMPLAINTID_COL = 4;
-    private static final char STATUS_COL = 2;
+    private static final int STATUS_COL = 2;
 
     @Then("^\"([^\"]*)\" form should open to add new complaint$")
     public void verifyAddComplaintFormOpens(final String title)  {
