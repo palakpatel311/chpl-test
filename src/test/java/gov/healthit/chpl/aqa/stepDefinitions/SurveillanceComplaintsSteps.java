@@ -132,4 +132,11 @@ public class SurveillanceComplaintsSteps extends Base {
         Select dropdown = new Select(selectBox);
         dropdown.selectByVisibleText(criteria);
     }
+    
+    @When("^I edit data in Closed Date field to \"([^\"]*)\"$")
+    public void i_edit_data_in_Closed_Date_field_to(final String closedDate) {
+    	{
+            SurveillanceComplaintsPage.closedDate(getDriver()).sendKeys(closedDate);
+        }
+    }
 }
