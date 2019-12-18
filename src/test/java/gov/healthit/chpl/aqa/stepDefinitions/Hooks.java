@@ -1,5 +1,7 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
+import static io.restassured.RestAssured.given;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +26,10 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 
 /**
  * Class Hooks definition.
@@ -38,7 +45,7 @@ public class Hooks {
     /**
      * Launch ChromeDriver.
      */
-    @Before
+    @Before("~@RegressionAPI")
     public void openBrowser() {
         /* To run chrome with the developer tools window automatically opened re-able these lines.
          *
@@ -102,7 +109,7 @@ public class Hooks {
     /**
      * Close browser windows and terminate WebDriver session.
      */
-    @After
+    @After("~@RegressionAPI")
     public void afterMethod() {
         driver.quit();
     }
@@ -135,4 +142,6 @@ public class Hooks {
         String hash = String.valueOf(new Date().getTime());
         takeScreenshot(hash);
     }
+    
+
 }
