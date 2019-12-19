@@ -19,7 +19,7 @@ Background: Setting base URL
     Given I set Headers with API key, "ROLE_ACB" authorization 
     And I set "POST" request body
     When I send POST request to resource "rest/complaints" 
-    Then I verify status code "201" 
+    Then I verify status code "200" 
     And I extract id from response body
     Given I set Headers with API key, "ROLE_ACB" authorization
     When I send GET request to complaints resource "rest/complaints" 
@@ -28,7 +28,7 @@ Background: Setting base URL
     Given I set Headers with API key, "ROLE_ACB" authorization 
     And I set "PUT" request body
     When I send PUT request to resource "rest/complaints/{complaintId}" with posted complaintId
-    Then I verify status code "201" 
+    Then I verify status code "200" 
     And I validate response body has updated ONC complaint id
     Given I set Headers with API key, "ROLE_ACB" authorization 
     When I send DELETE request to resource "rest/complaints/{complaintId}" 
