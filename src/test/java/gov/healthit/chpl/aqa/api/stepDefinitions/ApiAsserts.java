@@ -1,11 +1,9 @@
-package gov.healthit.chpl.aqa.asserts;
+package gov.healthit.chpl.aqa.api.stepDefinitions;
 
 import static io.restassured.RestAssured.given;
-
+import gov.healthit.chpl.aqa.api.stepDefinitions.Base;
 import org.testng.Assert;
-
 import cucumber.api.java.en.Then;
-import gov.healthit.chpl.aqa.stepDefinitions.Base;
 import io.restassured.response.Response;
 
 /**
@@ -21,7 +19,7 @@ public class ApiAsserts extends Base {
     public void apiReturnsCorrectStatusCode(final String apiEndpoint, final int expStatus) {
 
         Response response = given()
-                .header("API-KEY", getApikey())
+                .header("API-KEY", Base.getApikey())
                 .header("content-type", "application/json")
                 .get(getUrl() + "rest" + apiEndpoint);
 

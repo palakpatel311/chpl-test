@@ -1,5 +1,6 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
+import static io.restassured.RestAssured.given;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
@@ -7,19 +8,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 
 /** Base class for step definition files. */
 public class Base {
     private EventFiringWebDriver driver;
     private WebDriverWait wait;
-    private String url = System.getProperty("url");
+    private static String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
-    private String apikey = System.getProperty("apikey");
     protected static final long TIMEOUT = 30;
     protected static final long LONG_TIMEOUT = 120;
     private static final int MAX_RETRYCOUNT = 8;
@@ -27,6 +30,7 @@ public class Base {
     protected static final int SLEEP_TIME = 5000;
     protected static final int DEBOUNCE_TIME = 500;
     protected static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     /** Default constructor. */
     public Base() {
         super();
@@ -57,7 +61,7 @@ public class Base {
         this.filePath = filePath;
     }
 
-    public String getUrl() {
+    public static String getUrl() {
         return url;
     }
 
@@ -71,14 +75,6 @@ public class Base {
 
     public void setWait(final WebDriverWait wait) {
         this.wait = wait;
-    }
-
-    public String getApikey() {
-        return apikey;
-    }
-
-    public void setApikey(final String apikey) {
-        this.apikey = apikey;
     }
 
     /**
@@ -191,4 +187,3 @@ public class Base {
         return dateInstance;
     }
 }
-
