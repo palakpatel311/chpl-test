@@ -79,12 +79,11 @@ Scenario: Validate compliant status based on closed date
     And I am on complaints page
     When I click Add New Complaint button
     Then "Add Complaint" form should open to add new complaint
-    When I enter complaint data in fields: "SLI Compliance" "07/12/2019" "" "ONCACB010" "ONC001" "Developer" "TBD"
+    When I enter complaint data in fields: "Drummond Group" "07/12/2019" "" "ONCACB009" "ONC001" "Developer" "TBD"
     And I click save button
-    Then the complaint with given ONC-ACB Complaint ID "ONCACB010" and Status "Open" is displayed in complaints view table
-    When I click Edit complaint for ONC-ACB Complaint ID "ONCACB010"
+    Then the complaint with given ONC-ACB Complaint ID "ONCACB009" and Status "Open" is displayed in complaints view table
+    When I click Edit complaint for ONC-ACB Complaint ID "ONCACB009"
     Then "Edit Complaint" form should open
     When I edit data in Closed Date field to "07/13/2019"
     And I click save button
-    Then the complaint with given ONC-ACB Complaint ID "ONCACB010" and Status "Closed" is displayed in complaints view table
-
+    Then the complaint with given ONC-ACB Complaint ID "ONCACB009" and Status "Closed" is displayed in complaints view table

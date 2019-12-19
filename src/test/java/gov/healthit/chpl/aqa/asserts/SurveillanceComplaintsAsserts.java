@@ -18,7 +18,7 @@ import gov.healthit.chpl.aqa.stepDefinitions.Base;
 public class SurveillanceComplaintsAsserts extends Base {
     private static final int ACBCOMPLAINTID_COL = 3;
     private static final int ONCCOMPLAINTID_COL = 4;
-    private static final int STATUS_COL = 2;
+    private static final int STATUS_COL = 1;
 
     @Then("^\"([^\"]*)\" form should open to add new complaint$")
     public void verifyAddComplaintFormOpens(final String title)  {
@@ -124,8 +124,12 @@ public class SurveillanceComplaintsAsserts extends Base {
         assertTrue(getDriver().getTitle().contains(expectedPageTitle));
     }
     
+    /**
+     * Verify that complaint status updated successfully.
+     * @param status is value to look for in Status column
+     */
     @Then("^the complaint with given ONC-ACB Complaint ID \"([^\"]*)\" and Status \"([^\"]*)\" is displayed in complaints view table$")
-    public void complaint_with_given_ONC_ACB_Complaint_ID_and_Status_should_be_added_to_CHPL(String acbComplaintId, String status) {
+    public void complaint_with_given_ONC_ACB_Complaint_ID_and_Status_should_be_added_to_CHPL(final String acbComplaintId,final String status) {
         getDriver().navigate().refresh();
         boolean isFound = false;
 
@@ -135,14 +139,13 @@ public class SurveillanceComplaintsAsserts extends Base {
         for (WebElement row : rows) {
             List<WebElement> cols = row.findElements(By.xpath("td"));
             if (cols.get(ACBCOMPLAINTID_COL).getText().equals(acbComplaintId)) {
-                isFound = true;
-                break;
-            }
-            if (cols.get(STATUS_COL).getText().equals(status)) {
-                isFound = true;
-                break;
-            }
-        }
+                if (cols.get(STATUS_COL).getText().equals(status)) {
+                    isFound = true;
+                    break;
+                }
+             }            
+          }
         assertTrue(isFound, "Text: " + acbComplaintId + " not found");
-    }
+      }
+ 
 }
