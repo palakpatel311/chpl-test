@@ -126,6 +126,7 @@ public class SurveillanceComplaintsAsserts extends Base {
     
     /**
      * Verify that complaint status updated successfully.
+     * @param acbComplaintId is value to look for in Complaint Id
      * @param status is value to look for in Status column
      */
     @Then("^the complaint with given ONC-ACB Complaint ID \"([^\"]*)\" and Status \"([^\"]*)\" is displayed in complaints view table$")
