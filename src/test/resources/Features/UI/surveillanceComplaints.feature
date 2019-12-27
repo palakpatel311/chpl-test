@@ -17,13 +17,13 @@ Scenario Outline: Add a complaint
     Then a new complaint with given "<ONC-ACB Complaint ID>" should be added to CHPL 
 Examples:
     |ONC-ACB|Received Date|Closed Date|ONC-ACB Complaint ID|ONC Complaint ID|Complainant Type|Summary|
-    |Drummond Group|07/12/2019|07/12/2019|ONCACB001|ONC001|Developer|Test Summary|
+    |Drummond Group|07/12/2019||ONCACB001|ONC001|Developer|Test Summary|
     
 Scenario: Edit a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
     And I click Add New Complaint button
-    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB003" "ONC001" "Developer" "TBD"
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "" "ONCACB003" "ONC001" "Developer" "TBD"
     And I click save button
     When I click Edit complaint for ONC-ACB Complaint ID "ONCACB003"
     Then "Edit Complaint" form should open
@@ -35,18 +35,18 @@ Scenario: Delete a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
     And I click Add New Complaint button
-    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB004" "ONC001" "Developer" "TBD"
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "" "D$DC" "ONC001" "Developer" "TBD"
     And I click save button
-    And I click delete button to delete complaint with ONC-ACB Complaint ID "ONCACB004"
+    And I click delete button to delete complaint with ONC-ACB Complaint ID "D$DC"
     When I confirm delete
-    Then the complaint with ONC-ACB Complaint ID "ONCACB004" should not display in complaints view table
+    Then the complaint with ONC-ACB Complaint ID "D$DC" should not display in complaints view table
     
 Scenario: Associate a listing to a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
     And I click Add New Complaint button
-    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB002" "ONC001" "Developer" "TBD"
-    When I associate listing "15.05.05.2760.ISAD.01.00.0.180412" to the complaint
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "" "ONCACB002" "ONC001" "Developer" "TBD"
+    When I associate listing "15.05.05.2760.ISAD.01.00.0.18041" to the complaint
     And I click save button
     And I click Edit complaint for ONC-ACB Complaint ID "ONCACB002"
     Then the listing "15.05.05.2760.ISAD.01.00.0.180412" should be associated to the complaint
@@ -57,7 +57,7 @@ Scenario: Associate a surveillance to a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
     And I click Add New Complaint button
-    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB006" "ONC001" "Developer" "TBD"
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "" "ONCACB006" "ONC001" "Developer" "TBD"
     And I associate listing "15.05.05.2760.ISAD.01.00.0.180412" to the complaint
     When I associate surveillance "SURV01 - 15.05.05.2760.ISAD.01.00.0.180412" to the complaint
     And I click save button
@@ -68,7 +68,7 @@ Scenario: Associate a criteria to a complaint
     Given I'm logged in as "ROLE_ACB"
     And I am on complaints page
     And I click Add New Complaint button
-    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "07/12/2019" "ONCACB005" "ONC001" "Developer" "TBD"
+    And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "" "ONCACB005" "ONC001" "Developer" "TBD"
     When I associate criteria "170.315 (a)(1)" to the complaint
     And I click save button
     And I click Edit complaint for ONC-ACB Complaint ID "ONCACB005"

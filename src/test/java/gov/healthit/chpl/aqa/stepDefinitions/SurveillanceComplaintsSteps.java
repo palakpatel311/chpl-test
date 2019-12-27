@@ -26,6 +26,7 @@ public class SurveillanceComplaintsSteps extends Base {
     @When("^I click Add New Complaint button$")
     public void clickAddNewComplaintButton() {
       SurveillanceComplaintsPage.addNewComplaintButton(getDriver()).click();
+      getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.oncACBField(getDriver())));
     }
 
     /**
@@ -42,6 +43,7 @@ public class SurveillanceComplaintsSteps extends Base {
     public void enterDataInComplaintFields(final String acb, final String receivedDate, final String closedDate,
             final String acbComplaintId, final String oncComplaintId, final String complainantType,
             final String summary) {
+        getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.oncACBField(getDriver())));
         SurveillanceComplaintsPage.oncACBField(getDriver()).sendKeys(acb);
         SurveillanceComplaintsPage.receivedDate(getDriver()).sendKeys(receivedDate);
         SurveillanceComplaintsPage.closedDate(getDriver()).sendKeys(closedDate);
@@ -132,11 +134,9 @@ public class SurveillanceComplaintsSteps extends Base {
         Select dropdown = new Select(selectBox);
         dropdown.selectByVisibleText(criteria);
     }
-    
+
     @When("^I edit data in Closed Date field to \"([^\"]*)\"$")
-    public void i_edit_data_in_Closed_Date_field_to(final String closedDate) {
-    	{
-            SurveillanceComplaintsPage.closedDate(getDriver()).sendKeys(closedDate);
-        }
+    public void editDataInClosedDateField(final String closedDate) {
+    	SurveillanceComplaintsPage.closedDate(getDriver()).sendKeys(closedDate);
     }
 }
