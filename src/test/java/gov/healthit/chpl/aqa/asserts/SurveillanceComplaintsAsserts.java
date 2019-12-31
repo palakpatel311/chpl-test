@@ -118,7 +118,8 @@ public class SurveillanceComplaintsAsserts extends Base {
      * @param acbComplaintId is value to look for in Complaint Id
      * @param status is value to look for in Status column
      */
-    @Then("^the complaint with given ONC-ACB Complaint ID \"([^\"]*)\" and Status \"([^\"]*)\" is displayed in complaints view table$")
+    @Then("^the complaint with given ONC-ACB Complaint ID \"([^\"]*)\" "
+            + "and Status \"([^\"]*)\" is displayed in complaints view table$")
     public void verifyComplaintStatusUpdate(final String acbComplaintId, final String status) {
         getDriver().navigate().refresh();
         boolean isFound = false;
@@ -133,9 +134,9 @@ public class SurveillanceComplaintsAsserts extends Base {
                     isFound = true;
                     break;
                 }
-             }            
+             }
           }
         assertTrue(isFound, "Text: " + acbComplaintId + " not found");
       }
- 
+
 }

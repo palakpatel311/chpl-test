@@ -39,14 +39,14 @@ public class SurveillanceComplaintsSteps extends Base {
      * @param complainantType is type of complainant
      * @param summary is summary of a complaint
      */
-    @When("^I enter complaint data in fields: \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-    public void enterDataInComplaintFields(final String acb, final String receivedDate, final String closedDate,
+    @When("^I enter complaint data in "
+            + "fields: \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+    public void enterDataInComplaintFields(final String acb, final String receivedDate,
             final String acbComplaintId, final String oncComplaintId, final String complainantType,
             final String summary) {
         getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.oncACBField(getDriver())));
         SurveillanceComplaintsPage.oncACBField(getDriver()).sendKeys(acb);
         SurveillanceComplaintsPage.receivedDate(getDriver()).sendKeys(receivedDate);
-        SurveillanceComplaintsPage.closedDate(getDriver()).sendKeys(closedDate);
         SurveillanceComplaintsPage.oncACBComplaintId(getDriver()).sendKeys(acbComplaintId);
         SurveillanceComplaintsPage.oncComplaintId(getDriver()).sendKeys(oncComplaintId);
         SurveillanceComplaintsPage.complainantType(getDriver()).sendKeys(complainantType);
@@ -55,7 +55,8 @@ public class SurveillanceComplaintsSteps extends Base {
 
     @When("^I click save button$")
     public void clickSaveButton() {
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", SurveillanceComplaintsPage.saveButtonOnNewComplaintForm(getDriver()));
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
+                SurveillanceComplaintsPage.saveButtonOnNewComplaintForm(getDriver()));
         getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.complaintsTable(getDriver())));
     }
 
@@ -68,8 +69,10 @@ public class SurveillanceComplaintsSteps extends Base {
         getDriver().navigate().refresh();
         getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.complaintsTable(getDriver())));
 
-        List<WebElement> acbComplaintIdValue = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[4]"));
-        List<WebElement> allEditButtons = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[7]/button/i"));
+        List<WebElement> acbComplaintIdValue = getDriver().findElements(
+                By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[4]"));
+        List<WebElement> allEditButtons = getDriver().findElements(
+                By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[7]/button/i"));
 
         for (int i = 0; i < acbComplaintIdValue.size(); i++) {
 
@@ -95,8 +98,10 @@ public class SurveillanceComplaintsSteps extends Base {
         getDriver().navigate().refresh();
         getWait().until(ExpectedConditions.visibilityOf(SurveillanceComplaintsPage.complaintsTable(getDriver())));
 
-        List<WebElement> acbComplaintIdValue = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[4]"));
-        List<WebElement> allEditButtons = getDriver().findElements(By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[7]/button[2]"));
+        List<WebElement> acbComplaintIdValue = getDriver().findElements(
+                By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[4]"));
+        List<WebElement> allEditButtons = getDriver().findElements(
+                By.xpath("//*[@id=\"main-content\"]/div/div/div/div/table/tbody/tr/td[7]/button[2]"));
 
         for (int i = 0; i < acbComplaintIdValue.size(); i++) {
 
@@ -137,6 +142,6 @@ public class SurveillanceComplaintsSteps extends Base {
 
     @When("^I edit data in Closed Date field to \"([^\"]*)\"$")
     public void editDataInClosedDateField(final String closedDate) {
-    	SurveillanceComplaintsPage.closedDate(getDriver()).sendKeys(closedDate);
+    SurveillanceComplaintsPage.closedDate(getDriver()).sendKeys(closedDate);
     }
 }
