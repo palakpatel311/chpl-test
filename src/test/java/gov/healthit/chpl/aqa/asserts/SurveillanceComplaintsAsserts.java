@@ -86,19 +86,8 @@ public class SurveillanceComplaintsAsserts extends Base {
     @Then("^the complaint with ONC-ACB Complaint ID \"([^\"]*)\" should not display in complaints view table$")
     public void verifyComplaintIsDeleted(final String acbComplaintId) {
         getDriver().navigate().refresh();
-        boolean isFound = false;
-
-        WebElement table = SurveillanceComplaintsPage.complaintsTable(getDriver());
-        List<WebElement> rows = table.findElements(By.xpath("tbody/tr"));
-
-        for (WebElement row : rows) {
-            List<WebElement> cols = row.findElements(By.xpath("td"));
-            if (cols.get(ACBCOMPLAINTID_COL).getText().equals(acbComplaintId)) {
-                isFound = true;
-                break;
-            }
-        }
-        assertFalse(isFound);
+        /*Fix stale element exception;use unique acbComplaintId*/
+        assertFalse(getDriver().getPageSource().contains(acbComplaintId));
     }
 
     @Then("^the listing \"([^\"]*)\" should be associated to the complaint$")
@@ -123,14 +112,15 @@ public class SurveillanceComplaintsAsserts extends Base {
     public void iSeeComplaintsReportingPageTitle(final String expectedPageTitle) {
         assertTrue(getDriver().getTitle().contains(expectedPageTitle));
     }
-    
+
     /**
      * Verify that complaint status updated successfully.
      * @param acbComplaintId is value to look for in Complaint Id
      * @param status is value to look for in Status column
      */
-    @Then("^the complaint with given ONC-ACB Complaint ID \"([^\"]*)\" and Status \"([^\"]*)\" is displayed in complaints view table$")
-    public void complaint_with_given_ONC_ACB_Complaint_ID_and_Status_should_be_added_to_CHPL(final String acbComplaintId,final String status) {
+    @Then("^the complaint with given ONC-ACB Complaint ID \"([^\"]*)\" "
+            + "and Status \"([^\"]*)\" is displayed in complaints view table$")
+    public void verifyComplaintStatusUpdate(final String acbComplaintId, final String status) {
         getDriver().navigate().refresh();
         boolean isFound = false;
 
@@ -144,9 +134,9 @@ public class SurveillanceComplaintsAsserts extends Base {
                     isFound = true;
                     break;
                 }
-             }            
+             }
           }
         assertTrue(isFound, "Text: " + acbComplaintId + " not found");
       }
- 
+
 }

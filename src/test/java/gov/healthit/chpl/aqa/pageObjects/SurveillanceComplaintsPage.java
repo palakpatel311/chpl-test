@@ -23,7 +23,7 @@ public final class SurveillanceComplaintsPage extends BasePage {
     }
 
     public static WebElement associatedCriteriaValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[10]/div[1]/span"));
+        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[9]/div[1]/span"));
     }
 
     public static WebElement associatedListingValue(final WebDriver driver) {
