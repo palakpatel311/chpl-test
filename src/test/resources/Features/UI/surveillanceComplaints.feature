@@ -46,7 +46,7 @@ Scenario: Associate a listing to a complaint
     And I am on complaints page
     And I click Add New Complaint button
     And I enter complaint data in fields: "SLI Compliance" "07/12/2019" "ONCACB002" "ONC001" "Developer" "TBD"
-    When I associate listing "15.05.05.2760.ISAD.01.00.0.18041" to the complaint
+    When I associate listing "15.05.05.2760.ISAD.01.00.0.180412" to the complaint
     And I click save button
     And I click Edit complaint for ONC-ACB Complaint ID "ONCACB002"
     Then the listing "15.05.05.2760.ISAD.01.00.0.180412" should be associated to the complaint
