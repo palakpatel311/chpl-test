@@ -21,18 +21,18 @@ Feature: Monitor that download files and definition files on CHPL download resou
       | DEV  |    2011 | xml  |   92 |  148 | MB    |  3885 |
       | DEV  |    2014 | xml  |    1 |  470 | MB    |  5250 |
       | DEV  |    2014 | csv  |    1 | 2900 | KB    |  5250 |
-      | DEV  |    2015 | xml  |    1 |  220 | MB    |   855 |
-      | DEV  |    2015 | csv  |    1 |  515 | KB    |   855 |
+      | DEV  |    2015 | xml  |    1 |  284 | MB    |  1020 |
+      | DEV  |    2015 | csv  |    1 |  620 | KB    |  1020 |
       | STG  |    2011 | xml  |   92 |  148 | MB    |  3885 |
       | STG  |    2014 | xml  |    1 |  470 | MB    |  5250 |
       | STG  |    2014 | csv  |    1 | 2900 | KB    |  5250 |
-      | STG  |    2015 | xml  |    1 |  220 | MB    |   855 |
-      | STG  |    2015 | csv  |    1 |  515 | KB    |   855 |
+      | STG  |    2015 | xml  |    1 |  284 | MB    |  1020 |
+      | STG  |    2015 | csv  |    1 |  620 | KB    |  1020 |
       | PROD |    2011 | xml  |   92 |  148 | MB    |  3885 |
       | PROD |    2014 | xml  |    1 |  470 | MB    |  5250 |
       | PROD |    2014 | csv  |    1 | 2900 | KB    |  5250 |
-      | PROD |    2015 | xml  |    1 |  220 | MB    |   855 |
-      | PROD |    2015 | csv  |    1 |  515 | KB    |   855 |
+      | PROD |    2015 | xml  |    1 |  284 | MB    |  1020 |
+      | PROD |    2015 | csv  |    1 |  620 | KB    |  1020 |
 
   Scenario Outline: 
     At any given time, when downloaded, file name ends with Date and time format 
@@ -76,14 +76,14 @@ Feature: Monitor that download files and definition files on CHPL download resou
     | STG  | 2015 edition products (xml) Definition File| listingSchema.xsd                                     |  83 | KB   |
     | STG  | 2014 edition products (xml) Definition File| listingSchema.xsd                                     |  83 | KB   |
     | STG  | 2011 edition products (xml) Definition File| listingSchema.xsd                                     |  83 | KB   |
-    | STG  | 2015 edition summary (csv) Definition File | 2015 Listing CSV Data Dictionary.csv                  |  7  | KB   |
+    | STG  | 2015 edition summary (csv) Definition File | 2015 Listing CSV Data Dictionary Legacy.csv           |  7  | KB   |
     | STG  | 2014 edition summary (csv) Definition File | 2014 Listing CSV Data Dictionary.csv                  |  8  | KB   |
     | STG  | Surveillance Activity Definition File      | Surveillance and Nonconformity CSV Data Dictionary.csv|  7  | KB   |
     | STG  | Non-Conformities Definition File           | Surveillance and Nonconformity CSV Data Dictionary.csv|  7  | KB   |
     | PROD | 2015 edition products (xml) Definition File| listingSchema.xsd                                     |  83 | KB   |
     | PROD | 2014 edition products (xml) Definition File| listingSchema.xsd                                     |  83 | KB   |
     | PROD | 2011 edition products (xml) Definition File| listingSchema.xsd                                     |  83 | KB   |
-    | PROD | 2015 edition summary (csv) Definition File | 2015 Listing CSV Data Dictionary.csv                  |  7  | KB   |
+    | PROD | 2015 edition summary (csv) Definition File | 2015 Listing CSV Data Dictionary Legacy.csv           |  7  | KB   |
     | PROD | 2014 edition summary (csv) Definition File | 2014 Listing CSV Data Dictionary.csv                  |  8  | KB   |
     | PROD | Surveillance Activity Definition File      | Surveillance and Nonconformity CSV Data Dictionary.csv|  7  | KB   |
     | PROD | Non-Conformities Definition File           | Surveillance and Nonconformity CSV Data Dictionary.csv|  7  | KB   |

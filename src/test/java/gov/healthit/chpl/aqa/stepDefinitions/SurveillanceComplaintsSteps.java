@@ -32,8 +32,7 @@ public class SurveillanceComplaintsSteps extends Base {
     /**
      * Fill data in complaint form.
      * @param acb is ACB for which complaint is being entered
-     * @param receivedDate is received date of complaint
-     * @param closedDate is date when complaint was closed
+     * @param receivedDate is received date of complaint     
      * @param acbComplaintId ACB complaint ID
      * @param oncComplaintId ONC complaint ID
      * @param complainantType is type of complainant
