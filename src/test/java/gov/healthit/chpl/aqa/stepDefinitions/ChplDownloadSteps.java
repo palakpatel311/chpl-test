@@ -266,7 +266,8 @@ public class ChplDownloadSteps extends Base {
      * @throws FileNotFoundException if the expected file not found
      */
     @When("^I select the \"([^\"]*)\", download it from drop-down and I see the \"([^\"]*)\"$")
-    public void selectAndDownloadFileFromDropdown(final String fileName, final String downloadedFileName) throws FileNotFoundException {
+    public void selectAndDownloadFileFromDropdown(final String fileName,
+            final String downloadedFileName) throws FileNotFoundException {
         WebElement link = ChplDownloadPage.selectFilefromDropdown(getDriver(), fileName);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         ChplDownloadPage.downloadFileButton(getDriver()).click();
@@ -361,7 +362,8 @@ public class ChplDownloadSteps extends Base {
      * @throws FileNotFoundException if the expected file not found
      */
     @When("^I select the definition \"([^\"]*)\", download it from drop-down and I see the \"([^\"]*)\"$")
-    public void selectAndDownloadDefinitionFileFromDropdown(final String fileName, final String downloadedFileName) throws FileNotFoundException {
+    public void selectAndDownloadDefinitionFileFromDropdown(final String fileName,
+            final String downloadedFileName) throws FileNotFoundException {
         WebElement link = ChplDownloadPage.selectFilefromDefinitionDropdown(getDriver(), fileName);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
         ChplDownloadPage.downloadDefinitionButton(getDriver()).click();
