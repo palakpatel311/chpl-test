@@ -38,12 +38,12 @@ import gov.healthit.chpl.aqa.pageObjects.ManageDevelopersAndProductsPage;
  * All steps related to activities in the "Developer and Product Management" admin section,
  * navigated to via #/admin/dpManagement and including both ROLE_ADMIN and ROLE_ACB activities.
  */
-public class ManageDevelopersAndProductsSteps extends Base {
+public class ListingUploadConfirmSteps extends Base {
     private static final int CHPL_PRODUCT_NUMBER_PREFIX = 14;
     private String chplProductNumber; // Used to pass newly generated CHPL Product number between steps during upload
 
     /** Default constructor. */
-    public ManageDevelopersAndProductsSteps() {
+    public ListingUploadConfirmSteps() {
         super();
     }
 
@@ -120,10 +120,12 @@ public class ManageDevelopersAndProductsSteps extends Base {
         try {
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
+            .until(ExpectedConditions.visibilityOf(DpManagementPage.inspectButtonForUploadedListing(getDriver(),
+                    this.chplProductNumber)));
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
-            .until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber)));
+            .until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(),
+                    this.chplProductNumber)));
             DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber).click();
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
@@ -214,7 +216,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      * Load listing details to verify listing was uploaded successfully.
      * @param ed - edition digits in CHPL ID
      */
-    @Then("^I see that listing was uploaded successfully to CHPL and listing details load as expected for uploaded \"([^\"]*)\" listing$")
+    @Then("^I see that listing was uploaded successfully to CHPL "
+            + "and listing details load as expected for uploaded \"([^\"]*)\" listing$")
     public void testVerifyUploadWasSuccessful(final String ed) {
         String testListingName = "New product";
         String actualString = ListingDetailsPage.listingName(getDriver()).getText();
@@ -227,7 +230,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
                     + File.separator + "test" + File.separator + "resources" + File.separator + edition + "_Test_SLI.csv");
             /**
              * This should work, but I can't figure out why it isn't.
-             * InputStream listing = ManageDevelopersAndProductsSteps.class.getResourceAsStream("test/resources/" + edition + "_Test_SLI.csv");
+             * InputStream listing = ManageDevelopersAndProductsSteps.class.getResourceAsStream(
+             * "test/resources/" + edition + "_Test_SLI.csv");
              */
             try (CSVParser parser = CSVParser.parse(listing, Charset.forName("UTF-8"), CSVFormat.EXCEL)) {
                 return parser.getRecords();
@@ -325,7 +329,8 @@ public class ManageDevelopersAndProductsSteps extends Base {
      * @param fieldinUploadFile is a field in upload file that has bad input
      */
     @When("^I upload a 2015 listing with CHPL ID \"([^\"]*)\" that has bad input in \"([^\"]*)\"$")
-    public void uploadListingWithBadInputsInTestTaskParticipantFields(final String chplId, final String fieldinUploadFile) throws URISyntaxException {
+    public void uploadListingWithBadInputsInTestTaskParticipantFields(final String chplId,
+            final String fieldinUploadFile) throws URISyntaxException {
         URL resource = Main.class.getResource("/2015_Test_SLI_BadInputs.csv");
         String absolutePath = Paths.get(resource.toURI()).toString();
 
