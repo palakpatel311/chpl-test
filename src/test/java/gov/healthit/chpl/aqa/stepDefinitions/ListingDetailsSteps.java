@@ -199,6 +199,8 @@ public class ListingDetailsSteps extends Base {
     public void setOtherACBField() {
         ListingDetailsPage.otherACBField(getDriver()).clear();
         ListingDetailsPage.otherACBField(getDriver()).sendKeys(getCurrentDate());
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys("test");
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys(Keys.TAB);
         WebElement link = ListingDetailsPage.editCPSaveButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", link);
         ListingDetailsPage.editCPSaveButton(getDriver()).click();
@@ -219,6 +221,8 @@ public class ListingDetailsSteps extends Base {
     public void setReliedUponSoftwareField() {
         ListingDetailsPage.reliedUponSoftwareField(getDriver()).clear();
         ListingDetailsPage.reliedUponSoftwareField(getDriver()).sendKeys(getCurrentDate());
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys("test");
+        ListingDetailsPage.reasonForChangeField(getDriver()).sendKeys(Keys.TAB);
         WebElement link = ListingDetailsPage.editCPSaveButton(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", link);
         ListingDetailsPage.editCPSaveButton(getDriver()).click();

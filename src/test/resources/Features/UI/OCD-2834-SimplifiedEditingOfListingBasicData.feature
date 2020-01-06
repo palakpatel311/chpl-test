@@ -8,7 +8,7 @@ Scenario Outline: User logs in as ROLE and sees edit certified product link exis
     Then I see edit link to edit certified product
     Examples:
       |ROLE       |listing id|
-      |ROLE_ACB   |4229      |
+      |ROLE_ACB   |9837      |
       |ROLE_ADMIN |1799      |
       |ROLE_ONC   |5737      |
 
@@ -20,7 +20,7 @@ Scenario Outline: User logs in as ROLE and edits a listing
     Then I see ONC ACB Certification ID is updated on Listing Details Page
     Examples:
       |ROLE       |listing id|
-      |ROLE_ACB   |4229      |
+      |ROLE_ACB   |9837      |
       |ROLE_ADMIN |1799      |
       |ROLE_ONC   |5737      |
 
