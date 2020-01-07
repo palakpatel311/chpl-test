@@ -53,7 +53,9 @@ public class Hooks {
          */
     	if(driver==null){
 		fis = new FileInputStream(
-					System.getProperty("user.dir") + "\\src\\test\\resources\\Config.properties");
+					System.getProperty("user.dir") + File.separator+"src"
+					+File.separator+"test"+File.separator+"resources"
+							+File.separator+"Config.properties");
     	config.load(fis);
     	}
     	if(System.getenv("browser")!=null && !System.getenv("browser").isEmpty()){
