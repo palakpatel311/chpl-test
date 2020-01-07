@@ -51,7 +51,7 @@ public class Hooks {
     /**
      * Launch ChromeDriver.
      */
-    @Before("~@RegressionAPI")
+	@Before("~@RegressionAPI")
     public void openBrowser() {
         /* To run chrome with the developer tools window automatically opened re-able these lines.
          *
@@ -98,18 +98,14 @@ public class Hooks {
          * Save Chrome Options
          */
         ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+        //HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
         options.setExperimentalOption("prefs", chromePrefs);
         chromePrefs.put("safebrowsing.enabled", "true");
         options.addArguments("--safebrowsing-disable-download-protection");
         options.addArguments("disable-popup-blocking");
-
-        DesiredCapabilities cap = DesiredCapabilities.chrome();
-        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
-        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        cap.setCapability(ChromeOptions.CAPABILITY, options);
+        options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
-        driver = new EventFiringWebDriver(new ChromeDriver(cap));
+        driver = new EventFiringWebDriver(new ChromeDriver(options));
 		}
 		else if (config.getProperty("browser").equals("firefox")) {
         System.setProperty("webdriver.gecko.driver",downloadPath+ File.separator + "geckodriver.exe");
