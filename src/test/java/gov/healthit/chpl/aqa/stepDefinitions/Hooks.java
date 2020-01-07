@@ -51,10 +51,11 @@ public class Hooks {
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
          */
+    	if(driver==null){
 		fis = new FileInputStream(
 					System.getProperty("user.dir") + "\\src\\test\\resources\\Config.properties");
     	config.load(fis);
-    	
+    	}
     	if(System.getenv("browser")!=null && !System.getenv("browser").isEmpty()){
 			browser = System.getenv("browser");
 		}else{
