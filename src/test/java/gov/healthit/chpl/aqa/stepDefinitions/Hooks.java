@@ -27,6 +27,7 @@ import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import io.restassured.RestAssured;
@@ -107,13 +108,12 @@ public class Hooks {
         cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
         cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         cap.setCapability(ChromeOptions.CAPABILITY, options);
+        screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
         driver = new EventFiringWebDriver(new ChromeDriver(cap));
 		}
 		else if (config.getProperty("browser").equals("firefox")) {
         System.setProperty("webdriver.gecko.driver",downloadPath+ File.separator + "geckodriver.exe");
-        
-        screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
-        
+              
         FirefoxOptions options = new FirefoxOptions();
         options.setCapability("download.default_directory", downloadPath);
         
@@ -155,6 +155,14 @@ public class Hooks {
      * All "non-word characters" will be replaced with "_"
      * @throws Exception if there is an exception
      */
+    @After
+    public void tearDown(Scenario scenario) {
+        if (scenario.isFailed()) {
+          final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+          scenario.embed(screenshot, "image/png"); 
+        }
+    }
+    
     public static void takeScreenshot(final String hash) throws Exception {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         File outFile = new File(screenshotPath + File.separator + "failed-test-" + hash.replaceAll("\\W+", "_") + ".png");
