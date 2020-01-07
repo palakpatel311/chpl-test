@@ -8,8 +8,6 @@ import java.nio.file.Files;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.openqa.selenium.OutputType;
@@ -17,6 +15,10 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
@@ -37,7 +39,7 @@ import io.restassured.response.Response;
 public class Hooks {
 
     private static File dir;
-    private static EventFiringWebDriver driver;
+    private static WebDriver driver;
     private static final int DELAY = 30;
     private static String screenshotPath;
     private static String downloadPath = System.getProperty("downloadPath");
@@ -72,26 +74,31 @@ public class Hooks {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-        chromePrefs.put("profile.default_content_settings.popups", 0);
-        chromePrefs.put("download.default_directory", downloadPath);
-        /**
-         * Save Chrome Options
-         */
-        ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
-        options.setExperimentalOption("prefs", chromePrefs);
-        chromePrefs.put("safebrowsing.enabled", "true");
-        options.addArguments("--safebrowsing-disable-download-protection");
-        options.addArguments("disable-popup-blocking");
-
-        DesiredCapabilities cap = DesiredCapabilities.chrome();
-        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
-        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        cap.setCapability(ChromeOptions.CAPABILITY, options);
-
+//        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+//        chromePrefs.put("profile.default_content_settings.popups", 0);
+//        chromePrefs.put("download.default_directory", downloadPath);
+//        /**
+//         * Save Chrome Options
+//         */
+//        ChromeOptions options = new ChromeOptions();
+//        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+//        options.setExperimentalOption("prefs", chromePrefs);
+//        chromePrefs.put("safebrowsing.enabled", "true");
+//        options.addArguments("--safebrowsing-disable-download-protection");
+//        options.addArguments("disable-popup-blocking");
+//
+//        DesiredCapabilities cap = DesiredCapabilities.chrome();
+//        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
+//        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+//        cap.setCapability(ChromeOptions.CAPABILITY, options);
+        System.setProperty("webdriver.gecko.driver",downloadPath+ File.separator + "geckodriver.exe");
+        
         screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
-        driver = new EventFiringWebDriver(new ChromeDriver(cap));
+        
+        FirefoxOptions options = new FirefoxOptions();
+        options.setCapability("download.default_directory", downloadPath);
+        //driver = new EventFiringWebDriver(new ChromeDriver(cap));
+        driver = new FirefoxDriver(options);
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
             @Override
@@ -103,7 +110,7 @@ public class Hooks {
                 }
             }
         };
-        driver.register(errorListener);
+        //driver.register(errorListener);
     }
 
     /**
@@ -114,7 +121,7 @@ public class Hooks {
         driver.quit();
     }
 
-    public static EventFiringWebDriver getDriver() {
+    public static WebDriver getDriver() {
         return driver;
     }
 
@@ -131,7 +138,7 @@ public class Hooks {
     public static void takeScreenshot(final String hash) throws Exception {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         File outFile = new File(screenshotPath + File.separator + "failed-test-" + hash.replaceAll("\\W+", "_") + ".png");
-        FileUtils.copyFile(scrFile, outFile);
+        FileHandler.copy(scrFile, outFile);
     }
 
     /**
