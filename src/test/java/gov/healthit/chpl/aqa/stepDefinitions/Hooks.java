@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -40,9 +41,11 @@ public class Hooks {
 
     private static File dir;
     private static WebDriver driver;
+	public static Properties config = new Properties();
     private static final int DELAY = 30;
     private static String screenshotPath;
     private static String downloadPath = System.getProperty("downloadPath");
+	public static String browser;
 
     /**
      * Launch ChromeDriver.
@@ -74,31 +77,48 @@ public class Hooks {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-//        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-//        chromePrefs.put("profile.default_content_settings.popups", 0);
-//        chromePrefs.put("download.default_directory", downloadPath);
-//        /**
-//         * Save Chrome Options
-//         */
-//        ChromeOptions options = new ChromeOptions();
-//        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
-//        options.setExperimentalOption("prefs", chromePrefs);
-//        chromePrefs.put("safebrowsing.enabled", "true");
-//        options.addArguments("--safebrowsing-disable-download-protection");
-//        options.addArguments("disable-popup-blocking");
-//
-//        DesiredCapabilities cap = DesiredCapabilities.chrome();
-//        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
-//        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-//        cap.setCapability(ChromeOptions.CAPABILITY, options);
+        
+        if(System.getenv("browser")!=null && !System.getenv("browser").isEmpty()){
+			
+			browser = System.getenv("browser");
+		}else{
+			
+			browser = config.getProperty("browser");
+			
+		}
+		
+		config.setProperty("browser", browser);
+		
+		if (config.getProperty("browser").equals("chrome")) {
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+        chromePrefs.put("download.default_directory", downloadPath);
+        /**
+         * Save Chrome Options
+         */
+        ChromeOptions options = new ChromeOptions();
+        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+        options.setExperimentalOption("prefs", chromePrefs);
+        chromePrefs.put("safebrowsing.enabled", "true");
+        options.addArguments("--safebrowsing-disable-download-protection");
+        options.addArguments("disable-popup-blocking");
+
+        DesiredCapabilities cap = DesiredCapabilities.chrome();
+        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
+        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
+        driver = new EventFiringWebDriver(new ChromeDriver(cap));
+		}
+		else if (config.getProperty("browser").equals("firefox")) {
         System.setProperty("webdriver.gecko.driver",downloadPath+ File.separator + "geckodriver.exe");
         
         screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
         
         FirefoxOptions options = new FirefoxOptions();
         options.setCapability("download.default_directory", downloadPath);
-        //driver = new EventFiringWebDriver(new ChromeDriver(cap));
+        
         driver = new FirefoxDriver(options);
+		}
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
             @Override
