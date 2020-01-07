@@ -19,7 +19,7 @@ import io.restassured.response.Response;
 
 /** Base class for step definition files. */
 public class Base {
-    private EventFiringWebDriver driver;
+    private WebDriver driver;
     private WebDriverWait wait;
     private static String url = System.getProperty("url");
     private String filePath = System.getProperty("filePath");
