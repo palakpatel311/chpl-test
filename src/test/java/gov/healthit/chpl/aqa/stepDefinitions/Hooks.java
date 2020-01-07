@@ -1,8 +1,8 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
-import static io.restassured.RestAssured.given;
-
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -18,22 +17,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
-//import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-
-import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 
 /**
  * Class Hooks definition.
@@ -41,18 +31,19 @@ import io.restassured.response.Response;
 public class Hooks {
 
     private static File dir;
-    private static WebDriver driver;
-	public static Properties config = new Properties();
+    private static EventFiringWebDriver driver;
+    public static Properties config = new Properties();
     private static final int DELAY = 30;
     private static String screenshotPath;
+	public static FileInputStream fis;
     private static String downloadPath = System.getProperty("downloadPath");
-	public static String browser;
-
+    public static String browser;
     /**
      * Launch ChromeDriver.
+     * @throws IOException 
      */
-	@Before("~@RegressionAPI")
-    public void openBrowser() {
+    @Before("~@RegressionAPI")
+    public void openBrowser() throws IOException {
         /* To run chrome with the developer tools window automatically opened re-able these lines.
          *
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -60,6 +51,16 @@ public class Hooks {
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
          */
+		fis = new FileInputStream(
+					System.getProperty("user.dir") + "\\src\\test\\resources\\Config.properties");
+    	config.load(fis);
+    	
+    	if(System.getenv("browser")!=null && !System.getenv("browser").isEmpty()){
+			browser = System.getenv("browser");
+		}else{
+			browser = config.getProperty("browser");
+		}
+		config.setProperty("browser", browser);
         if (StringUtils.isEmpty(downloadPath)) {
             String tempDirectory;
             try {
@@ -79,26 +80,14 @@ public class Hooks {
             dir.mkdirs();
         }
         
-        if(System.getenv("browser")!=null && !System.getenv("browser").isEmpty()){
-			
-			browser = System.getenv("browser");
-		}else{
-			
-			browser = config.getProperty("browser");
-			
-		}
-		
-		config.setProperty("browser", browser);
-		
-		if (config.getProperty("browser").equals("chrome")) {
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-        chromePrefs.put("profile.default_content_settings.popups", 0);
-        chromePrefs.put("download.default_directory", downloadPath);
+        if (config.getProperty("browser").equals("chrome")) {
+        	HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+            chromePrefs.put("profile.default_content_settings.popups", 0);
+            chromePrefs.put("download.default_directory", downloadPath);
         /**
          * Save Chrome Options
          */
         ChromeOptions options = new ChromeOptions();
-        //HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
         options.setExperimentalOption("prefs", chromePrefs);
         chromePrefs.put("safebrowsing.enabled", "true");
         options.addArguments("--safebrowsing-disable-download-protection");
@@ -106,15 +95,13 @@ public class Hooks {
         options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
         driver = new EventFiringWebDriver(new ChromeDriver(options));
-		}
-		else if (config.getProperty("browser").equals("firefox")) {
-        System.setProperty("webdriver.gecko.driver",downloadPath+ File.separator + "geckodriver.exe");
-              
-        FirefoxOptions options = new FirefoxOptions();
-        options.setCapability("download.default_directory", downloadPath);
+        }
         
-        driver = new FirefoxDriver(options);
-		}
+        else if(config.getProperty("browser").equals("firefox")) {
+        	System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver.exe");
+        	driver = new EventFiringWebDriver(new FirefoxDriver());
+        }
+        
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
             @Override
@@ -126,7 +113,7 @@ public class Hooks {
                 }
             }
         };
-        //driver.register(errorListener);
+        driver.register(errorListener);
     }
 
     /**
@@ -137,7 +124,7 @@ public class Hooks {
         driver.quit();
     }
 
-    public static WebDriver getDriver() {
+    public static EventFiringWebDriver getDriver() {
         return driver;
     }
 
@@ -151,14 +138,6 @@ public class Hooks {
      * All "non-word characters" will be replaced with "_"
      * @throws Exception if there is an exception
      */
-    @After
-    public void tearDown(Scenario scenario) {
-        if (scenario.isFailed()) {
-          final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-          scenario.embed(screenshot, "image/png"); 
-        }
-    }
-    
     public static void takeScreenshot(final String hash) throws Exception {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         File outFile = new File(screenshotPath + File.separator + "failed-test-" + hash.replaceAll("\\W+", "_") + ".png");
