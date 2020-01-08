@@ -100,7 +100,7 @@ public class Hooks {
         }
         
         else if(config.getProperty("browser").equals("firefox")) {
-        	System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver"));
+        	System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver");
         	driver = new EventFiringWebDriver(new FirefoxDriver());
         }
         
