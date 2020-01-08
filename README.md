@@ -27,6 +27,11 @@ Based on Selenium-cucumber: Automation Testing Using Java Automation test framew
 * Install cucumber plugin in eclipse
 * Clone this repository: https://github.com/chpladmin/chpl-test.git
 * Install chromedriver and set it on your PATH
+* Install Geckodriver and set it on your PATH
+
+## Browser configuration locally
+
+* Set up browser in config.properties file in which you want to run test
 
 ## Writing a test
 

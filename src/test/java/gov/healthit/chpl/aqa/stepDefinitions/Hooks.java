@@ -15,6 +15,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
@@ -104,6 +105,10 @@ public class Hooks {
         	driver = new EventFiringWebDriver(new FirefoxDriver());
         }
         
+        else if(config.getProperty("browser").equals("edge")) {
+       		driver =new EventFiringWebDriver( new EdgeDriver());
+        }
+        
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
 //        WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
 //            @Override
@@ -121,10 +126,10 @@ public class Hooks {
     /**
      * Close browser windows and terminate WebDriver session.
      */
-    @After("~@RegressionAPI")
-    public void afterMethod() {
-        driver.quit();
-    }
+//    @After("~@RegressionAPI")
+//    public void afterMethod() {
+//        driver.quit();
+//    }
 
     public static EventFiringWebDriver getDriver() {
         return driver;
