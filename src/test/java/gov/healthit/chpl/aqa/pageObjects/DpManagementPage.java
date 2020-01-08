@@ -453,7 +453,7 @@ public final class DpManagementPage {
      * @return button element
      */
     public static WebElement yesOnConfirm(final WebDriver driver) {
-        return driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/button[1]"));
+        return driver.findElement(By.cssSelector(".btn.btn-primary.ng-binding"));
     }
 
     /**

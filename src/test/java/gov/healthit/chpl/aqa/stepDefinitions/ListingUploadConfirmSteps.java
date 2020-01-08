@@ -30,6 +30,7 @@ import cucumber.api.cli.Main;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gov.healthit.chpl.aqa.pageObjects.ChplDownloadPage;
 import gov.healthit.chpl.aqa.pageObjects.DpManagementPage;
 import gov.healthit.chpl.aqa.pageObjects.ListingDetailsPage;
 import gov.healthit.chpl.aqa.pageObjects.ManageDevelopersAndProductsPage;
@@ -73,7 +74,8 @@ public class ListingUploadConfirmSteps extends Base {
     public void loadUploadCertifiedProductsPage() {
         WebElement button = DpManagementPage.administrationNavLink(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
-        DpManagementPage.administrationUploadNavLink(getDriver()).click();
+       WebElement uploadlink= DpManagementPage.administrationUploadNavLink(getDriver());
+       ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", uploadlink);
     }
 
     /**
@@ -126,7 +128,9 @@ public class ListingUploadConfirmSteps extends Base {
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
             .until(ExpectedConditions.elementToBeClickable(DpManagementPage.inspectButtonForUploadedListing(getDriver(),
                     this.chplProductNumber)));
-            DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber).click();
+            WebElement button = DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber);
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
+            //DpManagementPage.inspectButtonForUploadedListing(getDriver(), this.chplProductNumber).click();
             getWait()
             .withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS)
             .until(ExpectedConditions.visibilityOf(DpManagementPage.nextOnInspectButton(getDriver())));
@@ -156,8 +160,12 @@ public class ListingUploadConfirmSteps extends Base {
                 DpManagementPage.createNewVersionOptionOnInspect(getDriver()).click();
             }
             DpManagementPage.nextOnInspectButton(getDriver()).click();
-
-            DpManagementPage.confirmButtonOnInspect(getDriver()).click();
+            if(DpManagementPage.confirmButtonOnInspect(getDriver()).isDisplayed()) {
+            DpManagementPage.confirmButtonOnInspect(getDriver()).click();}
+            else {
+            	DpManagementPage.nextOnInspectButton(getDriver()).click();
+            	DpManagementPage.confirmButtonOnInspect(getDriver()).click();
+            }
 
             WebElement button = DpManagementPage.yesOnConfirm(getDriver());
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
