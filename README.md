@@ -32,6 +32,7 @@ Based on Selenium-cucumber: Automation Testing Using Java Automation test framew
 ## Browser configuration locally
 
 * Set up browser in config.properties file in which you want to run test
+Options: chrome, firefox, edge
 
 ## Writing a test
 
