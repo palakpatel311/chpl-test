@@ -20,6 +20,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
@@ -101,8 +102,12 @@ public class Hooks {
         }
         
         else if(config.getProperty("browser").equals("firefox")) {
+        	FirefoxOptions options = new FirefoxOptions();
+    		options.addPreference("--log", "trace");
+    		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+    		capabilities.setCapability("moz:firefoxOptions", options);
         	System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver");
-        	driver = new EventFiringWebDriver(new FirefoxDriver());
+        	driver = new EventFiringWebDriver(new FirefoxDriver(capabilities));
         }
         
         else if(config.getProperty("browser").equals("edge")) {
