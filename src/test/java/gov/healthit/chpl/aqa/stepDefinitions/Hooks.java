@@ -18,6 +18,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -56,9 +57,8 @@ public class Hooks {
 
     	if(System.getenv("browser")!=null && !System.getenv("browser").isEmpty()){
 			browser = System.getenv("browser");
-			if(config.getProperty("browser").equals("firefox")) {
-			System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver");
-			}
+		System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver");
+
 		}else{
 			fis = new FileInputStream(
 					System.getProperty("user.dir") + File.separator+"src"
@@ -66,9 +66,9 @@ public class Hooks {
 							+File.separator+"Config.properties");
 			config.load(fis);
 			browser = config.getProperty("browser");
-			if(config.getProperty("browser").equals("firefox")) {
-	        	System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver.exe");
-			}
+
+			System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver.exe");
+
 		}
 		config.setProperty("browser", browser);
         if (StringUtils.isEmpty(downloadPath)) {
@@ -116,17 +116,17 @@ public class Hooks {
         }
         
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
-//        WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
-//            @Override
-//            public void onException(final Throwable throwable, final WebDriver activeDriver) {
-//                try {
-//                    takeScreenshot();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        };
-//        driver.register(errorListener);
+        WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
+            @Override
+            public void onException(final Throwable throwable, final WebDriver activeDriver) {
+                try {
+                    takeScreenshot();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        driver.register(errorListener);
     }
 
     /**
