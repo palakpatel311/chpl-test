@@ -105,17 +105,17 @@ public class Hooks {
         }
         
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
-        WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
-            @Override
-            public void onException(final Throwable throwable, final WebDriver activeDriver) {
-                try {
-                    takeScreenshot();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        driver.register(errorListener);
+//        WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
+//            @Override
+//            public void onException(final Throwable throwable, final WebDriver activeDriver) {
+//                try {
+//                    takeScreenshot();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
+//        driver.register(errorListener);
     }
 
     /**
