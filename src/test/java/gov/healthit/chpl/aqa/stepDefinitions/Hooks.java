@@ -102,10 +102,8 @@ public class Hooks {
         }
         
         else if(config.getProperty("browser").equals("firefox")) {
-        	FirefoxOptions options = new FirefoxOptions();
-    		options.addPreference("--log", "trace");
-        	System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver");
-        	driver = new EventFiringWebDriver(new FirefoxDriver(options));
+        	System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver.exe");
+        	driver = new EventFiringWebDriver(new FirefoxDriver());
         }
         
         else if(config.getProperty("browser").equals("edge")) {
