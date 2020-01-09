@@ -118,7 +118,7 @@ public class Hooks {
 //            //Process process = Runtime. getRuntime(). exec("taskkill /F /IM chromedriver.exe /T");
 //            //process.destroy();
 //    	 }
-    	driver.close();
+    	//driver.close();
         driver.quit();
     }
 
