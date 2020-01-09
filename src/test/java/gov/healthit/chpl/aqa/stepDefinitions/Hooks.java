@@ -47,7 +47,7 @@ public class Hooks {
         if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
             browser = System.getenv("browser");
             if (browser.equalsIgnoreCase("firefox")) {
-                System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver");
+                System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver"));
             }
         } else {
             fis = new FileInputStream(
@@ -56,9 +56,6 @@ public class Hooks {
                             + File.separator + "Config.properties");
             config.load(fis);
             browser = config.getProperty("browser");
-            if (browser.equalsIgnoreCase("firefox")) {
-                System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver.exe");
-            }
         }
         config.setProperty("browser", browser);
         if (StringUtils.isEmpty(downloadPath)) {
