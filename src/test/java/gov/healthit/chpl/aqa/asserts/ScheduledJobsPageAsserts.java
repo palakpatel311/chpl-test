@@ -28,13 +28,15 @@ public class ScheduledJobsPageAsserts extends Base {
      * @param jobTypeValue is the expected JobType
      */
     @Then("^I see types of jobs with \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void scheduledJobsList(final String jobNameValue, final String descriptionValue, final String oncAcbSpecificValue, final String jobTypeValue) {
+    public void scheduledJobsList(final String jobNameValue,
+            final String descriptionValue, final String oncAcbSpecificValue, final String jobTypeValue) {
         boolean jobFound = false;
         WebElement tableElement = ScheduledJobsPage.typesOfSheduledJobs(getDriver());
         List<List<String>> rowList = getElementsWithinRows(tableElement);
         for (List<String> row : rowList) {
             if (row.get(JOBNAME_COL).contains(jobNameValue) && (row.get(DESCRIPTION_COL).contains(descriptionValue))
-                    && (row.get(ONCACBSPECIFIC_COL).contains(oncAcbSpecificValue)) && (row.get(JOBTYPE_COL).contains(jobTypeValue))) {
+                    && (row.get(ONCACBSPECIFIC_COL).contains(oncAcbSpecificValue))
+                    && (row.get(JOBTYPE_COL).contains(jobTypeValue))) {
                 jobFound = true;
             }
             if (jobFound) {

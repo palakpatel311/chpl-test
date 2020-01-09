@@ -40,7 +40,8 @@ public final class ViewVersionPage extends BasePage {
     }
 
     public static WebElement versionsToMergeMessage(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/ui-view/chpl-developers/div/chpl-products/div/chpl-versions/div/div[2]/div[4]/div[1]"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]"
+                + "/div/div/ui-view/chpl-developers/div/chpl-products/div/chpl-versions/div/div[2]/div[4]/div[1]"));
     }
 
     public static WebElement versionMissingErrorMessage(final WebDriver driver, final String versionId) {
@@ -52,7 +53,8 @@ public final class ViewVersionPage extends BasePage {
     }
 
     public static WebElement listingsMovingToNewVersionMessage(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div/ui-view/chpl-developers/div/chpl-products/div/chpl-versions/div/div[2]/div[4]/div"));
+        return driver.findElement(By.xpath("//*[@id=\"main-content\"]"
+                + "/div/div/ui-view/chpl-developers/div/chpl-products/div/chpl-versions/div/div[2]/div[4]/div"));
     }
 }
 

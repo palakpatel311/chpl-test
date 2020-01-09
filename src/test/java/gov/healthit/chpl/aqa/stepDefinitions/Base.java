@@ -1,6 +1,5 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
-import static io.restassured.RestAssured.given;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
@@ -8,14 +7,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 
 /** Base class for step definition files. */
 public class Base {
@@ -40,7 +36,8 @@ public class Base {
             this.setUrl("http://localhost:3000/");
         }
         if (StringUtils.isEmpty(this.filePath)) {
-            String tempDirectory = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator + "resources";
+            String tempDirectory = System.getProperty("user.dir")
+                    + File.separator + "src" + File.separator + "test" + File.separator + "resources";
             this.setFilePath(tempDirectory);
         }
     }
@@ -122,7 +119,8 @@ public class Base {
                 File[] files = Hooks.getDownloadDirectory().listFiles();
                 for (int i = 0; i < files.length; i++) {
                     Long currentTime = System.currentTimeMillis();
-                    if ((files[i].getName().startsWith(fileName) && files[i].getName().endsWith(ext)) && ((currentTime - files[i].lastModified()) < LAST_MODIFIED_WINDOW_MILLIS)) {
+                    if ((files[i].getName().startsWith(fileName) && files[i].getName().endsWith(ext))
+                            && ((currentTime - files[i].lastModified()) < LAST_MODIFIED_WINDOW_MILLIS)) {
                         foundFile = true;
                         break;
                     }
