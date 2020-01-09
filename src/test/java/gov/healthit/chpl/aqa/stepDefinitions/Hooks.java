@@ -113,8 +113,6 @@ public class Hooks {
     @After("~@RegressionAPI")
     public void afterMethod() throws Throwable {
         driver.quit();
-        Process process = Runtime. getRuntime(). exec("taskkill /F /IM chromedriver.exe /T");
-        process.destroy();
     }
 
     public static EventFiringWebDriver getDriver() {
