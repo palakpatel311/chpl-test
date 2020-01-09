@@ -21,10 +21,10 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -287,12 +287,12 @@ public class ChplDownloadSteps extends Base {
         deleteDir(Hooks.getDownloadDirectory());
         assertFalse(Hooks.getDownloadDirectory().list().length > 0, "directory is not empty");
     }
-    
+
     public void deleteDir(File file) {
         File[] contents = file.listFiles();
         if (contents != null) {
             for (File f : contents) {
-                if (! Files.isSymbolicLink(f.toPath())) {
+                if (!Files.isSymbolicLink(f.toPath())) {
                     deleteDir(f);
                 }
             }
@@ -380,5 +380,4 @@ public class ChplDownloadSteps extends Base {
         ChplDownloadPage.downloadDefinitionButton(getDriver()).click();
         super.checkIfFileIsDownloaded(downloadedFileName);
     }
-
 }

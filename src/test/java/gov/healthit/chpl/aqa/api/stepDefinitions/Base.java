@@ -8,16 +8,18 @@ import io.restassured.response.Response;
 
 /** Base class for step definition files. */
 public class Base {
-    
+
     private static String url = System.getProperty("url");
     private static String apikey = System.getProperty("apikey");
     private static String username;
     private static String password;
+
+    private static final int HTTP_GOOD_RESPONSE = 200;
     /** Default constructor. */
     public Base() {
-        
+
     }
-    
+
     public static String getUrl() {
         return url;
     }
@@ -35,39 +37,39 @@ public class Base {
     }
 
     public static String getAuth(String role) {
-    	switch (role) { 
-        case "ROLE_ADMIN": 
-            username = System.getProperty("roleAdminUsername"); 
-            password= System.getProperty("roleAdminPassword");
-            break; 
-        case "ROLE_ACB": 
-        	username = System.getProperty("roleAcbUsername"); 
-            password= System.getProperty("roleAcbPassword");
-            break; 
-        case "ROLE_ONC": 
-        	username = System.getProperty("roleOncUsername"); 
-            password= System.getProperty("roleOncPassword");
-            break; 
-        default: 
-        	username = System.getProperty("roleAdminUsername"); 
-            password= System.getProperty("roleAdminPassword");
-            break; 
-        } 
-    	RestAssured.baseURI= Base.getUrl();
-		Response res= given()
-				.header("API-KEY", Base.getApikey())
-				.header("content-type", "application/json")
-				.body("{\r\n" + 
-						"  \"password\": \""+password+ "\",\r\n" + 
-						"  \"userName\": \""+username+"\"\r\n" + 
-						"}")
-				.when()
-				.post("rest/auth/authenticate")
-				.then().assertThat().statusCode(200).and().contentType(ContentType.JSON)
-				.extract().response();
-    	JsonPath js= res.jsonPath();
-		String token= js.get("token");
-		String auth= "Bearer "+token;
-		return auth;   					
+        switch (role) {
+        case "ROLE_ADMIN":
+            username = System.getProperty("roleAdminUsername");
+            password = System.getProperty("roleAdminPassword");
+            break;
+        case "ROLE_ACB":
+            username = System.getProperty("roleAcbUsername");
+            password = System.getProperty("roleAcbPassword");
+            break;
+        case "ROLE_ONC":
+            username = System.getProperty("roleOncUsername");
+            password = System.getProperty("roleOncPassword");
+            break;
+        default:
+            username = System.getProperty("roleAdminUsername");
+            password = System.getProperty("roleAdminPassword");
+            break;
+        }
+        RestAssured.baseURI = Base.getUrl();
+        Response res = given()
+                .header("API-KEY", Base.getApikey())
+                .header("content-type", "application/json")
+                .body("{\r\n"
+                        + "  \"password\": \"" + password + "\",\r\n"
+                        + "  \"userName\": \"" + username + "\"\r\n"
+                        + "}")
+                .when()
+                .post("rest/auth/authenticate")
+                .then().assertThat().statusCode(HTTP_GOOD_RESPONSE).and().contentType(ContentType.JSON)
+                .extract().response();
+        JsonPath js = res.jsonPath();
+        String token = js.get("token");
+        String auth = "Bearer " + token;
+        return auth;
     }
 }
