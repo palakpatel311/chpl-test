@@ -110,7 +110,7 @@ public class Hooks {
      * Close browser windows and terminate WebDriver session.
      */
     @After("~@RegressionAPI")
-    public void afterMethod() throws Throwable {
+    public void afterMethod() {
         driver.quit();
     }
 
