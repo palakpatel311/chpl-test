@@ -31,30 +31,24 @@ public class Hooks {
 
     private static File dir;
     private static EventFiringWebDriver driver;
-    public static Properties config = new Properties();
+    private static Properties config = new Properties();
     private static final int DELAY = 30;
     private static String screenshotPath;
-    public static FileInputStream fis;
+    private static FileInputStream fis;
     private static String downloadPath = System.getProperty("downloadPath");
-    public static String browser;
+    private static String browser;
     /**
      * Launch ChromeDriver.
      * @throws IOException
      */
     @Before("~@RegressionAPI")
     public void openBrowser() throws IOException {
-        /* To run chrome with the developer tools window automatically opened re-able these lines.
-         *
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--auto-open-devtools-for-tabs");
-        driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
-         */
 
         if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
             browser = System.getenv("browser");
-            System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver");
-
+            if (browser.equalsIgnoreCase("firefox")) {
+                System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver");
+            }
         } else {
             fis = new FileInputStream(
                     System.getProperty("user.dir") + File.separator + "src"
@@ -62,16 +56,15 @@ public class Hooks {
                             + File.separator + "Config.properties");
             config.load(fis);
             browser = config.getProperty("browser");
-
-            System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver.exe");
-
+            if (browser.equalsIgnoreCase("firefox")) {
+                System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver") + File.separator + "geckodriver.exe");
+            }
         }
         config.setProperty("browser", browser);
         if (StringUtils.isEmpty(downloadPath)) {
             String tempDirectory;
             try {
                 tempDirectory = Files.createTempDirectory("download-files").toString();
-                // Print the path to the newly created directory
             } catch (final IOException e) {
                 // If temp directory creation failed, create new directory in target folder
                 // user.dir - User working directory, make new directories in user's working directory
@@ -87,6 +80,13 @@ public class Hooks {
         }
 
         if (config.getProperty("browser").equals("chrome")) {
+            /* To run chrome with the developer tools window automatically opened re-able these lines.
+            *
+           ChromeOptions chromeOptions = new ChromeOptions();
+           chromeOptions.addArguments("--auto-open-devtools-for-tabs");
+           driver = new ChromeDriver(chromeOptions);
+           driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
+            */
             HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
             chromePrefs.put("profile.default_content_settings.popups", 0);
             chromePrefs.put("download.default_directory", downloadPath);
