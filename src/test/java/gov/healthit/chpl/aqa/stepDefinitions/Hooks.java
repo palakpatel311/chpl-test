@@ -24,6 +24,7 @@ import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import io.restassured.RestAssured;
@@ -108,9 +109,16 @@ public class Hooks {
 
     /**
      * Close browser windows and terminate WebDriver session.
+     * @throws Throwable 
      */
     @After("~@RegressionAPI")
-    public void afterMethod() {
+    public void afterMethod(Scenario scenario) throws Throwable {
+//    	if (scenario.isFailed()) {
+//    		   		
+//            //Process process = Runtime. getRuntime(). exec("taskkill /F /IM chromedriver.exe /T");
+//            //process.destroy();
+//    	 }
+    	driver.close();
         driver.quit();
     }
 
