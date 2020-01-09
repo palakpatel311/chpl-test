@@ -111,7 +111,7 @@ public class Hooks {
      * @throws Throwable 
      */
     @After("~@RegressionAPI")
-    public void afterMethod() throws Throwable {
+    public void afterMethod(){
         driver.quit();
     }
 
