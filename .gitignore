@@ -32,3 +32,4 @@ Rest.*
 #################
 .checkstyle
 node_modules/
+src/test/resources/config.properties

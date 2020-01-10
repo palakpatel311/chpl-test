@@ -1,8 +1,9 @@
 package gov.healthit.chpl.aqa.api.stepDefinitions;
 
 import static io.restassured.RestAssured.given;
-import gov.healthit.chpl.aqa.api.stepDefinitions.Base;
+
 import org.testng.Assert;
+
 import cucumber.api.java.en.Then;
 import io.restassured.response.Response;
 
