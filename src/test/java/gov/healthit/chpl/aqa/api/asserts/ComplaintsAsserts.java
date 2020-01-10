@@ -8,45 +8,45 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 public class ComplaintsAsserts {
-	private static Response response;
-	public static int postComplaintId;
-	private List<Integer> idList;
+    private static Response response;
+    public static int postComplaintId;
+    private List<Integer> idList;
 
-	@Then("^I verify the (.+)$")
-	public void apiReturnsCorrectStatusCode(int statuscode) throws Throwable {
-		Assert.assertEquals(ComplaintsTest.response.getStatusCode(), statuscode);
-	}
+    @Then("^I verify the (.+)$")
+    public void apiReturnsCorrectStatusCode(int statuscode) throws Throwable {
+        Assert.assertEquals(ComplaintsTest.response.getStatusCode(), statuscode);
+    }
 
-	@Then("^I verify status code \"([^\"]*)\"$")
-	public void validateStatusCode(int statuscode) throws Throwable {
-		response = ComplaintsTest.response.then().assertThat().statusCode(statuscode).extract().response();
-	}
+    @Then("^I verify status code \"([^\"]*)\"$")
+    public void validateStatusCode(int statuscode) throws Throwable {
+        response = ComplaintsTest.response.then().assertThat().statusCode(statuscode).extract().response();
+    }
 
-	@Then("^I extract id from response body$")
-	public void extractpostResponseBody() throws Throwable {
-		JsonPath js = response.jsonPath();
-		postComplaintId = js.get("id");
-	}
+    @Then("^I extract id from response body$")
+    public void extractpostResponseBody() throws Throwable {
+        JsonPath js = response.jsonPath();
+        postComplaintId = js.get("id");
+    }
 
-	@Then("^I extract ids of all complaints from response body$")
-	public void extractgetResponseBody() throws Throwable {
-		idList = ComplaintsTest.response.jsonPath().getList("results.id");
-	}
+    @Then("^I extract ids of all complaints from response body$")
+    public void extractgetResponseBody() throws Throwable {
+        idList = ComplaintsTest.response.jsonPath().getList("results.id");
+    }
 
-	@Then("^I validate posted id exist in ids of all complaints$")
-	public void validatePostComplaint() throws Throwable {
-		Assert.assertTrue(idList.contains(postComplaintId));
-	}
+    @Then("^I validate posted id exist in ids of all complaints$")
+    public void validatePostComplaint() throws Throwable {
+        Assert.assertTrue(idList.contains(postComplaintId));
+    }
 
-	@Then("^I validate response body has updated ONC complaint id$")
-	public void validatePutResponse() throws Throwable {
-		JsonPath js = response.jsonPath();
-		String updatedvalue = "ONC-Updated";
-		Assert.assertEquals(js.getString("oncComplaintId"), updatedvalue);
-	}
+    @Then("^I validate response body has updated ONC complaint id$")
+    public void validatePutResponse() throws Throwable {
+        JsonPath js = response.jsonPath();
+        String updatedvalue = "ONC-Updated";
+        Assert.assertEquals(js.getString("oncComplaintId"), updatedvalue);
+    }
 
-	@Then("^I validate posted id doesnt exist in ids of all complaints$")
-	public void validateCompliantsDeletion() throws Throwable {
-		Assert.assertFalse(idList.contains(postComplaintId));
-	}
+    @Then("^I validate posted id doesnt exist in ids of all complaints$")
+    public void validateCompliantsDeletion() throws Throwable {
+        Assert.assertFalse(idList.contains(postComplaintId));
+    }
 }

@@ -75,7 +75,7 @@ public class BasePage {
         List<WebElement> columns = elements.findElements(By.tagName("td"));
         return columns;
     }
-    
+
     public static WebElement shortcutsDropdown(final WebDriver driver) {
         return driver.findElement(By.id("shortcut-toggle"));
     }
