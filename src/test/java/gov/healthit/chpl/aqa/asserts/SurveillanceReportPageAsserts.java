@@ -119,8 +119,11 @@ public class SurveillanceReportPageAsserts extends Base {
         /* Workaround to resolve Stale Element Reference Exception-
          * reload the element after form update so it's attached to DOM: https://www.seleniumhq.org/exceptions/stale_element_reference.jsp*/
         getDriver().get(getUrl() + "#/surveillance/reporting");
+        getDriver().navigate().refresh();
         steps.iExpandACB("UL LLC");
-        SurveillanceReportPage.editSurveillanceReport(getDriver(), "UL LLC-2019-Q1").click();
+        WebElement editbutton = SurveillanceReportPage.editSurveillanceReport(getDriver(), "UL LLC-2019-Q1");
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", editbutton);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", editbutton);
         WebElement button = SurveillanceReportPage.listingsWithRelevantSurveillanceAccordion(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
@@ -130,7 +133,7 @@ public class SurveillanceReportPageAsserts extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", editButton);
 
         String groundsForInitiatingSurv = SurveillanceReportPage.surveillanceCompletedCapVerification(getDriver()).getAttribute("value");
-        assertEquals((groundsForInitiatingSurv.split(" ")[0]).trim(), getCurrentDate());
+        assertEquals((groundsForInitiatingSurv.substring(groundsForInitiatingSurv.length() - 10)), getCurrentDate());
 
     }
 }
