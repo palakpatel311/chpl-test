@@ -54,7 +54,8 @@ public class ListingHistoryEyeAsserts extends Base {
         }
         Date actualDate = getFormatedDateTimeZone(latestDate);
         Date currentDate = new Date();
-        assertTrue(((currentDate.getTime() - actualDate.getTime()) < TIME_DURATION), "Listing history is missing for today's date");
+        assertTrue(((currentDate.getTime() - actualDate.getTime()) < TIME_DURATION),
+                "Listing history is missing for today's date");
     }
 
 }

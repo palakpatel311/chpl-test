@@ -119,7 +119,8 @@ public class ChplSearchPageAsserts extends Base {
                 }
                 if (!headersChecked) {
                     for (String  header : headerList) {
-                        assertTrue(csvHeaderList.contains(header), "The search option [ " + header + " ] is missing in the CSV file");
+                        assertTrue(csvHeaderList.contains(header),
+                                "The search option [ " + header + " ] is missing in the CSV file");
                         headersChecked = true;
                     }
                 }
@@ -149,7 +150,8 @@ public class ChplSearchPageAsserts extends Base {
     @Then("^I see that Certification Status filter shows \"([^\"]*)\" statuses$")
     public void certificationStatusFilterOptionCount(final String expectedStatusCount) {
 
-        WebElement allElements = getDriver().findElement(By.cssSelector("#filters > div.col-sm-8 > div.btn-group.dropdown.open > ul"));
+        WebElement allElements = getDriver().findElement(
+                By.cssSelector("#filters > div.col-sm-8 > div.btn-group.dropdown.open > ul"));
         List<WebElement> statusElements = allElements.findElements(By.tagName("input"));
         String statusCount = String.valueOf(statusElements.size());
         assertEquals(statusCount, expectedStatusCount);
@@ -162,7 +164,8 @@ public class ChplSearchPageAsserts extends Base {
     @Then("^the displayed status options should include all valid statuses: \"([^\"]*)\"$")
     public void certificationStatusFilterOptions(final String expectedStatus) {
 
-        WebElement allElements = getDriver().findElement(By.cssSelector("#filters > div.col-sm-8 > div.btn-group.dropdown.open > ul"));
+        WebElement allElements = getDriver().findElement(
+                By.cssSelector("#filters > div.col-sm-8 > div.btn-group.dropdown.open > ul"));
         List<WebElement> statusElements = allElements.findElements(By.tagName("li"));
         List<String> listOfStatuses = new ArrayList<>();
 

@@ -48,7 +48,8 @@ public class SurveillanceReportPageAsserts extends Base {
      */
     @Then("^I see \"([^\"]*)\" for the quarterly surveillance report page$")
     public void iSeePageTitleForQuarterlySurveillanceReport(final String expectedPageTitle) {
-        String actualPageTitle = SurveillanceReportPage.quarterlySurveillanceReportingTitle(getDriver(), expectedPageTitle).getText();
+        String actualPageTitle = SurveillanceReportPage.quarterlySurveillanceReportingTitle(getDriver(),
+                expectedPageTitle).getText();
         assertTrue(actualPageTitle.contains(expectedPageTitle));
     }
 
@@ -58,13 +59,15 @@ public class SurveillanceReportPageAsserts extends Base {
      */
     @Then("^\"([^\"]*)\" for the quarterly surveillance report$")
     public void iSeeSubtitle(final String expectedSubtitle) {
-        String actualSubtitle = SurveillanceReportPage.quarterlySurveillanceReportingSubtitle(getDriver(), expectedSubtitle).getText();
+        String actualSubtitle = SurveillanceReportPage.quarterlySurveillanceReportingSubtitle(getDriver(),
+                expectedSubtitle).getText();
         assertTrue(actualSubtitle.contains(expectedSubtitle));
     }
 
     /**
      * Assert that confirmation message is correct on initiating a surveillance report.
-     * @param expectedConfirmationMessage - Are you sure you wish to initiate quarterly surveillance reporting for quarter Q1/Q2/Q3/Q4 of year 2019/2020?
+     * @param expectedConfirmationMessage - Are you sure you wish to initiate quarterly surveillance reporting
+     *  for quarter Q1/Q2/Q3/Q4 of year 2019/2020?
      */
     @Then("^I see \"([^\"]*)\" on clicking initiate$")
     public void iSeeConfirmationMessageOnClickingInitiate(final String expectedConfirmationMessage) {
@@ -129,7 +132,8 @@ public class SurveillanceReportPageAsserts extends Base {
         WebElement editButton =  getDriver().findElement(By.id("edit-surveillance-data-SURV01"));
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", editButton);
 
-        String groundsForInitiatingSurv = SurveillanceReportPage.surveillanceCompletedCapVerification(getDriver()).getAttribute("value");
+        String groundsForInitiatingSurv = SurveillanceReportPage.surveillanceCompletedCapVerification(getDriver())
+                .getAttribute("value");
         assertEquals((groundsForInitiatingSurv.split(" ")[0]).trim(), getCurrentDate());
 
     }

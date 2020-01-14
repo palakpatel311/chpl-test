@@ -28,7 +28,8 @@ public class OncAcbManagementPageAsserts extends Base {
      */
     @Then("^ONC ACB status should show as Retired: \"([^\"]*)\"$")
     public void retiredStatus(final String expectedRetirementStatus) {
-        String actualRetirementStatus = OncAcbManagementPage.retirementStatus(getDriver(), expectedRetirementStatus).getText().split(",")[0];
+        String actualRetirementStatus = OncAcbManagementPage.retirementStatus(
+                getDriver(), expectedRetirementStatus).getText().split(",")[0];
         assertEquals(actualRetirementStatus, expectedRetirementStatus);
     }
 }

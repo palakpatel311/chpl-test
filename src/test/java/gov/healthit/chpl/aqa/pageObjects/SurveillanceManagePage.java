@@ -14,7 +14,8 @@ public final class SurveillanceManagePage extends BasePage {
     }
 
     public static WebElement chplIdButtonInFilteredResults(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[1]/div[2]/div/div/div/table/tbody/tr/td[1]/button"));
+        return driver.findElement(By.xpath("//*[@id=\"surveillance-manage\"]"
+                + "/div[2]/div/div/div/div[1]/div[2]/div/div/div/table/tbody/tr/td[1]/button"));
     }
 
     public static WebElement chplIdTab(final WebDriver driver) {
@@ -22,10 +23,12 @@ public final class SurveillanceManagePage extends BasePage {
     }
 
     public static WebElement surveillanceList(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[2]/span/chpl-surveillance-management-view/div/ai-surveillance/div"));
+        return driver.findElement(By.xpath("//*[@id=\"surveillance-manage\"]"
+                + "/div[2]/div/div/div/div[2]/span/chpl-surveillance-management-view/div/ai-surveillance/div"));
     }
 
     public static WebElement surveillanceDataTable(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[1]/div[2]/div/div/div/table"));
+        return driver.findElement(By.xpath("//*[@id=\"surveillance-manage\"]"
+                + "/div[2]/div/div/div/div[1]/div[2]/div/div/div/table"));
     }
 }
