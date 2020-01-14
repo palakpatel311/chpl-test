@@ -2,6 +2,7 @@ package gov.healthit.chpl.aqa.stepDefinitions;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,7 +16,7 @@ import gov.healthit.chpl.aqa.pageObjects.OncAcbManagementPage;
 public class OncAcbManagementSteps extends Base {
 
     /**
-     * Get user to ONC ACB Management  page.
+     * Get user to ONC ACB Management page.
      */
     @And("^I navigate to ONC ACB Management page$")
     public void navigateToONCACBManagementPage() {
@@ -26,7 +27,9 @@ public class OncAcbManagementSteps extends Base {
 
     /**
      * Access ONC ACB details page.
-     * @param acb is the name of ONC ACB
+     *
+     * @param acb
+     *            is the name of ONC ACB
      */
     @And("^I access \"([^\"]*)\" ACB details$")
     public void iClickOnONCACBName(final String acb) {
@@ -46,11 +49,15 @@ public class OncAcbManagementSteps extends Base {
 
     /**
      * Retire the ACB on a specific date.
-     * @param date set the retirement date
+     *
+     * @param date
+     *            set the retirement date
+     * @throws Throwable
      */
     @When("^I mark it as retired on \"([^\"]*)\"$")
-    public void markRetired(final String date) {
-        OncAcbManagementPage.markRetirementStatus(getDriver()).click();
+    public void markRetired(final String date) throws Throwable {
+        Actions act = new Actions(getDriver());
+        act.moveToElement(OncAcbManagementPage.markRetirementStatus(getDriver())).click().build().perform();
         OncAcbManagementPage.retirementDate(getDriver()).clear();
         OncAcbManagementPage.retirementDate(getDriver()).sendKeys(date);
         WebElement link = OncAcbManagementPage.saveONCACB(getDriver());
@@ -62,7 +69,11 @@ public class OncAcbManagementSteps extends Base {
      */
     @When("^I unretire an existing retired ACB$")
     public void iUnretireExistingRetiredACB() {
-        OncAcbManagementPage.markRetirementStatus(getDriver()).click();
+        if (OncAcbManagementPage.markRetirementStatus(getDriver()).isSelected()) {
+            OncAcbManagementPage.retirementDate(getDriver()).clear();
+            Actions act = new Actions(getDriver());
+            act.moveToElement(OncAcbManagementPage.markRetirementStatus(getDriver())).click().build().perform();
+        }
         OncAcbManagementPage.addressFirstLine(getDriver()).clear();
         OncAcbManagementPage.addressFirstLine(getDriver()).sendKeys("Test");
         OncAcbManagementPage.addressCity(getDriver()).clear();
@@ -73,16 +84,18 @@ public class OncAcbManagementSteps extends Base {
         OncAcbManagementPage.addressZipCode(getDriver()).sendKeys("111");
         OncAcbManagementPage.addressCountry(getDriver()).clear();
         OncAcbManagementPage.addressCountry(getDriver()).sendKeys("Test");
-        OncAcbManagementPage.fieldWebsite(getDriver()).clear();
-        OncAcbManagementPage.fieldWebsite(getDriver()).sendKeys("http://www.example.com");
         WebElement link = OncAcbManagementPage.saveONCACB(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
     /**
-     * Edit ACB details to edit ACB name to new name and edit it back to original ACB name.
-     * @param newName is new ACB name
-     * @param oldName is original ACB name
+     * Edit ACB details to edit ACB name to new name and edit it back to
+     * original ACB name.
+     *
+     * @param newName
+     *            is new ACB name
+     * @param oldName
+     *            is original ACB name
      */
     @When("^I edit ACB name to be \"([^\"]*)\" and edit it back to \"([^\"]*)\"$")
     public void editAcbName(final String newName, final String oldName) {

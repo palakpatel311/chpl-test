@@ -13,7 +13,8 @@ public class Base {
     private static String apikey = System.getProperty("apikey");
     private static String username;
     private static String password;
-    private static final int STATUS_CODE = 200;
+    private static final int HTTP_GOOD_RESPONSE = 200;
+
     /** Default constructor. */
     public Base() {
 
@@ -59,10 +60,14 @@ public class Base {
         Response res = given()
                 .header("API-KEY", Base.getApikey())
                 .header("content-type", "application/json")
-                .body("{\r\n" + "  \"password\": \"" + password + "\",\r\n" + "  \"userName\": \"" + username + "\"\r\n"
+                .body("{\r\n"
+                        + "  \"password\": \"" + password + "\",\r\n"
+                        + "  \"userName\": \"" + username + "\"\r\n"
                         + "}")
-                .when().post("rest/auth/authenticate").then().assertThat().statusCode(STATUS_CODE).and()
-                .contentType(ContentType.JSON).extract().response();
+                .when()
+                .post("rest/auth/authenticate")
+                .then().assertThat().statusCode(HTTP_GOOD_RESPONSE).and().contentType(ContentType.JSON)
+                .extract().response();
         JsonPath js = res.jsonPath();
         String token = js.get("token");
         String auth = "Bearer " + token;

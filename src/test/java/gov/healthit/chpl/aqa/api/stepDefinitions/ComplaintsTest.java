@@ -1,12 +1,12 @@
 package gov.healthit.chpl.aqa.api.stepDefinitions;
 
 import static io.restassured.RestAssured.given;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.api.asserts.ComplaintsAsserts;
-import gov.healthit.chpl.aqa.api.payLoad.complaintsPayload;
-import gov.healthit.chpl.aqa.api.stepDefinitions.Base;
+import gov.healthit.chpl.aqa.api.payLoad.ComplaintsPayload;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -45,9 +45,9 @@ public class ComplaintsTest {
     @And("^I set \"([^\"]*)\" request body$")
     public void setRequestBody(String method) {
         if (method.contains("POST")) {
-            request.body(complaintsPayload.postPayload());
+            request.body(ComplaintsPayload.postPayload());
         } else if (method.contains("PUT")) {
-            request.body(complaintsPayload.putPayload());
+            request.body(ComplaintsPayload.putPayload());
         }
     }
 

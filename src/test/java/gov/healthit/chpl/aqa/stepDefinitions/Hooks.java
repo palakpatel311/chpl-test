@@ -1,26 +1,26 @@
 package gov.healthit.chpl.aqa.stepDefinitions;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
-//import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
@@ -31,27 +31,37 @@ public class Hooks {
 
     private static File dir;
     private static EventFiringWebDriver driver;
+    private static Properties config = new Properties();
     private static final int DELAY = 30;
     private static String screenshotPath;
+    private static FileInputStream fis;
     private static String downloadPath = System.getProperty("downloadPath");
-
+    private static String browser;
     /**
      * Launch ChromeDriver.
+     * @throws IOException
      */
     @Before("~@RegressionAPI")
-    public void openBrowser() {
-        /* To run chrome with the developer tools window automatically opened re-able these lines.
-         *
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--auto-open-devtools-for-tabs");
-        driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
-         */
+    public void openBrowser() throws IOException {
+
+        if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
+            browser = System.getenv("browser");
+            if (browser.equalsIgnoreCase("firefox")) {
+                System.setProperty("webdriver.gecko.driver", System.getProperty("PathtoGeckodriver"));
+            }
+        } else {
+            fis = new FileInputStream(
+                    System.getProperty("user.dir") + File.separator + "src"
+                            + File.separator + "test" + File.separator + "resources"
+                            + File.separator + "Config.properties");
+            config.load(fis);
+            browser = config.getProperty("browser");
+        }
+        config.setProperty("browser", browser);
         if (StringUtils.isEmpty(downloadPath)) {
             String tempDirectory;
             try {
                 tempDirectory = Files.createTempDirectory("download-files").toString();
-                // Print the path to the newly created directory
             } catch (final IOException e) {
                 // If temp directory creation failed, create new directory in target folder
                 // user.dir - User working directory, make new directories in user's working directory
@@ -65,26 +75,35 @@ public class Hooks {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-        chromePrefs.put("profile.default_content_settings.popups", 0);
-        chromePrefs.put("download.default_directory", downloadPath);
-        /**
-         * Save Chrome Options
-         */
-        ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
-        options.setExperimentalOption("prefs", chromePrefs);
-        chromePrefs.put("safebrowsing.enabled", "true");
-        options.addArguments("--safebrowsing-disable-download-protection");
-        options.addArguments("disable-popup-blocking");
 
-        DesiredCapabilities cap = DesiredCapabilities.chrome();
-        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
-        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        cap.setCapability(ChromeOptions.CAPABILITY, options);
+        if (config.getProperty("browser").equals("chrome")) {
+            /* To run chrome with the developer tools window automatically opened re-able these lines.
+            *
+           ChromeOptions chromeOptions = new ChromeOptions();
+           chromeOptions.addArguments("--auto-open-devtools-for-tabs");
+           driver = new ChromeDriver(chromeOptions);
+           driver.manage().window().maximize(); // does not work on CI machine, sometimes useful locally
+            */
+            HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+            chromePrefs.put("profile.default_content_settings.popups", 0);
+            chromePrefs.put("download.default_directory", downloadPath);
+            /**
+             * Save Chrome Options
+             */
+            ChromeOptions options = new ChromeOptions();
+            options.setExperimentalOption("prefs", chromePrefs);
+            chromePrefs.put("safebrowsing.enabled", "true");
+            options.addArguments("--safebrowsing-disable-download-protection");
+            options.addArguments("disable-popup-blocking");
+            options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
+            driver = new EventFiringWebDriver(new ChromeDriver(options));
+        } else if (config.getProperty("browser").equals("firefox")) {
+            driver = new EventFiringWebDriver(new FirefoxDriver());
+        } else if (config.getProperty("browser").equals("edge")) {
+            driver = new EventFiringWebDriver(new EdgeDriver());
+        }
 
-        screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
-        driver = new EventFiringWebDriver(new ChromeDriver(cap));
         driver.manage().timeouts().implicitlyWait(DELAY, TimeUnit.SECONDS);
         WebDriverEventListener errorListener = new AbstractWebDriverEventListener() {
             @Override
@@ -124,7 +143,7 @@ public class Hooks {
     public static void takeScreenshot(final String hash) throws Exception {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         File outFile = new File(screenshotPath + File.separator + "failed-test-" + hash.replaceAll("\\W+", "_") + ".png");
-        FileUtils.copyFile(scrFile, outFile);
+        FileHandler.copy(scrFile, outFile);
     }
 
     /**
@@ -135,6 +154,4 @@ public class Hooks {
         String hash = String.valueOf(new Date().getTime());
         takeScreenshot(hash);
     }
-
-
 }
