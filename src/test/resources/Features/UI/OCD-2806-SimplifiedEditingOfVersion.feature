@@ -4,8 +4,8 @@ Feature: OCD-2806 Simplified Editing of Version
 
 Scenario Outline: User logs in as ROLE and sees edit version link exists on new developer page
     Given I'm logged in as "<ROLE>"
-    When I expand product "Agility EHR" of developer "1816" to view version dropdown
-    Then I see edit version to "11"
+    When I navigate to the version edit page for version "478" of product "1742" of developer "1816"
+    Then I see edit link for version "478"
     Examples:
       |ROLE       |
       |ROLE_ACB   |
