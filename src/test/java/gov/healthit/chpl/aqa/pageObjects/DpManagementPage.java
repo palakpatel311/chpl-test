@@ -52,7 +52,6 @@ public final class DpManagementPage {
 
     /**
      * Get the CHPL Product Number value in surveillance search results.
-     * 
      * @param driver
      *            WebDriver
      * @return the CHPL Product Number element

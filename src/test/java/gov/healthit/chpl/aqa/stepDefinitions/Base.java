@@ -36,7 +36,8 @@ public class Base {
             this.setUrl("http://localhost:3000/");
         }
         if (StringUtils.isEmpty(this.filePath)) {
-            String tempDirectory = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator + "resources";
+            String tempDirectory = System.getProperty("user.dir")
+                    + File.separator + "src" + File.separator + "test" + File.separator + "resources";
             this.setFilePath(tempDirectory);
         }
     }

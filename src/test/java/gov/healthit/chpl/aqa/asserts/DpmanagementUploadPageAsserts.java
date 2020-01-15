@@ -59,21 +59,25 @@ public class DpmanagementUploadPageAsserts extends Base {
     @Then("^I see upload failure with appropriate error message \"([^\"]*)\" to indicate failure due to invalid data$")
     public void verifyLongTestTaskIdAndParticipantIdErrorsOnUpload(final String errorMessage) {
         String actualString = DpManagementPage.uploadFailureErrorMessage(getDriver()).getText();
-        assertTrue(actualString.contains(errorMessage), "Expect \"" + errorMessage + "\" to be found in \"" + actualString + "\"");
+        assertTrue(actualString.contains(errorMessage),
+                "Expect \"" + errorMessage + "\" to be found in \"" + actualString + "\"");
     }
 
     /**
      * Load listing details to verify surveillance was uploaded successfully.
      * @param chplId is CHPL ID input on Surveillance Manage page to load surveillance activity for given listing
      */
-    @Then("^I see that surveillance was uploaded successfully for listing with CHPL ID \"([^\"]*)\" and shows in surveillance activities list of the listing$")
+    @Then("^I see that surveillance was uploaded successfully for listing with CHPL ID \"([^\"]*)\""
+            + " and shows in surveillance activities list of the listing$")
     public void verifySurveillanceConfirmWasSuccessful(final String chplId) {
         getDriver().get(getUrl() + "/#/surveillance/manage");
         SurveillanceManagePage.generalFilterInput(getDriver()).sendKeys(chplId);
         getWait().until(ExpectedConditions.visibilityOf(BasePage.mainContent(getDriver())));
-        List<WebElement> productName = getDriver().findElements(By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[1]/div[2]/div/div/div/table/tbody/tr/td[3]"));
+        List<WebElement> productName = getDriver().findElements(
+          By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[1]/div[2]/div/div/div/table/tbody/tr/td[3]"));
         List<WebElement> allChplIdButtons = getDriver().
-                findElements(By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[1]/div[2]/div/div/div/table/tbody/tr/td[1]/button"));
+                findElements(
+          By.xpath("//*[@id=\"surveillance-manage\"]/div[2]/div/div/div/div[1]/div[2]/div/div/div/table/tbody/tr/td[1]/button"));
 
         for (int i = 0; i < productName.size(); i++) {
 
@@ -89,6 +93,7 @@ public class DpmanagementUploadPageAsserts extends Base {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d" + ", " + "yyyy");
         LocalDate newDate = LocalDate.now();
 
-        assertTrue(surveillanceText.contains("Open Surveillance, Began " + dtf.format(newDate) + ": 1 Open and 2 Closed Non-Conformities Were Found"));
+        assertTrue(surveillanceText.contains("Open Surveillance, Began " + dtf.format(newDate) +
+                ": 1 Open and 2 Closed Non-Conformities Were Found"));
     }
 }

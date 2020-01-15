@@ -41,6 +41,7 @@ public class BaseSteps extends Base {
     @And("^I open \"([^\"]*)\" page$")
     public void iOpenCollectionsPage(final String collectionsPage) {
         BasePage.shortcutsCollectionsPage(getDriver(), collectionsPage).click();
-        getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(BasePage.shortcutsCollectionsPage(getDriver(), collectionsPage))));
+        getWait().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(
+                BasePage.shortcutsCollectionsPage(getDriver(), collectionsPage))));
     }
 }

@@ -28,7 +28,8 @@ public final class DeveloperDashboardPage extends BasePage {
     }
 
     public static WebElement changeRequestSubmittedWebsite(final WebDriver driver) {
-        return driver.findElement(By.xpath("//chpl-change-requests[@class='ng-scope ng-isolate-scope']//div[@class='panel-body']"));
+        return driver.findElement(
+                By.xpath("//chpl-change-requests[@class='ng-scope ng-isolate-scope']//div[@class='panel-body']"));
     }
 
     public static WebElement changeRequestAction(final WebDriver driver, final String changeRequestAction) {

@@ -43,7 +43,8 @@ public class DeveloperDashboardPageAsserts extends Base {
 
     @Then("^I see \"([^\"]*)\" as the title for developer dashboard$")
     public void developerDashboardTitle(final String expectedDeveloperDashboardTitle) {
-        String actualDeveloperDashboardTitle = DeveloperDashboardPage.pageTitle(getDriver(), expectedDeveloperDashboardTitle).getText();
+        String actualDeveloperDashboardTitle = DeveloperDashboardPage.pageTitle(
+                getDriver(), expectedDeveloperDashboardTitle).getText();
         assertTrue(actualDeveloperDashboardTitle.contains(expectedDeveloperDashboardTitle));
     }
 
