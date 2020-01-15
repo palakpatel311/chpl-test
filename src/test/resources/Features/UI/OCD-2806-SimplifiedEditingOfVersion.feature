@@ -60,4 +60,3 @@ Scenario: Verify message is displayed in listings moving to new version
     When I navigate to the version edit page for version "49" of product "1482" of developer "934"
     And I click the split version link for version "49"
     Then I see "At least one Listing must be selected to move" in listings moving to new version section
-    
