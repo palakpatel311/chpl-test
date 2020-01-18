@@ -9,8 +9,8 @@ Feature: OCD-2062: Verify that newly generated & incorrectly removed CMS IDs sti
     Then I should see the listings "<CHPL_ID>" that make up the CMS ID
     Examples:
       | CMS_ID          | CHPL_ID                           |
-      | 0015H8GK6K0ZZB2 | 14.07.07.2452.VEI1.01.01.0.161111 |
-      | 0015H8GK6K0ZZB2 | 15.04.04.2891.Sunr.07.02.1.171201 |
+      | 0015EK9A6FGV4ZQ | 15.04.04.2916.smar.07.01.1.190328 |
+      | 0015EK9A6FGV4ZQ | 15.04.04.2891.Sunr.07.02.1.171201 |
 
   Scenario Outline: Generating a CMS ID
     When I add "<CHPL_IDs>" Listings to the CMS Widget
@@ -18,4 +18,4 @@ Feature: OCD-2062: Verify that newly generated & incorrectly removed CMS IDs sti
     Then the generated CMS ID should be "<CMS_ID>"
     Examples:
       | CHPL_IDs  | CMS_ID          |
-      | 8169;8969 | 0015H8GK6K0ZZB2 |
+      | 9956;8969 | 0015EK9A6FGV4ZQ |
