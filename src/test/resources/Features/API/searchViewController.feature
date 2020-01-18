@@ -15,7 +15,6 @@ Scenario Outline: Verify search-view-controller endpoints return correct status 
       |/data/change-request-types          |200        |
       |/data/classification_types          |200        |
       |/data/complainant-types             |200        |
-      |/data/complaint-status-types        |200        |
       |/data/developer_statuses            |200        |
       |/data/developers                    |200        |
       |/data/education_types               |200        |

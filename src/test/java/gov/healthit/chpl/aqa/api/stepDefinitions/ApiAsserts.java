@@ -24,6 +24,6 @@ public class ApiAsserts extends Base {
                 .header("content-type", "application/json")
                 .get(getUrl() + "rest" + apiEndpoint);
 
-        Assert.assertEquals(expStatus, response.getStatusCode());
+        Assert.assertEquals(response.getStatusCode(), expStatus);
     }
 }
