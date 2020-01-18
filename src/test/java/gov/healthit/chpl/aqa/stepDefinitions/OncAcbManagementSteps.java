@@ -101,12 +101,13 @@ public class OncAcbManagementSteps extends Base {
     public void editAcbName(final String newName, final String oldName) {
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).clear();
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).sendKeys(newName);
-        OncAcbManagementPage.saveONCACB(getDriver()).click();
-        WebElement link = OncAcbManagementPage.editONCACB(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        WebElement savebutton = OncAcbManagementPage.saveONCACB(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", savebutton);
+        WebElement editbutton = OncAcbManagementPage.editONCACB(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", editbutton);
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).clear();
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).sendKeys(oldName);
-        link = OncAcbManagementPage.saveONCACB(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
+        savebutton = OncAcbManagementPage.saveONCACB(getDriver());
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", savebutton);
     }
 }

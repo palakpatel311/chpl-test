@@ -74,9 +74,8 @@ public class ApiAccessSteps {
                 .header("API-KEY", apikey)
                 .header("content-type", "application/json")
                 .get(url + "rest/system-status");
-
         JsonPath jsonPathEvaluator = response.jsonPath();
-        String cacheStatus = jsonPathEvaluator.get("cache");
+        String cacheStatus = jsonPathEvaluator.get("running");
         Assert.assertEquals(cacheStatus, expStatus);
     }
 }
