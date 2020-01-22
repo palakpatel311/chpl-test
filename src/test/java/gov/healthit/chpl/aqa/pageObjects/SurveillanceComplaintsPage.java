@@ -27,11 +27,11 @@ public final class SurveillanceComplaintsPage extends BasePage {
     }
 
     public static WebElement associatedListingValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[12]/div/span"));
+        return driver.findElement(By.id("remove-listing-9360"));
     }
 
     public static WebElement associatedSurveillanceValue(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"chpl-complaint\"]/div[13]/div/span"));
+        return driver.findElement(By.id("remove-listing-831"));
     }
 
     public static WebElement certifiedProductField(final WebDriver driver) {
