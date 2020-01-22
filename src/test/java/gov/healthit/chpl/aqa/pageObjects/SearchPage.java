@@ -220,6 +220,7 @@ public final class SearchPage extends BasePage {
     }
 
     public static WebElement collectionsPageShortcuts(final WebDriver driver, final String shortcutPageName) {
-        return driver.findElement(By.xpath("//a[@class='btn btn-lg btn-block btn-ai-grey'][contains(text(),'" + shortcutPageName + "')]"));
+        return driver.findElement(By.xpath("//a[@class='btn btn-lg btn-block btn-ai-grey']"
+                + "[contains(text(),'" + shortcutPageName + "')]"));
     }
 }

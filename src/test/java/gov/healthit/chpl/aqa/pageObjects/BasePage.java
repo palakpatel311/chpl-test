@@ -81,6 +81,7 @@ public class BasePage {
     }
 
     public static WebElement shortcutsCollectionsPage(final WebDriver driver, final String collectionsPage) {
-        return driver.findElement(By.xpath("//*[@id=\"shortcut-dropdown-menu\"]/li/a[contains(text(),'" + collectionsPage + "')]"));
+        return driver.findElement(
+                By.xpath("//*[@id=\"shortcut-dropdown-menu\"]/li/a[contains(text(),'" + collectionsPage + "')]"));
     }
 }

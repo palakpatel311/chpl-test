@@ -94,7 +94,8 @@ public class ChplAPIPageAsserts extends Base {
             for (Object endPointLink:apiimplnotesArray) {
                 JSONArray endPointLinkArray = (JSONArray) ((JSONObject) endPointLink).get("endPointLink");
                 String controller = (String) ((JSONObject) endPointLink).get("controllerName");
-                WebElement cLink = ChplAPIPage.controllerLink(getDriver(), (String) ((JSONObject) endPointLink).get("controllerName"));
+                WebElement cLink = ChplAPIPage.controllerLink(getDriver(),
+                        (String) ((JSONObject) endPointLink).get("controllerName"));
                 ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", cLink);
                 for (Object links:endPointLinkArray) {
                     String endPoint = (String) (((JSONObject) links).get("link"));
@@ -103,7 +104,8 @@ public class ChplAPIPageAsserts extends Base {
                     String implNote = (String) ((JSONObject) links).get("implementationNote");
                     String actImpNotes = ChplAPIPage.certifiedProductsImplementationNotes(getDriver()).getText();
                     try {
-                        assertTrue(actImpNotes.contains(implNote), "Expected [ " + implNote + " ]not found for:[" + controller + "] where endpoint is:[" + endPoint + "]");
+                        assertTrue(actImpNotes.contains(implNote), "Expected [ " + implNote + " ]"
+                                + "not found for:[" + controller + "] where endpoint is:[" + endPoint + "]");
                     } catch (AssertionError ex) {
                         System.out.println(ex.getMessage());
                         failedCase = true;

@@ -17,7 +17,8 @@ public final class OncAcbManagementPage extends BasePage {
     }
 
     public static WebElement oncACBName(final WebDriver driver, final String oncAcbName) {
-        List<WebElement> navItems = driver.findElements(By.xpath("//*[@id='main-content']/div/div/ui-view/chpl-onc-organizations/div[2]/div/div"));
+        List<WebElement> navItems = driver.findElements(By.xpath("//*[@id='main-content']"
+                + "/div/div/ui-view/chpl-onc-organizations/div[2]/div/div"));
         for (WebElement item : navItems) {
             if (item.findElement(By.xpath(".//button")).getText().equalsIgnoreCase(oncAcbName)) {
                 return item.findElement(By.xpath(".//button"));

@@ -30,7 +30,8 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     /**
-     * Returns the element that holds associated criteria number for a Measure Name in Successfully Tested G1/G2 Measures section .
+     * Returns the element that holds associated criteria number
+     *  for a Measure Name in Successfully Tested G1/G2 Measures section.
      * @param driver WebDriver
      * @param mName is measure Name
      * @return associatedCriteria element
@@ -185,7 +186,8 @@ public final class ListingDetailsPage extends BasePage {
      * @return text element
      */
     public static WebElement meaningfulUseUsers(final WebDriver driver) {
-        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-estimated-number-of-meaningful-use-users\"]/p"));
+        return driver.findElement(By.xpath("//*[@id=\"panel-additional-information-estimated-number-of"
+                + "-meaningful-use-users\"]/p"));
     }
 
     /**
@@ -241,7 +243,8 @@ public final class ListingDetailsPage extends BasePage {
      * @return text element
      */
     public static WebElement qmsStandardText(final WebDriver driver, final String number) {
-        return driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]/div/table/tbody/tr[3]/td[2]/ul/li"));
+        return driver.findElement(By.xpath("//*[@id=\"criteria_" + number + "_details_header\"]"
+                + "/div/table/tbody/tr[3]/td[2]/ul/li"));
     }
 
     /**
@@ -470,7 +473,8 @@ public final class ListingDetailsPage extends BasePage {
     }
 
     public static WebElement selectCertificationStatus(final WebDriver driver, final String certificationStatus) {
-        return driver.findElement(By.xpath("//select[@name='certificationStatus0']//option[contains(text()," + certificationStatus + ")]"));
+        return driver.findElement(By.xpath("//select[@name='certificationStatus0']"
+                + "//option[contains(text()," + certificationStatus + ")]"));
     }
 
     public static WebElement clickCertificationStatus(final WebDriver driver) {

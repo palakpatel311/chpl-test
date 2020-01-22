@@ -36,7 +36,8 @@ public class ListingDetailsAsserts extends Base {
      * @param criteria is criteria for which accessibilityText is being verified
      */
     @Then("^Accessibility Standard for criteria \"([^\"]*)\" should display \"([^\"]*)\"$")
-    public void accessibilityStandardForCriteriaShouldDisplayUpdatedOtherWCAG(final String criteria, final String accessibilityText) {
+    public void accessibilityStandardForCriteriaShouldDisplayUpdatedOtherWCAG(final String criteria,
+            final String accessibilityText) {
         String actualString = ListingDetailsPage.accessibilityStandardByCriteriaText(getDriver(), criteria).getText();
         assertEquals(actualString, accessibilityText);
     }
@@ -51,7 +52,8 @@ public class ListingDetailsAsserts extends Base {
         assertTrue(getDriver().findElement(By.id("details-cqm")).getText().contains("Clinical Quality Measures"));
         assertTrue(getDriver().findElement(By.id("details-sed")).getText().contains("Safety Enhanced Design (SED)"));
         assertTrue(getDriver().findElement(By.id("details-g1g2")).getText().contains("Successfully Tested G1/G2 Measures"));
-        assertTrue(getDriver().findElement(By.id("details-surveillance-activities")).getText().contains("Surveillance Activities"));
+        assertTrue(getDriver().findElement(By.id(
+                "details-surveillance-activities")).getText().contains("Surveillance Activities"));
         assertTrue(getDriver().findElement(By.id("details-additional-information")).getText().contains("Additional Information"));
     }
 
@@ -60,13 +62,20 @@ public class ListingDetailsAsserts extends Base {
      */
     @Then("^I should see the accordions in the following order: Criteria, CQMs, SED, G1/G2, Surveillance, Additional Info$")
     public void iShouldSeeTheAccordionsInTheFollowingOrderCriteriaCQMsSEDG1G2SurveillanceAdditionalInfo() {
-        getWait().until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.panel:nth-child(2) > div:nth-child(1) > a:nth-child(1)")));
-        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(2) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Certification Criteria"));
-        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(3) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Clinical Quality Measures"));
-        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(4) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Safety Enhanced Design (SED)"));
-        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(5) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Successfully Tested G1/G2 Measures"));
-        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(6) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Surveillance Activities"));
-        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(7) > div:nth-child(1) > a:nth-child(1)")).getText().contains("Additional Information"));
+        getWait().until(ExpectedConditions.presenceOfElementLocated(
+                By.cssSelector("div.panel:nth-child(2) > div:nth-child(1) > a:nth-child(1)")));
+        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(2) > div:nth-child(1) > a:nth-child(1)"))
+                .getText().contains("Certification Criteria"));
+        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(3) > div:nth-child(1) > a:nth-child(1)"))
+                .getText().contains("Clinical Quality Measures"));
+        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(4) > div:nth-child(1) > a:nth-child(1)"))
+                .getText().contains("Safety Enhanced Design (SED)"));
+        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(5) > div:nth-child(1) > a:nth-child(1)"))
+                .getText().contains("Successfully Tested G1/G2 Measures"));
+        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(6) > div:nth-child(1) > a:nth-child(1)"))
+                .getText().contains("Surveillance Activities"));
+        assertTrue(getDriver().findElement(By.cssSelector("div.panel:nth-child(7) > div:nth-child(1) > a:nth-child(1)"))
+                .getText().contains("Additional Information"));
     }
 
     /**
@@ -85,16 +94,23 @@ public class ListingDetailsAsserts extends Base {
      */
     @Then("^the criteria number should also include the criteria title$")
     public void theCriteriaNumberShouldAlsoIncludeTheCriteriaTitle() {
-        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "1").getText(), "170.315 (a)(1): Computerized Provider Order Entry (CPOE) - Medications");
-        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "2").getText(), "170.315 (a)(2): CPOE - Laboratory");
-        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "3").getText(), "170.315 (a)(3): CPOE - Diagnostic Imaging");
-        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "4").getText(), "170.315 (a)(4): Drug-Drug, Drug-Allergy Interaction Checks for CPOE");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "1")
+                .getText(), "170.315 (a)(1): Computerized Provider Order Entry (CPOE) - Medications");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "2")
+                .getText(), "170.315 (a)(2): CPOE - Laboratory");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "3")
+                .getText(), "170.315 (a)(3): CPOE - Diagnostic Imaging");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "4")
+                .getText(), "170.315 (a)(4): Drug-Drug, Drug-Allergy Interaction Checks for CPOE");
         assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "5").getText(), "170.315 (a)(5): Demographics");
         assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "6").getText(), "170.315 (a)(6): Problem List");
         assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "7").getText(), "170.315 (a)(7): Medication List");
-        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "8").getText(), "170.315 (a)(8): Medication Allergy List");
-        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "9").getText(), "170.315 (a)(14): Implantable Device List");
-        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "10").getText(), "170.315 (b)(3): Electronic Prescribing");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "8")
+                .getText(), "170.315 (a)(8): Medication Allergy List");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "9")
+                .getText(), "170.315 (a)(14): Implantable Device List");
+        assertEquals(ListingDetailsPage.sedCertificationCriteria(getDriver(), "10")
+                .getText(), "170.315 (b)(3): Electronic Prescribing");
     }
 
     /**
@@ -162,11 +178,14 @@ public class ListingDetailsAsserts extends Base {
      * @throws Exception if screenshot unable to be taken
      */
     @Then("^Test Tool should display \"([^\"]*)\" and \"([^\"]*)\" for criteria \"([^\"]*)\"$")
-    public void testToolFieldShouldDisplay(final String testToolName, final String testToolVersion, final String number) throws Exception {
+    public void testToolFieldShouldDisplay(final String testToolName,
+            final String testToolVersion, final String number) throws Exception {
         try {
             String actualString = ListingDetailsPage.testTool(getDriver(), number).getText();
-            assertTrue(actualString.contains(testToolName), "Expect \"" + testToolName + "\" to be found in \"" + actualString + "\"");
-            assertTrue(actualString.contains(testToolVersion), "Expect \"" + testToolVersion + "\" to be found in \"" + actualString + "\"");
+            assertTrue(actualString.contains(testToolName), "Expect \"" + testToolName
+                    + "\" to be found in \"" + actualString + "\"");
+            assertTrue(actualString.contains(testToolVersion), "Expect \"" + testToolVersion
+                    + "\" to be found in \"" + actualString + "\"");
         } catch (NullPointerException npe) {
             Hooks.takeScreenshot(testToolName + "_" + number);
             assertTrue(false, testToolName + "_" + number + ": " + npe.getMessage());
@@ -183,7 +202,8 @@ public class ListingDetailsAsserts extends Base {
     public void verifyFunctionalityTestedValue(final String functTested, final String number) throws Exception {
         try {
             String actualString = ListingDetailsPage.functionalityTested(getDriver(), number).getText();
-            assertTrue(actualString.contains(functTested), "Expect \"" + functTested + "\" to be found in \"" + actualString + "\"");
+            assertTrue(actualString.contains(functTested), "Expect \""
+            + functTested + "\" to be found in \"" + actualString + "\"");
         } catch (NullPointerException npe) {
             Hooks.takeScreenshot(functTested + "_" + number);
             assertTrue(false, functTested + "_" + number + ": " + npe.getMessage());
@@ -200,7 +220,8 @@ public class ListingDetailsAsserts extends Base {
     public void verifyPrivacySecurityFrameworkValue(final String privacySecurity, final String number) throws Exception {
         try {
             String actualString = ListingDetailsPage.privacySecurityFramework(getDriver(), number).getText();
-            assertTrue(actualString.contains(privacySecurity), "Expect \"" + privacySecurity + "\" to be found in \"" + actualString + "\"");
+            assertTrue(actualString.contains(privacySecurity), "Expect \"" + privacySecurity
+                    + "\" to be found in \"" + actualString + "\"");
         } catch (NullPointerException npe) {
             Hooks.takeScreenshot(privacySecurity + "_" + number);
             assertTrue(false, privacySecurity + "_" + number + ": " + npe.getMessage());
@@ -358,7 +379,8 @@ public class ListingDetailsAsserts extends Base {
     @Then("^the correct CHPL Product number \"([^\"]*)\" is displayed$")
     public void correctCHPLProductNumber(final String expectedProductNumber) {
         String productNumber = ListingDetailsPage.productNumber(getDriver()).getText();
-        assertTrue(productNumber.contains(expectedProductNumber), "Expected product number [ " + expectedProductNumber + " ] but found [ " + productNumber + " ]");
+        assertTrue(productNumber.contains(expectedProductNumber), "Expected product number [ " + expectedProductNumber + " ]"
+                + " but found [ " + productNumber + " ]");
     }
 
     /**
@@ -374,7 +396,8 @@ public class ListingDetailsAsserts extends Base {
      */
     @Then("^I see ONC ACB Certification ID is updated on Listing Details Page$")
     public void iSeeONCACBCertificationIDIsUpdatedOnListingDetailsPage() {
-        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(ListingDetailsPage.updateSuccessfulToastContainer(getDriver())));
+        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(
+                ListingDetailsPage.updateSuccessfulToastContainer(getDriver())));
         String actualOncAcbCertificationId = ListingDetailsPage.viewOncAcbCertificationIdListingPage(getDriver()).getText();
         assertTrue(actualOncAcbCertificationId.contains(getCurrentDate()));
     }
@@ -434,7 +457,8 @@ public class ListingDetailsAsserts extends Base {
      */
     @Then("^I see Other ACB is updated on listing details page under Additional Information section$")
     public void iSeeOtherACBIsUpdated() {
-        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(ListingDetailsPage.updateSuccessfulToastContainer(getDriver())));
+        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(
+                ListingDetailsPage.updateSuccessfulToastContainer(getDriver())));
         String actualValue = ListingDetailsPage.otherACBListingDetails(getDriver()).getText();
         assertTrue(actualValue.contains(getCurrentDate()));
     }
@@ -444,7 +468,8 @@ public class ListingDetailsAsserts extends Base {
      */
     @Then("^I see Relied Upon Software is updated on listing details page$")
     public void iSeeReliedUponSoftwareIsUpdated() {
-        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(ListingDetailsPage.updateSuccessfulToastContainer(getDriver())));
+        getWait().withTimeout(LONG_TIMEOUT, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(
+                ListingDetailsPage.updateSuccessfulToastContainer(getDriver())));
         String actualValue = ListingDetailsPage.reliedUponSoftwareFieldListingDetails(getDriver()).getText();
         assertTrue(actualValue.contains(getCurrentDate()));
     }

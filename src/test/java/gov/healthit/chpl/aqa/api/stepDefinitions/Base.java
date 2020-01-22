@@ -13,8 +13,8 @@ public class Base {
     private static String apikey = System.getProperty("apikey");
     private static String username;
     private static String password;
-
     private static final int HTTP_GOOD_RESPONSE = 200;
+
     /** Default constructor. */
     public Base() {
 
@@ -55,6 +55,7 @@ public class Base {
             password = System.getProperty("roleAdminPassword");
             break;
         }
+
         RestAssured.baseURI = Base.getUrl();
         Response res = given()
                 .header("API-KEY", Base.getApikey())
