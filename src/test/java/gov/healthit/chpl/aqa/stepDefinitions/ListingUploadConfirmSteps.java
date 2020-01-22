@@ -46,30 +46,7 @@ public class ListingUploadConfirmSteps extends Base {
         super();
     }
 
-    /**
-     * Get user to Manage Surveillance Activity section.
-     */
-    @And("^I navigate to Manage Surveillance Activity section$")
-    public void loadManageSurveillanceActivityPage() {
-        getDriver().get(getUrl() + "#/surveillance/manage");
-    }
-
-    /**
-     * Search for given CHPL Id on Manage Surveillance Activity Page.
-     *
-     * @param chplId
-     *            is chplId to look up
-     * @throws Exception
-     *             if screenshot cannot be taken
-     */
-    @When("^I search for \"([^\"]*)\" in Manage Surveillance Activity section$")
-    public void searchForChplIdInSurvSearch(final String chplId) throws Exception {
-        DpManagementPage.surveillanceSearch(getDriver()).sendKeys(chplId);
-        Thread.sleep(DEBOUNCE_TIME); // need to wait for smart-table component
-                                     // to recognize text
-    }
-
-    /**
+     /**
      * Navigate to Upload Certified Products page.
      */
     @And("^I am on Upload Listings page$")
@@ -85,18 +62,13 @@ public class ListingUploadConfirmSteps extends Base {
      */
     @And("^I am on Upload Surveillance page$")
     public void loadUploadSurveillancePage() {
-        WebElement button = DpManagementPage.surveillanceNavLink(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
-        DpManagementPage.surveillanceUploadNavLink(getDriver()).click();
+        getDriver().get(getUrl() + "#/surveillance/upload");
     }
 
     /**
      * Upload a listing.
-     * 
-     * @param edition
-     *            is listing edition
-     * @param inputChplId
-     *            initial CHPL ID
+     * @param edition is listing edition
+     * @param inputChplId initial CHPL ID
      */
     @When("^I upload a \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
     public void uploadAlisting(final String edition, final String inputChplId) {
@@ -120,9 +92,7 @@ public class ListingUploadConfirmSteps extends Base {
 
     /**
      * Open inspect screen.
-     *
-     * @throws Exception
-     *             if there is an exception
+     * @throws Exception if there is an exception
      */
     @And("^I open inspect form to inspect listing details$")
     public void openInspectScreen() throws Exception {
@@ -143,13 +113,9 @@ public class ListingUploadConfirmSteps extends Base {
 
     /**
      * Confirm uploaded listing.
-     *
-     * @param edition
-     *            is listing edition
-     * @param testChplId
-     *            is chpl id of listing to confirm
-     * @throws Exception
-     *             if there is an exception
+     * @param edition is listing edition
+     * @param testChplId is chpl id of listing to confirm
+     * @throws Exception if there is an exception
      */
     @And("^I confirm \"([^\"]*)\" listing with CHPL ID \"([^\"]*)\"$")
     public void confirmUploadedListing(final String edition, final String testChplId) throws Exception {
@@ -189,11 +155,8 @@ public class ListingUploadConfirmSteps extends Base {
 
     /**
      * Upload a listing with invalid inputs in specific fields.
-     *
-     * @throws URISyntaxException
-     *             if there is an exception
-     * @param fieldinUploadFile
-     *            is a field in upload file that has invalid input
+     * @throws URISyntaxException if there is an exception
+     * @param fieldinUploadFile is a field in upload file that has invalid input
      */
     @When("^I upload a 2015 listing with invalid input in \"([^\"]*)\"$")
     public void uploadListingWithLongTestTaskIDsParticipantIDs(final String fieldinUploadFile)
@@ -206,11 +169,8 @@ public class ListingUploadConfirmSteps extends Base {
     }
 
     /**
-     * Assert that SED End Date of Testing displays date value on Manage
-     * Developers and Products page.
-     *
-     * @param sedEndDate
-     *            the date value to assert
+     * Assert that SED End Date of Testing displays date value on Manage Developers and Products page.
+     * @param sedEndDate the date value to assert
      */
     @Then("^SED End Date of Testing field should display the date \"([^\"]*)\" in listing details section$")
     public void testSedEndDateOfTestingDisplayedInListingDetailsDpmgmt(final String sedEndDate) {
@@ -221,11 +181,8 @@ public class ListingUploadConfirmSteps extends Base {
     }
 
     /**
-     * Assert that SED End Date of Testing displays date value on listing
-     * details page.
-     *
-     * @param sedEndDate
-     *            the date value to assert
+     * Assert that SED End Date of Testing displays date value on listing details page.
+     * @param sedEndDate the date value to assert
      */
     @Then("^SED Testing End Date shows as \"([^\"]*)\" in SED details section$")
     public void testSedTestingEndDateDisplayedInSedDetails(final String sedEndDate) {
@@ -235,13 +192,11 @@ public class ListingUploadConfirmSteps extends Base {
 
     /**
      * Load listing details to verify listing was uploaded successfully.
-     *
-     * @param ed
-     *            - edition digits in CHPL ID
+     * @param edition - edition digits in CHPL ID
      */
     @Then("^I see that listing was uploaded successfully to CHPL "
             + "and listing details load as expected for uploaded \"([^\"]*)\" listing$")
-    public void testVerifyUploadWasSuccessful(final String ed) {
+    public void testVerifyUploadWasSuccessful(final String edition) {
         String testListingName = "New product";
         String actualString = ListingDetailsPage.listingName(getDriver()).getText();
         assertEquals(actualString, testListingName);
@@ -333,11 +288,8 @@ public class ListingUploadConfirmSteps extends Base {
 
     /**
      * Asserts newly added version for CQMs are correct.
-     * 
-     * @param version
-     *            is expected version
-     * @param cqm
-     *            is given CQM
+     * @param version is expected version
+     * @param cqm is given CQM
      */
     @Then("^there should be version \"([^\"]*)\" available for \"([^\"]*)\"$")
     public void checkCqmVersion(final String version, final String cqm) {
@@ -346,15 +298,10 @@ public class ListingUploadConfirmSteps extends Base {
     }
 
     /**
-     * Upload a listing with special characters in Test Task and Participant
-     * fields.
-     *
-     * @throws URISyntaxException
-     *             if there is an exception
-     * @param chplId
-     *            is chpl id of listing to upload
-     * @param fieldinUploadFile
-     *            is a field in upload file that has bad input
+     * Upload a listing with special characters in Test Task and Participant fields.
+     * @throws URISyntaxException if there is an exception
+     * @param chplId is chpl id of listing to upload
+     * @param fieldinUploadFile is a field in upload file that has bad input
      */
     @When("^I upload a 2015 listing with CHPL ID \"([^\"]*)\" that has bad input in \"([^\"]*)\"$")
     public void uploadListingWithBadInputsInTestTaskParticipantFields(final String chplId,
@@ -368,9 +315,7 @@ public class ListingUploadConfirmSteps extends Base {
 
     /**
      * Inspect listing details for bad data input to verify errors.
-     *
-     * @param chplId
-     *            is chpl id of listing to inspect
+     * @param chplId is chpl id of listing to inspect
      */
     @And("^I inspect listing details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectListingDetails(final String chplId) {
@@ -379,11 +324,8 @@ public class ListingUploadConfirmSteps extends Base {
 
     /**
      * Upload a surveillance.
-     * 
-     * @throws URISyntaxException
-     *             if there is an exception
-     * @param filename
-     *            is filename of upload file
+     * @throws URISyntaxException if there is an exception
+     * @param filename is filename of upload file
      */
     @When("^I upload the \"(.*)\" surveillance activity$")
     public void uploadSurveillance(final String filename) throws URISyntaxException {
@@ -401,17 +343,13 @@ public class ListingUploadConfirmSteps extends Base {
      */
     @When("^I go to Confirm Pending Surveillance Activities Page$")
     public void loadConfirmPendingSurveillanceActivitiesPage() {
-        WebElement button = DpManagementPage.surveillanceNavLink(getDriver());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
         DpManagementPage.confirmPendingSurveillanceActivitiesLink(getDriver()).click();
         getWait().until(ExpectedConditions.visibilityOf(DpManagementPage.pendingSurveillanceTable(getDriver())));
     }
 
     /**
      * Inspect Surveillance details.
-     * 
-     * @param chplId
-     *            is chpl id of listing to inspect surveillance activity details
+     * @param chplId is chpl id of listing to inspect surveillance activity details
      */
     @And("^I inspect surveillance activity details for listing with CHPL ID \"([^\"]*)\"$")
     public void inspectSurveillanceDetails(final String chplId) {
@@ -420,11 +358,8 @@ public class ListingUploadConfirmSteps extends Base {
 
     /**
      * Confirm uploaded surveillance activity.
-     * 
-     * @param survChplId
-     *            is chpl id of listing for surveillance activity
-     * @throws Exception
-     *             if there is an exception
+     * @param survChplId is chpl id of listing for surveillance activity
+     * @throws Exception if there is an exception
      */
     @And("^I confirm surveillance activity for listing with CHPL ID \"([^\"]*)\"$")
     public void confirmUploadedSurveillanceActivity(final String survChplId) throws Exception {
