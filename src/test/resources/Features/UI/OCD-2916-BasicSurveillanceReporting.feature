@@ -68,4 +68,4 @@ Scenario Outline: Verify that surveillance data can be entered and is saved in a
     And I confirm deleting a quarterly surveillance report
     Examples:
     |ROLE       |ACB              |ACB-Year-Quarter        |Initiate Confirmation Message                                                                   |Outcome of Surveillance|Surveillance Process Type|Delete Confirmation Message                                        |
-    |ROLE_ADMIN |UL LLC           |UL LLC-2020-Q1          |Are you sure you wish to initiate quarterly surveillance reporting for quarter Q1 of year 2019? |No non-conformity|Correspondence with Complainant/Developer|Are you sure you wish to delete this Quarterly Surveillance Report?|
+    |ROLE_ADMIN |UL LLC           |UL LLC-2019-Q1          |Are you sure you wish to initiate quarterly surveillance reporting for quarter Q1 of year 2019? |No non-conformity|Correspondence with Complainant/Developer|Are you sure you wish to delete this Quarterly Surveillance Report?|

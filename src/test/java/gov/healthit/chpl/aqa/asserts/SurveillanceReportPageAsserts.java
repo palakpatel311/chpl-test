@@ -119,22 +119,14 @@ public class SurveillanceReportPageAsserts extends Base {
     @Then("^I see that all entered data was saved for Surveillance Id \"([^\"]*)\"$")
     public void verifyThatSurveillanceDataIsSavedInReport(final String friendlySurvId) {
         SurveillanceReportSteps steps = new SurveillanceReportSteps();
-        /* Workaround to resolve Stale Element Reference Exception-
-         * reload the element after form update so it's attached to DOM: https://www.seleniumhq.org/exceptions/stale_element_reference.jsp*/
-        getDriver().get(getUrl() + "#/surveillance/reporting");
-        steps.iExpandACB("UL LLC");
-        SurveillanceReportPage.editSurveillanceReport(getDriver(), "UL LLC-2019-Q1").click();
+        getDriver().navigate().refresh();
         WebElement button = SurveillanceReportPage.listingsWithRelevantSurveillanceAccordion(getDriver());
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", button);
         SurveillanceReportPage.viewListingSurveillanceDataButton(getDriver(), "15.02.02.1703.A057.01.00.1.180301").click();
-
         WebElement editButton =  getDriver().findElement(By.id("edit-surveillance-data-SURV01"));
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", editButton);
-
-        String groundsForInitiatingSurv = SurveillanceReportPage.surveillanceCompletedCapVerification(getDriver())
-                .getAttribute("value");
-        assertEquals((groundsForInitiatingSurv.split(" ")[0]).trim(), getCurrentDate());
-
+        String groundsForInitiatingSurv = SurveillanceReportPage.surveillanceCompletedCapVerification(getDriver()).getAttribute("value");
+        assertEquals((groundsForInitiatingSurv.substring(groundsForInitiatingSurv.length() - 10)), getCurrentDate());
     }
 }
