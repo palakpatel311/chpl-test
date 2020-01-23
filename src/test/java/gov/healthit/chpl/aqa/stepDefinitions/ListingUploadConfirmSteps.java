@@ -194,8 +194,7 @@ public class ListingUploadConfirmSteps extends Base {
      * Load listing details to verify listing was uploaded successfully.
      * @param edition - edition digits in CHPL ID
      */
-    @Then("^I see that listing was uploaded successfully to CHPL "
-            + "and listing details load as expected for uploaded \"([^\"]*)\" listing$")
+    @Then("^I see that listing was uploaded successfully to CHPL and listing details load as expected$")
     public void testVerifyUploadWasSuccessful() {
         String testListingName = "New product";
         String actualString = ListingDetailsPage.listingName(getDriver()).getText();
