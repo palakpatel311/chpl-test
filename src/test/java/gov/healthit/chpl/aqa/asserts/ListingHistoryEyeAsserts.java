@@ -59,4 +59,3 @@ public class ListingHistoryEyeAsserts extends Base {
     }
 
 }
-

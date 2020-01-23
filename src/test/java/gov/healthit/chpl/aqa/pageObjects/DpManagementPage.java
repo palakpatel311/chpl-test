@@ -30,9 +30,7 @@ public final class DpManagementPage {
 
     /**
      * Returns choose file button for new listing upload.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return button element
      */
     public static WebElement chooseFileButtonListingUpload(final WebDriver driver) {
@@ -41,19 +39,16 @@ public final class DpManagementPage {
 
     /**
      * Returns choose file button for new surveillance upload.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement chooseFileButton(final WebDriver driver) {
-        return driver.findElement(By.id("ngf-upload-button"));
+        return driver.findElement(By.id("ngf-upload-button-surveillance"));
     }
 
     /**
      * Get the CHPL Product Number value in surveillance search results.
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return the CHPL Product Number element
      */
     public static WebElement chplProductNumber(final WebDriver driver) {
@@ -67,9 +62,7 @@ public final class DpManagementPage {
 
     /**
      * Return the table containing surveillance details for a single Listing.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return the table
      */
     public static WebElement surveillanceSearchSingleResultTable(final WebDriver driver) {
@@ -78,9 +71,7 @@ public final class DpManagementPage {
 
     /**
      * Returns Confirm Pending Products link.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return link element
      */
     public static WebElement confirmPendingProductsLink(final WebDriver driver) {
@@ -89,22 +80,17 @@ public final class DpManagementPage {
 
     /**
      * Returns Confirm Pending Surveillance Activities link.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return link element
      */
     public static WebElement confirmPendingSurveillanceActivitiesLink(final WebDriver driver) {
-        return driver.findElement(By.linkText("Confirm"));
+        return driver.findElement(By.partialLinkText("Confirm"));
     }
 
     /**
      * Find inspect button for uploaded listing to confirm.
-     *
-     * @param driver
-     *            WebDriver
-     * @param testChplId
-     *            is chpl id of listing to confirm
+     *@param driver WebDriver
+     * @param testChplId is chpl id of listing to confirm
      * @return the inspect button element
      */
     public static WebElement inspectButtonForUploadedListing(final WebDriver driver, final String testChplId) {
@@ -113,9 +99,7 @@ public final class DpManagementPage {
 
     /**
      * Label of the inspect modal dialog work flow.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return the label element
      */
     public static WebElement inspectModalLabel(final WebDriver driver) {
@@ -124,9 +108,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Developer New" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isDeveloperNewDivElementPresent(final WebDriver driver) {
@@ -135,9 +117,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Developer System" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isDeveloperSystemDivElementPresent(final WebDriver driver) {
@@ -146,9 +126,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Developer Uploaded" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isDeveloperUploadedDivElementPresent(final WebDriver driver) {
@@ -157,9 +135,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Product New" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isProductNewDivElementPresent(final WebDriver driver) {
@@ -168,9 +144,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Product System" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isProductSystemDivElementPresent(final WebDriver driver) {
@@ -179,9 +153,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Product Uploaded" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isProductUploadedDivElementPresent(final WebDriver driver) {
@@ -190,9 +162,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Version New" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isVersionNewDivElementPresent(final WebDriver driver) {
@@ -201,9 +171,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Version System" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isVersionSystemDivElementPresent(final WebDriver driver) {
@@ -212,9 +180,7 @@ public final class DpManagementPage {
 
     /**
      * Returns true iff "Version Uploaded" DIV exists on the Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return true iff element exists
      */
     public static boolean isVersionUploadedDivElementPresent(final WebDriver driver) {
@@ -223,9 +189,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'Create new product' radio button element on Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return radio button element
      */
     public static WebElement createNewProductOptionOnInspect(final WebDriver driver) {
@@ -234,9 +198,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'Create new version' radio button element on Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return radio button element
      */
     public static WebElement createNewVersionOptionOnInspect(final WebDriver driver) {
@@ -245,9 +207,7 @@ public final class DpManagementPage {
 
     /**
      * Returns Developer and Product Management link.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return link element
      */
     public static WebElement dpManagementLink(final WebDriver driver) {
@@ -256,9 +216,7 @@ public final class DpManagementPage {
 
     /**
      * Returns Products and Surveillance Upload link.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return link element
      */
     public static WebElement dpManagementUploadProductsSurveillance(final WebDriver driver) {
@@ -268,11 +226,8 @@ public final class DpManagementPage {
     /**
      * Returns Inspect button link for bad data listing from pending listings
      * table.
-     *
-     * @param driver
-     *            WebDriver
-     * @param chplId
-     *            is chpl id of listing with bad data input
+     * @param driver WebDriver
+     * @param chplId is chpl id of listing with bad data input
      * @return inspect button element for a listing with given chpl id
      */
     public static WebElement inspectButtonForBadDataListing(final WebDriver driver, final String chplId) {
@@ -282,12 +237,8 @@ public final class DpManagementPage {
     /**
      * Returns Inspect button link for surveillance activity from pending
      * surveillance table.
-     *
-     * @param driver
-     *            WebDriver
-     * @param chplId
-     *            is chpl id of listing for which surveillance activity is to be
-     *            inspected
+     * @param driver WebDriver
+     * @param chplId is chpl id of listing for which surveillance activity is to be inspected
      * @return inspect button element for a listing with given chpl id
      */
     public static WebElement inspectButtonForPendingSurveillanceActivity(final WebDriver driver, final String chplId) {
@@ -296,9 +247,7 @@ public final class DpManagementPage {
 
     /**
      * Returns element holding main content.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return element holding main content
      */
     public static WebElement mainContent(final WebDriver driver) {
@@ -307,9 +256,7 @@ public final class DpManagementPage {
 
     /**
      * Returns Manage Surveillance Activity link.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return link element
      */
     public static WebElement manageSurveillanceActivityLink(final WebDriver driver) {
@@ -318,9 +265,7 @@ public final class DpManagementPage {
 
     /**
      * Returns Pending Listings table in Confirm Pending Listings section.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return table element
      */
     public static WebElement pendingListingsTable(final WebDriver driver) {
@@ -328,11 +273,8 @@ public final class DpManagementPage {
     }
 
     /**
-     * Returns Pending Surveillance table in Confirm Pending Surveillance
-     * section.
-     *
-     * @param driver
-     *            WebDriver
+     * Returns Pending Surveillance table in Confirm Pending Surveillance section.
+     * @param driver WebDriver
      * @return table element
      */
     public static WebElement pendingSurveillanceTable(final WebDriver driver) {
@@ -340,11 +282,8 @@ public final class DpManagementPage {
     }
 
     /**
-     * Returns 'previous' button on Inspect screen to navigate to previous
-     * screen.
-     *
-     * @param driver
-     *            WebDriver
+     * Returns 'previous' button on Inspect screen to navigate to previous screen.
+     *@param driver WebDriver
      * @return button element
      */
     public static WebElement previousButtonOnInspect(final WebDriver driver) {
@@ -353,9 +292,7 @@ public final class DpManagementPage {
 
     /**
      * Returns surveillanceSearch input box.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return surveillanceSearch element
      */
     public static WebElement surveillanceSearch(final WebDriver driver) {
@@ -369,9 +306,7 @@ public final class DpManagementPage {
 
     /**
      * Returns Surveillance search button.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement survSearchButton(final WebDriver driver) {
@@ -380,9 +315,7 @@ public final class DpManagementPage {
 
     /**
      * Returns upload listing file button element.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement uploadFileButtonListingUpload(final WebDriver driver) {
@@ -396,11 +329,8 @@ public final class DpManagementPage {
     }
 
     /**
-     * Returns element that holds text message displayed after successful
-     * listing upload.
-     *
-     * @param driver
-     *            WebDriver
+     * Returns element that holds text message displayed after successful listing upload.
+     * @param driver WebDriver
      * @return text element
      */
     public static WebElement uploadSuccessfulText(final WebDriver driver) {
@@ -409,11 +339,8 @@ public final class DpManagementPage {
     }
 
     /**
-     * Returns element that holds text message displayed after successful
-     * listing upload.
-     *
-     * @param driver
-     *            WebDriver
+     * Returns element that holds text message displayed after successful listing upload.
+     * @param driver WebDriver
      * @return text element
      */
     public static WebElement uploadSuccessfulTextSurveillanceUpload(final WebDriver driver) {
@@ -423,9 +350,7 @@ public final class DpManagementPage {
 
     /**
      * Returns Upload Products and Surveillance link.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return link element
      */
     public static WebElement uploadProductsAndSurveillanceLink(final WebDriver driver) {
@@ -434,9 +359,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'next' button on Inspect screen to navigate to next screen.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return button element
      */
     public static WebElement nextOnInspectButton(final WebDriver driver) {
@@ -445,9 +368,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'confirm' button on Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement confirmButtonOnInspect(final WebDriver driver) {
@@ -456,9 +377,7 @@ public final class DpManagementPage {
 
     /**
      * Returns edit certified product button on Inspect screen.
-     * 
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement editOnInspectButton(final WebDriver driver) {
@@ -467,9 +386,7 @@ public final class DpManagementPage {
 
     /**
      * Returns element that holds error text.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return text element
      */
     public static WebElement errorTextOnInspect(final WebDriver driver) {
@@ -478,9 +395,7 @@ public final class DpManagementPage {
 
     /**
      * Returns product Id in CHPL ID on inspect form.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return text element
      */
     public static WebElement productIdOnInspect(final WebDriver driver) {
@@ -489,9 +404,7 @@ public final class DpManagementPage {
 
     /**
      * Returns product version in CHPL ID on inspect form.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return text element
      */
     public static WebElement productVersionOnInspect(final WebDriver driver) {
@@ -500,9 +413,7 @@ public final class DpManagementPage {
 
     /**
      * Returns save certified product button on inspect form.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return button element
      */
     public static WebElement saveCpOnInspect(final WebDriver driver) {
@@ -511,9 +422,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'edit' button on surveillance Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement surveillanceEditButtonOnInspect(final WebDriver driver) {
@@ -523,9 +432,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'Start Date' input field on surveillance Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return input element
      */
     public static WebElement surveillanceStartDateOnInspect(final WebDriver driver) {
@@ -534,9 +441,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'Start Date' input field on surveillance Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return input element
      */
     public static WebElement surveillanceSaveButtonOnInspect(final WebDriver driver) {
@@ -545,9 +450,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'confirm' button on surveillance Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement surveillanceConfirmButtonOnInspect(final WebDriver driver) {
@@ -556,9 +459,7 @@ public final class DpManagementPage {
 
     /**
      * Returns 'Yes' button on Confirm alert.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement yesOnConfirm(final WebDriver driver) {
@@ -567,9 +468,7 @@ public final class DpManagementPage {
 
     /**
      * Returns element that holds error and warning text.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return text element
      */
     public static WebElement warningTextOnInspect(final WebDriver driver) {
@@ -578,9 +477,7 @@ public final class DpManagementPage {
 
     /**
      * Returns reject product button on Inspect screen.
-     *
-     * @param driver
-     *            WebDriver
+     * @param driver WebDriver
      * @return button element
      */
     public static WebElement rejectButtonOnInspect(final WebDriver driver) {
@@ -589,9 +486,7 @@ public final class DpManagementPage {
 
     /**
      * Returns error text on upload failure message.
-     *
-     * @param driver
-     *            WebDriver
+     *@param driver WebDriver
      * @return button element
      */
     public static WebElement uploadFailureErrorMessage(final WebDriver driver) {

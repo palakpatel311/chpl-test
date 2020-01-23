@@ -95,7 +95,7 @@ public class Hooks {
             chromePrefs.put("safebrowsing.enabled", "true");
             options.addArguments("--safebrowsing-disable-download-protection");
             options.addArguments("disable-popup-blocking");
-            options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            //options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
             screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
             driver = new EventFiringWebDriver(new ChromeDriver(options));
         } else if (config.getProperty("browser").equals("firefox")) {
