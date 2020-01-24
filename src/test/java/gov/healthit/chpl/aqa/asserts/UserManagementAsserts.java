@@ -17,6 +17,9 @@ public class UserManagementAsserts extends Base {
     public void impersonatingRoleName(final String expectedRoleUsername) throws Exception {
         WebDriverWait wait = new WebDriverWait(getDriver(), LONG_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(UserManagementPage.mainContent(getDriver())));
+        if (expectedRoleUsername.contains("Developer")) {
+            wait.until(ExpectedConditions.titleContains("Dashboard"));
+        }
         String actualRoleUsername = UserManagementPage.loggedInRoleUsername(getDriver()).getText();
         assertTrue(actualRoleUsername.contains(expectedRoleUsername));
     }
