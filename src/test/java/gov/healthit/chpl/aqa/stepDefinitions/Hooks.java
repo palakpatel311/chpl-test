@@ -38,8 +38,8 @@ public class Hooks {
     private static String downloadPath = System.getProperty("downloadPath");
     private static String browser;
     /**
-     * Launch ChromeDriver.
-     * @throws IOException
+     * Launch browser.
+     * @throws IOException on failure to create directory
      */
     @Before("~@RegressionAPI")
     public void openBrowser() throws IOException {
