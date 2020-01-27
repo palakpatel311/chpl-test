@@ -7,6 +7,8 @@ Feature: Verify data in criteria details
   OCD-746, OCD-1424, OCD-2532- Restrict Functionality Tested values by edition, criteria and display correct description
   OCD-2637- Verify backend update for Test Functionality on select listings
   OCD-2562- Add two new Test Tools
+  OCD-3235- Add new Test Tool -Inferno
+  OCD-3226-Update Test Functionality
 
   Scenario Outline: Verify Test Tool field displays correct values in applicable criteria details
     Given I am on listing details page of listing with ID "<CHPL_ID>"
@@ -36,6 +38,7 @@ Feature: Verify data in criteria details
       | 14.07.07.1459.AXA1.03.02.1.170912 | 170.314 (c)(1) | Cypress                                                      | 2.4.1             |
       | 14.07.04.1221.Heal.7I.01.1.180625 | 170.314 (c)(1) | Cypress                                                      | 2.2.0             |
       | 15.04.04.3043.Rhap.64.00.0.180918 | 170.315 (f)(6) | CDC's NHSN CDA Validator                                     | 1.0               |
+      | 15.02.02.3007.A056.01.00.0.180214	| 170.315 (b)(7) | Inferno                                                      | 1.0               |
       
 Scenario Outline: Verify Privacy and security Framework field displays correct values in applicable criteria details
     Given I am on listing details page of listing with ID "<CHPL_ID>"
@@ -77,6 +80,7 @@ Scenario Outline: Verify Functionality Tested field displays correct edition and
     | 9318   | 170.315 (g)(9) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
     | 9187   | 170.315 (g)(6) | Optional: Common Clincial Data Set 170.102(19)(ii) For certification|
     | 9187   | 170.315 (g)(8) | Optional: CCDS: 170.102(13)(ii)(C) The patient’s BMI percentile|
+    | 9187   | 170.315 (b)(3) | Optional: 170.315(b)(3)(i)(C) For each transaction listed in paragraph (b)(3)(i)(A) of this|
     | 9225   | 170.315 (a)(13)| None |
     | 9098   | 170.315 (a)(13)| None |
     | 9339   | 170.315 (b)(2) | None |
@@ -86,7 +90,7 @@ Scenario Outline: Verify Functionality Tested field displays correct edition and
     | 9745   | 170.315 (b)(2) | None |
     | 9569   | 170.315 (b)(2) | None |
     | 9570   | 170.315 (b)(2) | None |
-    | 9555   |170.315 (a)(13) | None |
+    | 9555   | 170.315 (a)(13)| None |
     | 9739   | 170.315 (a)(13)| None |
     
     Scenario: Upload sample listing for 2015 edition
