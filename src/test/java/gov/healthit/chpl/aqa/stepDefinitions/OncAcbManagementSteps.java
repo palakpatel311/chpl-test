@@ -10,14 +10,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import gov.healthit.chpl.aqa.pageObjects.OncAcbManagementPage;
 
-/**
- * Class ONC ACB Management step definition.
- */
 public class OncAcbManagementSteps extends Base {
 
-    /**
-     * Get user to ONC ACB Management page.
-     */
     @And("^I navigate to ONC ACB Management page$")
     public void navigateToONCACBManagementPage() {
         getDriver().get(getUrl() + "#/organizations/onc-acbs");
@@ -25,20 +19,11 @@ public class OncAcbManagementSteps extends Base {
         wait.until(ExpectedConditions.visibilityOf(OncAcbManagementPage.oncACBManagementPageTitle(getDriver())));
     }
 
-    /**
-     * Access ONC ACB details page.
-     *
-     * @param acb
-     *            is the name of ONC ACB
-     */
     @And("^I access \"([^\"]*)\" ACB details$")
     public void iClickOnONCACBName(final String acb) {
         OncAcbManagementPage.oncACBName(getDriver(), acb).click();
     }
 
-    /**
-     * Open the ACB edit form.
-     */
     @And("^I open the ACB edit form$")
     public void editACB() {
         WebElement link = OncAcbManagementPage.editONCACB(getDriver());
@@ -47,13 +32,6 @@ public class OncAcbManagementSteps extends Base {
         wait.until(ExpectedConditions.visibilityOf(OncAcbManagementPage.markRetirementStatus(getDriver())));
     }
 
-    /**
-     * Retire the ACB on a specific date.
-     *
-     * @param date
-     *            set the retirement date
-     * @throws Throwable
-     */
     @When("^I mark it as retired on \"([^\"]*)\"$")
     public void markRetired(final String date) throws Throwable {
         Actions act = new Actions(getDriver());
@@ -64,9 +42,6 @@ public class OncAcbManagementSteps extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
-    /**
-     * Unretire an existing retired ACB.
-     */
     @When("^I unretire an existing retired ACB$")
     public void iUnretireExistingRetiredACB() {
         if (OncAcbManagementPage.markRetirementStatus(getDriver()).isSelected()) {
@@ -88,15 +63,6 @@ public class OncAcbManagementSteps extends Base {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", link);
     }
 
-    /**
-     * Edit ACB details to edit ACB name to new name and edit it back to
-     * original ACB name.
-     *
-     * @param newName
-     *            is new ACB name
-     * @param oldName
-     *            is original ACB name
-     */
     @When("^I edit ACB name to be \"([^\"]*)\" and edit it back to \"([^\"]*)\"$")
     public void editAcbName(final String newName, final String oldName) {
         OncAcbManagementPage.oncACBNameOnEditForm(getDriver()).clear();
