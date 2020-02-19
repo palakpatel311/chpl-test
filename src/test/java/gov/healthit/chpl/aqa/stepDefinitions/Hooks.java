@@ -92,9 +92,9 @@ public class Hooks {
             chromePrefs.put("safebrowsing.enabled", "true");
             options.addArguments("--safebrowsing-disable-download-protection");
             options.addArguments("disable-popup-blocking");
-            options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-            options.addArguments("--no-sandbox"); // Bypass OS security model
-            options.addArguments("--remote-debugging-port=9222");
+            options.addArguments("disable-dev-shm-usage"); // overcome limited resource problems
+            options.addArguments("no-sandbox"); // Bypass OS security model
+            options.addArguments("remote-debugging-port=9222");
             //options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
             screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
             driver = new EventFiringWebDriver(new ChromeDriver(options));
