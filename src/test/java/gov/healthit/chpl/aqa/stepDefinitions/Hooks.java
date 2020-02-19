@@ -87,9 +87,6 @@ public class Hooks {
             HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
             chromePrefs.put("profile.default_content_settings.popups", 0);
             chromePrefs.put("download.default_directory", downloadPath);
-            /**
-             * Save Chrome Options
-             */
             ChromeOptions options = new ChromeOptions();
             options.setExperimentalOption("prefs", chromePrefs);
             chromePrefs.put("safebrowsing.enabled", "true");
@@ -97,6 +94,7 @@ public class Hooks {
             options.addArguments("disable-popup-blocking");
             options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
             options.addArguments("--no-sandbox"); // Bypass OS security model
+            options.addArguments("--remote-debugging-port=9222");
             //options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
             screenshotPath = System.getProperty("user.dir") + File.separator + "test-output";
             driver = new EventFiringWebDriver(new ChromeDriver(options));
